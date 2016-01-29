@@ -30,7 +30,7 @@ router.get('/help', function(req, res, next) {
 
 /* Post Cookie */
 router.post('/sharecookie', function(req, res, next) {
-    var badWord = /fuck|shit|cunt|damn|nigger|nigga|twat|dick|cum|tits|titties|boob|boobs|penis|cock|bbc|porn|pornography|rape|sex|orgasm|tit|raping/gi;
+    var badWord = /fuck|shit|cunt|damn|nigger|nigga|twat|dick|cum|tits|titties|boob|boobs|penis|cock|bbc|porn|pornography|rape|sex|orgasm|tit|raping|bitch|ass|clit|clitoris|breast|breasts/gi;
     var titleq=req.body.titlebox;
     var authorq=req.body.username;
     var contentq=req.body.texxtt;
