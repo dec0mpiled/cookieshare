@@ -35,7 +35,7 @@ a {
     border: 2px solid #848484; 
     -webkit-border-radius: 30px; 
     -moz-border-radius: 30px; 
-    border-radius: 10px; 
+    border-radius: 5px; 
     outline:0; 
     height:120px; 
     width: 400px; 
@@ -2496,7 +2496,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
     border: 2px solid #848484; 
     -webkit-border-radius: 30px; 
     -moz-border-radius: 30px; 
-    border-radius: 30px; 
+    border-radius: 5px; 
     outline:0; 
     height:25px; 
     width: 300px; 
