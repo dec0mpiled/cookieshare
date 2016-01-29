@@ -17,8 +17,15 @@ a {
   position: relative;
     left: 600px;
     width: 700px;
-    float: left;
     height: 700px;
+}
+
+#div3 {
+  position: relative;
+    left: 600px;
+    top: -520px;
+    width: 700px;
+    height: 0px;
 }
 
 #container {
@@ -2478,6 +2485,27 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 }
 
 .btn1:hover {
+  background-color: #0066ff;
+  color: white;
+  text-decoration: none;
+}
+
+.btn2 {
+    background-color: #0099FF; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 0px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    margin-left: 1200px;
+}
+
+.btn2:hover {
   background-color: #0066ff;
   color: white;
   text-decoration: none;
