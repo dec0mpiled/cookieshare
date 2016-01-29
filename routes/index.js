@@ -41,7 +41,7 @@ var myurl=url;
 if (myurl.startsWith("https://" || "http://")) {
     myurl=myurl;
 } else {
-    myurl="";
+    myurl="https://"+myurl;
 }
    
 var mytitle = titleq;
