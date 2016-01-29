@@ -24,16 +24,17 @@
 
 <br><br><br><br>
 {{#each posts}}
-<p><font color="black" size=5><b>{{title}} </b></font><br>
+<p><font color="black" size=5><b>{{title}} - </b></font><br>
 <font size=5 color="gray"><i>by {{author}}</i></font></p>
-<p><font color="black" size="4">{{content}}</font></p>
+<p><font color="black" size="4">{{content}}</font></p><br>
+<a id="hides" onclick="hidefunction();"><font size=4><span class="glyphicon glyphicon-alert" aria-hidden="true"></span></font></a><br>
 <font color="black">_______________________________________________________________________</font>
 {{/each}}
 
 
 </div>
   <nav class="navbar navbar-default navbar-fixed-top">
-  <a href="/"><font size=6 class="test affix" color="white"><b>ShareCookie</b></font></a><a class="btn " href="/">Need Help? (soon) <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></a>
+  <a href="/"><font size=6 class="test affix" color="white"><b>ShareCookie</b></font></a><a class="btn " href="/help">Find Help Here <span class="glyphicon glyphicon-education" aria-hidden="true"></span></a>
 </nav>
 </div>
 
@@ -48,4 +49,8 @@ function textCounter(field,field2,maxlimit)
   countfield.value = maxlimit - field.value.length;
  }
 }
+
+function hidefunction(){
+ document.getElementById("hides").setAttribute("class", "disabledl");
+};
 </script>

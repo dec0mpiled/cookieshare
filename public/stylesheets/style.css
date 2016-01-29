@@ -2503,3 +2503,8 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
     padding-left:10px; 
     padding-right:10px; 
   } 
+  
+  .disabledl {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
