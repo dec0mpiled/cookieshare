@@ -8,14 +8,15 @@ var PostSchema = new Schema({
         author: String,
         content: String,
         tags: String,
-        spam: Number
+        spam: Number,
+        created: Date
 });
 
 var Post = mongoose.model('User', PostSchema);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    Post.find({}, function (err, posts) {
+    Post.find({}, null, { sort: '-created' }, function (err, posts) {
         if (err) return next(err);
         console.log(posts);
         res.render('index', { title: 'ShareCookie', posts: posts });
@@ -36,7 +37,8 @@ router.post('/sharecookie', function(req, res, next) {
         title: titleq,
         author: authorq,
         content: contentq,
-        spam: 0
+        spam: 0,
+        created: new Date()
     });
     newpost.save();
     res.redirect('/');
