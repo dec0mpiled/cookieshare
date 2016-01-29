@@ -38,10 +38,12 @@ router.post('/sharecookie', function(req, res, next) {
     
 var myurl=url;
 
+if (myurl!="") {
 if (myurl.startsWith("https://" || "http://")) {
     myurl=myurl;
 } else {
     myurl="https://"+myurl;
+}
 }
    
 var mytitle = titleq;
