@@ -3,9 +3,9 @@
 <diV id="div1" class="fixed">
 <form id="postcookie" action="/sharecookie" method="post">
 <h1 class="fixed"><b><font color="black">Share a cookie with the world!</font></b></h1><br><br><br><br><br>
-<input class="fixed textbox" name="titlebox" id="titlebox" required placeholder="Cookie Title"><br><br>
-<input class="fixed textbox" name="username" id="username" required placeholder="Username"><br><br>
-<textarea onkeyup="textCounter(this,'counter',200);" name="texxtt" id="texxtt" class="textarea" required placeholder="Enter your short message here! (Max 200 characters)"></textarea><br><br><br><br><br><br><br>
+<input class="fixed textbox" name="titlebox" id="titlebox" required placeholder="Title"><br><br>
+<textarea onkeyup="textCounter(this,'counter',200);" name="texxtt" id="texxtt" class="textarea" required placeholder="Enter your message here! (Max 200 characters)"></textarea><br><br><br><br><br><br><br>
+<input class="fixed textbox" name="picbox" id="picbox" placeholder="External Site or Image URL (Not required)"><br><br>
 <input class="fixed" disabled maxlength="3" size="3" value="200" id="counter">
 <br><br><button class="btn1 " id="login">Share Cookie!</button>
 </form>
@@ -14,8 +14,7 @@
 <p class="fixed text-left"><font size=3 color="Red">ShareCookie does NOT moniter posts.</p>
 <br>
 <p class="fixed text-left"><font size=3 color="Red">We do NOT take responsibility for any hurtful comments spread.</p><br>
-<p class="fixed text-left"><font size=3 color="Red">Be nice.</p><br>
-<p class="fixed text-left"><font size=3 color="Red">Jk we don't give a fuck what you say. COCKBALLS</p>
+<p class="fixed text-left"><font size=3 color="Red">Be nice :)</p><br>
 </div>
 
 <div id="div2">
@@ -31,12 +30,14 @@
 <font color="lightgray" size=3><b>post id: {{id}}</b></font>
 </p>
 <p><font color="black" size="5">{{content}}</font></p>
+
+<font color="Black"><b>Optional Link:</b></font><a href={{myurl}}> {{myurl}}</a><br>
 <font color="black">_______________________________________________________________________</font>
 {{/each}}
 
 </div>
   <nav class="navbar navbar-default navbar-fixed-top">
-  <a href="/"><font size=6 class="test affix" color="white"><b>ShareCookie</b></font></a><a class="btn " href="/help">Find Help Here <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a>
+  <a href="/"><font size=6 class="test affix" color="white"><b>ShareCookie</b></font></a><!--<a class="btn " href="/help">Find Help Here <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a>!-->
 </nav>
 </div>
 

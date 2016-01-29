@@ -7,6 +7,7 @@ var PostSchema = new Schema({
         title: String,
         author: String,
         content: String,
+        myurl: String,
         tags: String,
         spam: Number,
         created: Date,
@@ -31,34 +32,31 @@ router.get('/help', function(req, res, next) {
 router.post('/sharecookie', function(req, res, next) {
     var badWord = /fuck|shit|cunt|damn|nigger|nigga|twat|dick|cum|tits|titties|boob|boobs|penis|cock|bbc|porn|pornography|rape|sex|orgasm|tit|raping|bitch|ass|clit|clitoris|breast|breasts|wigger/gi;
     var titleq=req.body.titlebox;
-    var authorq=req.body.username;
+    var authorq="user"+Math.floor(Math.random() * 9999999) + 1 ;
     var contentq=req.body.texxtt;
+    var url=req.body.picbox;
     
-    if(authorq=="drew") {
-        authorq="vanilla";
-    }
-    
-    if(authorq=="admin.name#1") {
-        authorq="drew";
-    }
-    
+var myurl=url;
+
+if (myurl.startsWith("https://" || "http://")) {
+    myurl=myurl;
+} else {
+    myurl="";
+}
+   
 var mytitle = titleq;
 var mynewtitle = mytitle.toLowerCase();
 mynewtitle = mynewtitle.replace(badWord,"****");
-    
-var myauthor = authorq;
-var mynewauthor = myauthor.toLowerCase();
-mynewauthor = mynewauthor.replace(badWord,"****");
 
 var mycontent = contentq;
 var mynewcontent = mycontent.toLowerCase();
 mynewcontent = mynewcontent.replace(badWord,"****");
-mynewcontent = mynewcontent.replace("!",". Fuck!");
     
     var newpost = new Post({
         title: mynewtitle,
-        author: mynewauthor,
+        author: authorq,
         content: mynewcontent,
+        myurl: myurl,
         spam: 0,
         created: new Date()
     });
