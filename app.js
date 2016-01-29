@@ -10,6 +10,15 @@ var users = require('./routes/users');
 
 var app = express();
 
+// Mongoose
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://dec0mpiled:welcometor4ge@ds051665.mongolab.com:51665/cookiesharedb');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log("Connected to the DB using Mongo!");
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');

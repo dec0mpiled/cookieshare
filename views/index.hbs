@@ -1,2 +1,48 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<div class="container">
+
+<diV id="div1" class="fixed">
+<form id="postcookie" action="/sharecookie" method="post">
+<h1 class="fixed"><b><font color="black">Share a cookie with the world!</font></b></h1><br><br><br><br>
+<input class="fixed textbox" name="titlebox" id="titlebox" required placeholder="Cookie Title"><br><br>
+<input class="fixed textbox" name="username" id="username" required placeholder="Username"><br><br>
+<textarea onkeyup="textCounter(this,'counter',200);" name="texxtt" id="texxtt" class="textarea" required placeholder="Enter your short message here! (Max 200 characters)"></textarea><br><br><br><br><br><br><br>
+<input class="fixed" disabled maxlength="3" size="3" value="200" id="counter">
+<br><br><button class="btn1 " id="login">Share Cookie!</button>
+</form>
+<br><br><br><br><br><br><br>
+<p class="text-left"><font size=3 color="Black">ShareCookie is Copyright 2016 PaLante Visions</p>
+</div>
+
+<div id="div2">
+  <svg class="fixed" width="700" height="110">
+  <rect width="700" height="100" style="fill:rgb(255,255,255);" />
+  <text x="0" y="50" font-family="Arial" font-weight="bold" font-size="28" fill=#000>All Cookies:</text>
+</svg>
+
+<br><br><br><br>
+{{#each posts}}
+<p><font size=5><b>{{title}} </b></font><br>
+<font size=5 color="gray"><i>by {{author}}</i></font></p>
+<p><font size="4">{{content}}</font></p>
+_______________________________________________________________________
+{{/each}}
+
+
+</div>
+  <nav class="navbar navbar-default navbar-fixed-top">
+  <a href="/"><font size=6 class="test affix" color="white"><b>ShareCookie</b></font></a><a class="btn " href="/">Need Help? <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></a>
+</nav>
+</div>
+
+<script>
+function textCounter(field,field2,maxlimit)
+{
+ var countfield = document.getElementById(field2);
+ if ( field.value.length > maxlimit ) {
+  field.value = field.value.substring( 0, maxlimit );
+  return false;
+ } else {
+  countfield.value = maxlimit - field.value.length;
+ }
+}
+</script>
