@@ -9,7 +9,7 @@ var PostSchema = new Schema({
         content: String,
         tags: String,
         spam: Number,
-        created: Date
+        created: Date,
 });
 
 var Post = mongoose.model('User', PostSchema);
@@ -30,13 +30,27 @@ router.get('/help', function(req, res, next) {
 
 /* Post Cookie */
 router.post('/sharecookie', function(req, res, next) {
+    var badWord = /fuck|shit|cunt|damn|nigger|nigga|twat|dick|cum|tits|titties|boob|boobs|penis|cock|bbc|porn|pornography|rape|sex|orgasm|tit|raping/gi;
     var titleq=req.body.titlebox;
     var authorq=req.body.username;
     var contentq=req.body.texxtt;
+    
+var mytitle = titleq;
+var mynewtitle = mytitle.toLowerCase();
+mynewtitle = mynewtitle.replace(badWord,"****");
+    
+var myauthor = authorq;
+var mynewauthor = myauthor.toLowerCase();
+mynewauthor = mynewauthor.replace(badWord,"****");
+
+var mycontent = contentq;
+var mynewcontent = mycontent.toLowerCase();
+mynewcontent = mynewcontent.replace(badWord,"****");
+    
     var newpost = new Post({
-        title: titleq,
-        author: authorq,
-        content: contentq,
+        title: mynewtitle,
+        author: mynewauthor,
+        content: mynewcontent,
         spam: 0,
         created: new Date()
     });

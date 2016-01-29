@@ -2,7 +2,7 @@
 
 <diV id="div1" class="fixed">
 <form id="postcookie" action="/sharecookie" method="post">
-<h1 class="fixed"><b><font color="black">Share a cookie with the world!</font></b></h1><br><br><br><br>
+<h1 class="fixed"><b><font color="black">Share a cookie with the world!</font></b></h1><br><br><br><br><br>
 <input class="fixed textbox" name="titlebox" id="titlebox" required placeholder="Cookie Title"><br><br>
 <input class="fixed textbox" name="username" id="username" required placeholder="Username"><br><br>
 <textarea onkeyup="textCounter(this,'counter',200);" name="texxtt" id="texxtt" class="textarea" required placeholder="Enter your short message here! (Max 200 characters)"></textarea><br><br><br><br><br><br><br>
@@ -10,10 +10,11 @@
 <br><br><button class="btn1 " id="login">Share Cookie!</button>
 </form>
 <p class="fixed text-left"><font size=3 color="Black">ShareCookie is Copyright 2016 PaLante Visions</p>
+<br><br>
+<p class="fixed text-left"><font size=3 color="Red">ShareCookie does NOT moniter posts.</p>
 <br>
-<p class="fixed text-left"><font size=3 color="Red">ShareCookie does NOT moniter posts. There is a report button if you</p>
-<br>
-<p> feel something needs to be deleted. We do NOT take responsibility for any hurtful comments spread. Be nice :)</p>
+<p class="fixed text-left"><font size=3 color="Red">We do NOT take responsibility for any hurtful comments spread.</p><br>
+<p class="fixed text-left"><font size=3 color="Red">Be nice.</p>
 </div>
 
 <div id="div2">
@@ -24,20 +25,20 @@
 
 <br><br><br><br>
 {{#each posts}}
-<p><font color="black" size=5><b>{{title}} - </b></font><br>
+<p><font color="black" size=5><b>{{title}}</b></font><br>
 <font size=5 color="gray"><i>by {{author}}</i></font></p>
-<p><font color="black" size="4">{{content}}</font></p><br>
+<p><font color="black" size="4">{{content}}</font></p>
 <font color="black">_______________________________________________________________________</font>
 {{/each}}
 
-
 </div>
   <nav class="navbar navbar-default navbar-fixed-top">
-  <a href="/"><font size=6 class="test affix" color="white"><b>ShareCookie</b></font></a><a class="btn " href="/help">Find Help Here <span class="glyphicon glyphicon-education" aria-hidden="true"></span></a>
+  <a href="/"><font size=6 class="test affix" color="white"><b>ShareCookie</b></font></a><a class="btn " href="/help">Find Help Here <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a>
 </nav>
 </div>
 
 <script>
+
 function textCounter(field,field2,maxlimit)
 {
  var countfield = document.getElementById(field2);
@@ -48,4 +49,5 @@ function textCounter(field,field2,maxlimit)
   countfield.value = maxlimit - field.value.length;
  }
 }
+
 </script>
