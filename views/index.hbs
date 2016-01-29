@@ -26,8 +26,7 @@
 {{#each posts}}
 <p><font color="black" size=5><b>{{title}} - </b></font><br>
 <font size=5 color="gray"><i>by {{author}}</i></font></p>
-<p><font color="black" size="4">{{content}}</font></p><br>
-<a id="hides" onclick="hidefunction();"><font size=4><span class="glyphicon glyphicon-alert" aria-hidden="true"></span></font></a><br>
+<p><font color="black" size="4">{{content}}</font></p><br><br>
 <font color="black">_______________________________________________________________________</font>
 {{/each}}
 
@@ -49,8 +48,4 @@ function textCounter(field,field2,maxlimit)
   countfield.value = maxlimit - field.value.length;
  }
 }
-
-function hidefunction(){
- document.getElementById("hides").setAttribute("class", "disabledl");
-};
 </script>
