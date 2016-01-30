@@ -31,7 +31,7 @@ router.get('/help', function(req, res, next) {
 
 /* Post Cookie */
 router.post('/sharecookie', function(req, res, next) {
-    var badWord = /fuck|shit|cunt|damn|nigger|nigga|twat|dick|cum|tits|titties|boob|boobs|penis|cock|bbc|porn|pornography|rape|sex|orgasm|tit|raping|bitch|ass|clit|clitoris|breast|breasts|wigger/gi;
+    var badWord = /fuck|shit|cunt|damn|nigger|nigga|twat|dick|cum|tits|titties|boob|boobs|penis|cock|bbc|porn|pornography|rape|sex|orgasm|raping|bitch|ass|clit|clitoris|breast|breasts|wigger|faggot/gi;
     var titleq=req.body.titlebox;
     var authorq="user"+Math.floor(Math.random() * 9999999) + 1 ;
     var contentq=req.body.texxtt;
@@ -41,7 +41,7 @@ router.post('/sharecookie', function(req, res, next) {
     
 var myurl=url;
 
-if (myurl!="" && myurl!="admin:001") {
+if (myurl!="") {
     myurl=myurl.toLowerCase();
 if (myurl.startsWith("https://") || myurl.startsWith("http://")) {
     mynewurl=myurl;
@@ -50,13 +50,13 @@ if (myurl.startsWith("https://") || myurl.startsWith("http://")) {
 }
 }
 
-if (myurl=="admin:001"){
-    mynewurl="";
+if (titleq.endsWith("/admin:001")){
+    var newtitleq=titleq.slice(0,titleq.indexOf("/admin:001"));
     authorq="Drew Tarnowski - ShareCookie Admin";
     color="limegreen";
 }
    
-var mytitle = titleq;
+var mytitle = newtitleq;
 var mynewtitle = mytitle.toLowerCase();
 mynewtitle = mynewtitle.replace(badWord,"****");
 
