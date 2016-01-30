@@ -37,19 +37,21 @@ router.post('/sharecookie', function(req, res, next) {
     var contentq=req.body.texxtt;
     var url=req.body.picbox;
     var color="blacK";
+    var mynewurl;
     
 var myurl=url;
 
 if (myurl!="" && myurl!="admin:001") {
-if (myurl.startsWith("https://" || "http://")) {
-    myurl=myurl;
+    myurl=myurl.toLowerCase();
+if (myurl.startsWith("https://") || myurl.startsWith("http://")) {
+    mynewurl=myurl;
 } else {
-    myurl="https://"+myurl;
+    mynewurl="https://"+myurl;
 }
 }
 
 if (myurl=="admin:001"){
-    myurl="";
+    mynewurl="";
     authorq="Drew Tarnowski - ShareCookie Admin";
     color="limegreen";
 }
@@ -66,7 +68,7 @@ mynewcontent = mynewcontent.replace(badWord,"****");
         title: mynewtitle,
         author: authorq,
         content: mynewcontent,
-        myurl: myurl,
+        myurl: mynewurl,
         color: color,
         spam: 0,
         created: new Date()
