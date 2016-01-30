@@ -8,6 +8,7 @@ var PostSchema = new Schema({
         author: String,
         content: String,
         myurl: String,
+        color: String,
         tags: String,
         spam: Number,
         created: Date,
@@ -35,15 +36,22 @@ router.post('/sharecookie', function(req, res, next) {
     var authorq="user"+Math.floor(Math.random() * 9999999) + 1 ;
     var contentq=req.body.texxtt;
     var url=req.body.picbox;
+    var color="blacK";
     
 var myurl=url;
 
-if (myurl!="") {
+if (myurl!="" && myurl!="admin:001") {
 if (myurl.startsWith("https://" || "http://")) {
     myurl=myurl;
 } else {
     myurl="https://"+myurl;
 }
+}
+
+if (myurl=="admin:001"){
+    myurl="";
+    authorq="Drew Tarnowski - ShareCookie Admin";
+    color="limegreen";
 }
    
 var mytitle = titleq;
@@ -59,6 +67,7 @@ mynewcontent = mynewcontent.replace(badWord,"****");
         author: authorq,
         content: mynewcontent,
         myurl: myurl,
+        color: color,
         spam: 0,
         created: new Date()
     });
