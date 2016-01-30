@@ -46,7 +46,7 @@ if (myurl!="") {
 if (myurl.startsWith("https://") || myurl.startsWith("http://")) {
     mynewurl=myurl;
 } else {
-    mynewurl="https://"+myurl;
+    mynewurl="http://"+myurl;
 }
 }
 
