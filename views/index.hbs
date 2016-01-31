@@ -25,6 +25,7 @@
 
 <br><br><br><br>
 {{#each posts}}
+<form action="/likepost/{{id}}" method="get">
 <p><font color={{color}} size=6><b>{{title}}</b></font><br>
 <font size=4 color="gray"><i>by</i></font> <font color="gray" size=4>@{{author}}</font><br>
 <font color="lightgray" size=3><b>post id: {{id}}</b></font>
@@ -32,8 +33,11 @@
 <p><font color={{color}} size="5">{{content}}</font></p>
 
 <font color="Black"><b>Optional Link:</b></font><a href={{myurl}}> {{myurl}}</a><br>
+<font color="black"><a href="/likepost/{{id}}" class="btn15">Like </a> {{likes}} <a href="/dislikepost/{{id}}" class="btn15">Dislike </a></font>
 <font color="black"><b>_______________________________________________________________________</b></font>
+</form>
 {{/each}}
+
 
 </div>
   <nav class="navbar navbar-default navbar-fixed-top">

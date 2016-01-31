@@ -9,6 +9,7 @@ var PostSchema = new Schema({
         content: String,
         myurl: String,
         color: String,
+        likes: Number,
         tags: String,
         spam: Number,
         created: Date,
@@ -29,6 +30,28 @@ router.get('/help', function(req, res, next) {
         res.render('help', { title: 'Help'});
 });
 
+/* Like Post */
+
+router.get('/likepost/:id', function(req, res) {
+    Post.findOne({ _id: req.params.id }, function (err, doc){
+        doc.likes=doc.likes+1;
+        doc.save();
+        if (err) throw err;
+    });
+    res.redirect('/');
+});
+
+/* Dislike Post */
+
+router.get('/dislikepost/:id', function(req, res) {
+    Post.findOne({ _id: req.params.id }, function (err, doc){
+        doc.likes=doc.likes-1;
+        doc.save();
+        if (err) throw err;
+    });
+    res.redirect('/');
+});
+
 /* Post Cookie */
 router.post('/sharecookie', function(req, res, next) {
     var badWord = /fuck|shit|cunt|damn|nigger|nigga|twat|dick|cum|tits|titties|boob|boobs|penis|cock|bbc|porn|pornography|rape|sex|orgasm|raping|bitch|ass|clit|clitoris|breast|breasts|wigger|faggot/gi;
@@ -38,6 +61,8 @@ router.post('/sharecookie', function(req, res, next) {
     var url=req.body.picbox;
     var color="blacK";
     var mynewurl;
+    var mynewcontent;
+    var mynewtitle;
     
 var myurl=url;
 
@@ -56,13 +81,18 @@ if (titleq.endsWith("/admin:001")){
     color="limegreen";
 }
    
-var mytitle = newtitleq;
-var mynewtitle = mytitle.toLowerCase();
+if (titleq.endsWith("/admin:001")){
+    mynewtitle = newtitleq;
+    mynewcontent=contentq;
+} else {
+var mytitle = titleq;
+mynewtitle = mytitle.toLowerCase();
 mynewtitle = mynewtitle.replace(badWord,"****");
 
 var mycontent = contentq;
-var mynewcontent = mycontent.toLowerCase();
+mynewcontent = mycontent.toLowerCase();
 mynewcontent = mynewcontent.replace(badWord,"****");
+}
     
     var newpost = new Post({
         title: mynewtitle,
@@ -71,6 +101,7 @@ mynewcontent = mynewcontent.replace(badWord,"****");
         myurl: mynewurl,
         color: color,
         spam: 0,
+        likes: 0,
         created: new Date()
     });
     newpost.save();
