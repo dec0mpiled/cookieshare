@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var type=2;
 
-var comments = new Schema({ value: String, user: String });
+var comments = new Schema({ value: String, user: String, created: Date });
 
 var PostSchema = new Schema({
         title: String,
@@ -97,6 +97,8 @@ var mycontent = contentq;
 mynewcontent = mycontent.toLowerCase();
 mynewcontent = mynewcontent.replace(badWord,"****");
 }
+
+mynewcontent = mynewcontent.replace(":)","😊");
     
     var newpost = new Post({
         title: mynewtitle,
@@ -120,12 +122,15 @@ router.get('/cookie/:id', function(req, res) {
   });
 
 router.post("/sendcomment/:id", function(req, res, next) {
+    var badWord = /fuck|shit|cunt|damn|nigger|nigga|twat|dick|cum|tits|titties|boob|boobs|penis|cock|bbc|porn|pornography|rape|sex|orgasm|raping|bitch|ass|clit|clitoris|breast|breasts|wigger|faggot/gi;
     var commentval = req.body.commentbox;
+    var mynewcomment = commentval.toLowerCase();
+    var mynewcomment1 = mynewcomment.replace(badWord,"****");
     console.log(commentval);
     var id=req.params.id;
     var name="user"+Math.floor(Math.random() * 9999999) + 1 ;
     Post.findOne({"_id" : id}, function (err, doc){
-        doc.commentslist.push({ value: commentval, user: name });
+        doc.commentslist.push({ value: mynewcomment1, user: name, created: new Date() });
         doc.save();
         if (err) throw err;
 });
