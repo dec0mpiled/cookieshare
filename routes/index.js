@@ -160,7 +160,7 @@ mynewcontent = mynewcontent.replace(badWord,"****");
 router.get('/cookie/:id', function(req, res) {
   Post.find({ _id: req.params.id }, function(err, result) {
     if (err) throw err;
-    res.render('post', { title: "Post", result: result});
+    res.render('post', { title: "Cookie from ShareCookie!", result: result});
     });
   });
 
