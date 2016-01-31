@@ -4,7 +4,7 @@
 <form id="postcookie" action="/sharecookie" method="post">
 <h1 class="fixed"><b><font color="black">Share a cookie with the world!</font></b></h1><br><br><br><br><br>
 <input class="fixed textbox" name="titlebox" id="titlebox" required placeholder="Title"><br><br>
-<textarea onkeyup="textCounter(this,'counter',200);" name="texxtt" id="texxtt" class="textarea" required placeholder="Enter your message here! (Max 200 characters)"></textarea><br><br><br><br><br><br><br>
+<textarea onkeyup="textCounter(this,'counter',200);" name="texxtt" id="texxtt" class="textarea fixed" required placeholder="Enter your message here! (Max 200 characters)"></textarea><br><br><br><br><br><br><br>
 <input class="fixed textbox" name="picbox" id="picbox" placeholder="External Site or Image URL (Not required)"><br><br>
 <input class="fixed" disabled maxlength="3" size="3" value="200" id="counter">
 <br><br><button class="btn1 " id="login">Share Cookie!</button>
@@ -25,23 +25,21 @@
 
 <br><br><br><br>
 {{#each posts}}
-<form action="/likepost/{{id}}" method="get">
-<p><font color={{color}} size=6><b>{{title}}</b></font><br>
+<a href="/cookie/{{id}}"><p><font color={{color}} size=6><b>{{title}}</b></font></a><br>
 <font size=4 color="gray"><i>by</i></font> <font color="gray" size=4>@{{author}}</font><br>
 <font color="lightgray" size=3><b>post id: {{id}}</b></font>
 </p>
-<p><font color={{color}} size="5">{{content}}</font></p>
+<p><font color={{color}} size="4">{{content}}</font></p>
 
 <font color="Black"><b>Optional Link:</b></font><a href={{myurl}}> {{myurl}}</a><br><br>
-<font color="black"><a href="/likepost/{{id}}" class="btn15">Like </a> {{likes}} <a href="/dislikepost/{{id}}" class="btn15">Dislike </a></font>
-<font color="black"><b>_______________________________________________________________________</b></font>
-</form>
+<font color="black"><a href="/likepost/{{id}}" class="btn15">Like </a> <a href="/dislikepost/{{id}}" class="btn15">Dislike </a>  <b><font size=4>{{likes}}</font></b></font>
+<font color="black"><b>_______________________________________________________________________</b></font><br><br>
 {{/each}}
 
 
 </div>
   <nav class="navbar navbar-default navbar-fixed-top">
-  <a href="/"><font size=6 class="test affix" color="white"><b>ShareCookie</b></font></a><!--<a class="btn " href="/help">Find Help Here <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a>!-->
+  <a href="/"><font size=6 class="test affix" color="white"><b>ShareCookie</b></font></a><!-- <span class="btn16"><b>Sort By:</b></span> <a class="btn7 " href="/type/2">Most Recent</a><a class="btn7 " href="/type/1">Most Likes</a>!-->
 </nav>
 </div>
 

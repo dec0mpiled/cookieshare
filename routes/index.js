@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var type=2;
+
+var comments = new Schema({ value: String, user: String });
 
 var PostSchema = new Schema({
         title: String,
@@ -13,17 +16,18 @@ var PostSchema = new Schema({
         tags: String,
         spam: Number,
         created: Date,
+        commentslist: [comments]
 });
 
 var Post = mongoose.model('User', PostSchema);
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
-    Post.find({}, null, { sort: '-created' }, function (err, posts) {
+
+    Post.find({}, null, { sort: '-likes' }, function (err, posts) {
         if (err) return next(err);
         res.render('index', { title: 'ShareCookie', posts: posts });
     });
-});
+    });
 
 /* GET help page. */
 router.get('/help', function(req, res, next) {
@@ -101,11 +105,31 @@ mynewcontent = mynewcontent.replace(badWord,"****");
         myurl: mynewurl,
         color: color,
         spam: 0,
-        likes: 0,
+        likes: 1,
         created: new Date()
     });
     newpost.save();
     res.redirect('/');
+});
+
+router.get('/cookie/:id', function(req, res) {
+  Post.find({ _id: req.params.id }, function(err, result) {
+    if (err) throw err;
+    res.render('post', { title: "Post", result: result});
+    });
+  });
+
+router.post("/sendcomment/:id", function(req, res, next) {
+    var commentval = req.body.commentbox;
+    console.log(commentval);
+    var id=req.params.id;
+    var name="user"+Math.floor(Math.random() * 9999999) + 1 ;
+    Post.findOne({"_id" : id}, function (err, doc){
+        doc.commentslist.push({ value: commentval, user: name });
+        doc.save();
+        if (err) throw err;
+});
+    res.redirect("/cookie/"+id);
 });
 
 module.exports = router;
