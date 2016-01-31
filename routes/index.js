@@ -87,19 +87,62 @@ if (titleq.endsWith("/admin:001")){
    
 if (titleq.endsWith("/admin:001")){
     mynewtitle = newtitleq;
+    mynewtitle = mynewtitle.replace(":)","😊");
+    mynewtitle = mynewtitle.replace(":D","😄");
+    mynewtitle = mynewtitle.replace(":(","😔");
+    mynewtitle = mynewtitle.replace(":*","😘");
+    mynewtitle = mynewtitle.replace(":|","😐");
+    mynewtitle = mynewtitle.replace(":>","😌");
+    mynewtitle = mynewtitle.replace(":&","😏");
+    mynewtitle = mynewtitle.replace(";)","😉");
+    mynewtitle = mynewtitle.replace("xD"||"XD","😂");
+    mynewtitle = mynewtitle.replace(":P"||":p","😛");
+    
     mynewcontent=contentq;
+    mynewcontent = mynewcontent.replace(":)","😊");
+    mynewcontent = mynewcontent.replace(":D","😄");
+    mynewcontent = mynewcontent.replace(":(","😔");
+    mynewcontent = mynewcontent.replace(":*","😘");
+    mynewcontent = mynewcontent.replace(":|","😐");
+    mynewcontent = mynewcontent.replace(":>","😌");
+    mynewcontent = mynewcontent.replace(":&","😏");
+    mynewcontent = mynewcontent.replace(";)","😉");
+    mynewcontent = mynewcontent.replace("xD"||"XD","😂");
+    mynewcontent = mynewcontent.replace(":P"||":p","😛");
 } else {
 var mytitle = titleq;
+// Emojis!!
+mytitle = mytitle.replace(":)","😊");
+mytitle = mytitle.replace(":D","😄");
+mytitle = mytitle.replace(":(","😔");
+mytitle = mytitle.replace(":*","😘");
+mytitle = mytitle.replace(":|","😐");
+mytitle = mytitle.replace(":>","😌");
+mytitle = mytitle.replace(":&","😏");
+mytitle = mytitle.replace(";)","😉");
+mytitle = mytitle.replace("xD"||"XD","😂");
+mytitle = mytitle.replace(":P"||":p","😛");
+
 mynewtitle = mytitle.toLowerCase();
 mynewtitle = mynewtitle.replace(badWord,"****");
 
 var mycontent = contentq;
+// Emojis!!
+mycontent = mycontent.replace(":)","😊");
+mycontent = mycontent.replace(":D","😄");
+mycontent = mycontent.replace(":(","😔");
+mycontent = mycontent.replace(":*","😘");
+mycontent = mycontent.replace(":|","😐");
+mycontent = mycontent.replace(":>","😌");
+mycontent = mycontent.replace(":&","😏");
+mycontent = mycontent.replace(";)","😉");
+mycontent = mycontent.replace("xD"||"XD","😂");
+mycontent = mycontent.replace(":P"||":p","😛");
+
 mynewcontent = mycontent.toLowerCase();
 mynewcontent = mynewcontent.replace(badWord,"****");
 }
 
-mynewcontent = mynewcontent.replace(":)","😊");
-    
     var newpost = new Post({
         title: mynewtitle,
         author: authorq,
@@ -124,9 +167,18 @@ router.get('/cookie/:id', function(req, res) {
 router.post("/sendcomment/:id", function(req, res, next) {
     var badWord = /fuck|shit|cunt|damn|nigger|nigga|twat|dick|cum|tits|titties|boob|boobs|penis|cock|bbc|porn|pornography|rape|sex|orgasm|raping|bitch|ass|clit|clitoris|breast|breasts|wigger|faggot/gi;
     var commentval = req.body.commentbox;
+    commentval = commentval.replace(":)","😊");
+    commentval = commentval.replace(":D","😄");
+    commentval = commentval.replace(":(","😔");
+    commentval = commentval.replace(":*","😘");
+    commentval = commentval.replace(":|","😐");
+    commentval = commentval.replace(":>","😌");
+    commentval = commentval.replace(":&","😏");
+    commentval = commentval.replace(";)","😉");
+    commentval = commentval.replace("xD"||"XD","😂");
+    commentval = commentval.replace(":P"||":p","😛");
     var mynewcomment = commentval.toLowerCase();
     var mynewcomment1 = mynewcomment.replace(badWord,"****");
-    console.log(commentval);
     var id=req.params.id;
     var name="user"+Math.floor(Math.random() * 9999999) + 1 ;
     Post.findOne({"_id" : id}, function (err, doc){
