@@ -22,13 +22,32 @@ var PostSchema = new Schema({
 
 var Post = mongoose.model('User', PostSchema);
 
+/* home */
 router.get('/', function(req, res, next) {
+
+    Post.find({}, null, { sort: '-created' }, function (err, posts) {
+        if (err) return next(err);
+        res.render('index', { title: 'ShareCookie',filter: 'date', posts: posts });
+    });
+});
+
+/* sort by date */
+router.get('/filter/date', function(req, res, next) {
+
+    Post.find({}, null, { sort: '-created' }, function (err, posts) {
+        if (err) return next(err);
+        res.render('index', { title: 'ShareCookie', filter: 'date', posts: posts });
+    });
+});
+
+/* sort by likes */
+router.get('/filter/likes', function(req, res, next) {
 
     Post.find({}, null, { sort: '-likes' }, function (err, posts) {
         if (err) return next(err);
-        res.render('index', { title: 'ShareCookie', posts: posts });
+        res.render('index', { title: 'ShareCookie', filter: 'likes', posts: posts });
     });
-    });
+});
 
 /* GET help page. */
 router.get('/help', function(req, res, next) {
