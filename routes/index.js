@@ -186,14 +186,13 @@ router.get('/cookie/:id', function(req, res) {
 router.post("/sendcomment/:id", function(req, res, next) {
     var badWord = /fuck|shit|cunt|damn|nigger|nigga|twat|dick|cum|tits|titties|boob|boobs|penis|cock|bbc|porn|pornography|rape|sex|orgasm|raping|bitch|ass|clit|clitoris|breast|breasts|wigger|faggot/gi;
     var commentval = req.body.commentbox;
-    if (commentval.endsWith("/admin:001")){
+if (commentval.endsWith("/admin:001")){
     var newcomq=commentval.slice(0,commentval.indexOf("/admin:001"));
     name="Andrew Tarnowski - ShareCookie Administrator";
-    var mynewcomment1=newcomq;
 } else {
     var name="user"+Math.floor(Math.random() * 9999999) + 1 ;
     var mynewcomment = commentval.toLowerCase();
-    var mynewcomment1 = mynewcomment.replace(badWord,"****");
+    var newcomq = mynewcomment.replace(badWord,"****");
 }
 commentval=newcomq;
     commentval = commentval.replace(":)","😊");
@@ -208,7 +207,7 @@ commentval=newcomq;
     commentval = commentval.replace(":P"||":p","😛");
     var id=req.params.id;
     Post.findOne({"_id" : id}, function (err, doc){
-        doc.commentslist.unshift({ value: mynewcomment1, user: name, created: new Date() });
+        doc.commentslist.unshift({ value: commentval, user: name, created: new Date() });
         doc.commentamount=doc.commentamount+1;
         doc.save();
         if (err) throw err;
