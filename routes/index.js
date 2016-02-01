@@ -39,6 +39,11 @@ router.get('/help', function(req, res, next) {
 router.get('/likepost/:id', function(req, res) {
     Post.findOne({ _id: req.params.id }, function (err, doc){
         doc.likes=doc.likes+1;
+        if (doc.likes<=-1){
+        doc.color="red";
+        } else {
+            doc.color="blacK";
+        }
         doc.save();
         if (err) throw err;
     });
@@ -50,6 +55,11 @@ router.get('/likepost/:id', function(req, res) {
 router.get('/dislikepost/:id', function(req, res) {
     Post.findOne({ _id: req.params.id }, function (err, doc){
         doc.likes=doc.likes-1;
+        if (doc.likes<=-1){
+        doc.color="red";
+        } else {
+            doc.color="blacK";
+        }
         doc.save();
         if (err) throw err;
     });
