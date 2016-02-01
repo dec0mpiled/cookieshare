@@ -79,6 +79,10 @@ if (myurl.startsWith("https://") || myurl.startsWith("http://")) {
 }
 }
 
+if (myurl=="") {
+    myurl="/images/void.jpg";
+}
+
 if (titleq.endsWith("/admin:001")){
     var newtitleq=titleq.slice(0,titleq.indexOf("/admin:001"));
     authorq="Drew Tarnowski - ShareCookie Admin";
