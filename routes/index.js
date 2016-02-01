@@ -70,6 +70,10 @@ router.post('/sharecookie', function(req, res, next) {
     
 var myurl=url;
 
+if (myurl=="" || myurl==" "){
+    mynewurl="http://www.reddoorrealtyatlanta.com/wp-content/themes/reddoorrealtyatlanta.com/images/no-image-available.jpg";
+}
+
 if (myurl!="") {
     myurl=myurl.toLowerCase();
 if (myurl.startsWith("https://") || myurl.startsWith("http://")) {
@@ -77,10 +81,13 @@ if (myurl.startsWith("https://") || myurl.startsWith("http://")) {
 } else {
     mynewurl="http://"+myurl;
 }
-}
 
-if (myurl=="") {
-    myurl="/images/void.jpg";
+if (myurl.endsWith(".gif")){
+    mynewurl=myurl;
+} else {
+    mynewurl="http://www.reddoorrealtyatlanta.com/wp-content/themes/reddoorrealtyatlanta.com/images/no-image-available.jpg";
+}
+    
 }
 
 if (titleq.endsWith("/admin:001")){

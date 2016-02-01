@@ -5,7 +5,7 @@
 <h1 class="fixed"><b><font color="black">Share a cookie with the world!</font></b></h1><br><br><br><br><br>
 <input class="fixed textbox" name="titlebox" id="titlebox" required placeholder="Title"><br><br>
 <textarea onkeyup="textCounter(this,'counter',200);" name="texxtt" id="texxtt" class="textarea fixed" required placeholder="Enter your message here! (Max 200 characters)"></textarea><br><br><br><br><br><br><br>
-<input class="fixed textbox" name="picbox" id="picbox" placeholder="External Site or Image URL (Not required)"><br><br>
+<input class="fixed textbox" name="picbox" id="picbox" placeholder="Link to animated GIF (Not required)"><br><br>
 <input class="fixed" disabled maxlength="3" size="3" value="200" id="counter">
 <br><br><button class="btn1 " id="login">Share Cookie!</button>
 </form>
@@ -30,10 +30,11 @@
 <font color="lightgray" size=3><b>post id: {{id}}</b></font>
 </p>
 <p><font color={{color}} size="4">{{content}}</font></p>
-
-<font color="Black"><b>Optional Link:</b></font><a href={{myurl}}> {{myurl}}</a><br><br>
-<font color="black"><a href="/likepost/{{id}}" class="btn15">Like </a> <a href="/dislikepost/{{id}}" class="btn15">Dislike </a>  <b><font size=4>{{likes}}</font></b></font><br>
-<a href="/cookie/{{id}}"><p><font size=3><b><u>View Comments</u></b></font></a><br>
+<font color="black"><a href="/likepost/{{id}}" class="btn15">Like </a> <a href="/dislikepost/{{id}}" class="btn15">Dislike </a>  <b><font size=4>{{likes}}</font></b></font> <br>
+<div id="div3">
+ <img src="{{myurl}}" style="border:00px solid white" width=90px height=90px>
+</div>
+<a href="/cookie/{{id}}"><p><font size=3><b><u>View Comments</u></b></font></a> <br> 
 <font color="black"><b>_______________________________________________________________________</b></font><br><br>
 {{/each}}
 
