@@ -16,6 +16,7 @@ var PostSchema = new Schema({
         tags: String,
         spam: Number,
         created: Date,
+        commentamount: Number,
         commentslist: [comments]
 });
 
@@ -103,8 +104,7 @@ if (myurl.endsWith(".gif")){
 
 if (titleq.endsWith("/admin:001")){
     var newtitleq=titleq.slice(0,titleq.indexOf("/admin:001"));
-    authorq="Drew Tarnowski - ShareCookie Admin";
-    color="limegreen";
+    authorq="Andrew Tarnowski - ShareCookie Administrator";
 }
    
 if (titleq.endsWith("/admin:001")){
@@ -173,6 +173,7 @@ mynewcontent = mynewcontent.replace(badWord,"****");
         color: color,
         spam: 0,
         likes: 1,
+        commentamount: 0,
         created: new Date(),
     });
     newpost.save();
@@ -189,6 +190,16 @@ router.get('/cookie/:id', function(req, res) {
 router.post("/sendcomment/:id", function(req, res, next) {
     var badWord = /fuck|shit|cunt|damn|nigger|nigga|twat|dick|cum|tits|titties|boob|boobs|penis|cock|bbc|porn|pornography|rape|sex|orgasm|raping|bitch|ass|clit|clitoris|breast|breasts|wigger|faggot/gi;
     var commentval = req.body.commentbox;
+    if (commentval.endsWith("/admin:001")){
+    var newcomq=commentval.slice(0,commentval.indexOf("/admin:001"));
+    name="Andrew Tarnowski - ShareCookie Administrator";
+    var mynewcomment1=newcomq;
+} else {
+    var name="user"+Math.floor(Math.random() * 9999999) + 1 ;
+    var mynewcomment = commentval.toLowerCase();
+    var mynewcomment1 = mynewcomment.replace(badWord,"****");
+}
+commentval=newcomq;
     commentval = commentval.replace(":)","😊");
     commentval = commentval.replace(":D","😄");
     commentval = commentval.replace(":(","😔");
@@ -199,12 +210,10 @@ router.post("/sendcomment/:id", function(req, res, next) {
     commentval = commentval.replace(";)","😉");
     commentval = commentval.replace("xD"||"XD","😂");
     commentval = commentval.replace(":P"||":p","😛");
-    var mynewcomment = commentval.toLowerCase();
-    var mynewcomment1 = mynewcomment.replace(badWord,"****");
     var id=req.params.id;
-    var name="user"+Math.floor(Math.random() * 9999999) + 1 ;
     Post.findOne({"_id" : id}, function (err, doc){
         doc.commentslist.unshift({ value: mynewcomment1, user: name, created: new Date() });
+        doc.commentamount=doc.commentamount+1;
         doc.save();
         if (err) throw err;
 });
