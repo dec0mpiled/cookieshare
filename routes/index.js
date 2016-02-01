@@ -78,7 +78,6 @@ router.post('/sharecookie', function(req, res, next) {
     var mynewurl;
     var mynewcontent;
     var mynewtitle;
-    var pinned;
     
 var myurl=url;
 
@@ -87,11 +86,8 @@ if (myurl=="" || myurl==" "){
 }
 
 if (myurl!="") {
-    myurl=myurl.toLowerCase();
-if (myurl.startsWith("https://") || myurl.startsWith("http://")) {
+if (myurl.startsWith("http://")) {
     mynewurl=myurl;
-} else {
-    mynewurl="http://"+myurl;
 }
 
 if (myurl.endsWith(".gif")){
