@@ -58,7 +58,11 @@ router.get('/dislikepost/:id', function(req, res) {
         doc.likes=doc.likes-1;
         if (doc.likes<=-1){
         doc.color="red";
-        } else {
+        } 
+        if (doc.likes<-15){
+            doc.remove();
+        }
+        if (doc.likes>=0){
             doc.color="blacK";
         }
         doc.save();
