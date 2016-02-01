@@ -211,7 +211,7 @@ commentval=newcomq;
     commentval = commentval.replace(":P"||":p","😛");
     var id=req.params.id;
     Post.findOne({"_id" : id}, function (err, doc){
-        doc.commentslist.unshift({ value: commentval, user: name, created: new Date() });
+        doc.commentslist.push({ value: commentval, user: name, created: new Date() });
         doc.commentamount=doc.commentamount+1;
         doc.save();
         if (err) throw err;
