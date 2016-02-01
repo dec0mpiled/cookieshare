@@ -67,6 +67,7 @@ router.post('/sharecookie', function(req, res, next) {
     var mynewurl;
     var mynewcontent;
     var mynewtitle;
+    var pinned;
     
 var myurl=url;
 
@@ -162,7 +163,7 @@ mynewcontent = mynewcontent.replace(badWord,"****");
         color: color,
         spam: 0,
         likes: 1,
-        created: new Date()
+        created: new Date(),
     });
     newpost.save();
     res.redirect('/');
@@ -193,7 +194,7 @@ router.post("/sendcomment/:id", function(req, res, next) {
     var id=req.params.id;
     var name="user"+Math.floor(Math.random() * 9999999) + 1 ;
     Post.findOne({"_id" : id}, function (err, doc){
-        doc.commentslist.push({ value: mynewcomment1, user: name, created: new Date() });
+        doc.commentslist.unshift({ value: mynewcomment1, user: name, created: new Date() });
         doc.save();
         if (err) throw err;
 });
