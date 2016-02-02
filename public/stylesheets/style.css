@@ -19,14 +19,6 @@
   position: fixed;
 }
 
-.navbar1 {
-  width: 100%;
-  padding: 1em 1%;
-  margin-top: -21px;
-  background: RGBA(100, 205, 15, 1);
-  position: fixed;
-}
-
 .navbar-right {
   float: right;
   padding-top: .4em;
@@ -56,7 +48,6 @@
 /* Display */
 .form-fixed {
   position: fixed;
-  border-right:1px solid black;
 }
 textarea {
   width: 90%;
@@ -72,6 +63,14 @@ textarea {
 textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:active, .input-gif:focus, .input-title:hover, .input-title:active, .input-title:focus {
   border: 1px solid #00cc00;
   outline: 0;
+}
+
+.input-username, .input-password {
+  width: 100%;
+  font-size: 1.4em;
+  color: #111;
+  padding: .5em;
+  margin: .5em 0;
 }
 
 .input-title {
@@ -117,3 +116,11 @@ textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:ac
   }
 }
 
+.cookie-content {
+  font-size: 1.4em;
+  font-weight: 500;
+}
+
+.cookie-caption {
+  color: #808080;
+}

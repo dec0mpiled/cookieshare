@@ -3,6 +3,10 @@
     <a class="navbar-item {{#equal filter 'date'}}selected{{/equal}}" href="/filter/date">Most Recent</a>
     <font color="white">|</font>
     <a class="navbar-item {{#equal filter 'likes'}}selected{{/equal}}" href="/filter/likes">Most Likes</a>
+    {{#if user}}
+    <font color="white">|</font>
+    <a class="navbar-item" href="/auth/logout">Logout</a>
+    {{/if}}
   </div>
   <a class="navbar-brand" href="/">ShareCookie</a>
 </nav>
@@ -14,7 +18,8 @@
    
    <div class="form-fixed">
     <!-- forms -->
-   <h1>Post to ShareCookie</h1>
+    {{#if user}}
+    <h1>Post to ShareCookie</h1>
    
    <form id="postcookie" action="/sharecookie" method="post">
     <input class="input-title" name="titlebox" id="titlebox" required placeholder="Title"><br><br>
@@ -22,6 +27,34 @@
     <input class="input-gif" name="picbox" id="picbox" placeholder="Link to animated GIF (Not required)"><br><br>
     <button class="btn " id="login">Create Post</button> <span id="counter">200</span>
    </form>
+   {{else}}
+   <h1>Login or Create an account to post!</h1>
+   
+   <div class="frame">
+    
+    <div class="bit-2">
+     
+     <h3>Sign in</h3>
+     
+     {{#if info}}
+     <p>{{info}}</p>
+     {{/if}}
+     
+     <form action="/auth/login" method="post">
+      <input class="input-username" type="text" name="username" id="username" placeholder="username">
+      <br>
+      <input class="input-password" type="password" name="password" id="password" placeholder="password">
+      <br><br>
+      <button class="btn" type="submit">Sign in</button>
+      <br><br>
+      <a href="/auth/register"><font color=#00cc00>Don't have an account? Sign up now!</font></a>
+     </form>
+     
+    </div>
+    
+   </div>
+   
+   {{/if}}
    </div>
    
   </div>
@@ -62,7 +95,7 @@
         <a href="/likepost/{{id}}" class="btn btn-like">Like </a> <a href="/dislikepost/{{id}}" class="btn btn-dislike">Dislike </a> {{likes}} likes
         
         <!-- comments -->
-        <a href="/cookie/{{id}}">View Comments ({{commentamount}})</a>
+        <a href="/cookie/{{id}}"><font color=#00cc00>Comments ({{commentamount}})</font></a>
        </div>
       
      </div>

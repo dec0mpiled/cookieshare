@@ -1,32 +1,53 @@
-<nav class="navbar1">
- <a class="navbar-brand" href="/">ShareCookie</a>
+<nav class="navbar">
+  <div class="navbar-right">
+    {{#if user}}
+    <a class="navbar-item" href="/auth/logout">Logout</a>
+    {{else}}
+    <a class="navbar-item" href="/auth/login">Login</a>
+    {{/if}}
+  </div>
+  <a class="navbar-brand" href="/">ShareCookie</a>
 </nav>
 
-{{#each result}}
-<form id="test" action="/sendcomment/{{id}}" method="post">
-<h1>{{title}}</h1>
-<p><b>Author:</b> @{{author}}</p>
-<p><b>Likes:</b> {{likes}}</p>
-<p><b>Date Created:</b> {{created}}</p>
-<p><b>Post ID:</b> {{id}}</p>
-<font size=4><p>{{content}}</p></font>
-<img src="{{myurl}}" style="border:00px solid white" width=250px height=200px><br>
-<p><font color="gray">image via: {{myurl}}</font></p>
-<font>_____________________________________________________________________________________________________________________</font>
-<h2>Comments ({{commentamount}}):</h2>
-<textarea onkeyup="textCounter(this,'counter',200);" name="commentbox" id="commentbox" class="textarea" placeholder="Write something nice!" required></textarea>
-<br><input disabled maxlength="3" size="3" value="100" id="counter">
-<button class="btn">Comment!</button>
+<div class="wrapper">
+ 
+<div class="frame body-frame">
+ <div class="bit-2">
+  <h1>{{result.title}}</h1>
+  <p><b>Author:</b> @{{result.author}}</p>
+  <p><b>Likes:</b> {{result.likes}}</p>
+  <p><b>Date Created:</b> {{formatDate result.created  day="numeric" month="long" year="numeric"}}</p>
+  <p><b>Post ID:</b> {{result.id}}</p>
+  <br>
+  <p class="cookie-content">{{result.content}}</p>
+ </div>
+ <div class="bit-2">
+  <br><br>
+  <img src="{{result.myurl}}" style="border:00px solid white" height=300px width=100%>
+  <p class="cookie-caption">image via: {{result.myurl}}</p>
+ </div>
+</div>
 
-{{#each commentslist}}
-  <br><font size=2>_____________________________________</font>
-  <h2><font color="black"><b>@{{user}}:</b></font></h2>
-  <h3>{{value}}</3><br>
+<div class="frame">
+ <div class="bit-2">
+  <h2>Post new comment</h2>
   
-{{/each}}
-
-</form>
-{{/each}}
+  <form id="test" action="/sendcomment/{{result.id}}" method="post">
+   
+   <textarea onkeyup="textCounter(this,'counter',200);" name="commentbox" id="commentbox" class="textarea" placeholder="Write something nice!" required></textarea>
+   <button class="btn">Comment!</button> <span id="counter">200</span>
+   
+   </form>
+ </div>
+ <div class="bit-2">
+  <h2>Comments ({{result.commentamount}}):</h2><br>
+  {{#each result.commentslist}}
+   <h3>@{{user}}:</h3>
+   <p>{{value}}</p><br>
+  {{/each}}
+ </div>
+</div>
+</div>
 
 
 <script>
@@ -38,7 +59,7 @@ function textCounter(field,field2,maxlimit)
   field.value = field.value.substring( 0, maxlimit );
   return false;
  } else {
-  countfield.value = maxlimit - field.value.length;
+  countfield.innerHTML = maxlimit - field.value.length;
  }
 }
 

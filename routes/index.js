@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var type=2;
 
 var comments = new Schema({ value: String, user: String, created: Date });
 
@@ -27,8 +26,9 @@ router.get('/', function(req, res, next) {
 
     Post.find({}, null, { sort: '-created' }, function (err, posts) {
         if (err) return next(err);
-        res.render('index', { title: 'ShareCookie',filter: 'date', posts: posts });
+        res.render('index', { title: 'ShareCookie',filter: 'date', posts: posts, user: req.user });
     });
+    
 });
 
 /* sort by date */
@@ -36,7 +36,7 @@ router.get('/filter/date', function(req, res, next) {
 
     Post.find({}, null, { sort: '-created' }, function (err, posts) {
         if (err) return next(err);
-        res.render('index', { title: 'ShareCookie', filter: 'date', posts: posts });
+        res.render('index', { title: 'ShareCookie', filter: 'date', posts: posts, user: req.user });
     });
 });
 
@@ -45,7 +45,7 @@ router.get('/filter/likes', function(req, res, next) {
 
     Post.find({}, null, { sort: '-likes' }, function (err, posts) {
         if (err) return next(err);
-        res.render('index', { title: 'ShareCookie', filter: 'likes', posts: posts });
+        res.render('index', { title: 'ShareCookie', filter: 'likes', posts: posts, user: req.user });
     });
 });
 
@@ -94,7 +94,7 @@ router.get('/dislikepost/:id', function(req, res) {
 router.post('/sharecookie', function(req, res, next) {
     var badWord = /fuck|shit|cunt|damn|nigger|nigga|twat|dick|cum|tits|titties|boob|boobs|penis|cock|bbc|porn|pornography|rape|sex|orgasm|raping|bitch|ass|clit|clitoris|breast|breasts|wigger|faggot/gi;
     var titleq=req.body.titlebox;
-    var authorq="user"+Math.floor(Math.random() * 9999999) + 1 ;
+    var authorq=req.user.username;
     var contentq=req.body.texxtt;
     var url=req.body.picbox;
     var color="blacK";
@@ -200,20 +200,16 @@ mynewcontent = mynewcontent.replace(badWord,"****");
 });
 
 router.get('/cookie/:id', function(req, res) {
-  Post.find({ _id: req.params.id }, function(err, result) {
+  Post.findOne({ _id: req.params.id }, function(err, result) {
     if (err) throw err;
-    res.render('post', { title: "Cookie from ShareCookie!", result: result});
+    res.render('post', { title: "Cookie from ShareCookie!", result: result, user: req.user });
     });
   });
 
 router.post("/sendcomment/:id", function(req, res, next) {
     var badWord = /fuck|shit|cunt|damn|nigger|nigga|twat|dick|cum|tits|titties|boob|boobs|penis|cock|bbc|porn|pornography|rape|sex|orgasm|raping|bitch|ass|clit|clitoris|breast|breasts|wigger|faggot/gi;
     var commentval = req.body.commentbox;
-if (commentval.endsWith("/admin:001")){
-    var newcomq=commentval.slice(0,commentval.indexOf("/admin:001"));
-    name="drew";
-} else {
-    var name="user"+Math.floor(Math.random() * 9999999) + 1 ;
+    var name=req.user.username;
     commentval = commentval.replace(":)","😊");
     commentval = commentval.replace(":D","😄");
     commentval = commentval.replace(":(","😔");
@@ -226,7 +222,6 @@ if (commentval.endsWith("/admin:001")){
     commentval = commentval.replace(":P"||":p","😛");
     var mynewcomment = commentval.toLowerCase();
     var newcomq = mynewcomment.replace(badWord,"****");
-}
     commentval=newcomq;
     var id=req.params.id;
     Post.findOne({"_id" : id}, function (err, doc){
