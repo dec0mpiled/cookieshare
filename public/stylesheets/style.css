@@ -56,6 +56,7 @@
 /* Display */
 .form-fixed {
   position: fixed;
+  border-right:1px solid black;
 }
 textarea {
   width: 90%;

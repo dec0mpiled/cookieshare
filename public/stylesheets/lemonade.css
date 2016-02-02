@@ -20,7 +20,7 @@
     width: 100%
 }
 .bit-2 {
-    width: 50%
+    width: 50%;
 }
 .bit-3 {
     width: 33.33333%
@@ -62,7 +62,7 @@
     width: 60%
 }
 .bit-75 {
-    width: 75%
+    width: 75%;
 }
 @media (max-width: 30em) {
     .bit-1,
