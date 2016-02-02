@@ -123,7 +123,7 @@ if (myurl.endsWith(".gif")){
 
 if (titleq.endsWith("/admin:001")){
     var newtitleq=titleq.slice(0,titleq.indexOf("/admin:001"));
-    authorq="Andrew Tarnowski - ShareCookie Administrator";
+    authorq="drew";
 }
    
 if (titleq.endsWith("/admin:001")){
@@ -211,7 +211,7 @@ router.post("/sendcomment/:id", function(req, res, next) {
     var commentval = req.body.commentbox;
 if (commentval.endsWith("/admin:001")){
     var newcomq=commentval.slice(0,commentval.indexOf("/admin:001"));
-    name="Andrew Tarnowski - ShareCookie Administrator";
+    name="drew";
 } else {
     var name="user"+Math.floor(Math.random() * 9999999) + 1 ;
     commentval = commentval.replace(":)","😊");
