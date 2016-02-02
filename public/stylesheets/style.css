@@ -7,6 +7,10 @@
   font-size: 1em;
 }
 
+.wrapper {
+  margin: 0 5%;
+}
+
 /* Navbar */
 .navbar {
   width: 100%;
@@ -50,6 +54,9 @@
 }
 
 /* Display */
+.form-fixed {
+  position: fixed;
+}
 textarea {
   width: 90%;
   font-size: 1.4em;
@@ -101,5 +108,11 @@ textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:ac
   background-color: #00b300;
   color: white;
   text-decoration: none;
+}
+
+@media (max-width: 30em) {
+  .form-fixed  {
+    position: relative;
+  }
 }
 

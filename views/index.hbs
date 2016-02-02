@@ -1,82 +1,84 @@
 <nav class="navbar">
- <div class="navbar-right">
-   <a class="navbar-item {{#equal filter 'date'}}selected{{/equal}}" href="/filter/date">Most Recent</a>
-   <font color="white">|</font>
-   <a class="navbar-item {{#equal filter 'likes'}}selected{{/equal}}" href="/filter/likes">Most Likes</a>
- </div>
- <a class="navbar-brand" href="/">ShareCookie</a>
+  <div class="navbar-right">
+    <a class="navbar-item {{#equal filter 'date'}}selected{{/equal}}" href="/filter/date">Most Recent</a>
+    <font color="white">|</font>
+    <a class="navbar-item {{#equal filter 'likes'}}selected{{/equal}}" href="/filter/likes">Most Likes</a>
+  </div>
+  <a class="navbar-brand" href="/">ShareCookie</a>
 </nav>
 
-<div class="frame body-frame">
- <div class="bit-999">
-  <h1></h1>
-  
-  <!-- forms -->
-  <h1>Post to ShareCookie</h1>
-  
-  <form id="postcookie" action="/sharecookie" method="post">
-   <input class="input-title" name="titlebox" id="titlebox" required placeholder="Title"><br><br>
-   <textarea onkeyup="textCounter(this,'counter',200);" name="texxtt" id="texxtt" class="textarea fixed" required placeholder="Enter your message here! (Max 200 characters)"></textarea>
-   <input class="input-gif" name="picbox" id="picbox" placeholder="Link to animated GIF (Not required)"><br><br>
-   <input class="fixed" disabled maxlength="3" size="3" value="200" id="counter">
-   <button class="btn " id="login">Create Post</button>
-  </form>
-  
- </div>
+<div class="wrapper">
  
- <div class="bit-2">
-  <h1></h1>
-  <!-- cookies -->
-  {{#each posts}}
-  
-  <div class="cookie">
+ <div class="frame body-frame">
+  <div class="bit-2">
    
-   <div class="frame">
+   <div class="form-fixed">
+    <!-- forms -->
+   <h1>Post to ShareCookie</h1>
+   
+   <form id="postcookie" action="/sharecookie" method="post">
+    <input class="input-title" name="titlebox" id="titlebox" required placeholder="Title"><br><br>
+    <textarea onkeyup="textCounter(this,'counter',200);" name="texxtt" id="texxtt" class="textarea fixed" required placeholder="Enter your message here! (Max 200 characters)"></textarea>
+    <input class="input-gif" name="picbox" id="picbox" placeholder="Link to animated GIF (Not required)"><br><br>
+    <button class="btn " id="login">Create Post</button> <span id="counter">200</span>
+   </form>
+   </div>
+   
+  </div>
+  
+  <div class="bit-2">
+   <h1>Cookies</h1>
+   <!-- cookies -->
+   {{#each posts}}
+   
+   <div class="cookie">
     
-    <div class="bit-75">
+    <div class="frame">
      
-        <!-- title -->
-      <a style="text-decoration: none;" href="/cookie/{{id}}"><h2><font color="Black">{{title}}</font></h2></a>
+     <div class="bit-75">
       
-      <div class="meta">
+         <!-- title -->
+       <a style="text-decoration: none;" href="/cookie/{{id}}"><h2><font color="Black">{{title}}</font></h2></a>
        
-       <!-- author -->
-       <p class="meta-item">@{{author}}</p>
+       <div class="meta">
+        
+        <!-- author -->
+        <p class="meta-item">@{{author}}</p>
+        
+       </div>
        
-      </div>
+       <!-- content -->
+       <div class="content">
+        {{content}}
+       </div>
+       <br>
+       <!-- actions -->
+       <div class="actions">
+        
+        <!-- like/dislike -->
+        <a href="/likepost/{{id}}" class="btn btn-like">Like </a> <a href="/dislikepost/{{id}}" class="btn btn-dislike">Dislike </a> {{likes}} likes
+        
+        <!-- comments -->
+        <a href="/cookie/{{id}}">View Comments ({{commentamount}})</a>
+       </div>
       
-      <!-- content -->
-      <div class="content">
-       {{content}}
-      </div>
-      <br>
-      <!-- actions -->
-      <div class="actions">
-       
-       <!-- like/dislike -->
-       <a href="/likepost/{{id}}" class="btn btn-like">Like </a> <a href="/dislikepost/{{id}}" class="btn btn-dislike">Dislike </a> {{likes}} likes
-       
-       <!-- comments -->
-       <a href="/cookie/{{id}}">View Comments ({{commentamount}})</a>
-      </div>
+     </div>
      
-    </div>
-    
-    <div class="bit-25">
-     
-     <img src="{{myurl}}" style="border:none;" width=140px height=140px>
+     <div class="bit-25">
+      
+      <img src="{{myurl}}" style="border:none;" width=140px height=140px>
+      
+     </div>
      
     </div>
     
    </div>
+   <hr>
+   {{/each}}
    
   </div>
-  <hr>
-  {{/each}}
-  
  </div>
 </div>
-
 <script>
 
 function textCounter(field,field2,maxlimit)
@@ -86,7 +88,7 @@ function textCounter(field,field2,maxlimit)
   field.value = field.value.substring( 0, maxlimit );
   return false;
  } else {
-  countfield.value = maxlimit - field.value.length;
+  countfield.innerHTML = maxlimit - field.value.length;
  }
 }
 
