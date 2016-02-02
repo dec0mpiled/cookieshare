@@ -116,7 +116,7 @@ if (myurl.startsWith("http://")) {
 if (myurl.endsWith(".gif")){
     mynewurl=myurl;
 } else {
-    mynewurl="http://www.reddoorrealtyatlanta.com/wp-content/themes/reddoorrealtyatlanta.com/images/no-image-available.jpg";
+    mynewurl="/images/void.jpg";
 }
     
 }

@@ -1,8 +1,6 @@
-</div>
-  <nav class="navbar navbar-default navbar-fixed-top">
-  <a href="/"><font size=6 class="test affix" color="white"><b>ShareCookie</b></font></a><!-- <span class="btn16"><b>Sort By:</b></span> <a class="btn7 " href="/type/2">Most Recent</a><a class="btn7 " href="/type/1">Most Likes</a>!-->
+<nav class="navbar1">
+ <a class="navbar-brand" href="/">ShareCookie</a>
 </nav>
-</div>
 
 {{#each result}}
 <form id="test" action="/sendcomment/{{id}}" method="post">
@@ -18,7 +16,7 @@
 <h2>Comments ({{commentamount}}):</h2>
 <textarea onkeyup="textCounter(this,'counter',200);" name="commentbox" id="commentbox" class="textarea" placeholder="Write something nice!" required></textarea>
 <br><input disabled maxlength="3" size="3" value="100" id="counter">
-<button class="btn15">Comment!</button>
+<button class="btn">Comment!</button>
 
 {{#each commentslist}}
   <br><font size=2>_____________________________________</font>

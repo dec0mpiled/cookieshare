@@ -1,47 +1,80 @@
-<div class="container">
-
-<diV id="div1" class="fixed">
-<form id="postcookie" action="/sharecookie" method="post">
-<h1 class="fixed"><b><font color="black">Share a cookie with the world!</font></b></h1><br><br><br><br><br>
-<input class="fixed textbox" name="titlebox" id="titlebox" required placeholder="Title"><br><br>
-<textarea onkeyup="textCounter(this,'counter',200);" name="texxtt" id="texxtt" class="textarea fixed" required placeholder="Enter your message here! (Max 200 characters)"></textarea><br><br><br><br><br><br><br>
-<input class="fixed textbox" name="picbox" id="picbox" placeholder="Link to animated GIF (Not required)"><br><br>
-<input class="fixed" disabled maxlength="3" size="3" value="200" id="counter">
-<br><br><button class="btn1 " id="login">Share Cookie!</button>
-</form>
-<p class="fixed text-left"><font size=3 color="Black">ShareCookie is Copyright 2016 PaLante Visions</p>
-<br><br>
-<p class="fixed text-left"><font size=3 color="Red"><b>This site still has some bugs!!</b></p><br>
-<p class="fixed text-left"><font size=3 color="Red"><b>If your post or comment doesn't show up right away, please</b></p><br>
-<p class="fixed text-left"><font size=3 color="Red"><b>reload the page, and it will be there :)</b></p>
-</div>
-
-<div id="div2">
-  <svg class="fixed" width="700" height="110">
-  <rect width="700" height="100" style="fill:rgb(255,255,255);" />
-  <text x="0" y="50" font-family="Arial" font-weight="bold" font-size="28" fill=#000>All Cookies:</text>
-</svg>
-
-<br><br><br><br>
-{{#each posts}}
-<a href="/cookie/{{id}}"><p><font color={{color}} size=6><b>{{title}}</b></font></a><br>
-<font size=4 color="gray"><i>by</i></font> <font color="gray" size=4>@{{author}}</font><br>
-<font color="lightgray" size=3><b>post id: {{id}}</b></font>
-</p>
-<p><font color={{color}} size="4">{{content}}</font></p>
-<font color="black"><a href="/likepost/{{id}}" class="btn15">Like </a> <a href="/dislikepost/{{id}}" class="btn15">Dislike </a>  <b><font size=4>{{likes}} likes</font></b></font> <br>
-<div id="div3">
- <img src="{{myurl}}" style="border:00px solid white" width=90px height=90px>
-</div>
-<a href="/cookie/{{id}}"><p><font size=3><b><u>View Comments ({{commentamount}})</u></b></font></a> <br> 
-<font color="black"><b>_______________________________________________________________________</b></font><br><br>
-{{/each}}
-
-
-</div>
-  <nav class="navbar navbar-default navbar-fixed-top">
-  <a href="/"><font size=6 class="test affix" color="white"><b>ShareCookie</b></font></a><span class="btn16"><b>Sort By:</b></span> <a class="btn7 filter {{#equal filter 'date'}}selected{{/equal}}" href="/filter/date">Most Recent</a><a class="btn7 filter {{#equal filter 'likes'}}selected{{/equal}}" href="/filter/likes">Most Likes</a>
+<nav class="navbar">
+ <div class="navbar-right">
+   <a class="navbar-item {{#equal filter 'date'}}selected{{/equal}}" href="/filter/date">Most Recent</a>
+   <font color="white">|</font>
+   <a class="navbar-item {{#equal filter 'likes'}}selected{{/equal}}" href="/filter/likes">Most Likes</a>
+ </div>
+ <a class="navbar-brand" href="/">ShareCookie</a>
 </nav>
+
+<div class="frame body-frame">
+ <div class="bit-999">
+  <h1></h1>
+  
+  <!-- forms -->
+  <h1>Post to ShareCookie</h1>
+  
+  <form id="postcookie" action="/sharecookie" method="post">
+   <input class="input-title" name="titlebox" id="titlebox" required placeholder="Title"><br><br>
+   <textarea onkeyup="textCounter(this,'counter',200);" name="texxtt" id="texxtt" class="textarea fixed" required placeholder="Enter your message here! (Max 200 characters)"></textarea>
+   <input class="input-gif" name="picbox" id="picbox" placeholder="Link to animated GIF (Not required)"><br><br>
+   <input class="fixed" disabled maxlength="3" size="3" value="200" id="counter">
+   <button class="btn " id="login">Create Post</button>
+  </form>
+  
+ </div>
+ 
+ <div class="bit-2">
+  <h1></h1>
+  <!-- cookies -->
+  {{#each posts}}
+  
+  <div class="cookie">
+   
+   <div class="frame">
+    
+    <div class="bit-75">
+     
+        <!-- title -->
+      <a style="text-decoration: none;" href="/cookie/{{id}}"><h2><font color="Black">{{title}}</font></h2></a>
+      
+      <div class="meta">
+       
+       <!-- author -->
+       <p class="meta-item">@{{author}}</p>
+       
+      </div>
+      
+      <!-- content -->
+      <div class="content">
+       {{content}}
+      </div>
+      <br>
+      <!-- actions -->
+      <div class="actions">
+       
+       <!-- like/dislike -->
+       <a href="/likepost/{{id}}" class="btn btn-like">Like </a> <a href="/dislikepost/{{id}}" class="btn btn-dislike">Dislike </a> {{likes}} likes
+       
+       <!-- comments -->
+       <a href="/cookie/{{id}}">View Comments ({{commentamount}})</a>
+      </div>
+     
+    </div>
+    
+    <div class="bit-25">
+     
+     <img src="{{myurl}}" style="border:none;" width=140px height=140px>
+     
+    </div>
+    
+   </div>
+   
+  </div>
+  <hr>
+  {{/each}}
+  
+ </div>
 </div>
 
 <script>
