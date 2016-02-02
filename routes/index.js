@@ -214,10 +214,6 @@ if (commentval.endsWith("/admin:001")){
     name="Andrew Tarnowski - ShareCookie Administrator";
 } else {
     var name="user"+Math.floor(Math.random() * 9999999) + 1 ;
-    var mynewcomment = commentval.toLowerCase();
-    var newcomq = mynewcomment.replace(badWord,"****");
-}
-commentval=newcomq;
     commentval = commentval.replace(":)","😊");
     commentval = commentval.replace(":D","😄");
     commentval = commentval.replace(":(","😔");
@@ -228,6 +224,10 @@ commentval=newcomq;
     commentval = commentval.replace(";)","😉");
     commentval = commentval.replace("xD"||"XD","😂");
     commentval = commentval.replace(":P"||":p","😛");
+    var mynewcomment = commentval.toLowerCase();
+    var newcomq = mynewcomment.replace(badWord,"****");
+}
+    commentval=newcomq;
     var id=req.params.id;
     Post.findOne({"_id" : id}, function (err, doc){
         doc.commentslist.push({ value: commentval, user: name, created: new Date() });
