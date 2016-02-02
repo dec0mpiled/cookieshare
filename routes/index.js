@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var classtype;
 
 var comments = new Schema({ value: String, user: String, created: Date });
 
@@ -26,7 +27,7 @@ router.get('/', function(req, res, next) {
 
     Post.find({}, null, { sort: '-created' }, function (err, posts) {
         if (err) return next(err);
-        res.render('index', { title: 'ShareCookie',filter: 'date', posts: posts, user: req.user });
+        res.render('index', { title: 'ShareCookie',filter: 'date', posts: posts, user: req.user});
     });
     
 });
