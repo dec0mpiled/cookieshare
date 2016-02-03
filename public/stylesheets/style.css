@@ -50,22 +50,23 @@
   position: fixed;
 }
 textarea {
-  width: 90%;
+  width: 100%;
   font-size: 1.4em;
   color: #111;
   height: 150px;
   padding: 1em;
-   border: 1px solid #FFF;
-  border-radius: 4px;
+  border: 1px solid #000;
+  border-radius: 2px;
   outline: 0;
   resize: none;
 }
-textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:active, .input-gif:focus, .input-title:hover, .input-title:active, .input-title:focus {
+textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:active, .input-gif:focus, .input-title:hover, .input-title:active, .input-title:focus, .input-username:hover, .input-username:active, .input-username:focus, .input-password:hover, .input-password:active, .input-password:focus {
   border: 1px solid #00cc00;
   outline: 0;
 }
 
 .input-username, .input-password {
+  border: 1px solid #000;
   width: 100%;
   font-size: 1.4em;
   color: #111;
@@ -74,19 +75,21 @@ textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:ac
 }
 
 .input-title {
-  width: 80%;
+  border: 1px solid #000;
+  width: 100%;
   font-size: 1.8em;
   padding: .5em;
-  border: 1px solid #FFF;
-  border-radius: 4px;
+
+  border-radius: 2px;
 }
 
 .input-gif {
-  width: 80%;
+  border: 1px solid #000;
+  width: 100%;
   font-size: 1em;
   padding: .5em;
-  border: 1px solid #FFF;
-  border-radius: 4px;
+
+  border-radius: 2px;
 }
 
 .btn {
