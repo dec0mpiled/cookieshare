@@ -27,10 +27,14 @@ var Post = mongoose.model('users', PostSchema);
 
 /* home */
 router.get('/', function(req, res, next) {
+    
+    User.count({},  function(err, counted){
+     if (err) throw err;   
 
     Post.find({}, null, { sort: '-created' }, function (err, posts) {
         if (err) return next(err);
-        res.render('index', { title: 'ShareCookie', filter: 'date', posts: posts, user: req.user });
+        res.render('index', { title: 'ShareCookie', filter: 'date', posts: posts, user: req.user, howmany:counted });
+    });
     });
     
 });
@@ -279,7 +283,7 @@ router.get('/user/:user', function(req, res, next) {
         Post.find({ "author": user.username }, function(err, post) {
             console.log(post);
            if (err) return next(err);
-           res.render('user', { posts: post, user: req.user, account: user });
+           res.render('user', { title:user.username, posts: post, user: req.user, account: user });
         });
     });
 });
