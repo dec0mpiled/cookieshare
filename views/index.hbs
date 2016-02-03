@@ -5,6 +5,8 @@
     <a class="navbar-item {{#equal filter 'likes'}}selected{{/equal}}" href="/filter/likes">Most Likes</a>
     {{#if user}}
     <font color="white">|</font>
+    <a class="navbar-item" href="/user/{{user.username}}">My Cookies</a>
+    <font color="white">|</font>
     <a class="navbar-item" href="/auth/logout">Log Out</a>
     {{/if}}
   </div>
