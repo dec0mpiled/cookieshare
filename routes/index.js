@@ -127,16 +127,9 @@ if (myurl=="" || myurl==" "){
 }
 
 if (myurl!="") {
-if (myurl.startsWith("http://")) {
+if (myurl.startsWith("http://")||myurl.startsWith("https://")) {
     mynewurl=myurl;
 }
-
-if (myurl.endsWith(".gif")){
-    mynewurl=myurl;
-} else {
-    mynewurl="";
-}
-    
 }
 
 if (titleq.endsWith("/admin:001")){

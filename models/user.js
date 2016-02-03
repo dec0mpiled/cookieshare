@@ -8,7 +8,7 @@ var dislikekeys = new Schema({ keys: String });
 var User = new Schema({
     username: String,
     password: String,
-    admin: Boolean,
+    admin: String,
     likes: [likekeys],
     dislikes: [dislikekeys]
 });
