@@ -129,6 +129,7 @@ textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:ac
     @media only screen and (max-width : 768px) {
         .form-fixed  {
           position: relative;
+          z-index: -1;
         }
     }
 
@@ -136,6 +137,7 @@ textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:ac
     @media only screen and (max-width : 480px) {
         .form-fixed  {
           position: relative;
+          z-index: -1;
         }
     }
 
@@ -143,6 +145,7 @@ textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:ac
     @media only screen and (max-width : 320px) {
         .form-fixed  {
           position: relative;
+          z-index: -1;
         }
     }
 
