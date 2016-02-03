@@ -1,14 +1,17 @@
 var express = require('express');
 var router = express.Router();
+var User = require('../models/user');
+
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var classtype;
 
-var comments = new Schema({ value: String, user: String, created: Date });
+var comments = new Schema({ value: String, user: String, _user: String, created: Date });
 
 var PostSchema = new Schema({
         title: String,
         author: String,
+        _author: Schema.Types.ObjectId,
         content: String,
         myurl: String,
         color: String,
@@ -17,10 +20,10 @@ var PostSchema = new Schema({
         spam: Number,
         created: Date,
         commentamount: Number,
-        commentslist: [comments]
+        commentslist: [comments],
 });
 
-var Post = mongoose.model('User', PostSchema);
+var Post = mongoose.model('users', PostSchema);
 
 /* home */
 router.get('/', function(req, res, next) {
@@ -57,38 +60,72 @@ router.get('/help', function(req, res, next) {
 
 /* Like Post */
 
-router.get('/likepost/:id', function(req, res) {
-    Post.findOne({ _id: req.params.id }, function (err, doc){
-        doc.likes=doc.likes+1;
-        if (doc.likes<=-1){
-        doc.color="red";
-        } else {
-            doc.color="blacK";
-        }
+router.get('/likepost/:author/:id', function(req, res, next) {
+    User.findById(req.user.id, function(err, doc){
+        console.log(doc);
+        var nid = req.params.id.toString()
+        var nlikes = doc.likes.toString();
+        var test = nlikes.indexOf(nid);
+        console.log(test);
+        if (test<0){
+        doc.likes.push({ keys: req.params.id.toString()});
         doc.save();
+        
+        Post.findOne({ _id: req.params.id }, function (err, doc){
+            doc.likes=doc.likes+1;
+            if (doc.likes<=-1){
+                 doc.color="red";
+            } else {
+                doc.color="blacK";
+            }
+            doc.save();
+            if (err) throw err;
+        });
+        res.redirect('/');
+        console.log("done!");
+        
+        } else if (test>0) {
+            console.log("cant like again!");
+            res.redirect('/');
+            
+        }
         if (err) throw err;
-    });
-    res.redirect('/');
+});
 });
 
 /* Dislike Post */
 
-router.get('/dislikepost/:id', function(req, res) {
-    Post.findOne({ _id: req.params.id }, function (err, doc){
-        doc.likes=doc.likes-1;
-        if (doc.likes<=-1){
-        doc.color="red";
-        } 
-        if (doc.likes<-15){
-            doc.remove();
-        }
-        if (doc.likes>=0){
-            doc.color="blacK";
-        }
+router.get('/dislikepost/:author/:id', function(req, res) {
+    User.findById(req.user.id, function(err, doc){
+        console.log(doc);
+        var nid = req.params.id.toString();
+        var nlikes = doc.dislikes.toString();
+        var test = nlikes.indexOf(nid);
+        console.log(test);
+        if (test<0){
+        doc.dislikes.push({ keys: req.params.id.toString()});
         doc.save();
+        
+        Post.findOne({ _id: req.params.id }, function (err, doc){
+            doc.likes=doc.likes-1;
+            if (doc.likes<=-1){
+                 doc.color="red";
+            } else {
+                doc.color="blacK";
+            }
+            doc.save();
+            if (err) throw err;
+        });
+        res.redirect('/');
+        console.log("done!");
+        
+        } else if (test>0) {
+            console.log("cant dislike again!");
+            res.redirect('/');
+            
+        }
         if (err) throw err;
-    });
-    res.redirect('/');
+});
 });
 
 /* Post Cookie */
@@ -106,7 +143,7 @@ router.post('/sharecookie', function(req, res, next) {
 var myurl=url;
 
 if (myurl=="" || myurl==" "){
-    mynewurl="http://www.reddoorrealtyatlanta.com/wp-content/themes/reddoorrealtyatlanta.com/images/no-image-available.jpg";
+    mynewurl="";
 }
 
 if (myurl!="") {
@@ -117,7 +154,7 @@ if (myurl.startsWith("http://")) {
 if (myurl.endsWith(".gif")){
     mynewurl=myurl;
 } else {
-    mynewurl="/images/void.jpg";
+    mynewurl="";
 }
     
 }
@@ -188,6 +225,7 @@ mynewcontent = mynewcontent.replace(badWord,"****");
     var newpost = new Post({
         title: mynewtitle,
         author: authorq,
+        _author: req.user.id,
         content: mynewcontent,
         myurl: mynewurl,
         color: color,
@@ -226,12 +264,24 @@ router.post("/sendcomment/:id", function(req, res, next) {
     commentval=newcomq;
     var id=req.params.id;
     Post.findOne({"_id" : id}, function (err, doc){
-        doc.commentslist.push({ value: commentval, user: name, created: new Date() });
+        doc.commentslist.push({ value: commentval, user: name, _author: req.user.id, created: new Date() });
         doc.commentamount=doc.commentamount+1;
         doc.save();
         if (err) throw err;
 });
     res.redirect("/cookie/"+id);
+});
+
+/* user page */
+router.get('/user/:user', function(req, res, next) {
+    User.findOne({ username: req.params.user }, function(err, user) {
+        if (err) return next(err);
+        Post.find({ "author": user.username }, function(err, post) {
+            console.log(post);
+           if (err) return next(err);
+           res.render('user', { posts: post, user: req.user, account: user });
+        });
+    });
 });
 
 module.exports = router;

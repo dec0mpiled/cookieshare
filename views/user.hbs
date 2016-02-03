@@ -1,0 +1,67 @@
+<nav class="navbar">
+  <div class="navbar-right">
+    {{#if user}}
+    <a class="navbar-item" href="/auth/logout">Logout</a>
+    {{else}}
+    <a class="navbar-item" href="/auth/login">Login</a>
+    {{/if}}
+  </div>
+  <a class="navbar-brand" href="/">ShareCookie</a>
+</nav>
+
+<div class="wrapper">
+ 
+<div class="frame body-frame">
+ <div class="bit-2">
+  <h1>Viewing User @{{account.username}}<font color="red"> NOT FINISHED!</font></h1>
+ </div>
+</div>
+
+ <div class="bit-2">
+  <h2>Cookies:</h2><br><br>
+  
+  {{#each posts}}
+   
+   <div class="cookie">
+    
+    <div class="frame">
+     
+     <div class="bit-75">
+         
+          <!-- title -->
+       <div class="title">
+        <h2>
+        {{title}}
+        </h2>
+       </div>
+       
+       <!-- content -->
+       <div class="content">
+        <font color="black">
+        {{content}}
+        </font>
+       </div><br>
+       
+       <!-- likes -->
+       <div class="content">
+        <font color="black">
+        {{likes}} likes
+        </font><br><br><br>
+        <a href="/cookie/{{id}}"><font color=#00cc00>View Cookie</font></a>
+       </div>
+      
+     </div>
+     <div class="bit-25">
+      
+      <img src="{{myurl}}" style="border:none;" width=140px height=140px>
+      
+     </div>
+     
+    </div>
+    
+   </div>
+   <hr>
+   {{/each}}
+  
+</div>
+</div>

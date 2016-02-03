@@ -14,7 +14,7 @@
 <div class="frame body-frame">
  <div class="bit-2">
   <h1>{{result.title}}</h1>
-  <p><b>Author:</b> @{{result.author}}</p>
+  <p><b>Author:</b> <a href="/user/{{result.author}}" class="a"><font color=#00cc00>@{{result.author}}</font></a></p>
   <p><b>Likes:</b> {{result.likes}}</p>
   <p><b>Date Created:</b> {{formatDate result.created  day="numeric" month="long" year="numeric"}}</p>
   <p><b>Post ID:</b> {{result.id}}</p>
@@ -36,7 +36,7 @@
   <form id="test" action="/sendcomment/{{result.id}}" method="post">
    
    <textarea onkeyup="textCounter(this,'counter',200);" name="commentbox" id="commentbox" class="textarea" placeholder="Write something nice!" required></textarea>
-   <button class="btn">Comment!</button> <span id="counter">200</span>
+   <button class="btn">Comment!</button> <span id="counter">100</span>
    
    </form>
    {{else}}

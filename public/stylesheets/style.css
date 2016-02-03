@@ -124,3 +124,7 @@ textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:ac
 .cookie-caption {
   color: #808080;
 }
+
+.a {
+  text-decoration: none;
+}
