@@ -1,35 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
-
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var classtype;
-
-var comments = new Schema({ value: String, user: String, _user: String, created: Date });
-
-var PostSchema = new Schema({
-        title: String,
-        author: String,
-        _author: Schema.Types.ObjectId,
-        content: String,
-        myurl: String,
-        color: String,
-        likes: Number,
-        tags: String,
-        spam: Number,
-        created: Date,
-        commentamount: Number,
-        commentslist: [comments],
-});
-
-var Post = mongoose.model('users', PostSchema);
+var Post = require('../models/post');
 
 /* home */
 router.get('/', function(req, res, next) {
-    
-    
-    
     User.count({},  function(err, counted){
      if (err) throw err;   
 
@@ -38,7 +13,6 @@ router.get('/', function(req, res, next) {
         res.render('index', { title: 'ShareCookie', filter: 'date', posts: posts, user: req.user, howmany:counted });
     });
     });
-    
 });
 
 /* sort by date */

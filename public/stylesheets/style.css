@@ -115,6 +115,11 @@ textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:ac
   text-decoration: none;
 }
 
+/* INFOS */
+.info-error {
+  color: red;
+}
+
   /*==========  Non-Mobile First Method  ==========*/
 
     /* Large Devices, Wide Screens */

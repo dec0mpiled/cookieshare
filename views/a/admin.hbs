@@ -1,0 +1,24 @@
+<nav class="navbar">
+  <a class="navbar-brand" href="/">ShareCookie</a>
+</nav>
+
+<div class="wrapper">
+    
+    
+    <div class="frame body-frame">
+        
+        <div class="bit-2">
+            <h2>Users</h2>
+            
+            <div class="list-users">
+                {{#each users}}
+                <h3>@{{username}}</h3>
+                <p><b>Admin</b>: {{#if admin}}true{{else}}false{{/if}}</p>
+                {{/each}}
+            </div>
+        </div>
+        
+    </div>
+
+    
+</div>
