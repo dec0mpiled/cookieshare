@@ -28,6 +28,8 @@ var Post = mongoose.model('users', PostSchema);
 /* home */
 router.get('/', function(req, res, next) {
     
+    
+    
     User.count({},  function(err, counted){
      if (err) throw err;   
 
