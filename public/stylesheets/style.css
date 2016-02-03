@@ -74,6 +74,10 @@ textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:ac
   margin: .5em 0;
 }
 
+input {
+  position: relative;
+}
+
 .input-title {
   border: 1px solid #000;
   width: 100%;
