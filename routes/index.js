@@ -27,7 +27,7 @@ router.get('/', function(req, res, next) {
 
     Post.find({}, null, { sort: '-created' }, function (err, posts) {
         if (err) return next(err);
-        res.render('index', { title: 'ShareCookie',filter: 'date', posts: posts, user: req.user});
+        res.render('index', { title: 'ShareCookie', filter: 'date', posts: posts, user: req.user });
     });
     
 });

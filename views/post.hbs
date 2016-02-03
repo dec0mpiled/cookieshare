@@ -30,6 +30,7 @@
 
 <div class="frame">
  <div class="bit-2">
+  {{#if user}}
   <h2>Post new comment</h2>
   
   <form id="test" action="/sendcomment/{{result.id}}" method="post">
@@ -38,6 +39,9 @@
    <button class="btn">Comment!</button> <span id="counter">200</span>
    
    </form>
+   {{else}}
+   <h2>Please Log in to comment!</h2>
+   {{/if}}
  </div>
  <div class="bit-2">
   <h2>Comments ({{result.commentamount}}):</h2><br>

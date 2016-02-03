@@ -7,6 +7,10 @@ router.get('/register', function(req, res) {
   res.render('a/register', { active: 'register', title: 'Register' });
 });
 
+router.get('/login', function(req, res) {
+  res.render('a/login', { active: 'login', title: 'Login', user:req.user });
+});
+
 router.post('/register', function(req, res, next) {
   User.register(new User({
     username: req.body.username
