@@ -18,4 +18,4 @@ var Post = new Schema({
         commentslist: [comments],
 });
 
-module.exports = mongoose.model('users', Post);
+module.exports = mongoose.model('posts', Post);
