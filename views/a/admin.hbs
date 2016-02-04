@@ -11,13 +11,20 @@
             <a href="/admin/users/raw">Show all users as "raw"</a>
             
             <div class="list-users">
+                <br>
                 {{#each users}}
                 <h3>@{{username}}</h3>
                 <p><b>Admin</b>: {{#if admin}}true{{else}}false{{/if}}</p>
                 <div class="list-actions">
-                    <a href="/admin/users/delete/{{id}}">Delete</a>
+                    <a href="/admin/user/delete/{{id}}">Delete</a>
                     <a href="/admin/user/raw/{{id}}">Show Raw</a>
-                </div>
+                    <br>
+                    {{#if admin}}
+                    <a href="/admin/remove/admin/{{id}}">Revoke Admin</a>
+                    {{else}}
+                    <a href="/admin/add/admin/{{id}}">Make Admin</a>
+                    {{/if}}
+                </div><br>
                 {{/each}}
             </div>
         </div>
@@ -27,6 +34,7 @@
             <a href="/admin/posts/raw">Show all posts as "raw"</a>
             
             <div class="list-posts">
+                <br>
                 {{#each posts}}
                 <h3>{{title}}</h3>
                 <div class="list-meta">
@@ -37,9 +45,9 @@
                 </div>
                 <p>{{content}}</p>
                 <div class="list-actions">
-                    <a href="/admin/posts/delete/{{id}}">Delete</a>
-                    <a href="/admin/posts/raw/{{id}}">Raw Post</a>
-                </div>
+                    <a href="/admin/post/delete/{{id}}">Delete</a>
+                    <a href="/admin/post/raw/{{id}}">Raw Post</a>
+                </div><br>
                 {{/each}}
             </div>
         </div>

@@ -44,6 +44,14 @@ router.get('/user/raw/:id', ensureAuthentication, function(req, res, next) {
     });
 });
 
+// remove user
+router.get('/user/delete/:id', ensureAuthentication, function(req, res, next) {
+    User.findOneAndRemove({ _id: req.params.id }, function(err, user) {
+       if (err) return next(err); 
+       res.redirect('/admin');
+    });
+});
+
 // add admin
 router.get('/add/admin/:id', ensureAuthentication, function(req, res, next) {
     User.findOneAndUpdate({ _id: req.params.id }, { admin: true }, function(err, user) {
@@ -55,14 +63,6 @@ router.get('/add/admin/:id', ensureAuthentication, function(req, res, next) {
 // remove admin
 router.get('/remove/admin/:id', ensureAuthentication, function(req, res, next) {
     User.findOneAndUpdate({ _id: req.params.id }, { admin: false }, function(err, user) {
-       if (err) return next(err); 
-       res.redirect('/admin');
-    });
-});
-
-// remove user
-router.get('/remove/user/:id', ensureAuthentication, function(req, res, next) {
-    User.findOneAndRemove({ _id: req.params.id }, function(err, user) {
        if (err) return next(err); 
        res.redirect('/admin');
     });
@@ -87,7 +87,7 @@ router.get('/post/raw/:id', ensureAuthentication, function(req, res, next) {
 });
 
 // remove post
-router.get('/post/remove/:id', ensureAuthentication, function(req, res, next) {
+router.get('/post/delete/:id', ensureAuthentication, function(req, res, next) {
     Post.findOneAndRemove({ _id: req.params.id }, function(err, post) {
         if (err) return next(err);
         res.redirect('/admin');
