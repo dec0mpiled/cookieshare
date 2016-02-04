@@ -21,6 +21,8 @@
   <p><b>Date Created:</b> {{formatDate result.created  day="numeric" month="long" year="numeric"}}</p>
   <br>
   <p class="cookie-content">{{result.content}}</p>
+   <br>
+  <div><a href="https://www.facebook.com/dialog/share?app_id=1549077778743128&amp;display=popup&amp;href=sharecookie.com%2Fcookie%2F{{result.id}}" class="fbbtn">Share on Facebook</a></div>
  </div>
  <div class="bit-2">
   <br><br>
@@ -47,7 +49,7 @@
  <div class="bit-2">
   <h2>Comments ({{result.commentamount}}):</h2><br>
   {{#each result.commentslist}}
-   <h3>@{{user}}:</h3>
+   <a href="/user/{{user}}" style="text-decoration:none;"><font color=#4CAF50><h3>@{{user}}:</h3></font></a>
    <p>{{value}}</p><br>
   {{/each}}
  </div>
