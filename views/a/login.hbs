@@ -10,9 +10,9 @@
         <h1>Login to ShareCookie!</h1>
     
     <form action="/auth/login" method="post">
-      <input class="input-username" type="text" name="username" id="username" requiredplaceholder="username">
+      <input class="input-username" type="text" name="username" id="username" maxlength=15 onkeypress="return alpha(event)" required placeholder="username">
       <br>
-      <input class="input-password" type="password" name="password" id="password" required placeholder="password">
+      <input class="input-password" type="password" name="password" id="password" onkeypress="return pass(event)" required placeholder="password">
       <br><br>
       <button class="btn" type="submit">Login</button>
      </form>
@@ -21,3 +21,17 @@
 
     
 </div>
+
+<script>
+
+    function alpha(e) {
+    var k;
+    document.all ? k = e.keyCode : k = e.which;
+    return ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || (k >= 48 && k <= 57));
+}
+    function pass(e) {
+    var k;
+    document.all ? k = e.keyCode : k = e.which;
+    return ((k > 0 && k < 32) || (k > 32 && k < 222));
+}
+    </script>

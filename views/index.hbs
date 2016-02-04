@@ -47,9 +47,9 @@
       {{/if}}
       
       <form action="/auth/login" method="post">
-       <input class="input-username" type="text" name="username" id="username" placeholder="username">
+       <input class="input-username" type="text" name="username" id="username" onkeypress="return alpha(event)" maxlength=15 placeholder="username">
        <br>
-       <input class="input-password" type="password" name="password" id="password" placeholder="password">
+       <input class="input-password" type="password" name="password" id="password" onkeypress="return pass(event)" placeholder="password">
        <br><br>
        <button class="btn" type="submit">Sign in</button>
        <br><br>
@@ -137,3 +137,17 @@ function textCounter(field,field2,maxlimit)
 }
 
 </script>
+
+<script>
+
+    function alpha(e) {
+    var k;
+    document.all ? k = e.keyCode : k = e.which;
+    return ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || (k >= 48 && k <= 57));
+}
+    function pass(e) {
+    var k;
+    document.all ? k = e.keyCode : k = e.which;
+    return ((k > 0 && k < 32) || (k > 32 && k < 222));
+}
+    </script>
