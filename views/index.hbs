@@ -7,6 +7,10 @@
     <font color="white">|</font>
     <a class="navbar-item" href="/user/{{user.username}}">My Cookies</a>
     <font color="white">|</font>
+    {{#if admin}}
+    <a class="navbar-item" href="/admin">Admin</a>
+    <font color="white">|</font>
+    {{/if}}
     <a class="navbar-item" href="/auth/logout">Log Out</a>
     {{/if}}
   </div>
@@ -22,41 +26,41 @@
     <!-- forms -->
     {{#if user}}
     <h1>Post to ShareCookie</h1>
-   
-   <form id="postcookie" action="/sharecookie" method="post">
-    <input class="input-title" name="titlebox" id="titlebox" required placeholder="Title"><br><br>
-    <textarea onkeyup="textCounter(this,'counter',200);" name="texxtt" id="texxtt" class="textarea fixed" required placeholder="Enter your message here! (Max 200 characters)"></textarea>
-    <input class="input-gif" name="picbox" id="picbox" placeholder="Link to any image (Not required)"><br><br>
-    <button class="btn " id="login">Create Post</button> <span id="counter">200</span>
-   </form>
-   {{else}}
-   <h1>Login or Create an account to post!</h1>
-   
-   <div class="frame">
     
-    <div class="bit-2">
+    <form id="postcookie" action="/sharecookie" method="post">
+     <input class="input-title" name="titlebox" id="titlebox" required placeholder="Title"><br><br>
+     <textarea onkeyup="textCounter(this,'counter',200);" name="texxtt" id="texxtt" class="textarea fixed" required placeholder="Enter your message here! (Max 200 characters)"></textarea>
+     <input class="input-gif" name="picbox" id="picbox" placeholder="Link to any image (Not required)"><br><br>
+     <button class="btn " id="login">Create Post</button> <span id="counter">200</span>
+    </form>
+    {{else}}
+    <h1>Login or Create an account to post!</h1>
+    
+    <div class="frame">
      
-     <h3>Sign in</h3>
-     
-     {{#if info}}
-     <p>{{info}}</p>
-     {{/if}}
-     
-     <form action="/auth/login" method="post">
-      <input class="input-username" type="text" name="username" id="username" placeholder="username">
-      <br>
-      <input class="input-password" type="password" name="password" id="password" placeholder="password">
-      <br><br>
-      <button class="btn" type="submit">Sign in</button>
-      <br><br>
-      <a href="/auth/register"><font color=#00cc00>Don't have an account? Sign up now!</font></a>
-     </form>
+     <div class="bit-2">
+      
+      <h3>Sign in</h3>
+      
+      {{#if info}}
+      <p>{{info}}</p>
+      {{/if}}
+      
+      <form action="/auth/login" method="post">
+       <input class="input-username" type="text" name="username" id="username" placeholder="username">
+       <br>
+       <input class="input-password" type="password" name="password" id="password" placeholder="password">
+       <br><br>
+       <button class="btn" type="submit">Sign in</button>
+       <br><br>
+       <a href="/auth/register"><font color=#00cc00>Don't have an account? Sign up now!</font></a>
+      </form>
+      
+     </div>
      
     </div>
     
-   </div>
-   
-   {{/if}}
+    {{/if}}
    </div>
    
   </div>

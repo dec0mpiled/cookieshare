@@ -4,21 +4,46 @@
 
 <div class="wrapper">
     
-    
     <div class="frame body-frame">
         
         <div class="bit-2">
             <h2>Users</h2>
+            <a href="/admin/users/raw">Show all users as "raw"</a>
             
             <div class="list-users">
                 {{#each users}}
                 <h3>@{{username}}</h3>
                 <p><b>Admin</b>: {{#if admin}}true{{else}}false{{/if}}</p>
+                <div class="list-actions">
+                    <a href="/admin/users/delete/{{id}}">Delete</a>
+                    <a href="/admin/user/raw/{{id}}">Show Raw</a>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        
+        <div class="bit-2">
+            <h2>Posts</h2>
+            <a href="/admin/posts/raw">Show all posts as "raw"</a>
+            
+            <div class="list-posts">
+                {{#each posts}}
+                <h3>{{title}}</h3>
+                <div class="list-meta">
+                    <p><b>Date</b> <span class="list-meta-item">{{formatDate created}}</span></p>
+                    <p><b>Author</b> <span class="list-meta-item">{{author}} ({{_author}})</span></p>
+                    <p><b>Likes</b> <span class="list-meta-item">{{likes}}</span></p>
+                    <p><b>ID</b> <span class="list-meta-item">{{id}}</span></p>
+                </div>
+                <p>{{content}}</p>
+                <div class="list-actions">
+                    <a href="/admin/posts/delete/{{id}}">Delete</a>
+                    <a href="/admin/posts/raw/{{id}}">Raw Post</a>
+                </div>
                 {{/each}}
             </div>
         </div>
         
     </div>
-
     
 </div>

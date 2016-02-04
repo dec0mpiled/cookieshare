@@ -9,10 +9,6 @@
         
     <h1>Create an account to share a Cookie now!</h1>
     
-    {{#if info}}
-    <p class="info-error">{{info}}</p>
-    {{/info}}
-    
     <form action="/auth/register" method="post">
       <input class="input-username" type="text" name="username" id="username" placeholder="username">
       <br>

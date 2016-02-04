@@ -14,7 +14,7 @@ router.get('/login', function(req, res) {
 router.post('/register', function(req, res, next) {
   User.register(new User({
     username: req.body.username,
-    admin: "False"
+    admin: false
   }), req.body.password, function(err, account) {
     if (err) {
       return res.render("a/register", {
