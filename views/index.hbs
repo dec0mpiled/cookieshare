@@ -5,7 +5,7 @@
     <a class="navbar-item {{#equal filter 'likes'}}selected{{/equal}}" href="/filter/likes">Most Likes</a>
     {{#if user}}
     <font color="white">|</font>
-    <a class="navbar-item" href="/user/{{user.username}}">My Cookies</a>
+    <a class="navbar-item" href="/user/{{user.username}}">My Profile</a>
     <font color="white">|</font>
     {{#if user.admin}}
     <a class="navbar-item" href="/admin">Admin</a>
@@ -43,7 +43,7 @@
       <h3>Sign in</h3>
       
       {{#if info}}
-      <p>{{info}}</p>
+      <p><font color="red">{{info}}</font></p>
       {{/if}}
       
       <form action="/auth/login" method="post">
@@ -89,7 +89,7 @@
        <!-- content -->
        <div class="content">
         <font color="{{color}}">
-        {{content}}
+        {{{content}}}
         </font>
        </div>
        <br>

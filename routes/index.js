@@ -3,8 +3,11 @@ var router = express.Router();
 var User = require('../models/user');
 var Post = require('../models/post');
 
+var twitter = require('twitter-text');
+
 /* home */
 router.get('/', function(req, res, next) {
+    
     User.count({},  function(err, counted){
      if (err) throw err;   
 
@@ -113,7 +116,9 @@ router.post('/sharecookie', function(req, res, next) {
     var badWord = /fuck|shit|cunt|damn|nigger|nigga|twat|dick|cum|tits|titties|boob|boobs|penis|cock|bbc|porn|pornography|rape|sex|orgasm|raping|bitch|ass|clit|clitoris|breast|breasts|wigger|faggot/gi;
     var titleq=req.body.titlebox;
     var authorq=req.user.username;
-    var contentq=req.body.texxtt;
+    var pattern = /\B@[a-z0-9_-]+/gi;
+    var str = req.body.texxtt;
+    var contentq = str.replace(pattern, "<a href='/user/'")
     var url=req.body.picbox;
     var color="blacK";
     var mynewurl;
@@ -174,6 +179,10 @@ mytitle = mytitle.replace(":&","😏");
 mytitle = mytitle.replace(";)","😉");
 mytitle = mytitle.replace("xD"||"XD","😂");
 mytitle = mytitle.replace(":P"||":p","😛");
+
+if (mytitle=="" || mytitle==" " || mytitle=="   " || mytitle=="    "){
+    mytitle="title";
+}
 
 mynewtitle = mytitle.toLowerCase();
 mynewtitle = mynewtitle.replace(badWord,"****");
@@ -245,16 +254,55 @@ router.post("/sendcomment/:id", function(req, res, next) {
     res.redirect("/cookie/"+id);
 });
 
+
 /* user page */
 router.get('/user/:user', function(req, res, next) {
-    User.findOne({ username: req.params.user }, function(err, user) {
+    User.findOne({ username: req.params.user }, function(err, usera) {
         if (err) return next(err);
-        Post.find({ "author": user.username }, function(err, post) {
+        Post.find({ "author": usera.username }, function(err, post) {
             console.log(post);
            if (err) return next(err);
-           res.render('user', { title:user.username, posts: post, user: req.user, account: user });
-        });
+           if (req.params.user==req.user.username){
+            res.render('me', {user: req.user, title: "My Profile", posts: post, posts1: usera.poststo, account: usera });
+           } else {
+           res.render('user', {user: req.user, title: usera.username, posts: post, posts1: usera.poststo, account: usera });
+           }
+           });
     });
+});
+
+////////////////////// Stuck /////////////////////
+router.post("/sendtouser/:id", function(req, res, next) {
+    var badWord = /fuck|shit|cunt|damn|nigger|nigga|twat|dick|cum|tits|titties|boob|boobs|penis|cock|bbc|porn|pornography|rape|sex|orgasm|raping|bitch|ass|clit|clitoris|breast|breasts|wigger|faggot/gi;
+    var commentval = req.body.msgbox;
+    commentval = commentval.replace(":)","😊");
+    commentval = commentval.replace(":D","😄");
+    commentval = commentval.replace(":(","😔");
+    commentval = commentval.replace(":*","😘");
+    commentval = commentval.replace(":|","😐");
+    commentval = commentval.replace(":>","😌");
+    commentval = commentval.replace(":&","😏");
+    commentval = commentval.replace(";)","😉");
+    commentval = commentval.replace("xD"||"XD","😂");
+    commentval = commentval.replace(":P"||":p","😛");
+    var mynewcomment = commentval.toLowerCase();
+    var newcomq = mynewcomment.replace(badWord,"****");
+    commentval=newcomq;
+    var id=req.params.id;
+    console.log(req.body.msgbox);
+    User.findOne({"_id" : id}, function (err, doc){
+        console.log(doc.username);
+        doc.poststo.push({ keys: commentval, author: req.user.username, _author: req.user.id, created: new Date() });
+        doc.save();
+        if (err) throw err;
+    res.redirect("/user/"+doc.username);
+    });
+});
+///////////////////////////////////////////////////
+
+/* GET settings page. */
+router.get('/settings', function(req, res, next) {
+    res.render('settings', { title: 'Settings', user: req.user});
 });
 
 module.exports = router;

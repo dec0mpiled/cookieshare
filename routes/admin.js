@@ -16,6 +16,7 @@ router.get('/', ensureAuthentication, function(req, res, next) {
                 User.find({}, function(err, users) {
                     if (err) return next(err);
                     res.render('a/admin', {
+                        title: "Admin Console",
                         user: req.user,
                         users: users,
                         posts: posts

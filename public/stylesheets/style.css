@@ -50,6 +50,9 @@
 .form-fixed {
   position: fixed;
 }
+.form-rel {
+  position: relative;
+}
 textarea {
   width: 100%;
   font-size: 1.4em;
@@ -167,4 +170,12 @@ textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:ac
 
 .a {
   text-decoration: none;
+}
+
+.list-action {
+  text-decoration: none;
+  border: 1px solid;
+  border-radius: 4px;
+  padding: .2em;
+  display: inline-block;
 }

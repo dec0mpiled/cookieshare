@@ -15,7 +15,7 @@
  
 <div class="frame body-frame">
  <div class="bit-75">
-  <h1>Viewing User @{{account.username}}'s Profile<font color="red"></font></h1>
+  <h1>My Profile (@{{account.username}})<font color="red"></font></h1>
  </div>
 </div>
 
@@ -69,50 +69,8 @@
 
   
  <div class="bit-2">
-   <h2>Post on this page:</h2><br><br>
-   <!-- cookies -->
+   <h2>Profile Options:</h2>
    
-   <div class="form-rel">
-    <!-- forms -->
-    <form id="sendtouser" action="/sendtouser/{{account.id}}" method="post">
-     <textarea onkeyup="textCounter(this,'counter',200);" name="msgbox" id="msgbox" class="textarea fixed" required placeholder="Enter your message to @{{account.username}} here! (Max 200 characters)"></textarea>
-     <button class="btn " id="post">Post to @{{account.username}}</button> <span id="counter">100</span>
-    </form>
-    </div>
-    
-   {{#each posts1}}
-   
-   <div class="cookie">
-    
-    <div class="frame">
-     
-     <div class="bit-75">
-      
-         <!-- title -->
-       <h2><font color="{{color}}">{{keys}}</font></h2>
-       
-       <div class="meta">
-        
-        <!-- author -->
-        <p class="meta-item"><a href="/user/{{author}}" class="a"><font color=#00cc00>@{{author}}</font></p></a>
-        <p class="meta-item">{{formatDate created day="numeric" month="long" year="numeric"}}</p>
-       </div>
-       
-       <!-- content -->
-       <div class="content">
-        <font color="{{color}}">
-        {{content}}
-        </font>
-       </div>
-     
-    </div>
-    
-   </div>
-   <hr>
-   {{/each}}
-   
-  </div>
- </div>
 </div>
 
 <script>

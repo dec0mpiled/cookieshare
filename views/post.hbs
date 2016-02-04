@@ -1,7 +1,7 @@
 <nav class="navbar">
   <div class="navbar-right">
     {{#if user}}
-    <a class="navbar-item" href="/user/{{result.author}}">My Cookies</a>
+    <a class="navbar-item" href="/user/{{result.author}}">More from @{{result.author}}</a>
     <font color="white">|</font>
     <a class="navbar-item" href="/auth/logout">Logout</a>
     {{else}}
@@ -19,7 +19,6 @@
   <p><b>Author:</b> <a href="/user/{{result.author}}" class="a"><font color=#00cc00>@{{result.author}}</font></a></p>
   <p><b>Likes:</b> {{result.likes}}</p>
   <p><b>Date Created:</b> {{formatDate result.created  day="numeric" month="long" year="numeric"}}</p>
-  <p><b>Post ID:</b> {{result.id}}</p>
   <br>
   <p class="cookie-content">{{result.content}}</p>
  </div>

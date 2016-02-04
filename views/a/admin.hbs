@@ -6,7 +6,7 @@
     
     <div class="frame body-frame">
         
-        <div class="bit-2">
+        <div class="bit-25">
             <h2>Users</h2>
             <a href="/admin/users/raw">Show all users as "raw"</a>
             
@@ -16,20 +16,19 @@
                 <h3>@{{username}}</h3>
                 <p><b>Admin</b>: {{#if admin}}true{{else}}false{{/if}}</p>
                 <div class="list-actions">
-                    <a href="/admin/user/delete/{{id}}">Delete</a>
-                    <a href="/admin/user/raw/{{id}}">Show Raw</a>
-                    <br>
+                    <a class="list-action btn" href="/admin/user/delete/{{id}}">Delete</a>
+                    <a class="list-action btn" href="/admin/user/raw/{{id}}">Raw</a>
                     {{#if admin}}
-                    <a href="/admin/remove/admin/{{id}}">Revoke Admin</a>
+                    <a class="list-action btn" href="/admin/remove/admin/{{id}}">REVOKE Admin</a>
                     {{else}}
-                    <a href="/admin/add/admin/{{id}}">Make Admin</a>
+                    <a class="list-action btn" href="/admin/add/admin/{{id}}">MAKE Admin</a>
                     {{/if}}
                 </div><br>
                 {{/each}}
             </div>
         </div>
         
-        <div class="bit-2">
+        <div class="bit-75">
             <h2>Posts</h2>
             <a href="/admin/posts/raw">Show all posts as "raw"</a>
             
@@ -45,8 +44,8 @@
                 </div>
                 <p>{{content}}</p>
                 <div class="list-actions">
-                    <a href="/admin/post/delete/{{id}}">Delete</a>
-                    <a href="/admin/post/raw/{{id}}">Raw Post</a>
+                    <a class="list-action btn" href="/admin/post/delete/{{id}}">Delete</a>
+                    <a class="list-action btn" href="/admin/post/raw/{{id}}">Raw Post</a>
                 </div><br>
                 {{/each}}
             </div>

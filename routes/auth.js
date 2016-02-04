@@ -1,6 +1,7 @@
 var express = require('express');
 var passport = require('passport');
 var User = require('../models/user');
+var Post = require('../models/post');
 var router = express.Router();
 
 router.get('/register', function(req, res) {
@@ -22,6 +23,9 @@ router.post('/register', function(req, res, next) {
         active: 'register'
       });
     }
+    if (username=="" || username==" " || username=="  " || username=="   "){
+  
+    }
 
     passport.authenticate('local')(req, res, function() {
       req.session.save(function(err) {
@@ -37,10 +41,13 @@ router.post('/register', function(req, res, next) {
 router.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err) { return next(err); }
-    if (!user) { return res.render("index", { info: "username and password do not match!", active: 'login', title: 'Login' }); }
+    Post.find({}, null, { sort: '-created' }, function (err, posts) {
+        if (err) return next(err);
+    if (!user) { return res.render("index", { info: "username and password do not match!", active: 'login', title: 'ShareCookie', posts:posts }); }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
       return res.redirect('/');
+    });
     });
   })(req, res, next);
 });
