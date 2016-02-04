@@ -13,6 +13,13 @@ router.get('/login', function(req, res) {
 });
 
 router.post('/register', function(req, res, next) {
+  var username=req.body.username;
+   if (username=="" || username==" " || username=="  " || username=="   "){
+    return res.render("a/register", {
+        info: "username cannot be blank!",
+        active: 'register'
+      });
+    }
   User.register(new User({
     username: req.body.username,
     admin: false
@@ -22,9 +29,6 @@ router.post('/register', function(req, res, next) {
         info: "username already exists!",
         active: 'register'
       });
-    }
-    if (username=="" || username==" " || username=="  " || username=="   "){
-  
     }
 
     passport.authenticate('local')(req, res, function() {

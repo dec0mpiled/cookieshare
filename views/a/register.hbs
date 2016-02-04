@@ -9,14 +9,17 @@
         
     <h1>Create an account to share a Cookie now!</h1>
     
+        {{#if info}}
+          <p><font color="red">{{info}}</font></p>
+        {{/if}}
+    
     <form action="/auth/register" method="post">
-      <input class="input-username" type="text" name="username" id="username" placeholder="username">
+      <input class="input-username" type="text" name="username" id="username" required placeholder="username">
       <br>
-      <input class="input-password" type="password" name="password" id="password" placeholder="password">
+      <input class="input-password" type="password" name="password" id="password" required placeholder="password">
       <br><br>
       <button class="btn" type="submit">Register</button>
-     </form>
-        
+     </form><br>
     </div>
 
     
