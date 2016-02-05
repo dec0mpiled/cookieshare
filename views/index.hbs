@@ -14,7 +14,7 @@
     <a class="navbar-item" href="/auth/logout">Log Out</a>
     {{/if}}
   </div>
-  <a class="navbar-brand" href="/">ShareCookie</a>
+  <a style="font-family: abr" class="navbar-brand" href="/">ShareCookie</a>
 </nav>
 
 <div class="wrapper">
@@ -46,9 +46,9 @@
       {{/if}}
       
       <form action="/auth/login" method="post">
-       <input class="input-username" type="text" name="username" id="username" onkeypress="return alpha(event)" maxlength=15 placeholder="username">
+       <input class="input-username posts" type="text" name="username" id="username" onkeypress="return alpha(event)" maxlength=15 placeholder="username">
        <br>
-       <input class="input-password" type="password" name="password" id="password" onkeypress="return pass(event)" placeholder="password">
+       <input class="input-password posts" type="password" name="password" id="password" onkeypress="return pass(event)" placeholder="password">
        <br><br>
        <button class="btn" type="submit">Sign in</button>
        <br><br>
@@ -69,7 +69,7 @@
    <!-- cookies -->
    {{#each posts}}
    
-   <div class="cookie" style="border:1px solid gray; border-radius:2px">
+   <div class="cookie posts" style="border:1px solid gray; border-radius:2px">
     
     <div class="frame">
      
