@@ -11,6 +11,10 @@ router.get('/', ensureAuthentication, function(req, res, next) {
         if (!user.admin) {
             return res.redirect('/');
         } else {
+            Post.count({}, function(err, postcount) {
+                if (err) return next(err);
+            User.count({}, function(err, usercount) {
+                if (err) return next(err);
             Post.find({}, function(err, posts) {
                 if (err) return next(err);
                 User.find({}, function(err, users) {
@@ -19,9 +23,13 @@ router.get('/', ensureAuthentication, function(req, res, next) {
                         title: "Admin Console",
                         user: req.user,
                         users: users,
-                        posts: posts
+                        posts: posts,
+                        postcount: postcount,
+                        usercount: usercount
                     });
                 }); 
+            });
+            });
             });
         }
     });
