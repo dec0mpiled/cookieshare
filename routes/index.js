@@ -208,13 +208,9 @@ router.get('/user/:user', function(req, res, next) {
         Post.find({ "author": usera.username }, null, { sort: '-created' }, function(err, post) {
             console.log(post);
            if (err) return next(err);
-           if (req.params.user==req.user.username){
-            res.render('me', {user: req.user, title: "My Profile", posts: post, posts1: usera.poststo, account: usera });
-           } else {
            res.render('user', {user: req.user, title: usera.username, posts: post, posts1: usera.poststo, account: usera });
-           }
-           });
-    });
+});
+});
 });
 
 ////////////////////// Stuck /////////////////////
