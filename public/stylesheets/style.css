@@ -8,11 +8,11 @@
 }
 
 body {
-  background-color:#e2ccff;
+  background-color:#437B85;
 }
 
 .posts {
-  background-color:#f2e5ff;
+  background-color:#82a8b0;
 }
 
 .wrapper {
@@ -23,7 +23,7 @@ body {
 .navbar {
   width: 100%;
   padding: 1em 1%;
-  background-color:#6600ff;
+  background-color:#114954;
   position: fixed;
   z-index:2;
 }
@@ -31,6 +31,9 @@ body {
 @font-face { font-family: swiftel; src: url('/fonts/swiftel.ttf'); } 
 @font-face { font-family: freakshow; src: url('/fonts/Freakshow.ttf'); } 
 @font-face { font-family: abr; src: url('/fonts/Always Been Right.ttf'); } 
+@font-face { font-family: prot; src: url('/fonts/Prototype.ttf'); } 
+@font-face { font-family: modz; src: url('/fonts/moderna.ttf'); } 
+@font-face { font-family: hug; src: url('/fonts/hug.ttf'); } 
 
 .navbar-right {
   float: right;
@@ -51,7 +54,7 @@ body {
   font-size: 1.5em;
   text-decoration: none;
   color: #fff;
-  text-shadow: 0 0 20px #fff;
+
 }
 
 .body-frame {
@@ -84,7 +87,7 @@ textarea {
   resize: none;
 }
 textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:active, .input-gif:focus, .input-title:hover, .input-title:active, .input-title:focus, .input-username:hover, .input-username:active, .input-username:focus, .input-password:hover, .input-password:active, .input-password:focus {
-  border: 1px solid #6600ff;
+  border: 1px solid #02313A;
   outline: 0;
 }
 
@@ -120,7 +123,7 @@ textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:ac
      /* Green */
     background-color: white; 
     color: black; 
-    border: 2px solid #6600ff;
+    border: 2px solid #02313A;
     padding: 5px 7px;
     text-align: center;
     text-decoration: none;
@@ -132,7 +135,7 @@ textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:ac
 }
 
 .btn:hover {
-  background-color: #6600ff;
+  background-color: #02313A;
   color: white;
   text-decoration: none;
 }

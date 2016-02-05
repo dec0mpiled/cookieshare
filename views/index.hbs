@@ -14,7 +14,7 @@
     <a class="navbar-item" href="/auth/logout">Log Out</a>
     {{/if}}
   </div>
-  <a style="font-family: abr" class="navbar-brand" href="/">ShareCookie</a>
+  <a style="font-family: prot" class="navbar-brand" href="/">ShareCookie</a>
 </nav>
 
 <div class="wrapper">
@@ -29,7 +29,8 @@
     
     <form id="postcookie" action="/sharecookie" method="post">
      <textarea  name="texxtt" id="texxtt" class="textarea fixed" required placeholder="What's going on?"></textarea>
-     <input class="input-gif" name="picbox" id="picbox" placeholder="Link to an image (Not required)"><br><br>
+     <input class="input-gif" name="picbox" id="picbox" placeholder="Link to an image (Optional)"><br><br>
+    <!-- <input class="input-gif" name="groupbox" id="groupbox" placeholder="Send this post to a group (Optional)"><br><br> !-->
      <button class="btn " id="login">Create Post</button> <!--<span id="counter">200</span>!-->
     </form>
     {{else}}
@@ -52,7 +53,7 @@
        <br><br>
        <button class="btn" type="submit">Sign in</button>
        <br><br>
-       <a href="/auth/register"><font color=#6600ff>Don't have an account? Sign up now!</font></a>
+       <a href="/auth/register"><font color=#9decfb>Don't have an account? Sign up now!</font></a>
       </form>
       
      </div>
@@ -69,7 +70,7 @@
    <!-- cookies -->
    {{#each posts}}
    
-   <div class="cookie posts" style="border:1px solid gray; border-radius:2px">
+   <div class="cookie posts" style="border:1px solid black; border-radius:2px">
     
     <div class="frame">
      
@@ -81,8 +82,8 @@
        <div class="meta">
         
         <!-- author -->
-        <p class="meta-item"><font color="black">{{names}} </font><a href="/user/{{author}}" class="a acolor"><font>@{{author}}</font></p></a>
-        <p class="meta-item">{{formatDate created day="numeric" month="long" year="numeric"}}</p>
+        <p class="meta-item"><font color="black"><b>{{names}}</b> </font><a class="a" href="/user/{{author}}"><font color=#9decfb>@{{author}}</font></p></a>
+        <p class="meta-item"><font color=#02313A>Posted on {{formatDate created day="numeric" month="long" year="numeric"}}</font></p>
        </div>
        
        <!-- content -->
@@ -96,7 +97,7 @@
        <!-- actions -->
      
      {{#if myurl}}
-     <img src="{{myurl}}" style="border:1px solid lightgray; width:auto; height:200px">
+     <img src="{{myurl}}" style="border:1px solid black; width:auto; height:200px">
      {{/if}}
            <div class="actions">
        
@@ -106,7 +107,7 @@
        {{/if}}
         {{likes}} likes
         <!-- comments -->
-        <a href="/cookie/{{id}}"><font color=#6600ff>Comments ({{commentamount}})</font></a>
+        <a href="/cookie/{{id}}"><font color=#9decfb>Comments ({{commentamount}})</font></a>
        </div>
      </div>
      
