@@ -15,7 +15,7 @@
 .navbar {
   width: 100%;
   padding: 1em 1%;
-  background: RGBA(100, 205, 15, 1);
+  background-color:#6600ff;
   position: fixed;
   z-index:2;
 }
@@ -46,6 +46,13 @@
   padding-top: 70px;
 }
 
+.acolor {
+  color:#6600ff;
+}
+.bcolor {
+  background-color:#6600ff;
+}
+
 /* Display */
 .form-fixed {
   position: fixed;
@@ -65,7 +72,7 @@ textarea {
   resize: none;
 }
 textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:active, .input-gif:focus, .input-title:hover, .input-title:active, .input-title:focus, .input-username:hover, .input-username:active, .input-username:focus, .input-password:hover, .input-password:active, .input-password:focus {
-  border: 1px solid #00cc00;
+  border: 1px solid #6600ff;
   outline: 0;
 }
 
@@ -101,7 +108,7 @@ textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:ac
      /* Green */
     background-color: white; 
     color: black; 
-    border: 2px solid #4CAF50;
+    border: 2px solid #6600ff;
     padding: 5px 7px;
     text-align: center;
     text-decoration: none;
@@ -113,7 +120,7 @@ textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:ac
 }
 
 .btn:hover {
-  background-color: #00b300;
+  background-color: #6600ff;
   color: white;
   text-decoration: none;
 }

@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var comments = new Schema({ value: String, user: String, _user: String, created: Date });
 
 var Post = new Schema({
-        title: String,
+        names: String,
         author: String,
         _author: Schema.Types.ObjectId,
         content: String,

@@ -120,3 +120,7 @@
 .box--new {
     background: #87D37C
 }
+
+.rel {
+    position: relative;
+}

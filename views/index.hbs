@@ -28,10 +28,9 @@
     <h1>Post to ShareCookie</h1>
     
     <form id="postcookie" action="/sharecookie" method="post">
-     <input class="input-title" name="titlebox" id="titlebox" required placeholder="Title"><br><br>
-     <textarea onkeyup="textCounter(this,'counter',200);" name="texxtt" id="texxtt" class="textarea fixed" required placeholder="Enter your message here! (Max 200 characters)"></textarea>
-     <input class="input-gif" name="picbox" id="picbox" placeholder="Link to any image (Not required)"><br><br>
-     <button class="btn " id="login">Create Post</button> <span id="counter">200</span>
+     <textarea  name="texxtt" id="texxtt" class="textarea fixed" required placeholder="What's going on?"></textarea>
+     <input class="input-gif" name="picbox" id="picbox" placeholder="Link to an image (Not required)"><br><br>
+     <button class="btn " id="login">Create Post</button> <!--<span id="counter">200</span>!-->
     </form>
     {{else}}
     <h1>Login or Create an account to post!</h1>
@@ -70,31 +69,35 @@
    <!-- cookies -->
    {{#each posts}}
    
-   <div class="cookie">
+   <div class="cookie" style="border:1px solid gray; border-radius:2px">
     
     <div class="frame">
      
      <div class="bit-75">
       
          <!-- title -->
-       <a style="text-decoration: none;" href="/cookie/{{id}}"><h2><font color="{{color}}">{{title}}</font></h2></a>
+      <!-- <a style="text-decoration: none;" href="/cookie/{{id}}"><h2><font color="{{color}}">{{title}}</font></h2></a> !-->
        
        <div class="meta">
         
         <!-- author -->
-        <p class="meta-item"><a href="/user/{{author}}" class="a"><font color=#00cc00>@{{author}}</font></p></a>
+        <p class="meta-item"><font color="black">{{names}} </font><a href="/user/{{author}}" class="a acolor"><font>@{{author}}</font></p></a>
         <p class="meta-item">{{formatDate created day="numeric" month="long" year="numeric"}}</p>
        </div>
        
        <!-- content -->
        <div class="content">
         <font color="{{color}}">
-        {{{content}}}
+        {{content}}
         </font>
        </div>
        <br>
        <!-- actions -->
-      <div class="actions">
+     
+     {{#if myurl}}
+     <img src="{{myurl}}" style="border:1px solid lightgray; width:auto; height:200px">
+     {{/if}}
+           <div class="actions">
        
        {{#if ../user}}
         <!-- like/dislike -->
@@ -102,29 +105,20 @@
        {{/if}}
         {{likes}} likes
         <!-- comments -->
-        <a href="/cookie/{{id}}"><font color=#00cc00>Comments ({{commentamount}})</font></a>
+        <a href="/cookie/{{id}}"><font color=#6600ff>Comments ({{commentamount}})</font></a>
        </div>
-     
-      
-     </div>
-     
-     <div class="bit-25">
-      
-      <img src="{{myurl}}" style="border:none;" width=140px height=140px>
-      
      </div>
      
     </div>
     
    </div>
-   <hr>
+   <br>
    {{/each}}
    
   </div>
  </div>
 </div>
 <script>
-
 function textCounter(field,field2,maxlimit)
 {
  var countfield = document.getElementById(field2);
@@ -135,11 +129,9 @@ function textCounter(field,field2,maxlimit)
   countfield.innerHTML = maxlimit - field.value.length;
  }
 }
-
 </script>
 
 <script>
-
     function alpha(e) {
     var k;
     document.all ? k = e.keyCode : k = e.which;

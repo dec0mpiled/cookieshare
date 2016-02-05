@@ -16,7 +16,7 @@
 <div class="frame body-frame">
  <div class="bit-2">
   <h1>{{result.title}}</h1>
-  <p><b>Author:</b> <a href="/user/{{result.author}}" class="a"><font color=#00cc00>@{{result.author}}</font></a></p>
+  <p><b>Author:</b> <a href="/user/{{result.author}}" class="a"><font color=#6600ff>@{{result.author}}</font></a></p>
   <p><b>Likes:</b> {{result.likes}}</p>
   <p><b>Date Created:</b> {{formatDate result.created  day="numeric" month="long" year="numeric"}}</p>
   <br>
@@ -49,7 +49,7 @@
  <div class="bit-2">
   <h2>Comments ({{result.commentamount}}):</h2><br>
   {{#each result.commentslist}}
-   <a href="/user/{{user}}" style="text-decoration:none;"><font color=#4CAF50><h3>@{{user}}:</h3></font></a>
+   <a href="/user/{{user}}" style="text-decoration:none;"><font color=#6600ff><h3>@{{user}}:</h3></font></a>
    <p>{{value}}</p><br>
   {{/each}}
  </div>

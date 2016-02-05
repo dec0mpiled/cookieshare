@@ -7,6 +7,7 @@ var dislikekeys = new Schema({ keys: String });
 var postkeys = new Schema({ keys: String, author: String, created: Date });
 
 var User = new Schema({
+    name: String,
     username: String,
     password: String,
     admin: Boolean,

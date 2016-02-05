@@ -76,6 +76,16 @@ if (app.get('env') === 'development') {
   });
 }
 
+hbs.registerHelper('isblank', function(lvalue, options) {
+    if (arguments.length < 3)
+        throw new Error("Handlebars Helper equal needs 2 parameters");
+    if( lvalue!="" ) {
+        return options.inverse(this);
+    } else {
+        return options.fn(this);
+    }
+});
+
 hbs.registerHelper('equal', function(lvalue, rvalue, options) {
     if (arguments.length < 3)
         throw new Error("Handlebars Helper equal needs 2 parameters");

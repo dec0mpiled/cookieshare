@@ -24,7 +24,7 @@
   
   {{#each posts}}
    
-   <div class="cookie">
+   <div class="cookie" style="border:1px solid gray; border-radius:2px">
     
     <div class="frame">
      
@@ -37,10 +37,10 @@
         </h2>
         <p class="meta-item">{{formatDate created day="numeric" month="long" year="numeric"}}</p>
        </div>
-       
+       <br>
        <!-- content -->
        <div class="content">
-        <font color="black">
+        <font color="black" size=4>
         {{content}}
         </font>
        </div><br>
@@ -50,20 +50,20 @@
         <font color="black">
         {{likes}} likes
         </font><br><br>
-        <a href="/cookie/{{id}}"><font color=#00cc00>View Cookie</font></a>
+        <a href="/cookie/{{id}}"><font color=#6600ff>View Cookie</font></a>
        </div>
       
      </div>
      <div class="bit-25">
-      
+      {{#if myurl}}
       <img src="{{myurl}}" style="border:none;" width=140px height=140px>
-      
+      {{/if}}
      </div>
      
     </div>
     
    </div>
-   <hr>
+   <br>
    {{/each}}
 </div>
 
@@ -81,8 +81,8 @@
     </div>
     
    {{#each posts1}}
-   
-   <div class="cookie">
+   <br>
+   <div class="cookie" style="border:1px solid gray; border-radius:2px">
     
     <div class="frame">
      
@@ -94,10 +94,9 @@
        <div class="meta">
         
         <!-- author -->
-        <p class="meta-item"><a href="/user/{{author}}" class="a"><font color=#00cc00>@{{author}}</font></p></a>
+        <p class="meta-item"><a href="/user/{{author}}" class="a"><font color=#6600ff>@{{author}}</font></p></a>
         <p class="meta-item">{{formatDate created day="numeric" month="long" year="numeric"}}</p>
        </div>
-       
        <!-- content -->
        <div class="content">
         <font color="{{color}}">
@@ -108,7 +107,6 @@
     </div>
     
    </div>
-   <hr>
    {{/each}}
    
   </div>

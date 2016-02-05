@@ -114,16 +114,11 @@ router.get('/dislikepost/:author/:id', function(req, res) {
 /* Post Cookie */
 router.post('/sharecookie', function(req, res, next) {
     var badWord = /fuck|shit|cunt|damn|nigger|nigga|twat|dick|cum|tits|titties|boob|boobs|penis|cock|bbc|porn|pornography|rape|sex|orgasm|raping|bitch|ass|clit|clitoris|breast|breasts|wigger|faggot/gi;
-    var titleq=req.body.titlebox;
     var authorq=req.user.username;
-    var pattern = /\B@[a-z0-9_-]+/gi;
-    var str = req.body.texxtt;
-    var contentq = str.replace(pattern, "<a href='/user/'")
+    var contentq = req.body.texxtt;
     var url=req.body.picbox;
     var color="blacK";
     var mynewurl;
-    var mynewcontent;
-    var mynewtitle;
     
 var myurl=url;
 
@@ -136,56 +131,6 @@ if (myurl.startsWith("http://")||myurl.startsWith("https://")) {
     mynewurl=myurl;
 }
 }
-
-if (titleq.endsWith("/admin:001")){
-    var newtitleq=titleq.slice(0,titleq.indexOf("/admin:001"));
-    authorq="drew";
-}
-   
-if (titleq.endsWith("/admin:001")){
-    mynewtitle = newtitleq;
-    mynewtitle = mynewtitle.replace(":)","😊");
-    mynewtitle = mynewtitle.replace(":D","😄");
-    mynewtitle = mynewtitle.replace(":(","😔");
-    mynewtitle = mynewtitle.replace(":*","😘");
-    mynewtitle = mynewtitle.replace(":|","😐");
-    mynewtitle = mynewtitle.replace(":>","😌");
-    mynewtitle = mynewtitle.replace(":&","😏");
-    mynewtitle = mynewtitle.replace(";)","😉");
-    mynewtitle = mynewtitle.replace("xD"||"XD","😂");
-    mynewtitle = mynewtitle.replace(":P"||":p","😛");
-    
-    mynewcontent=contentq;
-    mynewcontent = mynewcontent.replace(":)","😊");
-    mynewcontent = mynewcontent.replace(":D","😄");
-    mynewcontent = mynewcontent.replace(":(","😔");
-    mynewcontent = mynewcontent.replace(":*","😘");
-    mynewcontent = mynewcontent.replace(":|","😐");
-    mynewcontent = mynewcontent.replace(":>","😌");
-    mynewcontent = mynewcontent.replace(":&","😏");
-    mynewcontent = mynewcontent.replace(";)","😉");
-    mynewcontent = mynewcontent.replace("xD"||"XD","😂");
-    mynewcontent = mynewcontent.replace(":P"||":p","😛");
-} else {
-var mytitle = titleq;
-// Emojis!!
-mytitle = mytitle.replace(":)","😊");
-mytitle = mytitle.replace(":D","😄");
-mytitle = mytitle.replace(":(","😔");
-mytitle = mytitle.replace(":*","😘");
-mytitle = mytitle.replace(":|","😐");
-mytitle = mytitle.replace(":>","😌");
-mytitle = mytitle.replace(":&","😏");
-mytitle = mytitle.replace(";)","😉");
-mytitle = mytitle.replace("xD"||"XD","😂");
-mytitle = mytitle.replace(":P"||":p","😛");
-
-if (mytitle=="" || mytitle==" " || mytitle=="   " || mytitle=="    "){
-    mytitle="title";
-}
-
-mynewtitle = mytitle.toLowerCase();
-mynewtitle = mynewtitle.replace(badWord,"****");
 
 var mycontent = contentq;
 // Emojis!!
@@ -200,15 +145,16 @@ mycontent = mycontent.replace(";)","😉");
 mycontent = mycontent.replace("xD"||"XD","😂");
 mycontent = mycontent.replace(":P"||":p","😛");
 
-mynewcontent = mycontent.toLowerCase();
-mynewcontent = mynewcontent.replace(badWord,"****");
-}
+//mynewcontent = mycontent.toLowerCase();
+//mynewcontent = mynewcontent.replace(badWord,"****");
+    var name = req.user.name;
 
     var newpost = new Post({
-        title: mynewtitle,
+        //title: mynewtitle,
+        names: name,
         author: authorq,
         _author: req.user.id,
-        content: mynewcontent,
+        content: mycontent,
         myurl: mynewurl,
         color: color,
         spam: 0,
@@ -223,7 +169,7 @@ mynewcontent = mynewcontent.replace(badWord,"****");
 router.get('/cookie/:id', function(req, res) {
   Post.findOne({ _id: req.params.id }, function(err, result) {
     if (err) throw err;
-    res.render('post', { title: "Cookie from ShareCookie!", result: result, user: req.user });
+    res.render('post', { title: result.title, result: result, user: req.user });
     });
   });
 
@@ -241,9 +187,9 @@ router.post("/sendcomment/:id", function(req, res, next) {
     commentval = commentval.replace(";)","😉");
     commentval = commentval.replace("xD"||"XD","😂");
     commentval = commentval.replace(":P"||":p","😛");
-    var mynewcomment = commentval.toLowerCase();
-    var newcomq = mynewcomment.replace(badWord,"****");
-    commentval=newcomq;
+    //var mynewcomment = commentval.toLowerCase();
+    //var newcomq = mynewcomment.replace(badWord,"****");
+    //commentval=newcomq;
     var id=req.params.id;
     Post.findOne({"_id" : id}, function (err, doc){
         doc.commentslist.push({ value: commentval, user: name, _author: req.user.id, created: new Date() });
@@ -259,7 +205,7 @@ router.post("/sendcomment/:id", function(req, res, next) {
 router.get('/user/:user', function(req, res, next) {
     User.findOne({ username: req.params.user }, function(err, usera) {
         if (err) return next(err);
-        Post.find({ "author": usera.username }, function(err, post) {
+        Post.find({ "author": usera.username }, null, { sort: '-created' }, function(err, post) {
             console.log(post);
            if (err) return next(err);
            if (req.params.user==req.user.username){
@@ -285,9 +231,9 @@ router.post("/sendtouser/:id", function(req, res, next) {
     commentval = commentval.replace(";)","😉");
     commentval = commentval.replace("xD"||"XD","😂");
     commentval = commentval.replace(":P"||":p","😛");
-    var mynewcomment = commentval.toLowerCase();
-    var newcomq = mynewcomment.replace(badWord,"****");
-    commentval=newcomq;
+    //var mynewcomment = commentval.toLowerCase();
+    //var newcomq = mynewcomment.replace(badWord,"****");
+    //commentval=newcomq;
     var id=req.params.id;
     console.log(req.body.msgbox);
     User.findOne({"_id" : id}, function (err, doc){

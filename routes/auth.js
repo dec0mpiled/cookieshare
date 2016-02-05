@@ -21,6 +21,7 @@ router.post('/register', function(req, res, next) {
       });
     }
   User.register(new User({
+    name: req.body.namebox,
     username: req.body.username,
     admin: false
   }), req.body.password, function(err, account) {
