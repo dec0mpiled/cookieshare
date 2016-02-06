@@ -95,7 +95,7 @@ textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:ac
   border: 1px solid #000;
   width: 100%;
   font-size: 1.4em;
-  color: #111;
+  background-color: #FFF;
   padding: .5em;
   margin: .5em 0;
   position: relative;
