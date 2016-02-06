@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var comments = new Schema({ value: String, user: String, _user: String, created: Date });
+var comments = new Schema({ value: String, likes: Number, user: String, _user: String, created: Date });
 
 var Post = new Schema({
         names: String,

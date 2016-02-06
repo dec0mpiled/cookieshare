@@ -15,7 +15,6 @@
  
 <div class="frame body-frame">
  <div class="bit-2">
-  <h1>{{result.title}}</h1>
   <p><b>Author: {{result.names}}</b> <a href="/user/{{result.author}}" class="a"><font color=#9decfb>@{{result.author}}</font></a></p>
   <p><b>Likes:</b> {{result.likes}}</p>
   <p><b>Date Created:</b> {{formatDate result.created  day="numeric" month="long" year="numeric"}}</p>
@@ -32,7 +31,7 @@
   <!--<p class="cookie-caption">image via: {{result.myurl}}</p>!-->
  </div>
 </div>
-
+<br><br><br>
 <div class="frame">
  <div class="bit-2">
   {{#if user}}
@@ -48,15 +47,29 @@
    <h2>Please Log in to comment!</h2>
    {{/if}}
  </div>
+
  <div class="bit-2">
   <h2>Comments ({{result.commentamount}}):</h2><br>
   {{#each result.commentslist}}
-   <a href="/user/{{user}}" style="text-decoration:none;"><font color=#9decfb><h3>@{{user}}:</h3></font></a>
-   <p>{{value}}</p><br>
-  {{/each}}
+  
+  
+   
+   <div class="cookie posts" style="border:1px solid black; border-radius:2px">
+    
+    <div class="frame">
+       
+       <div class="meta">
+        
+        <p class="meta-item"><a class="a" href="/user/{{user}}"><font color=#9decfb>@{{user}}</font></p></a>
+        <p class="meta-item"><font color=#02313A>{{value}}</font></p>
+        {{/each}}
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
  </div>
-</div>
-</div>
 
 
 <script>

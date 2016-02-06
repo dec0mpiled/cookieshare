@@ -169,7 +169,7 @@ mycontent = mycontent.replace(":P"||":p","😛");
 router.get('/cookie/:id', function(req, res) {
   Post.findOne({ _id: req.params.id }, function(err, result) {
     if (err) throw err;
-    res.render('post', { title: result.title, result: result, user: req.user });
+    res.render('post', { title: result.content, result: result, user: req.user });
     });
   });
 
@@ -192,7 +192,7 @@ router.post("/sendcomment/:id", function(req, res, next) {
     //commentval=newcomq;
     var id=req.params.id;
     Post.findOne({"_id" : id}, function (err, doc){
-        doc.commentslist.push({ value: commentval, user: name, _author: req.user.id, created: new Date() });
+        doc.commentslist.push({ value: commentval, likes: 0, user: name, _author: req.user.id, created: new Date() });
         doc.commentamount=doc.commentamount+1;
         doc.save();
         if (err) throw err;
