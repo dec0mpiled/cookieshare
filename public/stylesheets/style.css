@@ -8,11 +8,11 @@
 }
 
 body {
-  background-color:#437B85;
+  background-color:#e5e5ff;
 }
 
 .posts {
-  background-color:#82a8b0;
+  background-color:#ccccff;
 }
 
 .wrapper {
@@ -23,7 +23,7 @@ body {
 .navbar {
   width: 100%;
   padding: 1em 1%;
-  background-color:#114954;
+  background-color:#6666ff;
   position: fixed;
   z-index:2;
 }
@@ -123,7 +123,7 @@ textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:ac
      /* Green */
     background-color: white; 
     color: black; 
-    border: 2px solid #02313A;
+    border: 2px solid #6666ff;
     padding: 5px 7px;
     text-align: center;
     text-decoration: none;
@@ -135,7 +135,7 @@ textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:ac
 }
 
 .btn:hover {
-  background-color: #02313A;
+  background-color:#6666ff;
   color: white;
   text-decoration: none;
 }

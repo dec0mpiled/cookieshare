@@ -53,7 +53,7 @@
        <br><br>
        <button class="btn" type="submit">Sign in</button>
        <br><br>
-       <a href="/auth/register"><font color=#9decfb>Don't have an account? Sign up now!</font></a>
+       <a href="/auth/register"><font color=#6666ff>Don't have an account? Sign up now!</font></a>
       </form>
       
      </div>
@@ -70,7 +70,7 @@
    <!-- cookies -->
    {{#each posts}}
    
-   <div class="cookie posts" style="border:1px solid black; border-radius:2px">
+   <div class="cookie posts" style="border:1px solid gray; border-radius:6px">
     
     <div class="frame">
      
@@ -82,7 +82,7 @@
        <div class="meta">
         
         <!-- author -->
-        <p class="meta-item"><font color="black"><b>{{names}}</b> </font><a class="a" href="/user/{{author}}"><font color=#9decfb>@{{author}}</font></p></a>
+        <p class="meta-item"><font color="black"><b>{{names}}</b> </font><a class="a" href="/user/{{author}}"><font color=#6666ff>@{{author}}</font></p></a>
         <p class="meta-item"><font color=#02313A>Posted on {{formatDate created day="numeric" month="long" year="numeric"}}</font></p>
        </div>
        
@@ -107,7 +107,7 @@
        {{/if}}
         {{likes}} likes
         <!-- comments -->
-        <a href="/cookie/{{id}}"><font color=#9decfb>Comments ({{commentamount}})</font></a>
+        <a href="/cookie/{{id}}"><font color=#6666ff>Comments ({{commentamount}})</font></a>
        </div>
      </div>
      
