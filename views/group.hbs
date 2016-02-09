@@ -22,40 +22,45 @@
   
   {{#each result}}
    
-   <div class="cookie posts" style="border:1px solid gray; border-radius:2px">
+   <div class="cookie posts" style="border:1px solid gray; border-radius:6px">
     
     <div class="frame">
      
-     <div class="bit-75">
-         
-          <!-- title -->
-       <div class="title">
-        <h2>
-        {{title}}
-        </h2>
-        <p class="meta-item"><font color=#6666ff>{{formatDate created day="numeric" month="long" year="numeric"}}</font></p>
+     <div class="bit-50">
+      
+         <!-- title -->
+      <!-- <a style="text-decoration: none;" href="/cookie/{{id}}"><h2><font color="{{color}}">{{title}}</font></h2></a> !-->
+       
+       <div class="meta">
+        
+        <!-- author -->
+        <p class="meta-item"><font color="black"><b>{{names}}</b> </font><a class="a" href="/user/{{author}}"><font color=#6666ff>@{{author}}</font></p></a>
+        <p class="meta-item"><font color=#02313A>Posted on {{formatDate created day="numeric" month="long" year="numeric"}}</font></p>
        </div>
-       <br>
+       
        <!-- content -->
        <div class="content">
-        <font color="black" size=4>
+        <a style="text-decoration:none;" href="/cookie/{{id}}"><font color="{{color}}" size=5>
         {{content}}
         </font>
-       </div><br>
-       
-       <!-- likes -->
-       <div class="content">
-        <font color="black">
-        {{likes}} likes
-        </font><br><br>
-        <a href="/cookie/{{id}}"><font color=#6666ff>View Cookie</font></a>
+        </a>
        </div>
-      
-     </div>
-     <div class="bit-25">
-      {{#if myurl}}
-      <img src="{{myurl}}" style="border:none;" width=140px height=140px>
-      {{/if}}
+       <br>
+       <!-- actions -->
+     {{#if myurl}}
+     <img src="{{myurl}}" style="border:1px solid black; width:auto; height:200px">
+     {{/if}}
+           <div class="actions">
+       
+       {{#if ../user}}
+        <!-- like/dislike -->
+        <a href="/likepost/{{author}}/{{id}}/group/{{group}}" class="btn btn-like">Like </a> <a href="/dislikepost/{{author}}/{{id}}/group/{{group}}" class="btn btn-dislike">Dislike </a>
+       {{/if}}
+        {{likes}} likes
+        <!-- comments -->
+        <a href="/cookie/{{id}}"><font color=#6666ff>Comments ({{commentamount}})</font></a>
+       
+       </div>
      </div>
      
     </div>

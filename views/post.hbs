@@ -21,7 +21,11 @@
   <br>
   <p class="cookie-content">{{result.content}}</p>
    <br>
-  <div><a href="https://www.facebook.com/dialog/share?app_id=1549077778743128&amp;display=popup&amp;href=sharecookie.com%2Fcookie%2F{{result.id}}" class="fbbtn">Share on Facebook</a></div>
+   {{#if user}}
+        <!-- like/dislike -->
+        <a href="/likepost/{{result.author}}/{{result.id}}/cookie/null" class="btn btn-like">Like </a> <a href="/dislikepost/{{result.author}}/{{result.id}}/cookie/null" class="btn btn-dislike">Dislike </a>
+  {{/if}}
+  <div><br><a href="https://www.facebook.com/dialog/share?app_id=1549077778743128&amp;display=popup&amp;href=sharecookie.com%2Fcookie%2F{{result.id}}" class="fbbtn">Share on Facebook</a></div>
  </div>
  <div class="bit-2">
   <br><br>

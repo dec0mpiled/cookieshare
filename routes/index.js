@@ -43,7 +43,7 @@ router.get('/help', function(req, res, next) {
 
 /* Like Post */
 
-router.get('/likepost/:author/:id', function(req, res, next) {
+router.get('/likepost/:author/:id/:return/:group', function(req, res, next) {
     User.findById(req.user.id, function(err, doc){
         console.log(doc);
         var nid = req.params.id.toString()
@@ -64,12 +64,44 @@ router.get('/likepost/:author/:id', function(req, res, next) {
             doc.save();
             if (err) throw err;
         });
+        if (req.params.return=="home"){
         res.redirect('/');
+        };
+        if (req.params.return=="cookie"){
+        res.redirect('/cookie/'+req.params.id);
+        };
+        if (req.params.return=="group"){
+        res.redirect('/group/'+req.params.group);
+        };
+        if (req.params.return=="user"){
+        User.findById(req.user.id, function(err, doc){
+            if (err) throw err;
+            var newname=doc.username;
+            console.log(newname);
+            res.redirect('/user/'+newname);
+        });
+        }
         console.log("done!");
         
         } else if (test>0) {
             console.log("cant like again!");
-            res.redirect('/');
+                    if (req.params.return=="home"){
+        res.redirect('/');
+        };
+        if (req.params.return=="cookie"){
+        res.redirect('/cookie/'+req.params.id);
+        };
+        if (req.params.return=="group"){
+        res.redirect('/group/'+req.params.group);
+        };
+        if (req.params.return=="user"){
+        User.findById(req.user.id, function(err, doc){
+            if (err) throw err;
+            var newname=doc.username;
+            console.log(newname);
+            res.redirect('/user/'+newname);
+        });
+        }
             
         }
         if (err) throw err;
@@ -78,7 +110,7 @@ router.get('/likepost/:author/:id', function(req, res, next) {
 
 /* Dislike Post */
 
-router.get('/dislikepost/:author/:id', function(req, res) {
+router.get('/dislikepost/:author/:id/:group', function(req, res) {
     User.findById(req.user.id, function(err, doc){
         console.log(doc);
         var nid = req.params.id.toString();
@@ -99,12 +131,44 @@ router.get('/dislikepost/:author/:id', function(req, res) {
             doc.save();
             if (err) throw err;
         });
+        if (req.params.return=="home"){
         res.redirect('/');
+        };
+        if (req.params.return=="cookie"){
+        res.redirect('/cookie/'+req.params.id);
+        };
+        if (req.params.return=="group"){
+        res.redirect('/group/'+req.params.group);
+        };
+        if (req.params.return=="user"){
+        User.findById(req.user.id, function(err, doc){
+            if (err) throw err;
+            var newname=doc.username;
+            console.log(newname);
+            res.redirect('/user/'+newname);
+        });
+        }
         console.log("done!");
         
         } else if (test>0) {
             console.log("cant dislike again!");
-            res.redirect('/');
+        if (req.params.return=="home"){
+        res.redirect('/');
+        };
+        if (req.params.return=="cookie"){
+        res.redirect('/cookie/'+req.params.id);
+        };
+        if (req.params.return=="group"){
+        res.redirect('/group/'+req.params.group);
+        };
+        if (req.params.return=="user"){
+        User.findById(req.user.id, function(err, doc){
+            if (err) throw err;
+            var newname=doc.username;
+            console.log(newname);
+            res.redirect('/user/'+newname);
+        });
+        }
             
         }
         if (err) throw err;
