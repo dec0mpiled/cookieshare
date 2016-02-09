@@ -1,0 +1,66 @@
+<nav class="navbar">
+  <div class="navbar-right">
+    {{#if user}}
+    <a class="navbar-item" href="/auth/logout">Logout</a>
+    {{else}}
+    <a class="navbar-item" href="/auth/login">Login</a>
+    {{/if}}
+  </div>
+  <a style="font-family: prot" class="navbar-brand" href="/">ShareCookie</a>
+</nav>
+
+<div class="wrapper">
+ 
+<div class="frame body-frame">
+ <div class="bit-75">
+  <h1>Viewing cookies in the group: {{groupname}}<font color="red"></font></h1>
+ </div>
+</div>
+
+ <div class="bit-2">
+  <h2>Cookies:</h2><br><br>
+  
+  {{#each result}}
+   
+   <div class="cookie posts" style="border:1px solid gray; border-radius:2px">
+    
+    <div class="frame">
+     
+     <div class="bit-75">
+         
+          <!-- title -->
+       <div class="title">
+        <h2>
+        {{title}}
+        </h2>
+        <p class="meta-item"><font color=#6666ff>{{formatDate created day="numeric" month="long" year="numeric"}}</font></p>
+       </div>
+       <br>
+       <!-- content -->
+       <div class="content">
+        <font color="black" size=4>
+        {{content}}
+        </font>
+       </div><br>
+       
+       <!-- likes -->
+       <div class="content">
+        <font color="black">
+        {{likes}} likes
+        </font><br><br>
+        <a href="/cookie/{{id}}"><font color=#6666ff>View Cookie</font></a>
+       </div>
+      
+     </div>
+     <div class="bit-25">
+      {{#if myurl}}
+      <img src="{{myurl}}" style="border:none;" width=140px height=140px>
+      {{/if}}
+     </div>
+     
+    </div>
+    
+   </div>
+   <br>
+   {{/each}}
+</div>

@@ -14,6 +14,7 @@ var Post = new Schema({
         tags: String,
         spam: Number,
         created: Date,
+        group: String,
         commentamount: Number,
         commentslist: [comments],
 });

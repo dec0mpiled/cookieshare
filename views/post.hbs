@@ -14,7 +14,7 @@
 <div class="wrapper">
  
 <div class="frame body-frame">
- <div class="bit-2">
+ <div class="bit-2 posts" style="border: 1px solid gray; border-radius: 6px">
   <p><b>Author: {{result.names}}</b> <a href="/user/{{result.author}}" class="a"><font color=#6666ff>@{{result.author}}</font></a></p>
   <p><b>Likes:</b> {{result.likes}}</p>
   <p><b>Date Created:</b> {{formatDate result.created  day="numeric" month="long" year="numeric"}}</p>
@@ -48,20 +48,17 @@
    {{/if}}
  </div>
 
- <div class="bit-2">
+ <div class="bit-2 posts" style="border: 1px solid gray; border-radius: 6px">
   <h2>Comments ({{result.commentamount}}):</h2><br>
   {{#each result.commentslist}}
-  
-  
-   
-   <div class="cookie posts" style="border:1px solid black; border-radius:2px">
-    
+ 
     <div class="frame">
        
        <div class="meta">
-        
-        <p class="meta-item"><a class="a" href="/user/{{user}}"><font color=#6666ff>@{{user}}</font></p></a>
+
+        <p class="meta-item"><a class="a" href="/user/{{user}}"><font color=#6666ff>@{{user}}</font></a> <font color="gray">at {{formatDate created  day="numeric" month="long" year="numeric"}}</font></p>
         <p class="meta-item"><font color=#02313A>{{value}}</font></p>
+        <br>
         {{/each}}
        </div>
       </div>

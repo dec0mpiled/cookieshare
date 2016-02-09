@@ -30,7 +30,7 @@
     <form id="postcookie" action="/sharecookie" method="post">
      <textarea  name="texxtt" id="texxtt" class="textarea fixed" required placeholder="What's going on?"></textarea>
      <input class="input-gif" name="picbox" id="picbox" placeholder="Link to an image (Optional)"><br><br>
-    <!-- <input class="input-gif" name="groupbox" id="groupbox" placeholder="Send this post to a group (Optional)"><br><br> !-->
+    <input class="input-gif" name="groupbox" id="groupbox" onkeypress="return group(event)" placeholder="Send this post to a group (Optional)"><br><br>
      <button class="btn " id="login">Create Post</button> <!--<span id="counter">200</span>!-->
     </form>
     {{else}}
@@ -83,7 +83,7 @@
         
         <!-- author -->
         <p class="meta-item"><font color="black"><b>{{names}}</b> </font><a class="a" href="/user/{{author}}"><font color=#6666ff>@{{author}}</font></p></a>
-        <p class="meta-item"><font color=#02313A>Posted on {{formatDate created day="numeric" month="long" year="numeric"}}</font></p>
+        <p class="meta-item"><font color=#02313A>Posted on {{formatDate created day="numeric" month="long" year="numeric"}} {{#if group}} (to group: <a href="/group/{{group}}">{{group}}</a>){{/if}}</font></p>
        </div>
        
        <!-- content -->
@@ -95,7 +95,6 @@
        </div>
        <br>
        <!-- actions -->
-     
      {{#if myurl}}
      <img src="{{myurl}}" style="border:1px solid black; width:auto; height:200px">
      {{/if}}
@@ -108,6 +107,7 @@
         {{likes}} likes
         <!-- comments -->
         <a href="/cookie/{{id}}"><font color=#6666ff>Comments ({{commentamount}})</font></a>
+       
        </div>
      </div>
      
@@ -139,9 +139,27 @@ function textCounter(field,field2,maxlimit)
     document.all ? k = e.keyCode : k = e.which;
     return ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || (k >= 48 && k <= 57));
 }
+
+function group(e) {
+    var k;
+    document.all ? k = e.keyCode : k = e.which;
+    return ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || (k >= 48 && k <= 57));
+}
+
     function pass(e) {
     var k;
     document.all ? k = e.keyCode : k = e.which;
     return ((k > 0 && k < 32) || (k > 32 && k < 222));
 }
     </script>
+    
+       <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- sharecookie -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4012175216329328"
+     data-ad-slot="7708538292"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>

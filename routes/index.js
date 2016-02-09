@@ -119,6 +119,13 @@ router.post('/sharecookie', function(req, res, next) {
     var url=req.body.picbox;
     var color="blacK";
     var mynewurl;
+    var ggroup=req.body.groupbox;
+    
+    if (ggroup!="") {
+        var group=ggroup;
+    } else {
+         var group="";
+    }
     
 var myurl=url;
 
@@ -157,6 +164,7 @@ mycontent = mycontent.replace(":P"||":p","😛");
         content: mycontent,
         myurl: mynewurl,
         color: color,
+        group: group,
         spam: 0,
         likes: 1,
         commentamount: 0,
@@ -170,6 +178,13 @@ router.get('/cookie/:id', function(req, res) {
   Post.findOne({ _id: req.params.id }, function(err, result) {
     if (err) throw err;
     res.render('post', { title: result.content, result: result, user: req.user });
+    });
+  });
+  
+  router.get('/group/:groupid', function(req, res) {
+  Post.find({ group: req.params.groupid }, function(err, result) {
+    if (err) throw err;
+    res.render('group', { title: req.params.groupid, result: result, user: req.user, groupname:req.params.groupid });
     });
   });
 
