@@ -78,12 +78,7 @@ router.get('/likepost/:author/:id/:return/:group', function(req, res, next) {
         res.redirect('/group/'+req.params.group);
         };
         if (req.params.return=="user"){
-        User.findById(req.user.id, function(err, doc){
-            if (err) throw err;
-            var newname=doc.username;
-            console.log(newname);
-            res.redirect('/user/'+newname);
-        });
+            res.redirect('/user/'+req.params.author);
         }
         console.log("done!");
         
@@ -99,12 +94,7 @@ router.get('/likepost/:author/:id/:return/:group', function(req, res, next) {
         res.redirect('/group/'+req.params.group);
         };
         if (req.params.return=="user"){
-        User.findById(req.user.id, function(err, doc){
-            if (err) throw err;
-            var newname=doc.username;
-            console.log(newname);
-            res.redirect('/user/'+newname);
-        });
+            res.redirect('/user/'+req.params.author);
         }
             
         }
@@ -145,12 +135,7 @@ router.get('/dislikepost/:author/:id/:group', function(req, res) {
         res.redirect('/group/'+req.params.group);
         };
         if (req.params.return=="user"){
-        User.findById(req.user.id, function(err, doc){
-            if (err) throw err;
-            var newname=doc.username;
-            console.log(newname);
-            res.redirect('/user/'+newname);
-        });
+            res.redirect('/user/'+req.params.author);
         }
         console.log("done!");
         
@@ -166,12 +151,7 @@ router.get('/dislikepost/:author/:id/:group', function(req, res) {
         res.redirect('/group/'+req.params.group);
         };
         if (req.params.return=="user"){
-        User.findById(req.user.id, function(err, doc){
-            if (err) throw err;
-            var newname=doc.username;
-            console.log(newname);
-            res.redirect('/user/'+newname);
-        });
+            res.redirect('/user/'+req.params.author);
         }
             
         }
@@ -369,7 +349,7 @@ router.post('/update/username', function(req, res, next) {
     Post.update({_author: req.user.id}, {author: req.body.displayName}, {multi: true}, function(err) {
         if (err) throw err;
     });
-    res.redirect('/user/'+req.body.displayName);
+    res.redirect('/settings');
 });
 
 /* do some fucking awesome shit bitches #3!!!! */
