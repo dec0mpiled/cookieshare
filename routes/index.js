@@ -7,8 +7,8 @@ var twitter = require('twitter-text');
 
 /* home */
 router.get('/', function(req, res, next) {
-    
-  /*User.update({}, {bio: "No Bio Provided"}, {multi: true}, function(err) {
+    /*
+  User.update({}, {coverphotourl: ""}, {multi: true}, function(err) {
         if (err) throw err;
     });*/
     
@@ -338,6 +338,16 @@ router.post('/updatepp/:usera', function(req, res, next) {
     if (err) throw err;    
     });
     res.redirect('/user/'+req.params.usera);
+});
+
+/* SET profile picture */
+router.post('/update/updatecp', function(req, res, next) {
+    var value=req.body.ppbox1;
+    console.log(value);
+    User.findOneAndUpdate({ _id: req.user.id }, { coverphotourl: value }, function(err, doc) {
+    if (err) throw err;    
+    });
+    res.redirect('/settings');
 });
 
 /* do some fucking awesome shit bitches */

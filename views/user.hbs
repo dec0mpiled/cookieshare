@@ -13,14 +13,20 @@
 
 <div class="wrapper">
  
-<div class="frame body-frame" style="border: 1px solid gray; background-color:{{account.themecolor}}">
+<div class="frame body-frame" style="border: 1px solid gray; background-color:{{account.themecolor}}; border-radius: 4px">
  <div class="bit-20">
-  <img src="{{account.avatarurl}}" width=150 height=150>
+  <img src="{{account.avatarurl}}" width=150 height=150 style="border:1px solid black; border-radius: 4px">
  </div>
-  <div class="bit-35" style="background-color: rgba(255, 255, 255, 0.5);">
+  <div class="bit-30" style="background-color: rgba(255, 255, 255, 0.5); border:1px solid black; border-radius: 4px;">
   <p><font size=6>{{account.name}}</font></p>
   <p>@{{account.username}} {{#if account.admin}}<font color=#0000ff>(Admin)</font>{{/if}}</p><br>
   <p><b>Bio: </b>{{account.bio}}</p>
+ </div>
+ 
+    <div class="bit-20">
+  {{#if account.coverphotourl}}
+  <img src="{{user.coverphotourl}}", width=250px height=150px style="border: 1px solid black; border-radius: 4px;">
+  {{/if}}
  </div>
 </div>
 

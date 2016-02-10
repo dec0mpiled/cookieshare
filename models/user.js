@@ -12,6 +12,7 @@ var User = new Schema({
     password: String,
     admin: Boolean,
     avatarurl: String,
+    coverphotourl: String,
     themecolor: String,
     bio: String,
     poststo: [postkeys],
