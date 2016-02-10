@@ -33,7 +33,7 @@
    
    <form id="name" action="/update/username" method="post">
    <p>Update Your Username</p>
-   <input type="text" name="displayName" id="displayName" value="{{user.username}}" class="input-gif">
+   <input type="text" name="displayName" id="displayName" onkeypress="return alpha(event)" value="{{user.username}}" class="input-gif">
    <br><br>
    <button type="submit" id="displayNameButton" class="btn">Update Username</button>
    <br><br>
@@ -110,6 +110,13 @@ function textCounter(field,field2,maxlimit)
  } else {
   countfield.innerHTML = maxlimit - field.value.length;
  }
+}
+</script>
+<script>
+    function alpha(e) {
+    var k;
+    document.all ? k = e.keyCode : k = e.which;
+    return ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || (k >= 48 && k <= 57));
 }
 </script>
 {{else}}
