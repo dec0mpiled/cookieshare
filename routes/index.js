@@ -245,7 +245,7 @@ mycontent = mycontent.replace(":P"||":p","😛");
 router.get('/cookie/:id', function(req, res) {
   Post.findOne({ _id: req.params.id }, function(err, result) {
     if (err) throw err;
-    res.render('post', { title: result.content, result: result, user: req.user });
+    res.render('post', { title: "ShareCookie Post by "+result.names, result: result, user: req.user });
     });
   });
   
