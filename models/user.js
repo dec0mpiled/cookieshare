@@ -11,6 +11,9 @@ var User = new Schema({
     username: String,
     password: String,
     admin: Boolean,
+    avatarurl: String,
+    themecolor: String,
+    bio: String,
     poststo: [postkeys],
     likes: [likekeys],
     dislikes: [dislikekeys]

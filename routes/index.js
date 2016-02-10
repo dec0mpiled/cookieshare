@@ -8,6 +8,10 @@ var twitter = require('twitter-text');
 /* home */
 router.get('/', function(req, res, next) {
     
+  /*User.update({}, {bio: "No Bio Provided"}, {multi: true}, function(err) {
+        if (err) throw err;
+    });*/
+    
     User.count({},  function(err, counted){
      if (err) throw err;   
 
@@ -324,6 +328,54 @@ router.post("/sendtouser/:id", function(req, res, next) {
 /* GET settings page. */
 router.get('/settings', function(req, res, next) {
     res.render('settings', { title: 'Settings', user: req.user});
+});
+
+/* SET profile picture */
+router.post('/updatepp/:usera', function(req, res, next) {
+    var value=req.body.ppbox;
+    console.log(value);
+    User.findOneAndUpdate({ username: req.user.username }, { avatarurl: value }, function(err, doc) {
+    if (err) throw err;    
+    });
+    res.redirect('/user/'+req.params.usera);
+});
+
+/* do some fucking awesome shit bitches */
+router.post('/update/displayName', function(req, res, next) {
+    User.findOneAndUpdate({ _id: req.user.id }, { name: req.body.displayName }, function(err, doc) {
+        if (err) throw err;
+    });
+    Post.update({_author: req.user.id}, {names: req.body.displayName}, {multi: true}, function(err) {
+        if (err) throw err;
+    });
+    res.redirect('/settings');
+});
+
+/* do some fucking awesome shit bitches #2 */
+router.post('/update/username', function(req, res, next) {
+    User.findOneAndUpdate({ _id: req.user.id }, { username: req.body.displayName }, function(err, doc) {
+        if (err) throw err;
+    });
+    Post.update({_author: req.user.id}, {author: req.body.displayName}, {multi: true}, function(err) {
+        if (err) throw err;
+    });
+    res.redirect('/user/'+req.body.displayName);
+});
+
+/* do some fucking awesome shit bitches #3!!!! */
+router.post('/update/colour', function(req, res, next) {
+    User.findOneAndUpdate({ _id: req.user.id }, { themecolor: req.body.colour }, function(err, doc) {
+        if (err) throw err;
+    });
+    res.redirect('/settings');
+});
+
+/* do some fucking awesome shit bitches #4!!!! */
+router.post('/update/bio', function(req, res, next) {
+    User.findOneAndUpdate({ _id: req.user.id }, { bio: req.body.bio }, function(err, doc) {
+        if (err) throw err;
+    });
+    res.redirect('/settings');
 });
 
 module.exports = router;

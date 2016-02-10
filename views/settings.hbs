@@ -6,11 +6,111 @@
   </div>
   <a style="font-family: prot" class="navbar-brand" href="/">ShareCookie</a>
 </nav>
-
+{{#if user}}
 <div class="wrapper">
-<div class="bit-50">
-  <div class="frame body-frame">
-<h1>Page not finished.</h1>
+<div class="frame body-frame" style="border: 1px solid gray; background-color:{{user.themecolor}}">
+ <div class="bit-20">
+  <img src="{{user.avatarurl}}" width=150 height=150>
+ </div>
+  <div class="bit-35">
+  <p><font size=6>{{user.name}}</font></p>
+  <p>@{{user.username}} {{#if user.admin}}<font color=#0000ff>(Admin)</font>{{/if}}</p><br>
+  <p><b>Bio: </b>{{user.bio}}</p>
+ </div>
 </div>
+  <div class="frame">
+   
+   <h1><i>Update Your Settings</i></h1>
+   <form id="name" action="/update/displayName" method="post">
+   <p>Update Your Display Name</p>
+   <input type="text" name="displayName" id="displayName" value="{{user.name}}" class="input-gif">
+   <br><br>
+   <button type="submit" id="displayNameButton" class="btn">Update Name</button>
+   <br><br>
+   <hr>
+   <br><br>
+   </form>
+   
+   <form id="name" action="/update/username" method="post">
+   <p>Update Your Username</p>
+   <input type="text" name="displayName" id="displayName" value="{{user.username}}" class="input-gif">
+   <br><br>
+   <button type="submit" id="displayNameButton" class="btn">Update Username</button>
+   <br><br>
+   <hr>
+   <br><br>
+   </form>
+   
+   <form id="name" action="/update/colour" method="post">
+    <p>Update Your Profile Theme Colour (<a href="http://www.w3schools.com/colors/colors_picker.asp">Find over 150 colours here</a>)</p>
+   <input type="text" name="colour" value="{{user.themecolor}}" class="input-gif">
+   <br><br>
+   <button type="submit" id="displayColourButton" class="btn">Update Colour</button>
+   <br><br>
+   <hr>
+   <br><br>
+   </form>
+   
+  </div>
+  <div class="frame">
+   <div class="bit-2">
+    <p>Update Your Profile Picture</p>
+    <form id="submitpic" action="/updatepp/{{user.username}}" method="post">
+     
+     <input name="ppbox" id="ppbox" class="input-gif" placeholder="URL to image (.png, .jpg, .gif, etc)">
+     <br><br>
+     <button class="btn" type="submit">Update Profile Picture</button>
+     <button id="ppPreview" type="button" class="btn">Preview!</button>
+     
+    </form>
+   </div>
+   <div class="bit-2">
+    <p>Preview Profile Picture Here</p>
+    <div id="previewImage">
+     <!-- pic !-->  
+     &nbsp;
+     </div>
+   </div>
+  </div>
+  <br><hr>
+  <br><br>
+  
+     <form id="name" action="/update/bio" method="post">
+    <p>Update Your Profile Bio</p>
+   <textarea type="text" name="bio" placeholder="Place Bio Here" onkeyup="textCounter(this,'counter',100);" class="input-gif"></textarea>
+   <span id="counter">100</span>
+   <br><br>
+   <button type="submit" id="displayColourButton" class="btn">Update Bio</button>
+   <br><br>
+   <hr>
+   <br><br>
+   </form>
+
+ <div class="bit-20">
+  
+
+ </div>
+
+
 </div>
-</div>
+
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+<script>
+ $("#ppPreview").click(function() {
+  $('#previewImage').html('<img src=' + $('#ppbox').val() + ' style="width:30%;height:auto;">');
+ });
+</script>
+<script>
+function textCounter(field,field2,maxlimit)
+{
+ var countfield = document.getElementById(field2);
+ if ( field.value.length > maxlimit ) {
+  field.value = field.value.substring( 0, maxlimit );
+  return false;
+ } else {
+  countfield.innerHTML = maxlimit - field.value.length;
+ }
+}
+</script>
+{{else}}
+{{/if}}
