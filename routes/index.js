@@ -240,11 +240,67 @@ mycontent = mycontent.replace(":P"||":p","😛");
     res.redirect('/');
 });
 
+
+/* Post Cookie */
+router.post('/updatecookie/:id', function(req, res, next) {
+    var id=req.params.id;
+    var contentq = req.body.texxtt;
+    var url=req.body.picbox;
+    var color="blacK";
+    var mynewurl;
+    var ggroup=req.body.groupbox;
+    
+    if (ggroup!="") {
+        var group=ggroup;
+    } else {
+         var group="";
+    }
+    
+var myurl=url;
+
+if (myurl=="" || myurl==" "){
+    mynewurl="";
+}
+
+if (myurl!="") {
+if (myurl.startsWith("http://")||myurl.startsWith("https://")) {
+    mynewurl=myurl;
+}
+}
+
+var mycontent = contentq;
+// Emojis!!
+mycontent = mycontent.replace(":)","😊");
+mycontent = mycontent.replace(":D","😄");
+mycontent = mycontent.replace(":(","😔");
+mycontent = mycontent.replace(":*","😘");
+mycontent = mycontent.replace(":|","😐");
+mycontent = mycontent.replace(":>","😌");
+mycontent = mycontent.replace(":&","😏");
+mycontent = mycontent.replace(";)","😉");
+mycontent = mycontent.replace("xD"||"XD","😂");
+mycontent = mycontent.replace(":P"||":p","😛");
+
+Post.findOne({_id:id}, function(err, doc) {
+    if (err) return next(err);
+    doc.content=mycontent;
+    doc.myurl=mynewurl;
+    doc.group=group;
+
+    doc.save();
+});
+    res.redirect('/user/'+req.user.username);
+});
+
+
 router.get('/cookie/:id', function(req, res) {
   Post.findOne({ _id: req.params.id }, function(err, result) {
     if (err) throw err;
-    res.render('post', { title: "ShareCookie Post by "+result.names, result: result, user: req.user });
+    User.findOne({username:result.author}, function(err, doc) {
+        if (err) throw err;
+    res.render('post', { title: "ShareCookie Post by "+result.names, result: result, person:doc, user: req.user });
     });
+  });
   });
   
   router.get('/group/:groupid', function(req, res) {
@@ -451,6 +507,13 @@ router.get('/deletecookie/:name/:id', function(req, res, next) {
     Post.findOneAndRemove({ _id: req.params.id }, function(err, post) {
         if (err) return next(err);
         res.redirect('/user/'+req.params.name);
+    });
+});
+
+router.get('/editcookie/:name/:id', function(req, res, next) {
+    Post.findOne({ _id: req.params.id }, function(err, post) {
+        if (err) return next(err);
+        res.render('editcookie', {post:post, user:req.user});
     });
 });
 

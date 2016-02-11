@@ -1,0 +1,57 @@
+<nav class="navbar">
+  <div class="navbar-right">
+    {{#if user}}
+    <a class="navbar-item" href="/auth/logout">Log Out</a>
+    {{else}}
+    <a class="navbar-item" href="/auth/login">Login</a>
+    {{/if}}
+  </div>
+  <a style="font-family: prot" class="navbar-brand" href="/">ShareCookie</a>
+</nav>
+
+<div class="wrapper">
+ {{#if user}}
+<div class="frame body-frame">
+ <div class="bit-2 posts" style="border: 1px solid gray; border-radius: 2px">
+ <h2>Edit Cookie</h2>
+ <form id="postcookie" action="/updatecookie/{{post.id}}" method="post">
+     <textarea  name="texxtt" id="texxtt" class="textarea fixed" required>{{post.content}}</textarea>
+     <input class="input-gif" name="picbox" id="picbox" placeholder="Link to an image (Optional)" value="{{post.myurl}}"><br><br>
+    <input class="input-gif" name="groupbox" id="groupbox" placeholder="Send this post to a group (Optional)" onkeypress="return group(event)" value="{{post.group}}"><br><br>
+     <a class="btn" id="ppPreview" type="button">Preview Image</a> <button class="btn " id="login">Update Cookie</button> <!--<span id="counter">200</span>!-->
+    </form>
+      
+     <br>
+    <p>Preview Image Here (if provided)</p>
+    <div id="previewImage" style="border 1px solid black">
+     <!-- pic !-->  
+     &nbsp;
+     </div>
+ 
+ 
+    </div>
+   </div>
+   {{/if}}
+  </div>
+
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+<script>
+ $("#ppPreview").click(function() {
+  $('#previewImage').html('<img src=' + $('#picbox').val() + ' style="width:30%;height:auto; border: 1px solid black">');
+ });
+</script>
+
+<script>
+
+function textCounter(field,field2,maxlimit)
+{
+ var countfield = document.getElementById(field2);
+ if ( field.value.length > maxlimit ) {
+  field.value = field.value.substring( 0, maxlimit );
+  return false;
+ } else {
+  countfield.innerHTML = maxlimit - field.value.length;
+ }
+}
+
+</script>

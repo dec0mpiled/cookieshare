@@ -1,7 +1,7 @@
 <nav class="navbar">
   <div class="navbar-right">
     {{#if user}}
-    <a class="navbar-item" href="/auth/logout">Logout</a>
+    <a class="navbar-item" href="/auth/logout">Log Out</a>
     {{else}}
     <a class="navbar-item" href="/auth/login">Login</a>
     {{/if}}
@@ -22,7 +22,7 @@
   
   {{#each result}}
    
-   <div class="cookie posts" style="border:1px solid gray; border-radius:6px">
+   <div class="cookie posts" style="border:1px solid gray; border-radius:2px">
     
     <div class="frame">
      
@@ -54,16 +54,11 @@
        
        {{#if ../user}}
         <!-- like/dislike -->
-        <a href="/likepost/{{author}}/{{id}}/group/{{group}}" class="btn btn-like">Like </a> <a href="/dislikepost/{{author}}/{{id}}/group/{{group}}" class="btn btn-dislike">Dislike </a>
+        <a href="/likepost/{{author}}/{{id}}/group/{{group}}" class="btn btn-like"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a> <a href="/dislikepost/{{author}}/{{id}}/group/{{group}}" class="btn btn-dislike"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a>
        {{/if}}
         {{likes}} likes
         <!-- comments -->
         <a href="/cookie/{{id}}"><font color=#6666ff>Comments ({{commentamount}})</font></a>
-               {{#ifeq ../user.username author}}
-        <br><br>
-        <p class="meta-item"><font color=#6666ff>[Edit]</font></p>
-        <p class="meta-item"><font color=#ff0000>[Delete]</font></p>
-       {{/ifeq}}
        </div>
      </div>
      

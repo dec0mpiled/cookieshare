@@ -3,7 +3,7 @@
     {{#if user}}
     <a class="navbar-item" href="/settings">Settings</a>
     <font color="white">|</font>
-    <a class="navbar-item" href="/auth/logout">Logout</a>
+    <a class="navbar-item" href="/auth/logout">Log Out</a>
     {{else}}
     <a class="navbar-item" href="/auth/login">Login</a>
     {{/if}}
@@ -13,11 +13,11 @@
 
 <div class="wrapper">
  
-<div class="frame body-frame" style="border: 1px solid gray; background-color:{{account.themecolor}}; border-radius: 4px">
+<div class="frame body-frame" style="border: 1px solid gray; background-color:{{account.themecolor}}; border-radius: 2px">
  <div class="bit-20">
-  <img src="{{account.avatarurl}}" width=150 height=150 style="border:1px solid black; border-radius: 4px">
+  <img src="{{account.avatarurl}}" width=150 height=150 style="border:1px solid black; border-radius: 2px">
  </div>
-  <div class="bit-30" style="background-color: rgba(255, 255, 255, 0.5); border:1px solid black; border-radius: 4px;">
+  <div class="bit-30" style="background-color: rgba(255, 255, 255, 0.5); border:1px solid black; border-radius: 2px;">
   <p><font size=6>{{account.name}}</font></p>
   <p>@{{account.username}} {{#if account.admin}}<font color=#0000ff>(Admin)</font>{{/if}}</p><br>
   <p><b>Bio: </b>{{account.bio}}</p>
@@ -44,7 +44,7 @@
   
   {{#each posts}}
    
-   <div class="cookie posts" style="border:1px solid gray; border-radius:6px">
+   <div class="cookie posts" style="border:1px solid gray; border-radius:2px">
     
     <div class="frame">
      
@@ -76,13 +76,14 @@
        
        {{#if ../user}}
         <!-- like/dislike -->
-        <a href="/likepost/{{author}}/{{id}}/user/null" class="btn btn-like">Like </a> <a href="/dislikepost/{{author}}/{{id}}/user/null" class="btn btn-dislike">Dislike </a>
+        <a href="/likepost/{{author}}/{{id}}/user/null" class="btn btn-like"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a> <a href="/dislikepost/{{author}}/{{id}}/user/null" class="btn btn-dislike"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a>
        {{/if}}
         {{likes}} likes
         <!-- comments -->
         <a href="/cookie/{{id}}"><font color=#6666ff>Comments ({{commentamount}})</font></a>
                <br><br>
-        <a href="/deletecookie/{{author}}/{{id}}"><p class="meta-item"><font color=#ff0000>[Delete]</font></p></a>
+        <a href="/editcookie/{{author}}/{{id}}" style="text-decoration:none;"><p class="meta-item"><font color=#0066ff>[Edit]</font></p></a>
+        <a href="/deletecookie/{{author}}/{{id}}" style="text-decoration:none;"><p class="meta-item"><font color=#ff0000>[Delete]</font></p></a>
        </div>
      </div>
      
@@ -93,11 +94,54 @@
    {{/each}}
 </div>
 
-<div class="bit-2">
+ <div class="bit-2">
   <br>
-  <h2>Following:</h2><br><br>
-
-</div>
+  {{#if user}}
+   <h2>Post on this page:</h2><br><br>
+   <!-- cookies -->
+   
+   <div class="form-rel">
+    <!-- forms -->
+    <form id="sendtouser" action="/sendtouser/{{account.id}}" method="post">
+     <textarea onkeyup="textCounter(this,'counter',200);" name="msgbox" id="msgbox" class="textarea fixed" required placeholder="Enter your message to @{{account.username}} here! (Max 100 characters)"></textarea>
+     <button class="btn " id="post">Post to @{{account.username}}</button> <span id="counter">100</span>
+    </form>
+    </div>
+    
+   {{#each posts1}}
+   <br>
+   <div class="cookie posts" style="border:1px solid gray; border-radius:2px">
+    
+    <div class="frame">
+     
+     <div class="bit-75">
+      
+         <!-- title -->
+       <h2><font color="{{color}}">{{keys}}</font></h2>
+       
+       <div class="meta">
+        
+        <!-- author -->
+        <p class="meta-item"><a href="/user/{{author}}" class="a"><font color=#6666ff>@{{author}}</font></p></a>
+        <p class="meta-item">{{formatDate created day="numeric" month="long" year="numeric"}}</p>
+       </div>
+       <!-- content -->
+       <div class="content">
+        <font color="{{color}}">
+        {{content}}
+        </font>
+       </div>
+     
+    </div>
+    
+   </div>
+   {{/each}}
+   
+  </div>
+  {{else}}
+   <h2>Please log in to post on this page!</h2>
+   {{/if}}
+ </div>
 
 </div>
 

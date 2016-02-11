@@ -1,9 +1,9 @@
 <nav class="navbar">
   <div class="navbar-right">
    {{#if user}}
-    <a class="navbar-item {{#equal filter 'date'}}selected{{/equal}}" href="/">Cookies from People I Follow</a>
+    <a class="navbar-item {{#equal filter 'date'}}selected{{/equal}}" href="/">My Timeline</a>
     <font color="white">|</font>
-    <a class="navbar-item {{#equal filter 'likes'}}selected{{/equal}}" href="/public">All Cookies</a>
+    <a class="navbar-item {{#equal filter 'likes'}}selected{{/equal}}" href="/public">Public Timeline</a>
     {{/if}}
     {{#if user}}
     <font color="white">|</font>
@@ -83,7 +83,7 @@
    <!-- cookies -->
    {{#each posts}}
    
-   <div class="cookie posts" style="border:1px solid gray; border-radius:6px">
+   <div class="cookie posts" style="border:1px solid gray; border-radius:2px">
     
     <div class="frame">
      
@@ -96,7 +96,8 @@
         
         <!-- author -->
         <p class="meta-item"><font size=5 color="black"><b>{{names}}</b> </font><a class="a" href="/user/{{author}}"><font size=4 color=#6666ff>@{{author}}</font></p></a>
-        <p class="meta-item"><font color=#02313A>Posted on {{formatDate created day="numeric" month="long" year="numeric"}} {{#if group}} (to group: <a href="/group/{{group}}">{{group}}</a>){{/if}}</font></p>
+        <p class="meta-item"><font color=#02313A>Posted on {{formatDate created day="numeric" month="long" year="numeric"}}</font></p>
+        <p> {{#if group}} (to group: <a href="/group/{{group}}">{{group}}</a>){{/if}} </p>
        </div>
        
        <!-- content -->

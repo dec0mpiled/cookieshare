@@ -3,7 +3,7 @@
     {{#if user}}
     <a class="navbar-item" href="/user/{{result.author}}">More from @{{result.author}}</a>
     <font color="white">|</font>
-    <a class="navbar-item" href="/auth/logout">Logout</a>
+    <a class="navbar-item" href="/auth/logout">Log Out</a>
     {{else}}
     <a class="navbar-item" href="/auth/login">Login</a>
     {{/if}}
@@ -14,10 +14,13 @@
 <div class="wrapper">
  
 <div class="frame body-frame">
- <div class="bit-2 posts" style="border: 1px solid gray; border-radius: 6px">
-  <p><b>Author: {{result.names}}</b> <a href="/user/{{result.author}}" class="a"><font color=#6666ff>@{{result.author}}</font></a></p>
-  <p><b>Likes:</b> {{result.likes}}</p>
+ <div class="bit-2 posts" style="border: 1px solid gray; border-radius: 2px">
+  <p><img src="{{person.avatarurl}}" width=60px height=60px style="border: 1px solid black"></p>
+  <p><b>Author: </b><i>{{result.names}}</i> <a href="/user/{{result.author}}" class="a"><font color=#6666ff>@{{result.author}}</font></a></p>
   <p><b>Date Created:</b> {{formatDate result.created  day="numeric" month="long" year="numeric"}}</p>
+  {{#if result.group}}
+  <p><b>Posted to Group:</b> {{result.group}}</p>
+  {{/if}}
   <br>
   <p class="cookie-content">{{result.content}}</p>
    <br>
@@ -25,6 +28,7 @@
         <!-- like/dislike -->
         <a href="/likepost/{{result.author}}/{{result.id}}/cookie/null" class="btn btn-like"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a> <a href="/dislikepost/{{result.author}}/{{result.id}}/cookie/null" class="btn btn-dislike"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a>
   {{/if}}
+  {{result.likes}} likes
   <div><br><a href="https://www.facebook.com/dialog/share?app_id=1549077778743128&amp;display=popup&amp;href=sharecookie.com%2Fcookie%2F{{result.id}}" class="fbbtn">Share on Facebook</a></div>
  </div>
  <div class="bit-2">
@@ -35,7 +39,7 @@
  </div>
 </div>
 <br><br><br>
-<div class="frame posts" style="border: 1px solid gray; border-radius: 6px">
+<div class="frame posts" style="border: 1px solid gray; border-radius: 2px">
  <div class="bit-2">
   {{#if user}}
   <h2>Post new comment</h2>
