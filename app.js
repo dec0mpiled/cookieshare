@@ -96,6 +96,20 @@ hbs.registerHelper('equal', function(lvalue, rvalue, options) {
     }
 });
 
+hbs.registerHelper('ifeq', function(v1, v2, options) {
+  if(v1 === v2) {
+    return options.fn(this);
+  }
+  return options.inverse(this);
+});
+
+hbs.registerHelper('ifneq', function(v1, v2, options) {
+  if(v1 != v2) {
+    return options.fn(this);
+  }
+  return options.inverse(this);
+});
+
 HandlebarsIntl.registerWith(hbs);
 
 // production error handler

@@ -59,7 +59,11 @@
         {{likes}} likes
         <!-- comments -->
         <a href="/cookie/{{id}}"><font color=#6666ff>Comments ({{commentamount}})</font></a>
-       
+               {{#ifeq ../user.username author}}
+        <br><br>
+        <p class="meta-item"><font color=#6666ff>[Edit]</font></p>
+        <p class="meta-item"><font color=#ff0000>[Delete]</font></p>
+       {{/ifeq}}
        </div>
      </div>
      

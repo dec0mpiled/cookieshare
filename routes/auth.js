@@ -23,6 +23,8 @@ router.post('/register', function(req, res, next) {
   User.register(new User({
     name: req.body.namebox,
     username: req.body.username,
+    following: ["drew",username],
+    bio: "No Bio Available",
     avatarurl: "https://medium.com/img/default-avatar.png",
     admin: false
   }), req.body.password, function(err, account) {
@@ -38,7 +40,7 @@ router.post('/register', function(req, res, next) {
         if (err) {
           return next(err);
         }
-        res.redirect('/');
+        res.redirect('/settings');
       });
     });
   });

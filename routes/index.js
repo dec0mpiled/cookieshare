@@ -7,19 +7,37 @@ var twitter = require('twitter-text');
 
 /* home */
 router.get('/', function(req, res, next) {
-    /*
-  User.update({}, {coverphotourl: ""}, {multi: true}, function(err) {
+  /*User.update({}, {following: ["drew"]}, {multi: true}, function(err) {
         if (err) throw err;
     });*/
     
-    User.count({},  function(err, counted){
+    User.find({}, function(err, users) {
+      if (err) return next(err);
+      if (req.user) {
+          console.log(req.user.following);
+          
+          Post.find({ 'author': { $in: req.user.following } }, null, { sort: '-created' },  function(err, followings) {
+            if (err) return next(err);
+            res.render('index', { title: 'ShareCookie', filter: 'date', posts: followings, user: req.user});
+          });
+        
+      } else { 
+          Post.find({}, null, { sort: '-created' }, function (err, posts) {
+            if (err) return next(err);
+            res.render('index', { title: 'ShareCookie', filter: 'date', posts: posts, user: req.user});
+          });
+      }
+      
+    });
+    
+   /* User.count({},  function(err, counted){
      if (err) throw err;   
 
     Post.find({}, null, { sort: '-created' }, function (err, posts) {
         if (err) return next(err);
-        res.render('index', { title: 'ShareCookie', filter: 'date', posts: posts, user: req.user, howmany:counted });
-    });
-    });
+        
+    }); 
+    });*/
 });
 
 /* sort by date */
@@ -32,9 +50,9 @@ router.get('/filter/date', function(req, res, next) {
 });
 
 /* sort by likes */
-router.get('/filter/likes', function(req, res, next) {
+router.get('/public', function(req, res, next) {
 
-    Post.find({}, null, { sort: '-likes' }, function (err, posts) {
+    Post.find({}, null, { sort: '-created' }, function (err, posts) {
         if (err) return next(err);
         res.render('index', { title: 'ShareCookie', filter: 'likes', posts: posts, user: req.user });
     });
@@ -104,7 +122,7 @@ router.get('/likepost/:author/:id/:return/:group', function(req, res, next) {
 
 /* Dislike Post */
 
-router.get('/dislikepost/:author/:id/:group', function(req, res) {
+router.get('/dislikepost/:author/:id/:return/:group', function(req, res) {
     User.findById(req.user.id, function(err, doc){
         console.log(doc);
         var nid = req.params.id.toString();
@@ -214,7 +232,7 @@ mycontent = mycontent.replace(":P"||":p","😛");
         color: color,
         group: group,
         spam: 0,
-        likes: 1,
+        likes: 0,
         commentamount: 0,
         created: new Date(),
     });
@@ -266,12 +284,36 @@ router.post("/sendcomment/:id", function(req, res, next) {
 
 /* user page */
 router.get('/user/:user', function(req, res, next) {
+    
+    User.findById(req.user.id, function(err, doc){
+        var nid = req.params.user.toString();
+        var nlikes = doc.following.toString();
+        var test = nlikes.indexOf(nid);
+        console.log(test);
+        if (test<0){
+    var buttontext="Follow";
+        } else if (test>0) {
+            var buttontext="Unfollow";
+    if (err) throw err;
+        }
+    
+    console.log(req.params.user);
+    
     User.findOne({ username: req.params.user }, function(err, usera) {
         if (err) return next(err);
-        Post.find({ "author": usera.username }, null, { sort: '-created' }, function(err, post) {
-            console.log(post);
-           if (err) return next(err);
-           res.render('user', {user: req.user, title: usera.username, posts: post, posts1: usera.poststo, account: usera });
+        Post.find({ "author": usera.username}, null, { sort: '-created' }, function(err, post) {
+            if (err) return next(err);
+            if (req.user) {
+                if (req.user.username==req.params.user){
+                    
+                   res.render('me', {user: req.user, title: usera.username, posts: post, posts1: usera.poststo, account: usera });
+                } else {
+                    res.render('user', {user: req.user, buttontext: buttontext, title: usera.username, posts: post, posts1: usera.poststo, account: usera });
+                }
+           } else {
+                   res.render('user', {user: req.user, title: usera.username, posts: post, posts1: usera.poststo, account: usera });
+               }
+});
 });
 });
 });
@@ -367,5 +409,50 @@ router.post('/update/bio', function(req, res, next) {
     });
     res.redirect('/settings');
 });
+
+/* follow a damn user */
+router.get('/Follow/:user', function(req, res, next) {
+    
+    User.findById(req.user.id, function(err, doc){
+        if (err) return next(err);
+        
+        var nid = req.params.user.toString();
+        var nlikes = doc.following.toString();
+        var test = nlikes.indexOf(nid);
+        
+        console.log(test);
+
+            if (test<0){
+                
+                doc.following.push(req.params.user);
+                
+                doc.save();
+                console.log(doc);
+                
+                res.redirect('/user/'+req.params.user);
+           
+                    
+            } else if (test>0) {
+                res.redirect('/user/'+req.params.user);
+            }
+        }); 
+    });
+    
+    /* follow a damn user */
+router.get('/Unfollow/:user', function(req, res, next) {
+    User.findOneAndUpdate({username: req.user.username}, {$pull: {following: req.params.user}}, function(err, org) {
+        if (err) return next(err);
+        org.save();
+});
+    res.redirect('/user/'+req.params.user);
+});
+
+router.get('/deletecookie/:name/:id', function(req, res, next) {
+    Post.findOneAndRemove({ _id: req.params.id }, function(err, post) {
+        if (err) return next(err);
+        res.redirect('/user/'+req.params.name);
+    });
+});
+
 
 module.exports = router;

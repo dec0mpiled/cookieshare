@@ -8,69 +8,97 @@
     <a class="navbar-item" href="/auth/login">Login</a>
     {{/if}}
   </div>
-  <a class="navbar-brand" href="/">ShareCookie</a>
+  <a style="font-family: prot" class="navbar-brand" href="/">ShareCookie</a>
 </nav>
 
 <div class="wrapper">
  
-<div class="frame body-frame">
- <div class="bit-75">
-  <h1>My Profile (@{{account.username}})<font color="red"></font></h1>
+<div class="frame body-frame" style="border: 1px solid gray; background-color:{{account.themecolor}}; border-radius: 4px">
+ <div class="bit-20">
+  <img src="{{account.avatarurl}}" width=150 height=150 style="border:1px solid black; border-radius: 4px">
  </div>
+  <div class="bit-30" style="background-color: rgba(255, 255, 255, 0.5); border:1px solid black; border-radius: 4px;">
+  <p><font size=6>{{account.name}}</font></p>
+  <p>@{{account.username}} {{#if account.admin}}<font color=#0000ff>(Admin)</font>{{/if}}</p><br>
+  <p><b>Bio: </b>{{account.bio}}</p>
+  {{#if user}}
+  {{#ifneq account.username user.username}}
+   <div class="bit-20">
+  <a href="/follow/{{account.username}}" class="btn">Follow</a>
+ </div>
+ {{/ifneq}}
+ {{/if}}
+ </div>
+ 
+  <!--  <div class="bit-20">
+  {{#if user.coverphotourl}}
+  <img src="{{user.coverphotourl}}", width=250px height=150px style="border: 1px solid black; border-radius: 4px;">
+  {{/if}}
+ </div> !-->
 </div>
 
+
  <div class="bit-2">
+  <br>
   <h2>Cookies:</h2><br><br>
   
   {{#each posts}}
    
-   <div class="cookie">
+   <div class="cookie posts" style="border:1px solid gray; border-radius:6px">
     
     <div class="frame">
      
-     <div class="bit-75">
-         
-          <!-- title -->
-       <div class="title">
-        <h2>
-        {{title}}
-        </h2>
-        <p class="meta-item">{{formatDate created day="numeric" month="long" year="numeric"}}</p>
+     <div class="bit-50">
+      
+         <!-- title -->
+      <!-- <a style="text-decoration: none;" href="/cookie/{{id}}"><h2><font color="{{color}}">{{title}}</font></h2></a> !-->
+       
+       <div class="meta">
+        
+        <!-- author -->
+        <p class="meta-item"><font size=5 color="black"><b>{{names}}</b> </font><a class="a" href="/user/{{author}}"><font size=4 color=#6666ff>@{{author}}</font></p></a>
+        <p class="meta-item"><font color=#02313A>Posted on {{formatDate created day="numeric" month="long" year="numeric"}} {{#if group}} (to group: <a href="/group/{{group}}">{{group}}</a>){{/if}}</font></p>
        </div>
        
        <!-- content -->
        <div class="content">
-        <font color="black">
+        <a style="text-decoration:none;" href="/cookie/{{id}}"><font color="{{color}}" size=5>
         {{content}}
         </font>
-       </div><br>
-       
-       <!-- likes -->
-       <div class="content">
-        <font color="black">
-        {{likes}} likes
-        </font><br><br>
-        <a href="/cookie/{{id}}"><font color=#00cc00>View Cookie</font></a>
+        </a>
        </div>
-      
-     </div>
-     <div class="bit-25">
-      
-      <img src="{{myurl}}" style="border:none;" width=140px height=140px>
-      
+       <br>
+       <!-- actions -->
+     {{#if myurl}}
+     <img src="{{myurl}}" style="border:1px solid black; width:auto; height:200px">
+     {{/if}}
+           <div class="actions">
+       
+       {{#if ../user}}
+        <!-- like/dislike -->
+        <a href="/likepost/{{author}}/{{id}}/user/null" class="btn btn-like">Like </a> <a href="/dislikepost/{{author}}/{{id}}/user/null" class="btn btn-dislike">Dislike </a>
+       {{/if}}
+        {{likes}} likes
+        <!-- comments -->
+        <a href="/cookie/{{id}}"><font color=#6666ff>Comments ({{commentamount}})</font></a>
+               <br><br>
+        <a href="/deletecookie/{{author}}/{{id}}"><p class="meta-item"><font color=#ff0000>[Delete]</font></p></a>
+       </div>
      </div>
      
     </div>
     
    </div>
-   <hr>
+   <br>
    {{/each}}
 </div>
 
-  
- <div class="bit-2">
-   <h2>Profile Options:</h2>
-   
+<div class="bit-2">
+  <br>
+  <h2>Following:</h2><br><br>
+
+</div>
+
 </div>
 
 <script>

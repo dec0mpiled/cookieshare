@@ -19,11 +19,11 @@
   <p><b>Bio: </b>{{user.bio}}</p>
  </div>
  
-    <div class="bit-20">
+  <!--<div class="bit-20">
   {{#if user.coverphotourl}}
   <img src="{{user.coverphotourl}}", width=250px height=150px style="border: 1px solid black; border-radius: 4px;">
   {{/if}}
- </div>
+ </div> !-->
 </div>
 
 
@@ -85,7 +85,7 @@
   <br><br>
   
   
-    <div class="frame">
+   <!-- <div class="frame">
    <div class="bit-2">
     <p>Update Your Cover Photo</p>
     <form id="submitpic" action="/update/updatecp" method="post">
@@ -101,12 +101,12 @@
     <p>Preview Cover Photo Here</p>
     <div id="previewImage1">
      <!-- pic !-->  
-     &nbsp;
+    <!-- &nbsp;
      </div>
    </div>
   </div>
   <br><hr>
-  <br><br>
+  <br><br> !-->
   
   
      <form id="name" action="/update/bio" method="post">
@@ -134,9 +134,9 @@
   $('#previewImage').html('<img src=' + $('#ppbox').val() + ' style="width:30%;height:auto;">');
  });
  
-  $("#cpPreview").click(function() {
-  $('#previewImage1').html('<img src=' + $('#ppbox1').val() + ' style="width:30%;height:auto;">');
- });
+//  $("#cpPreview").click(function() {
+//  $('#previewImage1').html('<img src=' + $('#ppbox1').val() + ' style="width:30%;height:auto;">');
+// });
 </script>
 <script>
 function textCounter(field,field2,maxlimit)
