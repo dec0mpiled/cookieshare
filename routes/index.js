@@ -285,18 +285,6 @@ router.post("/sendcomment/:id", function(req, res, next) {
 /* user page */
 router.get('/user/:user', function(req, res, next) {
     
-    User.findById(req.user.id, function(err, doc){
-        var nid = req.params.user.toString();
-        var nlikes = doc.following.toString();
-        var test = nlikes.indexOf(nid);
-        console.log(test);
-        if (test<0){
-    var buttontext="Follow";
-        } else if (test>0) {
-            var buttontext="Unfollow";
-    if (err) throw err;
-        }
-    
     console.log(req.params.user);
     
     User.findOne({ username: req.params.user }, function(err, usera) {
@@ -308,12 +296,24 @@ router.get('/user/:user', function(req, res, next) {
                     
                    res.render('me', {user: req.user, title: usera.username, posts: post, posts1: usera.poststo, account: usera });
                 } else {
+                        User.findById(req.user.id, function(err, doc){
+                         var nid = req.params.user.toString();
+                         var nlikes = doc.following.toString();
+                          var test = nlikes.indexOf(nid);
+                           console.log(test);
+                               if (test<0){
+                      var buttontext="Follow";
+                        } else if (test>0) {
+                        var buttontext="Unfollow";
+                       if (err) throw err;
+                          }
                     res.render('user', {user: req.user, buttontext: buttontext, title: usera.username, posts: post, posts1: usera.poststo, account: usera });
-                }
+                            
+                        });
+                }   
            } else {
                    res.render('user', {user: req.user, title: usera.username, posts: post, posts1: usera.poststo, account: usera });
                }
-});
 });
 });
 });
