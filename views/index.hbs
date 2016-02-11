@@ -44,7 +44,7 @@
      </div>
 
     {{else}}
-    <h1>Login or Register to view and create Cookies!</h1>
+    <h1>Login or Register to participate!</h1>
     
     <div class="frame">
      
@@ -81,7 +81,6 @@
    {{else}}
    {{/if}}
    <!-- cookies -->
-   {{#if user}}
    {{#each posts}}
    
    <div class="cookie posts" style="border:1px solid gray; border-radius:6px">
@@ -116,7 +115,7 @@
        
        {{#if ../user}}
         <!-- like/dislike -->
-        <a href="/likepost/{{author}}/{{id}}/home/null" class="btn btn-like">Like </a> <a href="/dislikepost/{{author}}/{{id}}/home/null" class="btn btn-dislike">Dislike </a>
+        <a href="/likepost/{{author}}/{{id}}/home/null" class="btn btn-like"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a> <a href="/dislikepost/{{author}}/{{id}}/home/null" class="btn btn-dislike"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a>
        {{/if}}
         {{likes}} likes
         <!-- comments -->
@@ -129,7 +128,7 @@
    </div>
    <br>
    {{/each}}
-   {{/if}}
+  
    
   </div>
  </div>
@@ -138,7 +137,7 @@
 <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 <script>
  $("#ppPreview").click(function() {
-  $('#previewImage').html('<img src=' + $('#picbox').val() + ' style="width:60%;height:auto; border: 1px solid black">');
+  $('#previewImage').html('<img src=' + $('#picbox').val() + ' style="width:30%;height:auto; border: 1px solid black">');
  });
 </script>
 
