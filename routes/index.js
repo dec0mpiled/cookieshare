@@ -320,7 +320,7 @@ router.get('/cookie/:id', function(req, res) {
   });
   
   router.get('/group/:groupid', function(req, res) {
-  Post.find({ group: req.params.groupid }, function(err, result) {
+  Post.find({ group: req.params.groupid },null, { sort: '-created' }, function(err, result) {
     if (err) throw err;
     res.render('group', { title: req.params.groupid, result: result, user: req.user, groupname:req.params.groupid });
     });
