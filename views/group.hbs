@@ -45,7 +45,9 @@
         </font>
         </a>
        </div>
-       <br>
+       {{#if link}}
+       <a style="text-decoration:none;" href="{{link}}">{{link}}</a><br><br>
+       {{/if}}
        <!-- actions -->
      {{#if myurl}}
      <img src="{{myurl}}" style="border:1px solid black; width:auto; height:200px">

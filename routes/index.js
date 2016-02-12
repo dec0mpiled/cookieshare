@@ -183,6 +183,7 @@ router.post('/sharecookie', function(req, res, next) {
     var authorq=req.user.username;
     var contentq = req.body.texxtt;
     var url=req.body.picbox;
+    var gurl=req.body.urlbox;
     var color="blacK";
     var mynewurl;
     var ggroup=req.body.groupbox;
@@ -229,6 +230,7 @@ mycontent = mycontent.replace(":P"||":p","😛");
         _author: req.user.id,
         content: mycontent,
         myurl: mynewurl,
+        link: gurl,
         color: color,
         group: group,
         spam: 0,
@@ -246,6 +248,7 @@ router.post('/updatecookie/:id', function(req, res, next) {
     var id=req.params.id;
     var contentq = req.body.texxtt;
     var url=req.body.picbox;
+    var gurl=req.body.urlbox;
     var color="blacK";
     var mynewurl;
     var ggroup=req.body.groupbox;
@@ -268,6 +271,18 @@ if (myurl.startsWith("http://")||myurl.startsWith("https://")) {
 }
 }
 
+var gurl=gurl;
+
+if (gurl=="" || gurl==" "){
+    gurl="";
+}
+
+if (gurl!="") {
+if (gurl.startsWith("http://")||gurl.startsWith("https://")) {
+    gurl=gurl;
+}
+}
+
 var mycontent = contentq;
 // Emojis!!
 mycontent = mycontent.replace(":)","😊");
@@ -286,6 +301,7 @@ Post.findOne({_id:id}, function(err, doc) {
     doc.content=mycontent;
     doc.myurl=mynewurl;
     doc.group=group;
+    doc.link=gurl;
 
     doc.save();
 });

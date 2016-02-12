@@ -24,6 +24,9 @@
   <br>
   <p class="cookie-content">{{result.content}}</p>
    <br>
+   {{#if result.link}}
+       <a style="text-decoration:none;" href="{{result.link}}">{{result.link}}</a><br><br>
+       {{/if}}
    {{#if user}}
         <!-- like/dislike -->
         <a href="/likepost/{{result.author}}/{{result.id}}/cookie/null" class="btn btn-like"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a> <a href="/dislikepost/{{result.author}}/{{result.id}}/cookie/null" class="btn btn-dislike"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a>

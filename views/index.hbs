@@ -31,6 +31,7 @@
     
     <form id="postcookie" action="/sharecookie" method="post">
      <textarea  name="texxtt" id="texxtt" class="textarea fixed" required placeholder="What's going on?"></textarea><br><br>
+     <input class="input-gif" name="urlbox" id="urlbox" placeholder="External URL (Optional)"><br><br>
      <input class="input-gif" name="picbox" id="picbox" placeholder="Link to an image (Optional)"><br><br>
     <input class="input-gif" name="groupbox" id="groupbox" onkeypress="return group(event)" placeholder="Send this post to a group (Optional)"><br><br>
      <a class="btn" id="ppPreview" type="button">Preview Image</a> <button class="btn " id="login">Create Post</button> <!--<span id="counter">200</span>!-->
@@ -118,8 +119,10 @@
         </font>
         </a>
        </div>
-       <br>
        <!-- actions -->
+       {{#if link}}
+       <a style="text-decoration:none;" href="{{link}}">{{link}}</a><br><br>
+       {{/if}}
      {{#if myurl}}
      <img src="{{myurl}}" style="border:1px solid black; max-width:100%; max-height:100%;">
      {{/if}}

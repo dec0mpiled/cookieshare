@@ -9,6 +9,7 @@ var Post = new Schema({
         _author: Schema.Types.ObjectId,
         content: String,
         myurl: String,
+        link: String,
         color: String,
         likes: Number,
         tags: String,
