@@ -350,7 +350,7 @@ router.get('/user/:user', function(req, res, next) {
             if (req.user) {
                 if (req.user.username==req.params.user){
                     
-                   res.render('me', {user: req.user, title: usera.username, posts: post, posts1: usera.poststo, account: usera });
+                   res.render('me', {user: req.user, title: usera.username, posts: post, posts1: usera.poststo, account: usera});
                 } else {
                         User.findById(req.user.id, function(err, doc){
                          var nid = req.params.user.toString();
@@ -363,12 +363,12 @@ router.get('/user/:user', function(req, res, next) {
                         var buttontext="Unfollow";
                        if (err) throw err;
                           }
-                    res.render('user', {user: req.user, buttontext: buttontext, title: usera.username, posts: post, posts1: usera.poststo, account: usera });
+                    res.render('user', {user: req.user, buttontext: buttontext, title: usera.username, posts: post, posts1: usera.poststo, account: usera});
                             
                         });
                 }   
            } else {
-                   res.render('user', {user: req.user, title: usera.username, posts: post, posts1: usera.poststo, account: usera });
+                   res.render('user', {user: req.user, title: usera.username, posts: post, posts1: usera.poststo, account: usera});
                }
 });
 });
@@ -430,7 +430,7 @@ router.post('/update/updatecp', function(req, res, next) {
 
 /* do some fucking awesome shit bitches */
 router.post('/update/displayName', function(req, res, next) {
-    User.findOneAndUpdate({ _id: req.user.id }, { name: req.body.displayName }, function(err, doc) {
+    User.findOneAndUpdate({ _id: req.user.id }, { name: req.body.displayName}, function(err, doc) {
         if (err) throw err;
     });
     Post.update({_author: req.user.id}, {names: req.body.displayName}, {multi: true}, function(err) {

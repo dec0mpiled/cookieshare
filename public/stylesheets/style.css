@@ -13,10 +13,12 @@ body {
 
 .posts {
   background-color:#fff;
+  width: 100%;
 }
 
 .wrapper {
   margin: 0 5%;
+  padding-top:30px;
 }
 
 /* Navbar */

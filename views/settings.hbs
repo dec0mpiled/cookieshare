@@ -1,10 +1,10 @@
 <nav class="navbar">
+ <a style="font-family: prot" class="navbar-brand" href="/">ShareCookie</a>
   <div class="navbar-right">
     {{#if user}}
     <a class="navbar-item" href="/auth/logout">Log Out</a>
     {{/if}}
   </div>
-  <a style="font-family: prot" class="navbar-brand" href="/">ShareCookie</a>
 </nav>
 {{#if user}}
 <div class="wrapper">
@@ -63,7 +63,7 @@
   </div>
   <div class="frame">
    <div class="bit-2">
-    <p>Update Your Profile Picture</p>
+    <p>Update Your Profile Picture (Square Images Work Best)</p>
     <form id="submitpic" action="/updatepp/{{user.username}}" method="post">
      
      <input name="ppbox" id="ppbox" class="input-gif" placeholder="URL to image (.png, .jpg, .gif, etc)">
