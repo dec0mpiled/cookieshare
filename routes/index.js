@@ -521,7 +521,10 @@ router.get('/Follow/:user', function(req, res, next) {
 router.get('/Unfollow/:user', function(req, res, next) {
     User.findOneAndUpdate({username: req.user.username}, {$pull: {following: req.params.user}}, function(err, org) {
         if (err) return next(err);
+        User.findOneAndUpdate({username:req.params.user}, {$pull: {followers: req.user.username}}, function(err,org) {
+            if (err) return next(err);
         org.save();
+        });
 });
     res.redirect('/user/'+req.params.user);
 });
