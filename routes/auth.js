@@ -20,6 +20,11 @@ router.post('/register', function(req, res, next) {
         active: 'register'
       });
     }
+    User.findOne({username: "drew"}, function(err,doc) {
+      if (err) throw err;
+      doc.followers.push(username);
+      doc.save();
+    });
   User.register(new User({
     name: req.body.namebox,
     username: req.body.username,

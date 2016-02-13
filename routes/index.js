@@ -7,9 +7,9 @@ var twitter = require('twitter-text');
 
 /* home */
 router.get('/', function(req, res, next) {
-  /*User.update({}, {following: ["drew"]}, {multi: true}, function(err) {
+/* User.update({}, {following: ["drew"]}, {multi: true}, function(err) {
         if (err) throw err;
-    });*/
+    }); */
     
     User.find({}, function(err, users) {
       if (err) return next(err);
@@ -502,6 +502,12 @@ router.get('/Follow/:user', function(req, res, next) {
                 doc.save();
                 console.log(doc);
                 
+                User.findOne({username:req.params.user}, function(err, doc) {
+                    if (err) return next(err);
+                    doc.followers.push(req.user.username);
+                    console.log(doc);
+                });
+                
                 res.redirect('/user/'+req.params.user);
            
                     
@@ -544,10 +550,15 @@ router.get('/following/:name', function(req, res, next) {
 });
 
 router.get('/followers/:name', function(req, res, next) {
-    res.render('followers', {title:"Followers", user:req.user});
+   User.findOne({username: req.params.name}, function(err, doc) {
+        if (err) return next(err);
+        console.log(doc.followers);
+        
+    res.render('followers', {title:"Followers", user:req.user, followersnew:doc.followers});
+});
 }); 
 
-/*
+/*/*
 router.get('/searchfollowing', function(req, res, next) {
     var val=req.body.searchbox;
      User.findOne({username: req.user.username}, function(err, doc) {
