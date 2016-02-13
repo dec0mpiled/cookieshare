@@ -16,7 +16,7 @@
  <h2>Edit Cookie</h2>
  <form id="postcookie" action="/updatecookie/{{post.id}}" method="post">
      <textarea  name="texxtt" id="texxtt" class="textarea fixed" required>{{post.content}}</textarea>
-     <input class="input-gif" name="urlbox" id="urlbox" placeholder="External URL (Optional)"><br><br>
+     <input class="input-gif" name="urlbox" id="urlbox" placeholder="External URL (Optional)" value="{{post.link}}"><br><br>
      <input class="input-gif" name="picbox" id="picbox" placeholder="Link to an image (Optional)" value="{{post.myurl}}"><br><br>
     <input class="input-gif" name="groupbox" id="groupbox" placeholder="Send this post to a group (Optional)" onkeypress="return group(event)" value="{{post.group}}"><br><br>
      <a class="btn" id="ppPreview" type="button">Preview Image</a> <button class="btn " id="login">Update Cookie</button> <!--<span id="counter">200</span>!-->

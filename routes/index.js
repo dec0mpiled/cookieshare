@@ -7,9 +7,9 @@ var twitter = require('twitter-text');
 
 /* home */
 router.get('/', function(req, res, next) {
-/*User.update({}, {followers: ["drew"]}, {multi: true}, function(err) {
+/*User.update({}, {followers: [""]}, {multi: true}, function(err) {
         if (err) throw err;
-    });*/ 
+    }); */
     
     User.find({}, function(err, users) {
       if (err) return next(err);
