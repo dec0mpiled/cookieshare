@@ -7,9 +7,9 @@ var twitter = require('twitter-text');
 
 /* home */
 router.get('/', function(req, res, next) {
-/* User.update({}, {following: ["drew"]}, {multi: true}, function(err) {
+/*User.update({}, {followers: ["drew"]}, {multi: true}, function(err) {
         if (err) throw err;
-    }); */
+    });*/ 
     
     User.find({}, function(err, users) {
       if (err) return next(err);
@@ -506,6 +506,7 @@ router.get('/Follow/:user', function(req, res, next) {
                     if (err) return next(err);
                     doc.followers.push(req.user.username);
                     console.log(doc);
+                    doc.save();
                 });
                 
                 res.redirect('/user/'+req.params.user);
