@@ -544,7 +544,7 @@ router.get('/following/:name', function(req, res, next) {
 });
 
 router.get('/followers/:name', function(req, res, next) {
-    res.render('followers', {title:"Followers"});
+    res.render('followers', {title:"Followers", user:req.user});
 }); 
 
 /*
