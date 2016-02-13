@@ -1,1 +1,19 @@
+<nav class="navbar">
+ <a style="font-family: prot" class="navbar-brand" href="/">ShareCookie</a>
+  <div class="navbar-right">
+    {{#if user}}
+    <a class="navbar-item" href="/settings">Settings</a>
+    <font color="white">|</font>
+    <a class="navbar-item" href="/auth/logout">Log Out</a>
+    {{else}}
+    <a class="navbar-item" href="/auth/login">Login</a>
+    {{/if}}
+  </div>
+</nav>
+
+<div class="wrapper">
+ 
+<div class="frame body-frame" style="border: 0px solid gray; background-color:{{account.themecolor}}; border-radius: 2px">
 <h1>We're working hard on this feature! Stay tuned :)</h1>
+</div>
+</div>
