@@ -542,15 +542,10 @@ router.get('/following/:name', function(req, res, next) {
     res.render('following', {title:"Following", user:req.user, followingsnew:doc.following});
 });
 });
-/*
+
 router.get('/followers/:name', function(req, res, next) {
-    User.find({: req.params.name}, function(err, doc) {
-        if (err) return next(err);
-        console.log(doc.following);
-        
-    res.render('following', {title:"Following", user:req.user, followingsnew:doc.following});
-});
-}); */
+    res.render('followers', {title:"Followers"});
+}); 
 
 /*
 router.get('/searchfollowing', function(req, res, next) {
