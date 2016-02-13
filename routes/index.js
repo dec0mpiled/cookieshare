@@ -5,6 +5,8 @@ var Post = require('../models/post');
 
 var twitter = require('twitter-text');
 
+var Dropbox = require("dropbox");
+
 /* home */
 router.get('/', function(req, res, next) {
 /*User.update({}, {followers: [""]}, {multi: true}, function(err) {
@@ -205,6 +207,7 @@ if (myurl.startsWith("http://")||myurl.startsWith("https://")) {
     mynewurl=myurl;
 }
 }
+        
 
 var mycontent = contentq;
 // Emojis!!
