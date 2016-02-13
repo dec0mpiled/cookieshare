@@ -1,0 +1,30 @@
+<nav class="navbar">
+ <a style="font-family: prot" class="navbar-brand" href="/">ShareCookie</a>
+  <div class="navbar-right">
+    {{#if user}}
+    <a class="navbar-item" href="/settings">Settings</a>
+    <font color="white">|</font>
+    <a class="navbar-item" href="/auth/logout">Log Out</a>
+    {{else}}
+    <a class="navbar-item" href="/auth/login">Login</a>
+    {{/if}}
+  </div>
+</nav>
+
+<div class="wrapper">
+ 
+<div class="frame body-frame" style="border: 0px solid gray; background-color:{{account.themecolor}}; border-radius: 2px">
+    <h1>People I follow</h1>
+    <!--<input class="input-gif" placeholder="Search for a user by name (Please enter exact, no @)" required><br><br><a href="/searchfollowing" name="searchbox" class="btn">Search</a><br><br><hr><br>!-->
+    
+{{#each followingsnew}}
+<div class="cookie posts" style="padding:5px; border: 1px solid black; border-radius: 2px">
+  <h2>@{{this}}</h2>
+  <br>
+  <h3><a class="btn" href="/user/{{this}}">View Profile</a> <a class="btn" href="/Unfollow/{{this}}">Unfollow</a></h3>
+</div>
+<br>
+{{/each}}
+
+</div>
+</div>

@@ -18,7 +18,6 @@ body {
 
 .wrapper {
   margin: 0 5%;
-  padding-top:30px;
 }
 
 /* Navbar */
@@ -186,6 +185,9 @@ textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:ac
           position: relative;
           z-index: 1;
         }
+        .wrapper{
+          padding-top:30px;
+        }
     }
 
     /* Extra Small Devices, Phones */ 
@@ -194,6 +196,9 @@ textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:ac
           position: relative;
           z-index: 1;
         }
+        .wrapper {
+          padding-top:30px;
+        }
     }
 
     /* Custom, iPhone Retina */ 
@@ -201,6 +206,9 @@ textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:ac
         .form-fixed  {
           position: relative;
           z-index: 1;
+        }
+        .wrapper {
+          padding-top:30px;
         }
     }
 

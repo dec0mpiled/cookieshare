@@ -51,8 +51,10 @@
    </form>
    
    <form id="name" action="/update/colour" method="post">
-    <p>Update Your Profile Theme Colour (<a href="http://www.w3schools.com/colors/colors_picker.asp">Find over 150 colours here</a>)</p>
-   <input type="text" name="colour" value="{{user.themecolor}}" class="input-gif">
+    <p>Update Your Profile Theme Colour</p>
+    <script src="/javascripts/jscolor.js"></script>
+
+  <input type="text" name="colour" class="jscolor input-gif" value="{{user.themecolor}}">
    <br><br>
    <button type="submit" id="displayColourButton" class="btn">Update Colour</button>
    <br><br>

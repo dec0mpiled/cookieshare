@@ -375,7 +375,7 @@ router.get('/user/:user', function(req, res, next) {
                            console.log(test);
                                if (test<0){
                       var buttontext="Follow";
-                        } else if (test>0) {
+                        } else if (test>=0) {
                         var buttontext="Unfollow";
                        if (err) throw err;
                           }
@@ -468,7 +468,8 @@ router.post('/update/username', function(req, res, next) {
 
 /* do some fucking awesome shit bitches #3!!!! */
 router.post('/update/colour', function(req, res, next) {
-    User.findOneAndUpdate({ _id: req.user.id }, { themecolor: req.body.colour }, function(err, doc) {
+    console.log(req.body.colour);
+    User.findOneAndUpdate({ _id: req.user.id }, { themecolor: "#"+req.body.colour }, function(err, doc) {
         if (err) throw err;
     });
     res.redirect('/settings');
@@ -532,6 +533,38 @@ router.get('/editcookie/:name/:id', function(req, res, next) {
         res.render('editcookie', {post:post, user:req.user});
     });
 });
+
+router.get('/following/:name', function(req, res, next) {
+    User.findOne({username: req.params.name}, function(err, doc) {
+        if (err) return next(err);
+        console.log(doc.following);
+        
+    res.render('following', {title:"Following", user:req.user, followingsnew:doc.following});
+});
+});
+/*
+router.get('/followers/:name', function(req, res, next) {
+    User.find({: req.params.name}, function(err, doc) {
+        if (err) return next(err);
+        console.log(doc.following);
+        
+    res.render('following', {title:"Following", user:req.user, followingsnew:doc.following});
+});
+}); */
+
+/*
+router.get('/searchfollowing', function(req, res, next) {
+    var val=req.body.searchbox;
+     User.findOne({username: req.user.username}, function(err, doc) {
+         if (err) return next(err);
+         var check=doc.following.indexOf("val");
+            if (check<0) {
+                res.render('following', {title:"Following", message:"User not found!"});
+            } else {
+                res.redirect("/user/"+val);
+            }
+     });
+});*/
 
 
 module.exports = router;
