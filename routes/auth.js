@@ -31,6 +31,7 @@ router.post('/register', function(req, res, next) {
   User.register(new User({
     name: req.body.namebox,
     username: req.body.username,
+    notamount: 0,
     following: ["drew", username],
     bio: "No Bio Available",
     avatarurl: "https://medium.com/img/default-avatar.png",
