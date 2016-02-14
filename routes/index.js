@@ -380,7 +380,9 @@ router.get('/user/:user', function(req, res, next) {
     console.log(req.params.user);
     
     User.findOne({ username: req.params.user }, function(err, usera) {
-        if (err) return next(err);
+        if (err) {
+            res.redirect('/');
+        }
         Post.find({ "author": usera.username}, null, { sort: '-created' }, function(err, post) {
             if (err) return next(err);
             if (req.user) {
