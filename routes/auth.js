@@ -14,6 +14,7 @@ router.get('/login', function(req, res) {
 
 router.post('/register', function(req, res, next) {
   var username=req.body.username;
+  var username1=req.body.username;
    if (username=="" || username==" " || username=="  " || username=="   "){
     return res.render("a/register", {
         info: "username cannot be blank!",
@@ -24,13 +25,7 @@ router.post('/register', function(req, res, next) {
       if (err) throw err;
       doc.followers.push(username);
        doc.notamount=doc.notamount+1;
-       doc.notifications.unshift({from: username, type: "follower", redirect:req.params.id});
-      doc.save();
-    });
-    User.findOne({username: username}, function(err,doc) {
-      if (err) throw err;
-       doc.notamount=doc.notamount+1;
-       doc.notifications.unshift({from: "ShareCookie", type: "welcome", redirect:req.params.id});
+       doc.notifications.unshift({from: username, type: "follower", redirect:username});
       doc.save();
     });
   User.register(new User({
