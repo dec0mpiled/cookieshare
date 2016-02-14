@@ -2,11 +2,11 @@
  <a style="font-family: prot" class="navbar-brand" href="/">ShareCookie</a>
   <div class="navbar-right">
     {{#if user}}
-    <a class="navbar-item" href="/settings">Settings</a>
+    <a class="navbar-item" href="/settings"><span class="glyphicon glyphicon glyphicon-cog" aria-hidden="true"></a>
     <font color="white">|</font>
-    <a class="navbar-item" href="/auth/logout">Log Out</a>
+    <a class="navbar-item" href="/auth/logout"><span class="glyphicon glyphicon glyphicon-log-out" aria-hidden="true"></a>
     {{else}}
-    <a class="navbar-item" href="/auth/login">Login</a>
+    <a class="navbar-item" href="/auth/login"><span class="glyphicon glyphicon glyphicon-log-in" aria-hidden="true"></a>
     {{/if}}
   </div>
 </nav>

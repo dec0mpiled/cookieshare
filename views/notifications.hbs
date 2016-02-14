@@ -14,14 +14,36 @@
 <div class="wrapper">
  
 <div class="frame body-frame" style="border: 0px solid gray; background-color:{{account.themecolor}}; border-radius: 2px">
-    <h1>People I follow</h1>
+    <h1>Notifications</h1>
     <!--<input class="input-gif" placeholder="Search for a user by name (Please enter exact, no @)" required><br><br><a href="/searchfollowing" name="searchbox" class="btn">Search</a><br><br><hr><br>!-->
     
-{{#each followingsnew}}
+{{#each notifications}}
 <div class="cookie posts" style="padding:5px; border: 1px solid black; border-radius: 2px">
-  <h2>@{{this}}</h2>
-  <br>
-  <h3><a class="btn" href="/user/{{this}}">View Profile</a> <a class="btn" href="/Unfollow/{{this}}">Unfollow</a></h3>
+    {{#ifeq type "comment"}}
+  <h2>@{{from}} Commented on your post!</h2>
+  <a class="btn" href="/cookie/{{redirect}}"><h3>View Post</h3></a>
+    {{/ifeq}}
+    
+    {{#ifeq type "like"}}
+  <h2>@{{from}} Liked your post!</h2>
+  <a class="btn" href="/cookie/{{redirect}}"><h3>View Post</h3></a>
+    {{/ifeq}}
+    
+    {{#ifeq type "dislike"}}
+  <h2>@{{from}} Disliked your post! :(</h2>
+  <a class="btn" href="/cookie/{{redirect}}"><h3>View Post</h3></a>
+    {{/ifeq}}
+    
+    {{#ifeq type "follower"}}
+  <h2>@{{from}} Followed you!</h2>
+  <a class="btn" href="/user/{{from}}"><h3>View User</h3></a>
+    {{/ifeq}}
+    
+    {{#ifeq type "postto"}}
+  <h2>@{{from}} Posted on your page!</h2>
+  <a class="btn" href="/user/{{user.username}}"><h3>View Post</h3></a>
+    {{/ifeq}}
+    
 </div>
 <br>
 {{/each}}

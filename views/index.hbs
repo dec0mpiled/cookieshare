@@ -2,19 +2,20 @@
  <a style="font-family: prot" class="navbar-brand" href="/">ShareCookie</a>
   <div class="navbar-right">
    {{#if user}}
-    <a class="navbar-item {{#equal filter 'date'}}selected{{/equal}}" href="/">My Timeline</a>
-    <font color="white">|</font>
-    <a class="navbar-item {{#equal filter 'likes'}}selected{{/equal}}" href="/public">Discover Others</a>
+    <a class="navbar-item {{#equal filter 'date'}}selected{{/equal}}" href="/"><span class="glyphicon glyphicon-home btn" aria-hidden="true"></a>
+   <!-- <font color="white">|</font> !-->
+    <a class="navbar-item {{#equal filter 'likes'}}selected{{/equal}}" href="/public"><span class="glyphicon glyphicon-globe btn" aria-hidden="true"></a>
     {{/if}}
     {{#if user}}
     <font color="white">|</font>
-    <a class="navbar-item" href="/user/{{user.username}}">My Profile</a>
+     <a class="navbar-item" href="/notifications"><span class="glyphicon glyphicon-bell btn" aria-hidden="true">{{#ifneq notes 0}}<font color="red">({{notes}})</font>{{/ifneq}}</a>
+    <a class="navbar-item" href="/user/{{user.username}}"><span class="glyphicon glyphicon-user btn" aria-hidden="true"></a>
     <font color="white">|</font>
     {{#if user.admin}}
-    <a class="navbar-item" href="/admin">Admin</a>
+    <a class="navbar-item" href="/admin"><span class="glyphicon glyphicon-eye-close btn" aria-hidden="true"></a>
     <font color="white">|</font>
     {{/if}}
-    <a class="navbar-item" href="/auth/logout">Log Out</a>
+    <a class="navbar-item" href="/auth/logout"><span class="glyphicon glyphicon-log-out btn" aria-hidden="true"></a>
     {{/if}}
   </div>
 </nav>
@@ -99,7 +100,7 @@
     
     <div class="frame">
      
-     <div class="bit-2">
+     <div class="bit-20">
       
          <!-- title -->
       <!-- <a style="text-decoration: none;" href="/cookie/{{id}}"><h2><font color="{{color}}">{{title}}</font></h2></a> !-->

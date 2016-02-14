@@ -9,18 +9,21 @@ var Dropbox = require("dropbox");
 
 /* home */
 router.get('/', function(req, res, next) {
-/*User.update({}, {followers: [""]}, {multi: true}, function(err) {
+    
+    /*User.update({}, {notifications: []}, {multi: true}, function(err) {
         if (err) throw err;
-    }); */
+    });*/
     
     User.find({}, function(err, users) {
       if (err) return next(err);
       if (req.user) {
           console.log(req.user.following);
           
+              var notcount=req.user.notamount;
+          
           Post.find({ 'author': { $in: req.user.following } }, null, { sort: '-created' },  function(err, followings) {
             if (err) return next(err);
-            res.render('index', { title: 'ShareCookie', filter: 'date', posts: followings, user: req.user});
+            res.render('index', { title: 'ShareCookie', filter: 'date', posts: followings, user: req.user, notes:notcount});
           });
         
       } else { 
@@ -87,6 +90,12 @@ router.get('/likepost/:author/:id/:return/:group', function(req, res, next) {
             }
             doc.save();
             if (err) throw err;
+        User.findOne({username:doc.author}, function(err, doc) {
+        if (err) return next(err);
+       doc.notamount=doc.notamount+1;
+       doc.notifications.unshift({from: req.user.username, type: "like", redirect:req.params.id});
+       doc.save();
+    });
         });
         if (req.params.return=="home"){
         res.redirect('/');
@@ -144,6 +153,12 @@ router.get('/dislikepost/:author/:id/:return/:group', function(req, res) {
             }
             doc.save();
             if (err) throw err;
+            User.findOne({username:doc.author}, function(err, doc) {
+        if (err) return (err);
+       doc.notamount=doc.notamount+1;
+       doc.notifications.unshift({from: req.user.username, type: "dislike", redirect:req.params.id});
+       doc.save();
+            });
         });
         if (req.params.return=="home"){
         res.redirect('/');
@@ -352,6 +367,12 @@ router.post("/sendcomment/:id", function(req, res, next) {
         doc.commentamount=doc.commentamount+1;
         doc.save();
         if (err) throw err;
+    User.findOne({username:doc.author}, function(err, doc) {
+        if (err) return next(err);
+       doc.notamount=doc.notamount+1;
+       doc.notifications.unshift({from: req.user.username, type: "comment", redirect:req.params.id});
+       doc.save();
+    });
 });
     res.redirect("/cookie/"+id);
 });
@@ -415,6 +436,8 @@ router.post("/sendtouser/:id", function(req, res, next) {
     User.findOne({"_id" : id}, function (err, doc){
         console.log(doc.username);
         doc.poststo.push({ keys: commentval, author: req.user.username, _author: req.user.id, created: new Date() });
+        doc.notamount=doc.notamount+1;
+       doc.notifications.unshift({from: req.user.username, type: "postto", redirect:req.params.id});
         doc.save();
         if (err) throw err;
     res.redirect("/user/"+doc.username);
@@ -498,7 +521,7 @@ router.get('/Follow/:user', function(req, res, next) {
         
         console.log(test);
 
-            if (test<0){
+            if (test<=0){
                 
                 doc.following.push(req.params.user);
                 
@@ -510,6 +533,12 @@ router.get('/Follow/:user', function(req, res, next) {
                     doc.followers.push(req.user.username);
                     console.log(doc);
                     doc.save();
+         User.findOne({username:req.params.user}, function(err, doc) {
+        if (err) return next(err);
+       doc.notamount=doc.notamount+1;
+       doc.notifications.unshift({from: req.user.username, type: "follower", redirect:req.params.id});
+       doc.save();
+         });
                 });
                 
                 res.redirect('/user/'+req.params.user);
@@ -562,6 +591,16 @@ router.get('/followers/:name', function(req, res, next) {
         console.log(doc.followers);
         
     res.render('followers', {title:"Followers", user:req.user, followersnew:doc.followers});
+});
+}); 
+
+router.get('/notifications', function(req, res, next) {
+   User.findOne({username: req.user.username}, function(err, doc) {
+        if (err) return next(err);
+        doc.notamount=0;
+        doc.save();
+        console.log(doc.notifications);
+    res.render('notifications', {title:"Notifications", user:req.user, notifications:doc.notifications});
 });
 }); 
 

@@ -23,6 +23,8 @@ router.post('/register', function(req, res, next) {
     User.findOne({username: "drew"}, function(err,doc) {
       if (err) throw err;
       doc.followers.push(username);
+       doc.notamount=doc.notamount+1;
+       doc.notifications.unshift({from: username, type: "follower", redirect:req.params.id});
       doc.save();
     });
   User.register(new User({

@@ -38,7 +38,7 @@ body {
 
 .navbar-right {
   float: right;
-  padding-top: .4em;
+  padding-top: .1em;
 }
 
 .navbar-item {
@@ -186,7 +186,7 @@ textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:ac
           z-index: 1;
         }
         .wrapper{
-          padding-top:30px;
+          padding-top:10px;
         }
     }
 
@@ -197,7 +197,7 @@ textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:ac
           z-index: 1;
         }
         .wrapper {
-          padding-top:30px;
+          padding-top:10px;
         }
     }
 
@@ -208,7 +208,7 @@ textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:ac
           z-index: 1;
         }
         .wrapper {
-          padding-top:30px;
+          padding-top:10px;
         }
     }
 

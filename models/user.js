@@ -5,6 +5,7 @@ var passportLocalMongoose = require('passport-local-mongoose');
 var likekeys = new Schema({ keys: String });
 var dislikekeys = new Schema({ keys: String });
 var postkeys = new Schema({ keys: String, author: String, created: Date });
+var notes = new Schema({ from: String, type: String, redirect: String});
 
 var User = new Schema({
     name: String,
@@ -13,6 +14,8 @@ var User = new Schema({
     admin: Boolean,
     following: [String],
     followers: [String],
+    notifications: [notes],
+    notamount: Number,
     avatarurl: String,
     coverphotourl: String,
     themecolor: String,
