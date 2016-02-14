@@ -43,7 +43,12 @@ router.post('/register', function(req, res, next) {
         active: 'register'
       });
     }
-
+User.findOne({username: username}, function(err,doc) {
+      if (err) throw err;
+       doc.notamount=doc.notamount+1;
+       doc.notifications.unshift({from: "ShareCookie", type: "welcome", redirect:username});
+      doc.save();
+    });
     passport.authenticate('local')(req, res, function() {
       req.session.save(function(err) {
         if (err) {
