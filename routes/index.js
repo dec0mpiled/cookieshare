@@ -543,14 +543,10 @@ router.get('/Follow/:user', function(req, res, next) {
                     if (err) return next(err);
                     doc.followers.push(req.user.username);
                     console.log(doc);
-                    doc.save();
-         User.findOne({username:req.params.user}, function(err, doc) {
-        if (err) return next(err);
        doc.notamount=doc.notamount+1;
        doc.notifications.unshift({from: req.user.username, type: "follower", redirect:req.params.id});
        doc.save();
          });
-                });
                 
                 res.redirect('/user/'+req.params.user);
            
