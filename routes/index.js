@@ -3,10 +3,6 @@ var router = express.Router();
 var User = require('../models/user');
 var Post = require('../models/post');
 
-var twitter = require('twitter-text');
-
-var Dropbox = require("dropbox");
-
 /* home */
 router.get('/', function(req, res, next) {
     
