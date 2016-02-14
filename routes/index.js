@@ -330,7 +330,7 @@ router.get('/cookie/:id', function(req, res) {
     if (err) throw err;
     if (result== null) {
     console.log("fail");
-    res.redirect('/notifications');
+    res.redirect('/');
 } else {
     User.findOne({username:result.author}, function(err, doc) {
         if (err) throw err;
@@ -393,7 +393,7 @@ router.get('/user/:user', function(req, res, next) {
         }
 if (usera == null) {
     console.log("fail");
-    res.redirect('/notifications');
+    res.redirect('/');
 } else {
         Post.find({ "author": usera.username}, null, { sort: '-created' }, function(err, post) {
             if (err) return next(err);
