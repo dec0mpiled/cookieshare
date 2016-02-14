@@ -8,7 +8,7 @@
     {{/if}}
     {{#if user}}
     <font color="white">|</font>
-     <a class="navbar-item" href="/notifications"><span class="glyphicon glyphicon-bell btn" aria-hidden="true">{{#ifneq notes 0}}<font color="red">({{notes}})</font>{{/ifneq}}</a>
+     <a class="navbar-item" href="/notifications"><span class="glyphicon glyphicon-bell btn" aria-hidden="true">{{#if user}}{{#ifneq notes 0}}<font color="red">({{notes}})</font>{{/ifneq}}{{/if}}</a>
     <a class="navbar-item" href="/user/{{user.username}}"><span class="glyphicon glyphicon-user btn" aria-hidden="true"></a>
     <font color="white">|</font>
     {{#if user.admin}}

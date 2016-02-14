@@ -52,10 +52,12 @@ router.get('/filter/date', function(req, res, next) {
 
 /* sort by likes */
 router.get('/public', function(req, res, next) {
+          
+              var notcount=req.user.notamount;
 
     Post.find({}, null, { sort: '-created' }, function (err, posts) {
         if (err) return next(err);
-        res.render('index', { title: 'ShareCookie', filter: 'likes', posts: posts, user: req.user });
+        res.render('index', { title: 'ShareCookie', filter: 'likes', posts: posts, user: req.user, notes:notcount });
     });
 });
 
@@ -326,10 +328,15 @@ Post.findOne({_id:id}, function(err, doc) {
 router.get('/cookie/:id', function(req, res) {
   Post.findOne({ _id: req.params.id }, function(err, result) {
     if (err) throw err;
+    if (result== null) {
+    console.log("fail");
+    res.redirect('/notifications');
+} else {
     User.findOne({username:result.author}, function(err, doc) {
         if (err) throw err;
     res.render('post', { title: "ShareCookie Post by "+result.names, result: result, person:doc, user: req.user });
     });
+}
   });
   });
   
@@ -380,9 +387,14 @@ router.get('/user/:user', function(req, res, next) {
     console.log(req.params.user);
     
     User.findOne({ username: req.params.user }, function(err, usera) {
+        console.log(usera);
         if (err) {
             res.redirect('/');
         }
+if (usera == null) {
+    console.log("fail");
+    res.redirect('/notifications');
+} else {
         Post.find({ "author": usera.username}, null, { sort: '-created' }, function(err, post) {
             if (err) return next(err);
             if (req.user) {
@@ -409,6 +421,7 @@ router.get('/user/:user', function(req, res, next) {
                    res.render('user', {user: req.user, title: usera.username, posts: post, posts1: usera.poststo, account: usera});
                }
 });
+}
 });
 });
 
