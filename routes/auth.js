@@ -27,6 +27,12 @@ router.post('/register', function(req, res, next) {
        doc.notifications.unshift({from: username, type: "follower", redirect:req.params.id});
       doc.save();
     });
+    User.findOne({username: username}, function(err,doc) {
+      if (err) throw err;
+       doc.notamount=doc.notamount+1;
+       doc.notifications.unshift({from: "ShareCookie", type: "welcome", redirect:req.params.id});
+      doc.save();
+    });
   User.register(new User({
     name: req.body.namebox,
     username: req.body.username,
