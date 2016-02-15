@@ -53,6 +53,14 @@ router.get('/user/raw/:id', ensureAuthentication, function(req, res, next) {
     });
 });
 
+// edit user
+router.get('/user/edit/:id', ensureAuthentication, function(req, res, next) {
+    User.findOne({ _id: req.params.id }, function(err, user) {
+        if (err) return next(err);
+        res.render('adminedit', {newuser:user, user:req.user});
+    });
+});
+
 // remove user
 router.get('/user/delete/:id', ensureAuthentication, function(req, res, next) {
     User.findOneAndRemove({ _id: req.params.id }, function(err, user) {

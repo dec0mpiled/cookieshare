@@ -322,7 +322,7 @@ Post.findOne({_id:id}, function(err, doc) {
 
     doc.save();
 });
-    res.redirect('/user/'+req.user.username);
+    res.redirect('/');
 });
 
 
@@ -469,53 +469,53 @@ router.post('/updatepp/:usera', function(req, res, next) {
     User.findOneAndUpdate({ username: req.user.username }, { avatarurl: value }, function(err, doc) {
     if (err) throw err;    
     });
-    res.redirect('/user/'+req.params.usera);
+    res.redirect('/settings');
 });
 
 /* SET profile picture */
-router.post('/update/updatecp', function(req, res, next) {
+router.post('/update/updatecp/:id', function(req, res, next) {
     var value=req.body.ppbox1;
     console.log(value);
-    User.findOneAndUpdate({ _id: req.user.id }, { coverphotourl: value }, function(err, doc) {
+    User.findOneAndUpdate({ _id: req.params.id }, { coverphotourl: value }, function(err, doc) {
     if (err) throw err;    
     });
     res.redirect('/settings');
 });
 
 /* do some fucking awesome shit bitches */
-router.post('/update/displayName', function(req, res, next) {
-    User.findOneAndUpdate({ _id: req.user.id }, { name: req.body.displayName}, function(err, doc) {
+router.post('/update/displayName/:id', function(req, res, next) {
+    User.findOneAndUpdate({ _id: req.params.id }, { name: req.body.displayName}, function(err, doc) {
         if (err) throw err;
     });
-    Post.update({_author: req.user.id}, {names: req.body.displayName}, {multi: true}, function(err) {
+    Post.update({_author: req.params.id}, {names: req.body.displayName}, {multi: true}, function(err) {
         if (err) throw err;
     });
     res.redirect('/settings');
 });
 
 /* do some fucking awesome shit bitches #2 */
-router.post('/update/username', function(req, res, next) {
-    User.findOneAndUpdate({ _id: req.user.id }, { username: req.body.displayName }, function(err, doc) {
+router.post('/update/username/:id', function(req, res, next) {
+    User.findOneAndUpdate({ _id: req.params.id }, { username: req.body.displayName }, function(err, doc) {
         if (err) throw err;
     });
-    Post.update({_author: req.user.id}, {author: req.body.displayName}, {multi: true}, function(err) {
+    Post.update({_author: req.params.id}, {author: req.body.displayName}, {multi: true}, function(err) {
         if (err) throw err;
     });
-    res.redirect('/settings');
+    res.redirect('/user/'+req.body.displayName);
 });
 
 /* do some fucking awesome shit bitches #3!!!! */
-router.post('/update/colour', function(req, res, next) {
+router.post('/update/colour/:id', function(req, res, next) {
     console.log(req.body.colour);
-    User.findOneAndUpdate({ _id: req.user.id }, { themecolor: "#"+req.body.colour }, function(err, doc) {
+    User.findOneAndUpdate({ _id: req.params.id }, { themecolor: "#"+req.body.colour }, function(err, doc) {
         if (err) throw err;
     });
     res.redirect('/settings');
 });
 
 /* do some fucking awesome shit bitches #4!!!! */
-router.post('/update/bio', function(req, res, next) {
-    User.findOneAndUpdate({ _id: req.user.id }, { bio: req.body.bio }, function(err, doc) {
+router.post('/update/bio/:id', function(req, res, next) {
+    User.findOneAndUpdate({ _id: req.params.id }, { bio: req.body.bio }, function(err, doc) {
         if (err) throw err;
     });
     res.redirect('/settings');

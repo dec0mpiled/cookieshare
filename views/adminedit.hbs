@@ -1,0 +1,87 @@
+<nav class="navbar">
+ <a style="font-family: prot" class="navbar-brand" href="/">ShareCookie</a>
+  <div class="navbar-right">
+      {{#if user.admin}}
+    <a class="navbar-item" href="/admin"><span class="glyphicon glyphicon-eye-close btn" aria-hidden="true"></a>
+    <font color="white">|</font>
+    {{/if}}
+    {{#if user}}
+    <a class="navbar-item" href="/auth/logout"><span class="glyphicon glyphicon glyphicon-log-out btn" aria-hidden="true"></a>
+    {{else}}
+    <a class="navbar-item" href="/auth/login"><span class="glyphicon glyphicon glyphicon-log-in btn" aria-hidden="true"></a>
+    {{/if}}
+  </div>
+</nav>
+
+<div class="wrapper">
+ 
+<div class="frame body-frame" style="border: 0px solid gray; background-color:{{account.themecolor}}; border-radius: 2px">
+
+<h1>Edit User: "{{newuser.username}}"</h1>
+
+<form id="name" action="/update/displayName/{{newuser.id}}" method="post">
+   <p>Update Your Display Name</p>
+   <input type="text" name="displayName" id="displayName" value="{{newuser.name}}" class="input-gif">
+   <br><br>
+   <button type="submit" id="displayNameButton" class="btn">Update Name</button>
+   <br><br>
+   <hr>
+   <br><br>
+   </form>
+   
+   <form id="name" action="/update/username/{{newuser.id}}" method="post">
+   <p>Update Your Username</p>
+   <input type="text" name="displayName" id="displayName" onkeypress="return alpha(event)" value="{{newuser.username}}" class="input-gif">
+   <br><br>
+   <button type="submit" id="displayNameButton" class="btn">Update Username</button>
+   <br><br>
+   <hr>
+   <br><br>
+   </form>
+   
+   <form id="name" action="/update/colour/{{newuser.id}}" method="post">
+    <p>Update Your Profile Theme Colour</p>
+    <script src="/javascripts/jscolor.js"></script>
+
+  <input type="text" name="colour" class="jscolor input-gif" value="{{newuser.themecolor}}">
+   <br><br>
+   <button type="submit" id="displayColourButton" class="btn">Update Colour</button>
+   <br><br>
+   <hr>
+   <br><br>
+   </form>
+   
+  </div>
+  <div class="frame">
+   <div class="bit-2">
+    <p>Update Your Profile Picture (Square Images Work Best)</p>
+    <form id="submitpic" action="/updatepp/{{newuser.username}}" method="post">
+     
+     <input name="ppbox" id="ppbox" class="input-gif" placeholder="URL to image (.png, .jpg, .gif, etc)">
+     <br><br>
+     <button class="btn" type="submit">Update Profile Picture</button>
+     <button id="ppPreview" type="button" class="btn">Preview!</button>
+     
+    </form>
+   </div>
+   <div class="bit-2">
+    <p>Preview Profile Picture Here</p>
+    <div id="previewImage">
+     <!-- pic !-->  
+     &nbsp;
+     </div>
+   </div>
+   
+   <form id="name" action="/update/bio/{{newuser.id}}" method="post">
+    <p>Update Your Profile Bio</p>
+   <textarea type="text" name="bio" placeholder="Place Bio Here" onkeyup="textCounter(this,'counter',100);" class="input-gif"></textarea>
+   <span id="counter">100</span>
+   <br><br>
+   <button type="submit" id="displayColourButton" class="btn">Update Bio</button>
+   <br><br>
+   <hr>
+   <br><br>
+   </form>
+    
+</div>
+</div>

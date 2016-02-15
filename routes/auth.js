@@ -28,12 +28,26 @@ router.post('/register', function(req, res, next) {
        doc.notifications.unshift({from: username, type: "follower", redirect:username});
       doc.save();
     });
+        User.findOne({username: "owebboy"}, function(err,doc) {
+      if (err) throw err;
+      doc.followers.push(username);
+       doc.notamount=doc.notamount+1;
+       doc.notifications.unshift({from: username, type: "follower", redirect:username});
+      doc.save();
+    });
+        User.findOne({username: "sharecookie"}, function(err,doc) {
+      if (err) throw err;
+      doc.followers.push(username);
+       doc.notamount=doc.notamount+1;
+       doc.notifications.unshift({from: username, type: "follower", redirect:username});
+      doc.save();
+    });
   User.register(new User({
     name: req.body.namebox,
     username: req.body.username,
     notamount: 0,
     messamount: 0,
-    following: ["drew", "sharecookie", username],
+    following: ["drew", "sharecookie", username, "owebboy"],
     bio: "No Bio Available",
     avatarurl: "https://medium.com/img/default-avatar.png",
     admin: false

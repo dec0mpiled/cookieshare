@@ -137,6 +137,10 @@
         {{likes}} likes
         <!-- comments -->
         <a href="/cookie/{{id}}"><font color=#6666ff>Comments ({{commentamount}})</font></a>
+        {{#if ../user.admin}}
+        <a href="/editcookie/{{author}}/{{id}}" style="text-decoration:none;"><p class="meta-item"><font color=#0066ff>[Edit]</font></p></a>
+        <a href="/deletecookie/{{author}}/{{id}}" style="text-decoration:none;"><p class="meta-item"><font color=#ff0000>[Delete]</font></p></a>
+        {{/if}}
        </div>
      </div>
      

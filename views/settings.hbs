@@ -29,8 +29,7 @@
 
   <div class="frame">
    
-   <h1><i>Update Your Settings</i></h1>
-   <form id="name" action="/update/displayName" method="post">
+   <form id="name" action="/update/displayName/{{user.id}}" method="post">
    <p>Update Your Display Name</p>
    <input type="text" name="displayName" id="displayName" value="{{user.name}}" class="input-gif">
    <br><br>
@@ -40,7 +39,7 @@
    <br><br>
    </form>
    
-   <form id="name" action="/update/username" method="post">
+   <form id="name" action="/update/username/{{user.id}}" method="post">
    <p>Update Your Username</p>
    <input type="text" name="displayName" id="displayName" onkeypress="return alpha(event)" value="{{user.username}}" class="input-gif">
    <br><br>
@@ -50,7 +49,7 @@
    <br><br>
    </form>
    
-   <form id="name" action="/update/colour" method="post">
+   <form id="name" action="/update/colour/{{user.id}}" method="post">
     <p>Update Your Profile Theme Colour</p>
     <script src="/javascripts/jscolor.js"></script>
 
@@ -82,36 +81,8 @@
      &nbsp;
      </div>
    </div>
-  </div>
-  <br><hr>
-  <br><br>
-  
-  
-   <!-- <div class="frame">
-   <div class="bit-2">
-    <p>Update Your Cover Photo</p>
-    <form id="submitpic" action="/update/updatecp" method="post">
-     
-     <input name="ppbox1" id="ppbox1" class="input-gif" placeholder="URL to image (.png, .jpg, .gif, etc)">
-     <br><br>
-     <button class="btn" type="submit">Update Cover Photo</button>
-     <button id="cpPreview" type="button" class="btn">Preview!</button>
-     
-    </form>
-   </div>
-   <div class="bit-2">
-    <p>Preview Cover Photo Here</p>
-    <div id="previewImage1">
-     <!-- pic !-->  
-    <!-- &nbsp;
-     </div>
-   </div>
-  </div>
-  <br><hr>
-  <br><br> !-->
-  
-  
-     <form id="name" action="/update/bio" method="post">
+   
+   <form id="name" action="/update/bio/{{user.id}}" method="post">
     <p>Update Your Profile Bio</p>
    <textarea type="text" name="bio" placeholder="Place Bio Here" onkeyup="textCounter(this,'counter',100);" class="input-gif"></textarea>
    <span id="counter">100</span>
