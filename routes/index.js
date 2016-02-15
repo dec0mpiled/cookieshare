@@ -6,13 +6,14 @@ var Post = require('../models/post');
 /* home */
 router.get('/', function(req, res, next) {
     
-    /*User.update({}, {notifications: []}, {multi: true}, function(err) {
+   /* User.update({}, {messamount: 0}, {multi: true}, function(err) {
         if (err) throw err;
-    });*/
+    }); */
     
     User.find({}, function(err, users) {
       if (err) return next(err);
       if (req.user) {
+    
           console.log(req.user.following);
           
               var notcount=req.user.notamount;
@@ -576,6 +577,15 @@ router.get('/deletecookie/:name/:id', function(req, res, next) {
     });
 });
 
+router.get('/deletepostto/:name/:id', function(req, res, next) {
+    User.findOne({username: req.params.name}, function(err, org) {
+        if (err) return next(err);
+        org.poststo.pull(req.params.id);
+        org.save();
+        res.redirect('/user/'+req.params.name);
+    });
+});
+
 router.get('/editcookie/:name/:id', function(req, res, next) {
     Post.findOne({ _id: req.params.id }, function(err, post) {
         if (err) return next(err);
@@ -610,6 +620,16 @@ router.get('/notifications', function(req, res, next) {
     res.render('notifications', {title:"Notifications", user:req.user, notifications:doc.notifications});
 });
 }); 
+
+router.get('/clearnotes', function(req, res, next) {
+    User.findOne({username:req.user.username}, function(err, doc) {
+       if (err) throw err; 
+       doc.notifications=[];
+       doc.notamount=0;
+       doc.save();
+    });
+    res.redirect('/notifications');
+});
 
 /*/*
 router.get('/searchfollowing', function(req, res, next) {

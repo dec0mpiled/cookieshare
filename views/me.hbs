@@ -114,8 +114,7 @@
     </div>
     
    {{#each posts1}}
-   <br>
-   <div class="cookie posts" style="border:1px solid gray; border-radius:2px">
+   <div class="cookie posts" style="border-top:1px solid gray; border-radius:2px">
     
     <div class="frame">
      
@@ -135,6 +134,7 @@
         <font color="{{color}}">
         {{content}}
         </font>
+        <a href="/deletepostto/{{author}}/{{id}}" style="text-decoration:none;"><p class="meta-item"><font color=#ff0000>[Delete]</font></p></a>
        </div>
      
     </div>

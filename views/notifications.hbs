@@ -2,8 +2,6 @@
  <a style="font-family: prot" class="navbar-brand" href="/">ShareCookie</a>
   <div class="navbar-right">
     {{#if user}}
-    <a class="navbar-item" href="/settings"><span class="glyphicon glyphicon glyphicon-cog btn" aria-hidden="true"></a>
-    <font color="white">|</font>
     <a class="navbar-item" href="/auth/logout"><span class="glyphicon glyphicon glyphicon-log-out btn" aria-hidden="true"></a>
     {{else}}
     <a class="navbar-item" href="/auth/login"><span class="glyphicon glyphicon glyphicon-log-in btn" aria-hidden="true"></a>
@@ -15,6 +13,7 @@
  
 <div class="frame body-frame" style="border: 0px solid gray; background-color:{{account.themecolor}}; border-radius: 2px">
     <h1>Notifications</h1>
+    <h3><a href="/clearnotes">(Clear All)</a></h3><br>
     <!--<input class="input-gif" placeholder="Search for a user by name (Please enter exact, no @)" required><br><br><a href="/searchfollowing" name="searchbox" class="btn">Search</a><br><br><hr><br>!-->
     
 {{#each notifications}}
