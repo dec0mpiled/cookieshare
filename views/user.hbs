@@ -23,12 +23,14 @@
   <p><b>Bio: </b>{{account.bio}}</p>
   {{#if user}}
   {{#ifneq account.username user.username}}
+  {{#ifneq account.username "sharecookie"}}
    <div class="bit-20">
   <a href="/{{buttontext}}/{{account.username}}" class="btn">{{buttontext}}</a>
  </div>
  <div class="bit-30">
   
  </div>
+ {{/ifneq}}
  {{/ifneq}}
  {{/if}}
  </div>

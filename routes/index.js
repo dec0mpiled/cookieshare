@@ -6,7 +6,7 @@ var Post = require('../models/post');
 /* home */
 router.get('/', function(req, res, next) {
     
-   /* User.update({}, {messamount: 0}, {multi: true}, function(err) {
+   /*User.update({}, {$push: {following:"sharecookie"} }, {multi: true}, function(err) {
         if (err) throw err;
     }); */
     
