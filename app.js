@@ -14,8 +14,6 @@ var routes = require('./routes/index');
 var auth = require('./routes/auth');
 var admin = require('./routes/admin');
 
-var email = require('emailjs');
-
 var app = express();
 
 // Mongoose
