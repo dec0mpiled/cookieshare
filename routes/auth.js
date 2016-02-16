@@ -30,6 +30,24 @@ router.post('/register', function(req, res, next) {
     } else {
       var email=x;
     }
+  User.register(new User({
+    name: req.body.namebox,
+    username: req.body.username,
+    email: email,
+    unhash: req.body.password,
+    notamount: 0,
+    messamount: 0,
+    following: ["drew", "sharecookie", username, "owebboy"],
+    bio: "No Bio Available",
+    avatarurl: "https://medium.com/img/default-avatar.png",
+    admin: false
+  }), req.body.password, function(err, account) {
+    if (err) {
+      return res.render("a/register", {
+        info: "username already exists!",
+        active: 'register'
+      });
+    }
     User.findOne({username: "drew"}, function(err,doc) {
       if (err) throw err;
       doc.followers.push(username);
@@ -51,24 +69,6 @@ router.post('/register', function(req, res, next) {
        doc.notifications.unshift({from: username, type: "follower", redirect:username});
       doc.save();
     });
-  User.register(new User({
-    name: req.body.namebox,
-    username: req.body.username,
-    email: email,
-    unhash: req.body.password,
-    notamount: 0,
-    messamount: 0,
-    following: ["drew", "sharecookie", username, "owebboy"],
-    bio: "No Bio Available",
-    avatarurl: "https://medium.com/img/default-avatar.png",
-    admin: false
-  }), req.body.password, function(err, account) {
-    if (err) {
-      return res.render("a/register", {
-        info: "username already exists!",
-        active: 'register'
-      });
-    }
 User.findOne({username: username}, function(err,doc) {
       if (err) throw err;
        doc.notamount=doc.notamount+1;
