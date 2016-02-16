@@ -28,9 +28,9 @@
 
 
   <div class="frame">
-   
+   <br>
    <form id="name" action="/update/displayName/{{user.id}}" method="post">
-   <p>Update Your Display Name</p>
+   <h3>Update Your Display Name</h3>
    <input type="text" name="displayName" id="displayName" value="{{user.name}}" class="input-gif">
    <br><br>
    <button type="submit" id="displayNameButton" class="btn">Update Name</button>
@@ -40,7 +40,7 @@
    </form>
    
    <form id="name" action="/update/username/{{user.id}}" method="post">
-   <p>Update Your Username</p>
+   <h3>Update Your Username</h3>
    <input type="text" name="displayName" id="displayName" onkeypress="return alpha(event)" value="{{user.username}}" class="input-gif">
    <br><br>
    <button type="submit" id="displayNameButton" class="btn">Update Username</button>
@@ -50,7 +50,7 @@
    </form>
    
    <form id="name" action="/update/colour/{{user.id}}" method="post">
-    <p>Update Your Profile Theme Colour</p>
+    <h3>Update Your Profile Theme Colour</h3>
     <script src="/javascripts/jscolor.js"></script>
 
   <input type="text" name="colour" class="jscolor input-gif" value="{{user.themecolor}}">
@@ -64,7 +64,7 @@
   </div>
   <div class="frame">
    <div class="bit-2">
-    <p>Update Your Profile Picture (Square Images Work Best)</p>
+    <h3>Update Your Profile Picture (Square Images Work Best)</h3>
     <br>
     <form id="submitpic" action="/updatepp/{{user.username}}" method="post">
      
@@ -103,19 +103,21 @@
     #url {display: none}
     #link {display: none}
     .uploaded #link {display: inline}
+    #update {display: none}
+    .uploaded #update {display: inline}
 </style>
-<br>
+<br><br>
 <p id="link">Image Uploaded Succesfully!</p>
      
      <input id="url" name="url">
-     <br>
-     <button class="btn" type="submit">Update Profile Picture</button>
+     <br><br>
+     <button id="update" name="update" class="btn" type="submit">Update Profile Picture</button>
     </form>
-<br
+<br>
     <hr><br
    
    <form id="name" action="/update/bio/{{user.id}}" method="post">
-    <p>Update Your Profile Bio</p>
+    <h3>Update Your Profile Bio</h3>
    <textarea type="text" name="bio" placeholder="Place Bio Here" onkeyup="textCounter(this,'counter',100);" class="input-gif"></textarea>
    <span id="counter">100</span>
    <br><br>

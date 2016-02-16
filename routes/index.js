@@ -453,7 +453,7 @@ router.get('/settings', function(req, res, next) {
 
 /* SET profile picture */
 router.post('/updatepp/:usera', function(req, res, next) {
-    var value=req.body.ppbox;
+    var value=req.body.url;
     console.log(value);
     User.findOneAndUpdate({ username: req.user.username }, { avatarurl: value }, function(err, doc) {
     if (err) throw err;    
