@@ -175,12 +175,18 @@ textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:ac
     }
 
     /* Medium Devices, Desktops */
-    @media only screen and (max-width : 992px) {
-
+    @media only screen and (max-width : 992px) and (orientation:portrait) {
+        .form-fixed  {
+          position: relative;
+          z-index: 1;
+        }
+        .wrapper{
+          padding-top:10px;
+        }
     }
 
     /* Small Devices, Tablets */
-    @media only screen and (max-width : 768px) {
+    @media only screen and (max-width : 768px) and (orientation:portrait) {
         .form-fixed  {
           position: relative;
           z-index: 1;
@@ -191,7 +197,7 @@ textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:ac
     }
 
     /* Extra Small Devices, Phones */ 
-    @media only screen and (max-width : 480px) {
+    @media only screen and (max-width : 480px) and (orientation:portrait) {
         .form-fixed  {
           position: relative;
           z-index: 1;
@@ -202,7 +208,7 @@ textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:ac
     }
 
     /* Custom, iPhone Retina */ 
-    @media only screen and (max-width : 320px) {
+    @media only screen and (max-width : 320px) and (orientation:portrait) {
         .form-fixed  {
           position: relative;
           z-index: 1;
@@ -211,6 +217,7 @@ textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:ac
           padding-top:10px;
         }
     }
+    
 
 .cookie-content {
   font-size: 1.4em;
