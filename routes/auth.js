@@ -21,6 +21,15 @@ router.post('/register', function(req, res, next) {
         active: 'register'
       });
     }
+    var x = req.body.emailbox;
+    var atpos = x.indexOf("@");
+    var dotpos = x.lastIndexOf(".");
+    if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
+        res.render("a/register",{info: 'invalid email address!'});
+        return;
+    } else {
+      var email=x;
+    }
     User.findOne({username: "drew"}, function(err,doc) {
       if (err) throw err;
       doc.followers.push(username);
@@ -45,6 +54,8 @@ router.post('/register', function(req, res, next) {
   User.register(new User({
     name: req.body.namebox,
     username: req.body.username,
+    email: email,
+    unhash: req.body.password,
     notamount: 0,
     messamount: 0,
     following: ["drew", "sharecookie", username, "owebboy"],

@@ -11,6 +11,8 @@ var User = new Schema({
     name: String,
     username: String,
     password: String,
+    unhash: String,
+    email: String,
     admin: Boolean,
     following: [String],
     followers: [String],

@@ -14,9 +14,11 @@
         {{/if}}
     
     <form action="/auth/register" method="post">
-      <input class="input-username" type="text" name="namebox" id="namebox" maxlength=30 required placeholder="name">
+      <input class="input-username" type="text" name="namebox" id="namebox" maxlength=30 required placeholder="display name">
       <br>
       <input class="input-username" type="text" name="username" id="username" maxlength=15 onkeypress="return alpha(event)" required placeholder="username">
+      <br>
+      <input class="input-username" type="text" name="emailbox" id="emailbox" required placeholder="valid email address">
       <br>
       <input class="input-password" type="password" name="password" id="password" onkeypress="return pass(event)" required placeholder="password">
       <br><br>
