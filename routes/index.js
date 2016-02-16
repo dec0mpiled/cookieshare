@@ -20,7 +20,7 @@ router.get('/', function(req, res, next) {
           
           Post.find({ 'author': { $in: req.user.following } }, null, { sort: '-created' },  function(err, followings) {
             if (err) return next(err);
-            res.render('index', { title: 'ShareCookie', filter: 'date', posts: followings, user: req.user, notes:notcount});
+            res.render('index', { title: 'ShareCookie', filter: 'date', posts: followings, user: req.user, notes:notcount, header:"My Timeline"});
           });
         
       } else { 
@@ -58,7 +58,7 @@ router.get('/public', function(req, res, next) {
 
     Post.find({}, null, { sort: '-created' }, function (err, posts) {
         if (err) return next(err);
-        res.render('index', { title: 'ShareCookie', filter: 'likes', posts: posts, user: req.user, notes:notcount });
+        res.render('index', { title: 'ShareCookie', filter: 'likes', posts: posts, user: req.user, notes:notcount,  header:"Public Timeline" });
     });
 });
 

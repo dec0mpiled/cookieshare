@@ -7,8 +7,9 @@ var bodyParser = require('body-parser');
 var hbs = require('hbs');
 var HandlebarsIntl = require("handlebars-intl");
 var passport = require("passport"),
-    LocalStrategy = require('passport-local').Strategy;
+LocalStrategy = require('passport-local').Strategy;
 var User = require("./models/user");
+
 
 var routes = require('./routes/index');
 var auth = require('./routes/auth');
@@ -47,13 +48,18 @@ app.use(passport.session());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
 app.use('/', routes);
 app.use('/auth', auth);
 app.use('/admin', admin);
 
 passport.use(new LocalStrategy(User.authenticate()));
+
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

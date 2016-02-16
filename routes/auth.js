@@ -94,6 +94,8 @@ router.post('/login', function(req, res, next) {
     if (!user) { return res.render("index", { info: "username and password do not match!", active: 'login', title: 'ShareCookie', posts:posts }); }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
+      var hour = 3600000;
+      req.session.cookie.maxAge = 14 * 24 * hour; //2 weeks
       return res.redirect('/');
     });
     });
