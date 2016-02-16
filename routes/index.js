@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
     }); */
     
     User.find({}, function(err, users) {
-      if (err) return next(err);
+      if (err) return (err);
       if (req.user) {
           console.log(req.user.following);
           
