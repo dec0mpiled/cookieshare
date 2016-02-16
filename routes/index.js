@@ -11,8 +11,9 @@ router.get('/', function(req, res, next) {
     }); */
     
     User.find({}, function(err, users) {
-      if (err) return (err);
+      if (err) return next(err);
       if (req.user) {
+    
           console.log(req.user.following);
           
               var notcount=req.user.notamount;
@@ -519,6 +520,7 @@ router.post('/update/bio/:id', function(req, res, next) {
     });
     res.redirect('/settings');
 });
+
 
 /* follow a damn user */
 router.get('/Follow/:user', function(req, res, next) {
