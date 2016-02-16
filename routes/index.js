@@ -2,10 +2,10 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
 var Post = require('../models/post');
+var mongoose = require('mongoose');
 
 /* home */
 router.get('/', function(req, res, next) {
-    
    /*User.update({}, {$push: {following:"sharecookie"} }, {multi: true}, function(err) {
         if (err) throw err;
     }); */
@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
     User.find({}, function(err, users) {
       if (err) return next(err);
       if (req.user) {
-    
+          
           console.log(req.user.following);
           
               var notcount=req.user.notamount;
@@ -201,26 +201,15 @@ router.post('/sharecookie', function(req, res, next) {
     var url=req.body.picbox;
     var gurl=req.body.urlbox;
     var color="blacK";
-    var mynewurl;
     var ggroup=req.body.groupbox;
+    var mynewurl = req.body.url;
+    console.log(mynewurl);
     
     if (ggroup!="") {
         var group=ggroup;
     } else {
          var group="";
     }
-    
-var myurl=url;
-
-if (myurl=="" || myurl==" "){
-    mynewurl="";
-}
-
-if (myurl!="") {
-if (myurl.startsWith("http://")||myurl.startsWith("https://")) {
-    mynewurl=myurl;
-}
-}
         
 
 var mycontent = contentq;

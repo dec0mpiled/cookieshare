@@ -22,35 +22,73 @@
 
 <div class="wrapper">
  
- <div class="frame body-frame">
-  <div class="bit-2">
+ <div class="frame body-frame" >
+  <div class="bit-2" >
    
-   <div class="form-fixed">
+   <div class="form-fixed" style="background-color:#FFF; border-radius:2px">
     <!-- forms -->
     {{#if user}}
     <h1>Post to ShareCookie</h1>
     
     <form id="postcookie" action="/sharecookie" method="post">
-     <textarea  name="texxtt" id="texxtt" class="textarea fixed" required placeholder="What's going on?"></textarea><br><br>
+     <textarea  name="texxtt" id="texxtt" class="textarea" required placeholder="What's going on?"></textarea><br><br>
      <input class="input-gif" name="urlbox" id="urlbox" placeholder="External URL (Optional)"><br><br>
-     <input class="input-gif" name="picbox" id="picbox" placeholder="Link to an image (Optional)"><br><br>
+
+
     <input class="input-gif" name="groupbox" id="groupbox" onkeypress="return group(event)" placeholder="Send this post to a group (Optional)"><br><br>
-     <a class="btn" id="ppPreview" type="button">Preview Image</a> <button class="btn " id="login">Create Post</button> <!--<span id="counter">200</span>!-->
-    </form>
+   
+   <input type="file" onchange="upload(this.files[0])">
+
+<script>
+    /* Drag'n drop stuff */
+    function upload(file) {
+        /* Is the file an image? */
+        if (!file || !file.type.match(/image.*/)) return;
+        /* It is! */
+        document.body.className = "uploading";
+        /* Lets build a FormData object*/
+        var fd = new FormData(); // I wrote about it: https://hacks.mozilla.org/2011/01/how-to-develop-a-html5-image-uploader/
+        fd.append("image", file); // Append the file
+        var xhr = new XMLHttpRequest(); // Create the XHR (Cross-Domain XHR FTW!!!) Thank you sooooo much imgur.com
+        xhr.open("POST", "https://api.imgur.com/3/image.json"); // Boooom!
+        xhr.onload = function() {
+            // Big win!
+            document.querySelector("#link").href = JSON.parse(xhr.responseText).data.link;
+            document.querySelector("#url").value = JSON.parse(xhr.responseText).data.link;
+            var linkval=JSON.parse(xhr.responseText).data.link;
+            document.body.className = "uploaded";
+        }
+        
+        xhr.setRequestHeader('Authorization', 'Client-ID 9fa1779f17f318a'); // Get your own key http://api.imgur.com/
+        
+        // Ok, I don't handle the errors. An exercise for the reader.
+        /* And now, we send the formdata */
+        xhr.send(fd);
+    }
+</script>
       
-     <br>
-    <p>Preview Image Here (if provided)</p>
-    <div id="previewImage" style="border 1px solid black">
-     <!-- pic !-->  
-     &nbsp;
-     </div>
+    <style>
+    #url {display: none}
+    #link {display: none}
+    .uploaded #link {display: inline}
+</style>
+<br>
+<p id="link">Image Uploaded Succesfully!</p>
+<input id="url" name="url">
+<br>
+<br>
+   
+    <button class="btn " id="login">Create Post</button> <!--<span id="counter">200</span>!-->
+    
+    </form>
 
     {{else}}
-    <h1>Login or Register to participate!</h1>
     
-    <div class="frame">
+    <div class="frame fixed">
      
      <div class="bit-2">
+      
+      <h1>Login or Register to participate!</h1>
       
       <h3>Sign in</h3>
       
@@ -68,17 +106,6 @@
        <a href="/auth/register"><font color=#6666ff>Don't have an account? Sign up now!</font></a>
       </form>
       
-      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- sharecookie -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-4012175216329328"
-     data-ad-slot="7708538292"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-      
      </div>
      
     </div>
@@ -87,7 +114,8 @@
    </div>
    
   </div>
-  
+      
+    
   <div class="bit-2">
    {{#if user}}
    <h1>{{header}}</h1>

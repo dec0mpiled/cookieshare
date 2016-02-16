@@ -65,22 +65,54 @@
   <div class="frame">
    <div class="bit-2">
     <p>Update Your Profile Picture (Square Images Work Best)</p>
+    <br>
     <form id="submitpic" action="/updatepp/{{user.username}}" method="post">
      
-     <input name="ppbox" id="ppbox" class="input-gif" placeholder="URL to image (.png, .jpg, .gif, etc)">
-     <br><br>
-     <button class="btn" type="submit">Update Profile Picture</button>
-     <button id="ppPreview" type="button" class="btn">Preview!</button>
+        
+   <input type="file" onchange="upload(this.files[0])">
+
+<script>
+    /* Drag'n drop stuff */
+    function upload(file) {
+        /* Is the file an image? */
+        if (!file || !file.type.match(/image.*/)) return;
+        /* It is! */
+        document.body.className = "uploading";
+        /* Lets build a FormData object*/
+        var fd = new FormData(); // I wrote about it: https://hacks.mozilla.org/2011/01/how-to-develop-a-html5-image-uploader/
+        fd.append("image", file); // Append the file
+        var xhr = new XMLHttpRequest(); // Create the XHR (Cross-Domain XHR FTW!!!) Thank you sooooo much imgur.com
+        xhr.open("POST", "https://api.imgur.com/3/image.json"); // Boooom!
+        xhr.onload = function() {
+            // Big win!
+            document.querySelector("#link").href = JSON.parse(xhr.responseText).data.link;
+            document.querySelector("#url").value = JSON.parse(xhr.responseText).data.link;
+            var linkval=JSON.parse(xhr.responseText).data.link;
+            document.body.className = "uploaded";
+        }
+        
+        xhr.setRequestHeader('Authorization', 'Client-ID 9fa1779f17f318a'); // Get your own key http://api.imgur.com/
+        
+        // Ok, I don't handle the errors. An exercise for the reader.
+        /* And now, we send the formdata */
+        xhr.send(fd);
+    }
+</script>
+
+    <style>
+    #url {display: none}
+    #link {display: none}
+    .uploaded #link {display: inline}
+</style>
+<br>
+<p id="link">Image Uploaded Succesfully!</p>
      
+     <input id="url" name="url">
+     <br>
+     <button class="btn" type="submit">Update Profile Picture</button>
     </form>
-   </div>
-   <div class="bit-2">
-    <p>Preview Profile Picture Here</p>
-    <div id="previewImage">
-     <!-- pic !-->  
-     &nbsp;
-     </div>
-   </div>
+<br
+    <hr><br
    
    <form id="name" action="/update/bio/{{user.id}}" method="post">
     <p>Update Your Profile Bio</p>
@@ -89,14 +121,8 @@
    <br><br>
    <button type="submit" id="displayColourButton" class="btn">Update Bio</button>
    <br><br>
-   <hr>
    <br><br>
    </form>
-
- <div class="bit-20">
-  
-
- </div>
 
 
 </div>
