@@ -72,13 +72,13 @@ body {
 /* Display */
 .form-fixed {
   position: fixed;
-  width:500px;
+  width:50%;
 }
 .form-rel {
   position: relative;
 }
 textarea {
-  width: 100%;
+  width: 60%;
   font-size: 1.4em;
   color: #111;
   height: 150px;
@@ -105,7 +105,7 @@ textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:ac
 
 .input-title {
   border: 1px solid #000;
-  width: 100%;
+  width: 50%;
   font-size: 1.8em;
   padding: .5em;
 
@@ -114,7 +114,7 @@ textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:ac
 
 .input-gif {
   border: 1px solid #000;
-  width: 100%;
+  width: 50%;
   font-size: 1em;
   padding: .5em;
 
