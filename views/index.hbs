@@ -25,7 +25,7 @@
  <div class="frame body-frame" >
   <div class="bit-2" >
    
-   <div class="form-fixed" style="background-color:#FFF; border-radius:2px">
+   <div class="form-fixed">
     <!-- forms -->
     {{#if user}}
     <h1>Post to ShareCookie</h1>
@@ -165,6 +165,10 @@
         {{likes}} likes
         <!-- comments -->
         <a href="/cookie/{{id}}"><font color=#6666ff>Comments ({{commentamount}})</font></a>
+        {{#ifeq ../user.username author}}
+        <a href="/editcookie/{{author}}/{{id}}" style="text-decoration:none;"><p class="meta-item"><font color=#0066ff>[Edit]</font></p></a>
+        <a href="/deletecookie/{{author}}/{{id}}" style="text-decoration:none;"><p class="meta-item"><font color=#ff0000>[Delete]</font></p></a>
+        {{/ifeq}}
         {{#if ../user.admin}}
         <a href="/editcookie/{{author}}/{{id}}" style="text-decoration:none;"><p class="meta-item"><font color=#0066ff>[Edit]</font></p></a>
         <a href="/deletecookie/{{author}}/{{id}}" style="text-decoration:none;"><p class="meta-item"><font color=#ff0000>[Delete]</font></p></a>

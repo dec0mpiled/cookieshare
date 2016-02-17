@@ -80,19 +80,19 @@ router.get('/likepost/:author/:id/:return/:group', function(req, res, next) {
         doc.likes.push({ keys: req.params.id.toString()});
         doc.save();
         
-        Post.findOne({ _id: req.params.id }, function (err, doc){
-            doc.likes=doc.likes+1;
-            if (doc.likes<=-1){
-                 doc.color="red";
+        Post.findOne({ _id: req.params.id }, function (err, docs){
+            docs.likes=docs.likes+1;
+            if (docs.likes<=-1){
+                 docs.color="red";
             } else {
-                doc.color="blacK";
+                docs.color="blacK";
             }
-            doc.save();
+            docs.save();
             if (err) throw err;
-        User.findOne({username:doc.author}, function(err, doc) {
+        User.findOne({username:docs.author}, function(err, doc) {
         if (err) return next(err);
        doc.notamount=doc.notamount+1;
-       doc.notifications.unshift({from: req.user.username, type: "like", redirect:req.params.id});
+       doc.notifications.unshift({from: req.user.username, type: "like", redirect:req.params.id, mini:docs.content.substr(0,50)});
        doc.save();
     });
         });
@@ -143,19 +143,19 @@ router.get('/dislikepost/:author/:id/:return/:group', function(req, res) {
         doc.dislikes.push({ keys: req.params.id.toString()});
         doc.save();
         
-        Post.findOne({ _id: req.params.id }, function (err, doc){
-            doc.likes=doc.likes-1;
-            if (doc.likes<=-1){
-                 doc.color="red";
+        Post.findOne({ _id: req.params.id }, function (err, docs){
+            docs.likes=docs.likes-1;
+            if (docs.likes<=-1){
+                 docs.color="red";
             } else {
-                doc.color="blacK";
+                docs.color="blacK";
             }
-            doc.save();
+            docs.save();
             if (err) throw err;
-            User.findOne({username:doc.author}, function(err, doc) {
+            User.findOne({username:docs.author}, function(err, doc) {
         if (err) return (err);
        doc.notamount=doc.notamount+1;
-       doc.notifications.unshift({from: req.user.username, type: "dislike", redirect:req.params.id});
+       doc.notifications.unshift({from: req.user.username, type: "dislike", redirect:req.params.id, mini:docs.content.substr(0,50)});
        doc.save();
             });
         });
@@ -355,15 +355,15 @@ router.post("/sendcomment/:id", function(req, res, next) {
     //var newcomq = mynewcomment.replace(badWord,"****");
     //commentval=newcomq;
     var id=req.params.id;
-    Post.findOne({"_id" : id}, function (err, doc){
-        doc.commentslist.push({ value: commentval, likes: 0, user: name, _author: req.user.id, created: new Date() });
-        doc.commentamount=doc.commentamount+1;
-        doc.save();
+    Post.findOne({"_id" : id}, function (err, docs){
+        docs.commentslist.push({ value: commentval, likes: 0, user: name, _author: req.user.id, created: new Date() });
+        docs.commentamount=docs.commentamount+1;
+        docs.save();
         if (err) throw err;
-    User.findOne({username:doc.author}, function(err, doc) {
+    User.findOne({username:docs.author}, function(err, doc) {
         if (err) return next(err);
        doc.notamount=doc.notamount+1;
-       doc.notifications.unshift({from: req.user.username, type: "comment", redirect:req.params.id});
+       doc.notifications.unshift({from: req.user.username, type: "comment", redirect:req.params.id, mini:commentval.substr(0,50)});
        doc.save();
     });
 });
@@ -438,7 +438,7 @@ router.post("/sendtouser/:id", function(req, res, next) {
         console.log(doc.username);
         doc.poststo.push({ keys: commentval, author: req.user.username, _author: req.user.id, created: new Date() });
         doc.notamount=doc.notamount+1;
-       doc.notifications.unshift({from: req.user.username, type: "postto", redirect:req.params.id});
+       doc.notifications.unshift({from: req.user.username, type: "postto", redirect:req.params.id, mini:commentval.substr(0,50)});
         doc.save();
         if (err) throw err;
     res.redirect("/user/"+doc.username);
@@ -619,6 +619,13 @@ router.get('/clearnotes', function(req, res, next) {
        doc.save();
     });
     res.redirect('/notifications');
+});
+
+router.get('/poststome/:name', function(req, res, next) {
+User.findOne({ username: req.params.name }, function(err, usera) {
+    if (err) return next(err);
+    res.render('poststome', {posts:usera.poststo, user:req.user});
+});
 });
 
 /*/*
