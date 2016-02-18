@@ -632,7 +632,7 @@ User.findOne({ username: req.params.name }, function(err, usera) {
 router.get('/posttoel/:name', function(req, res, next) {
 User.findOne({ username: req.params.name }, function(err, usera) {
     if (err) return next(err);
-    res.render('posttoel', {posts:usera.poststo, user:req.user});
+    res.render('posttoel', {posts:usera.poststo, users:usera, user:req.user});
 });
 });
 

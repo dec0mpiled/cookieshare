@@ -23,13 +23,13 @@
    
    <div class="form-rel">
     <!-- forms -->
-    <form id="sendtouser" action="/sendtouser/{{account.id}}" method="post">
-     <textarea onkeyup="textCounter(this,'counter',200);" name="msgbox" id="msgbox" class="textarea fixed" required placeholder="Enter your message to @{{account.username}} here! (Max 100 characters)"></textarea>
-     <button class="btn " id="post">Post to @{{account.username}}</button> <span id="counter">100</span>
+    <form id="sendtouser" action="/sendtouser/{{users.id}}" method="post">
+     <textarea onkeyup="textCounter(this,'counter',200);" name="msgbox" id="msgbox" class="textarea fixed" required placeholder="Enter your message to @{{users.username}} here! (Max 100 characters)"></textarea>
+     <button class="btn " id="post">Post to @{{users.username}}</button> <span id="counter">100</span>
     </form>
     </div>
     
-   {{#each posts1}}
+   {{#each posts}}
    <br>
    <div class="cookie posts" style="border-top:1px solid gray; border-radius:2px">
     
