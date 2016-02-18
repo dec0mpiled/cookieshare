@@ -86,7 +86,7 @@
     
     <div class="frame fixed">
      
-     <div class="bit-2">
+     <div class="bit-100">
       
       <h1>Login or Register to participate!</h1>
       
@@ -144,8 +144,8 @@
        
        <!-- content -->
        <div class="content">
-        <a style="text-decoration:none;" href="/cookie/{{id}}"><font color="{{color}}" size=5>
-        {{content}}
+        <a id="content" style="text-decoration:none;" href="/cookie/{{id}}"><font color="{{color}}" size=5>
+        {{{content}}}
         </font>
         </a>
        </div>
@@ -154,7 +154,7 @@
        <a style="text-decoration:none;" href="{{link}}">External Site</a><br><br>
        {{/if}}
      {{#if myurl}}
-     <img src="{{myurl}}" style="border:1px solid black; max-width:100%; max-height:100%;">
+     <a href="/cookie/{{id}}"><img src="{{myurl}}" style="border:1px solid black; max-width:100%; max-height:100%;"></a>
      {{/if}}
            <div class="actions">
        
@@ -165,14 +165,11 @@
         {{likes}} likes
         <!-- comments -->
         <a href="/cookie/{{id}}"><font color=#6666ff>Comments ({{commentamount}})</font></a>
-        {{#ifeq ../user.username author}}
+        {{#or ../user.username author ../user.admin true}}
         <a href="/editcookie/{{author}}/{{id}}" style="text-decoration:none;"><p class="meta-item"><font color=#0066ff>[Edit]</font></p></a>
         <a href="/deletecookie/{{author}}/{{id}}" style="text-decoration:none;"><p class="meta-item"><font color=#ff0000>[Delete]</font></p></a>
-        {{/ifeq}}
-        {{#if ../user.admin}}
-        <a href="/editcookie/{{author}}/{{id}}" style="text-decoration:none;"><p class="meta-item"><font color=#0066ff>[Edit]</font></p></a>
-        <a href="/deletecookie/{{author}}/{{id}}" style="text-decoration:none;"><p class="meta-item"><font color=#ff0000>[Delete]</font></p></a>
-        {{/if}}
+        {{/or}}
+        
        </div>
      </div>
      

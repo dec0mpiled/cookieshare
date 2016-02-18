@@ -116,6 +116,13 @@ hbs.registerHelper('ifneq', function(v1, v2, options) {
   return options.inverse(this);
 });
 
+hbs.registerHelper('or', function(v1, v2, v3, v4, options) {
+  if(v1 == v2 || v3==v4) {
+    return options.fn(this);
+  }
+  return options.inverse(this);
+});
+
 HandlebarsIntl.registerWith(hbs);
 
 // production error handler

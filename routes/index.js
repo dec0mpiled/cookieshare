@@ -235,7 +235,7 @@ mycontent = mycontent.replace(":P"||":p","😛");
         names: name,
         author: authorq,
         _author: req.user.id,
-        content: mycontent,
+        content: marked(mycontent),
         myurl: mynewurl,
         link: gurl,
         color: color,
