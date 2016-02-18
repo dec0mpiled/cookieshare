@@ -564,16 +564,16 @@ router.get('/Unfollow/:user', function(req, res, next) {
 router.get('/deletecookie/:name/:id', function(req, res, next) {
     Post.findOneAndRemove({ _id: req.params.id }, function(err, post) {
         if (err) return next(err);
-        res.redirect('/user/'+req.params.name);
+        res.redirect('/');
     });
 });
 
 router.get('/deletepostto/:name/:id', function(req, res, next) {
-    User.findOne({username: req.params.name}, function(err, org) {
+    User.findOne({username: req.user.username}, function(err, org) {
         if (err) return next(err);
         org.poststo.pull(req.params.id);
         org.save();
-        res.redirect('/user/'+req.params.name);
+        res.redirect('/poststome/'+req.user.username);
     });
 });
 
