@@ -1,0 +1,67 @@
+<nav class="navbar">
+ <a style="font-family: prot" class="navbar-brand" href="/">ShareCookie</a>
+  <div class="navbar-right">
+    {{#if user}}
+    <a class="navbar-item" href="/settings"><span class="glyphicon glyphicon glyphicon-cog btn" aria-hidden="true"></a>
+    <font color="white">|</font>
+    <a class="navbar-item" href="/auth/logout"><span class="glyphicon glyphicon glyphicon-log-out btn" aria-hidden="true"></a>
+    {{else}}
+    <a class="navbar-item" href="/auth/login"><span class="glyphicon glyphicon glyphicon-log-in btn" aria-hidden="true"></a>
+    {{/if}}
+  </div>
+</nav>
+
+<div class="wrapper">
+ 
+ <div class="frame body-frame" >
+
+<div class="bit-2">
+  <br>
+  {{#if user}}
+   <h2>Post on this page:</h2><br><br>
+   <!-- cookies -->
+   
+   <div class="form-rel">
+    <!-- forms -->
+    <form id="sendtouser" action="/sendtouser/{{account.id}}" method="post">
+     <textarea onkeyup="textCounter(this,'counter',200);" name="msgbox" id="msgbox" class="textarea fixed" required placeholder="Enter your message to @{{account.username}} here! (Max 100 characters)"></textarea>
+     <button class="btn " id="post">Post to @{{account.username}}</button> <span id="counter">100</span>
+    </form>
+    </div>
+    
+   {{#each posts1}}
+   <br>
+   <div class="cookie posts" style="border-top:1px solid gray; border-radius:2px">
+    
+    <div class="frame">
+     
+     <div class="bit-75">
+      
+         <!-- title -->
+       <h2><font color="{{color}}">{{keys}}</font></h2>
+       
+       <div class="meta">
+        
+        <!-- author -->
+        <p class="meta-item"><a href="/user/{{author}}" class="a"><font color=#6666ff>@{{author}}</font></p></a>
+        <p class="meta-item">{{formatDate created day="numeric" month="long" year="numeric"}}</p>
+       </div>
+       <!-- content -->
+       <div class="content">
+        <font color="{{color}}">
+        {{content}}
+        </font>
+       </div>
+     
+    </div>
+    
+   </div>
+   {{/each}}
+   
+  </div>
+  {{else}}
+   <h2>Please log in to post on this page!</h2>
+   {{/if}}
+ </div>
+ </div>
+ </div>

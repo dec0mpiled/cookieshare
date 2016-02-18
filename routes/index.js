@@ -3,6 +3,7 @@ var router = express.Router();
 var User = require('../models/user');
 var Post = require('../models/post');
 var mongoose = require('mongoose');
+var marked = require('marked');
 
 /* home */
 router.get('/', function(req, res, next) {
@@ -324,7 +325,7 @@ router.get('/cookie/:id', function(req, res) {
 } else {
     User.findOne({username:result.author}, function(err, doc) {
         if (err) throw err;
-    res.render('post', { title: "ShareCookie Post by "+result.names, result: result, person:doc, user: req.user });
+    res.render('post', { title: result.content, result: result, person:doc, user: req.user });
     });
 }
   });
@@ -625,6 +626,13 @@ router.get('/poststome/:name', function(req, res, next) {
 User.findOne({ username: req.params.name }, function(err, usera) {
     if (err) return next(err);
     res.render('poststome', {posts:usera.poststo, user:req.user});
+});
+});
+
+router.get('/posttoel/:name', function(req, res, next) {
+User.findOne({ username: req.params.name }, function(err, usera) {
+    if (err) return next(err);
+    res.render('posttoel', {posts:usera.poststo, user:req.user});
 });
 });
 

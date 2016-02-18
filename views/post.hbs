@@ -32,11 +32,11 @@
         <a href="/likepost/{{result.author}}/{{result.id}}/cookie/null" class="btn btn-like"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a> <a href="/dislikepost/{{result.author}}/{{result.id}}/cookie/null" class="btn btn-dislike"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a>
   {{/if}}
   {{result.likes}} likes
-  <div><br><a href="https://www.facebook.com/dialog/share?app_id=1549077778743128&amp;display=popup&amp;href=sharecookie.com%2Fcookie%2F{{result.id}}" class="fbbtn">Share on Facebook</a></div>
+  <div><br><a href="https://www.facebook.com/dialog/share?app_id=1549077778743128&amp;display=popup&amp;href=sharecookie.com%2Fcookie%2F{{result.id}}&amp;redirect_uri=https%3A%2F%2Fsharecookie.com" class="fbbtn">Share on Facebook</a></div>
  </div>
  <div class="bit-2">
   {{#if result.myurl}}
-  <img src="{{result.myurl}}" style="border:00px solid white width: 100%; height: 100%;">
+  <img src="{{result.myurl}}" style="max-width:60%; max-height:60%;">
   {{/if}}
   <!--<p class="cookie-caption">image via: {{result.myurl}}</p>!-->
  </div>
