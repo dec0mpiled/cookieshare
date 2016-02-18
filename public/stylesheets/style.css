@@ -16,6 +16,11 @@ body {
   width: 100%;
 }
 
+.posts1 {
+  background-color:#fff;
+  width: 70%;
+}
+
 .wrapper {
   margin: 0 5%;
 }

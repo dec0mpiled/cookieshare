@@ -24,6 +24,13 @@
   <br>
   <p class="cookie-content">{{result.content}}</p>
    <br>
+
+  {{#if result.myurl}}
+  <img src="{{result.myurl}}" style="max-width:100%; max-height:100%;">
+  {{/if}}
+  <!--<p class="cookie-caption">image via: {{result.myurl}}</p>!-->
+ 
+ <br>
    {{#if result.link}}
        <a style="text-decoration:none;" href="{{result.link}}">{{result.link}}</a><br><br>
        {{/if}}
@@ -34,13 +41,8 @@
   {{result.likes}} likes
   <div><br><a href="https://www.facebook.com/dialog/share?app_id=1549077778743128&amp;display=popup&amp;href=sharecookie.com%2Fcookie%2F{{result.id}}&amp;redirect_uri=https%3A%2F%2Fsharecookie.com" class="fbbtn">Share on Facebook</a></div>
  </div>
- <div class="bit-2">
-  {{#if result.myurl}}
-  <img src="{{result.myurl}}" style="max-width:60%; max-height:60%;">
-  {{/if}}
-  <!--<p class="cookie-caption">image via: {{result.myurl}}</p>!-->
- </div>
 </div>
+
 <br><br><br>
 <div class="frame posts" style="border: 1px solid gray; border-radius: 2px">
  <div class="bit-2">
