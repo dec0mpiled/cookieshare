@@ -44,7 +44,7 @@
         <a href="/likepost/{{result.author}}/{{result.id}}/cookie/null" class="btn btn-like"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a> <a href="/dislikepost/{{result.author}}/{{result.id}}/cookie/null" class="btn btn-dislike"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a>
   {{/if}}
   {{result.likes}} likes
-  <div><br><a href="https://www.facebook.com/dialog/share?app_id=1549077778743128&amp;display=popup&amp;href=sharecookie.com%2Fcookie%2F{{result.id}}&amp;redirect_uri=https%3A%2F%2Fsharecookie.com" class="fbbtn">Share on Facebook</a></div>
+  <div><br><a href="https://www.facebook.com/dialog/share?app_id=1549077778743128&amp;display=popup&amp;href=https://sharecookie.com%2Fcookie%2F{{result.id}}&amp;redirect_uri=https%3A%2F%2Fsharecookie.com" class="fbbtn">Share on Facebook</a></div>
  </div>
 </div>
 </div>
@@ -75,7 +75,7 @@
        <div class="meta">
 
         <p class="meta-item"><a class="a" href="/user/{{user}}"><font color=#6666ff>@{{user}}</font></a> <font color="gray">at {{formatDate created  day="numeric" month="long" year="numeric"}}</font></p>
-        <p class="meta-item"><font color=#000>{{value}}</font></p>
+        <p class="meta-item"><font color=#000>{{{value}}}</font></p>
         <!--{{#ifeq ../user.username user}}
         <a href="/deletecomment/{{user}}/{{../../result.commentslist.id}}" style="text-decoration:none;"><p class="meta-item"><font color=#ff0000>[Delete]</font></p></a>
         {{/ifeq}}
