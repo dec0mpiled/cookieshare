@@ -206,6 +206,18 @@ router.post('/sharecookie', function(req, res, next) {
     var mynewurl = req.body.url;
     console.log(mynewurl);
     
+function getUserName(text){
+    var parsed = /(@.*?)\s/.exec(contentq);
+    if(parsed){
+        return parsed[1];
+    }
+}
+/*
+var newname = getUserName(contentq);
+console.log(newname);
+
+contentq.replace(newname, "hi");
+    */
     if (ggroup!="") {
         var group=ggroup;
     } else {
