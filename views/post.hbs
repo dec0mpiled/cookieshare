@@ -15,13 +15,18 @@
  
 <div class="frame body-frame">
  <div class="bit-2 posts" style="border: 1px solid gray; border-radius: 2px">
+  <div class="bit-50">
   <p><img src="{{person.avatarurl}}" width=60px height=60px style="border: 1px solid black"></p>
+  </div>
+  <div class="bit-2">
   <p><b>Author: </b><i>{{result.names}}</i> <a href="/user/{{result.author}}" class="a"><font color=#6666ff>@{{result.author}}</font></a></p>
   <p><b>Date Created:</b> {{formatDate result.created  day="numeric" month="long" year="numeric"}}</p>
   {{#if result.group}}
   <p><b>Posted to Group:</b> {{result.group}}</p>
   {{/if}}
+  </div>
   <br>
+  <div class="bit-50">
   <p class="cookie-content">{{result.content}}</p>
    <br>
 
@@ -41,6 +46,7 @@
   {{result.likes}} likes
   <div><br><a href="https://www.facebook.com/dialog/share?app_id=1549077778743128&amp;display=popup&amp;href=sharecookie.com%2Fcookie%2F{{result.id}}&amp;redirect_uri=https%3A%2F%2Fsharecookie.com" class="fbbtn">Share on Facebook</a></div>
  </div>
+</div>
 </div>
 
 <br><br><br>
