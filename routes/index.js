@@ -95,7 +95,7 @@ router.get('/likepost/:author/:id/:return/:group', function(req, res, next) {
         User.findOne({username:docs.author}, function(err, doc) {
         if (err) return next(err);
        doc.notamount=doc.notamount+1;
-       doc.notifications.unshift({from: req.user.username, type: "like", redirect:req.params.id, mini:docs.content.substr(0,50)});
+       doc.notifications.unshift({from: req.user.username, type: "like", redirect:req.params.id, mini:marked(docs.content)});
        doc.save();
     });
         });
@@ -158,7 +158,7 @@ router.get('/dislikepost/:author/:id/:return/:group', function(req, res) {
             User.findOne({username:docs.author}, function(err, doc) {
         if (err) return (err);
        doc.notamount=doc.notamount+1;
-       doc.notifications.unshift({from: req.user.username, type: "dislike", redirect:req.params.id, mini:docs.content.substr(0,50)});
+       doc.notifications.unshift({from: req.user.username, type: "dislike", redirect:req.params.id, mini:marked(docs.content)});
        doc.save();
             });
         });
@@ -226,7 +226,7 @@ contentq.replace(newname, "hi");
     } else {
          var group="";
     }
-    
+    var rawcontent=contentq;
     var usernames = twitter.extractMentions(contentq);
     var i
     for (i = 0; i < usernames.length; i++) { 
@@ -237,7 +237,7 @@ contentq.replace(newname, "hi");
     User.findOne({username:usernames[i]}, function(err, doc) {
         if (err) return next(err);
        doc.notamount=doc.notamount+1;
-       doc.notifications.unshift({from: req.user.username, type: "mention", redirect:"/cookie/"+newid, mini:"Click the button to view the post"});
+       doc.notifications.unshift({from: req.user.username, type: "mention", redirect:"/cookie/"+newid, mini:marked(contentq)});
        doc.save();
     });
     }
@@ -267,6 +267,7 @@ mycontent = mycontent.replace(":P"||":p","😛");
         author: authorq,
         _author: req.user.id,
         content: marked(mycontent),
+        rawcontent:rawcontent,
         myurl: mynewurl,
         link: gurl,
         color: color,
@@ -285,29 +286,16 @@ mycontent = mycontent.replace(":P"||":p","😛");
 router.post('/updatecookie/:id', function(req, res, next) {
     var id=req.params.id;
     var contentq = req.body.texxtt;
-    var url=req.body.picbox;
     var gurl=req.body.urlbox;
     var color="blacK";
     var mynewurl;
     var ggroup=req.body.groupbox;
-    
+    var rawcontent=contentq;
     if (ggroup!="") {
         var group=ggroup;
     } else {
          var group="";
     }
-    
-var myurl=url;
-
-if (myurl=="" || myurl==" "){
-    mynewurl="";
-}
-
-if (myurl!="") {
-if (myurl.startsWith("http://")||myurl.startsWith("https://")) {
-    mynewurl=myurl;
-}
-}
 
 var gurl=gurl;
 
@@ -331,7 +319,7 @@ var usernames = twitter.extractMentions(contentq);
     User.findOne({username:usernames[i]}, function(err, doc) {
         if (err) return next(err);
        doc.notamount=doc.notamount+1;
-       doc.notifications.unshift({from: req.user.username, type: "mention", redirect:"/cookie/"+id, mini:"Click the button to view the post"});
+       doc.notifications.unshift({from: req.user.username, type: "mentionedit", redirect:"/cookie/"+id, mini:marked(contentq)});
        doc.save();
     });
     }
@@ -352,6 +340,7 @@ mycontent = mycontent.replace(":P"||":p","😛");
 Post.findOne({_id:id}, function(err, doc) {
     if (err) return next(err);
     doc.content=marked(mycontent);
+    doc.rawcontent=rawcontent;
     doc.myurl=mynewurl;
     doc.group=group;
     doc.link=gurl;
@@ -410,7 +399,7 @@ router.post("/sendcomment/:id", function(req, res, next) {
     User.findOne({username:docs.author}, function(err, doc) {
         if (err) return next(err);
        doc.notamount=doc.notamount+1;
-       doc.notifications.unshift({from: req.user.username, type: "comment", redirect:req.params.id, mini:commentval.substr(0,50)});
+       doc.notifications.unshift({from: req.user.username, type: "comment", redirect:req.params.id, mini:marked(commentval)});
        doc.save();
     });
 });
@@ -485,7 +474,7 @@ router.post("/sendtouser/:id", function(req, res, next) {
         console.log(doc.username);
         doc.poststo.push({ keys: marked(commentval), author: req.user.username, _author: req.user.id, created: new Date() });
         doc.notamount=doc.notamount+1;
-       doc.notifications.unshift({from: req.user.username, type: "postto", redirect:req.params.id, mini:commentval.substr(0,50)});
+       doc.notifications.unshift({from: req.user.username, type: "postto", redirect:req.params.id, mini:marked(commentval)});
         doc.save();
         if (err) throw err;
     res.redirect("/user/"+doc.username);
@@ -636,10 +625,15 @@ router.get('/deletepostto/:name/:id', function(req, res, next) {
 });
 
 router.get('/editcookie/:name/:id', function(req, res, next) {
+    if (req.user) {
     Post.findOne({ _id: req.params.id }, function(err, post) {
         if (err) return next(err);
+        console.log(post.content);
         res.render('editcookie', {post:post, user:req.user});
     });
+    } else {
+        res.redirect("/");
+    }
 });
 
 router.get('/following/:name', function(req, res, next) {

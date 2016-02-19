@@ -8,6 +8,7 @@ var Post = new Schema({
         author: String,
         _author: Schema.Types.ObjectId,
         content: String,
+        rawcontent: String,
         myurl: String,
         link: String,
         color: String,
