@@ -322,6 +322,21 @@ if (gurl.startsWith("http://")||gurl.startsWith("https://")) {
 }
 }
 
+var usernames = twitter.extractMentions(contentq);
+    var i
+    for (i = 0; i < usernames.length; i++) { 
+    console.log(usernames[i]);
+    var newc = contentq.replace("@"+usernames[i],"<a style=\"text-decoration:none; color:#6666ff\" href=\"/user/"+usernames[i]+"\">"+"@"+usernames[i]+"</a>");
+    console.log(newc);
+    contentq=newc;
+    User.findOne({username:usernames[i]}, function(err, doc) {
+        if (err) return next(err);
+       doc.notamount=doc.notamount+1;
+       doc.notifications.unshift({from: req.user.username, type: "mention", redirect:"/cookie/"+id, mini:"Click the button to view the post"});
+       doc.save();
+    });
+    }
+
 var mycontent = contentq;
 // Emojis!!
 mycontent = mycontent.replace(":)","😊");
@@ -665,6 +680,13 @@ router.get('/posttoel/:name', function(req, res, next) {
 User.findOne({ username: req.params.name }, function(err, usera) {
     if (err) return next(err);
     res.render('posttoel', {title:"Posts to "+usera.username, posts:usera.poststo, users:usera, user:req.user});
+});
+});
+
+router.get('/followme', function(req, res, next) {
+User.findOne({ username: req.user.username }, function(err, usera) {
+    if (err) throw err;
+    usera.followers.push(req.user.username);
 });
 });
 
