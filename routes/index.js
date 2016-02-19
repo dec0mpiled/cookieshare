@@ -3,6 +3,8 @@ var router = express.Router();
 var User = require('../models/user');
 var Post = require('../models/post');
 var marked = require('marked');
+var twitter = require('twitter-text');
+var mongoose = require('mongoose');
 
 //var sanitizeHtml = require('sanitize-html');
 
@@ -206,6 +208,7 @@ router.post('/sharecookie', function(req, res, next) {
     var ggroup=req.body.groupbox;
     var mynewurl = req.body.url;
     console.log(mynewurl);
+    var newid = mongoose.Types.ObjectId();
     
 function getUserName(text){
     var parsed = /(@.*?)\s/.exec(contentq);
@@ -223,6 +226,21 @@ contentq.replace(newname, "hi");
         var group=ggroup;
     } else {
          var group="";
+    }
+    
+    var usernames = twitter.extractMentions(contentq);
+    var i
+    for (i = 0; i < usernames.length; i++) { 
+    console.log(usernames[i]);
+    var newc = contentq.replace("@"+usernames[i],"<a style=\"text-decoration:none; color:#6666ff\" href=\"/user/"+usernames[i]+"\">"+"@"+usernames[i]+"</a>");
+    console.log(newc);
+    contentq=newc;
+    User.findOne({username:usernames[i]}, function(err, doc) {
+        if (err) return next(err);
+       doc.notamount=doc.notamount+1;
+       doc.notifications.unshift({from: req.user.username, type: "mention", redirect:"/cookie/"+newid, mini:"Click the button to view the post"});
+       doc.save();
+    });
     }
         
 
@@ -245,6 +263,7 @@ mycontent = mycontent.replace(":P"||":p","😛");
 
     var newpost = new Post({
         //title: mynewtitle,
+        _id:newid,
         names: name,
         author: authorq,
         _author: req.user.id,

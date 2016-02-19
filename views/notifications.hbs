@@ -20,19 +20,19 @@
 <div class="cookie posts" style="padding:5px; border: 1px solid black; border-radius: 2px">
     {{#ifeq type "comment"}}
   <h2>@{{from}} Commented on your post</h2>
-  <p>"{{mini}}..."</p>
+  <p>"{{{mini}}}..."</p>
   <a class="btn" href="/cookie/{{redirect}}"><h3>View Post</h3></a>
     {{/ifeq}}
     
     {{#ifeq type "like"}}
   <h2>@{{from}} Liked your post</h2>
-  <p>"{{mini}}..."</p>
+  <p>"{{{mini}}}..."</p>
   <a class="btn" href="/cookie/{{redirect}}"><h3>View Post</h3></a>
     {{/ifeq}}
     
     {{#ifeq type "dislike"}}
   <h2>@{{from}} Disliked your post</h2>
-  <p>"{{mini}}..."</p>
+  <p>"{{{mini}}}..."</p>
   <a class="btn" href="/cookie/{{redirect}}"><h3>View Post</h3></a>
     {{/ifeq}}
     
@@ -43,8 +43,14 @@
     
     {{#ifeq type "postto"}}
   <h2>@{{from}} Posted on your page</h2>
-  <p>"{{mini}}..."</p>
+  <p>"{{{mini}}}..."</p>
   <a class="btn" href="/poststome/{{../../user.username}}"><h3>View</h3></a>
+    {{/ifeq}}
+    
+    {{#ifeq type "mention"}}
+  <h2>@{{from}} Mentioned you in a post</h2>
+  <p>"{{{mini}}}..."</p>
+  <a class="btn" href="{{redirect}}"><h3>View Post</h3></a>
     {{/ifeq}}
     
    {{#ifeq type "welcome"}}
