@@ -688,6 +688,7 @@ User.findOne({ username: req.user.username }, function(err, usera) {
     if (err) throw err;
     usera.followers.push(req.user.username);
 });
+res.redirect('/');
 });
 
 /*/*
