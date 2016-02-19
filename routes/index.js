@@ -57,6 +57,7 @@ router.get('/filter/date', function(req, res, next) {
 
 /* sort by likes */
 router.get('/public', function(req, res, next) {
+    if (req.user) {
           
               var notcount=req.user.notamount;
 
@@ -64,11 +65,9 @@ router.get('/public', function(req, res, next) {
         if (err) return next(err);
         res.render('index', { title: 'ShareCookie', filter: 'likes', posts: posts, user: req.user, notes:notcount,  header:"Public Timeline" });
     });
-});
-
-/* GET help page. */
-router.get('/help', function(req, res, next) {
-        res.render('help', { title: 'Help'});
+    } else {
+        res.redirect("/");
+    }
 });
 
 /* Like Post */
@@ -496,7 +495,11 @@ router.post("/sendtouser/:id", function(req, res, next) {
 
 /* GET settings page. */
 router.get('/settings', function(req, res, next) {
+    if (req.user){
     res.render('settings', { title: 'Settings', user: req.user});
+    } else {
+        res.redirect("/");
+    }
 });
 
 /* SET profile picture */
@@ -561,6 +564,7 @@ router.post('/update/bio/:id', function(req, res, next) {
 
 /* follow a damn user */
 router.get('/Follow/:user', function(req, res, next) {
+    if (req.user){
     
     User.findById(req.user.id, function(err, doc){
         if (err) return next(err);
@@ -594,10 +598,14 @@ router.get('/Follow/:user', function(req, res, next) {
                 res.redirect('/user/'+req.params.user);
             }
         }); 
+    } else {
+        res.redirect("/");
+    }
     });
     
     /* follow a damn user */
 router.get('/Unfollow/:user', function(req, res, next) {
+    if (req.user){
     User.findOneAndUpdate({username: req.user.username}, {$pull: {following: req.params.user}}, function(err, org) {
         if (err) return next(err);
         User.findOneAndUpdate({username:req.params.user}, {$pull: {followers: req.user.username}}, function(err,org) {
@@ -606,6 +614,9 @@ router.get('/Unfollow/:user', function(req, res, next) {
         });
 });
     res.redirect('/user/'+req.params.user);
+    } else {
+        res.redirect("/");
+    }
 });
 
 router.get('/deletecookie/:name/:id', function(req, res, next) {
@@ -632,24 +643,33 @@ router.get('/editcookie/:name/:id', function(req, res, next) {
 });
 
 router.get('/following/:name', function(req, res, next) {
+    if (req.user){
     User.findOne({username: req.params.name}, function(err, doc) {
         if (err) return next(err);
         console.log(doc.following);
         
     res.render('following', {title:"Following", user:req.user, followingsnew:doc.following});
 });
+} else {
+    res.redirect("/");
+}
 });
 
 router.get('/followers/:name', function(req, res, next) {
+    if (req.user){
    User.findOne({username: req.params.name}, function(err, doc) {
         if (err) return next(err);
         console.log(doc.followers);
         
     res.render('followers', {title:"Followers", user:req.user, followersnew:doc.followers});
 });
+} else {
+    res.redirect("/");
+}
 }); 
 
 router.get('/notifications', function(req, res, next) {
+    if (req.user){
    User.findOne({username: req.user.username}, function(err, doc) {
         if (err) return next(err);
         doc.notamount=0;
@@ -657,9 +677,13 @@ router.get('/notifications', function(req, res, next) {
         console.log(doc.notifications);
     res.render('notifications', {title:"Notifications", user:req.user, notifications:doc.notifications});
 });
+} else {
+    res.redirect("/");
+}
 }); 
 
 router.get('/clearnotes', function(req, res, next) {
+    if (req.user){
     User.findOne({username:req.user.username}, function(err, doc) {
        if (err) throw err; 
        doc.notifications=[];
@@ -667,20 +691,31 @@ router.get('/clearnotes', function(req, res, next) {
        doc.save();
     });
     res.redirect('/notifications');
+    } else {
+        res.redirect("/");
+    }
 });
 
 router.get('/poststome/:name', function(req, res, next) {
+    if (req.user){
 User.findOne({ username: req.params.name }, function(err, usera) {
     if (err) return next(err);
     res.render('poststome', {title:"Posts to Me", posts:usera.poststo, user:req.user});
 });
+} else {
+    res.redirect("/");
+}
 });
 
 router.get('/posttoel/:name', function(req, res, next) {
+    if (req.user){
 User.findOne({ username: req.params.name }, function(err, usera) {
     if (err) return next(err);
     res.render('posttoel', {title:"Posts to "+usera.username, posts:usera.poststo, users:usera, user:req.user});
 });
+} else {
+    res.redirect("/");
+}
 });
 
 router.get('/followme', function(req, res, next) {
