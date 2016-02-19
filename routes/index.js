@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
 var Post = require('../models/post');
-var mongoose = require('mongoose');
 var marked = require('marked');
 
 var sanitizeHtml = require('sanitize-html');
