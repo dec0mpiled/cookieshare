@@ -4,7 +4,7 @@ var User = require('../models/user');
 var Post = require('../models/post');
 var marked = require('marked');
 
-var sanitizeHtml = require('sanitize-html');
+//var sanitizeHtml = require('sanitize-html');
 
 /* home */
 router.get('/', function(req, res, next) {
@@ -248,7 +248,7 @@ mycontent = mycontent.replace(":P"||":p","😛");
         names: name,
         author: authorq,
         _author: req.user.id,
-        content: sanitizeHtml(marked(mycontent), {allowedTags: sanitizeHtml.defaults.allowedTags.concat([ 'img' ])}),
+        content: marked(mycontent),
         myurl: mynewurl,
         link: gurl,
         color: color,
@@ -318,7 +318,7 @@ mycontent = mycontent.replace(":P"||":p","😛");
 
 Post.findOne({_id:id}, function(err, doc) {
     if (err) return next(err);
-    doc.content=sanitizeHtml(marked(mycontent));
+    doc.content=marked(mycontent);
     doc.myurl=mynewurl;
     doc.group=group;
     doc.link=gurl;
@@ -370,7 +370,7 @@ router.post("/sendcomment/:id", function(req, res, next) {
     //commentval=newcomq;
     var id=req.params.id;
     Post.findOne({"_id" : id}, function (err, docs){
-        docs.commentslist.push({ value: sanitizeHtml(marked(commentval)), likes: 0, user: name, _author: req.user.id, created: new Date() });
+        docs.commentslist.push({ value: marked(commentval), likes: 0, user: name, _author: req.user.id, created: new Date() });
         docs.commentamount=docs.commentamount+1;
         docs.save();
         if (err) throw err;
@@ -450,7 +450,7 @@ router.post("/sendtouser/:id", function(req, res, next) {
     console.log(req.body.msgbox);
     User.findOne({"_id" : id}, function (err, doc){
         console.log(doc.username);
-        doc.poststo.push({ keys: sanitizeHtml(marked(commentval)), author: req.user.username, _author: req.user.id, created: new Date() });
+        doc.poststo.push({ keys: marked(commentval), author: req.user.username, _author: req.user.id, created: new Date() });
         doc.notamount=doc.notamount+1;
        doc.notifications.unshift({from: req.user.username, type: "postto", redirect:req.params.id, mini:commentval.substr(0,50)});
         doc.save();
