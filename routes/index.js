@@ -583,7 +583,7 @@ router.get('/deletecookie/:name/:id', function(req, res, next) {
 });
 
 router.get('/deletepostto/:name/:id', function(req, res, next) {
-    User.findOne({username: req.user.username}, function(err, org) {
+    User.findOne({username: req.params.name}, function(err, org) {
         if (err) return next(err);
         org.poststo.pull(req.params.id);
         org.save();
@@ -639,14 +639,14 @@ router.get('/clearnotes', function(req, res, next) {
 router.get('/poststome/:name', function(req, res, next) {
 User.findOne({ username: req.params.name }, function(err, usera) {
     if (err) return next(err);
-    res.render('poststome', {posts:usera.poststo, user:req.user});
+    res.render('poststome', {title:"Posts to Me", posts:usera.poststo, user:req.user});
 });
 });
 
 router.get('/posttoel/:name', function(req, res, next) {
 User.findOne({ username: req.params.name }, function(err, usera) {
     if (err) return next(err);
-    res.render('posttoel', {posts:usera.poststo, users:usera, user:req.user});
+    res.render('posttoel', {title:"Posts to "+usera.username, posts:usera.poststo, users:usera, user:req.user});
 });
 });
 
