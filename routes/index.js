@@ -499,7 +499,7 @@ router.post('/updatepp/:usera', function(req, res, next) {
     User.findOneAndUpdate({ username: req.user.username }, { avatarurl: value }, function(err, doc) {
     if (err) throw err;    
     });
-    Post.update({_author: req.user.username}, {avatarurl: req.body.url}, {multi: true}, function(err) {
+    Post.update({author: req.user.username}, {avatarurl: req.body.url}, {multi: true}, function(err) {
         if (err) throw err;
     });
     res.redirect('/settings');
