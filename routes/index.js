@@ -267,6 +267,7 @@ mycontent = mycontent.replace(":P"||":p","😛");
         author: authorq,
         _author: req.user.id,
         content: marked(mycontent),
+        avatarurl: req.user.avatarurl,
         rawcontent:rawcontent,
         myurl: mynewurl,
         link: gurl,
@@ -497,6 +498,9 @@ router.post('/updatepp/:usera', function(req, res, next) {
     console.log(value);
     User.findOneAndUpdate({ username: req.user.username }, { avatarurl: value }, function(err, doc) {
     if (err) throw err;    
+    });
+    Post.update({_author: req.user.username}, {avatarurl: req.body.url}, {multi: true}, function(err) {
+        if (err) throw err;
     });
     res.redirect('/settings');
 });
