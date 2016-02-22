@@ -165,6 +165,7 @@
      <br><br>
      {{/if}}
        
+       {{#ifneq author "ShareCookieAds"}}
        {{#if ../user}}
         <!-- like/dislike -->
         <a href="/likepost/{{author}}/{{id}}/home/null" class="btn btn-like"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a> <a href="/dislikepost/{{author}}/{{id}}/home/null" class="btn btn-dislike"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a>
@@ -177,6 +178,7 @@
         <a href="/editcookie/{{author}}/{{id}}" style="text-decoration:none;"><font color=#0066ff>[Edit]</font></a>
         <a href="/deletecookie/{{author}}/{{id}}" style="text-decoration:none;"><font color=#ff0000>[Delete]</font></a>
         {{/or}}
+        {{/ifneq}}
         
        </div>
      
