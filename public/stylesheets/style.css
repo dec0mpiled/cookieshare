@@ -14,6 +14,7 @@ body {
 .posts {
   background-color:#fff;
   width: 100%;
+  box-shadow: 0 0 10px #ccc
 }
 
 .posts1 {
@@ -92,6 +93,7 @@ textarea {
   border-radius: 2px;
   outline: 0;
   resize: none;
+  
 }
 textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:active, .input-gif:focus, .input-title:hover, .input-title:active, .input-title:focus, .input-username:hover, .input-username:active, .input-username:focus, .input-password:hover, .input-password:active, .input-password:focus {
   border: 1px solid #02313A;
