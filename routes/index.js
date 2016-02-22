@@ -6,6 +6,8 @@ var marked = require('marked');
 var twitter = require('twitter-text');
 var mongoose = require('mongoose');
 
+var sanitizeHtml = require('sanitize-html');
+
 //var sanitizeHtml = require('sanitize-html');
 
 /* home */
@@ -268,7 +270,7 @@ mycontent = mycontent.replace(":P"||":p","😛");
         names: name,
         author: authorq,
         _author: req.user.id,
-        content: marked(mycontent),
+        content: sanitizeHtml(marked(mycontent)),
         avatarurl: req.user.avatarurl,
         rawcontent:rawcontent,
         myurl: mynewurl,
@@ -342,7 +344,7 @@ mycontent = mycontent.replace(":P"||":p","😛");
 
 Post.findOne({_id:id}, function(err, doc) {
     if (err) return next(err);
-    doc.content=marked(mycontent);
+    doc.content=sanitizeHtml(marked(mycontent));
     doc.rawcontent=rawcontent;
     doc.myurl=mynewurl;
     doc.group=group;
