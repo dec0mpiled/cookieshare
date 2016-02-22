@@ -224,7 +224,7 @@ console.log(newname);
 contentq.replace(newname, "hi");
     */
     if (ggroup!="") {
-        var group=ggroup;
+        var group=ggroup.toLowerCase();
     } else {
          var group="";
     }
