@@ -66,7 +66,7 @@
    <div class="bit-2">
     <h3>Update Your Profile Picture (Square Images Work Best)</h3>
     <br>
-    <form id="submitpic" action="/updatepp/{{user.username}}" method="post">
+    <form id="submitpic" action="/updatepp/{{user.id}}" method="post">
      
         
    <input type="file" onchange="upload(this.files[0])">
@@ -114,7 +114,7 @@
      <button id="update" name="update" class="btn" type="submit">Update Profile Picture</button>
     </form>
 <br>
-    <hr><br
+    <hr><br>
    
    <form id="name" action="/update/bio/{{user.id}}" method="post">
     <h3>Update Your Profile Bio</h3>

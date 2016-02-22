@@ -496,10 +496,10 @@ router.get('/settings', function(req, res, next) {
 router.post('/updatepp/:usera', function(req, res, next) {
     var value=req.body.url;
     console.log(value);
-    User.findOneAndUpdate({ username: req.user.username }, { avatarurl: value }, function(err, doc) {
+    User.findOneAndUpdate({ _id: req.params.usera }, { avatarurl: value }, function(err, doc) {
     if (err) throw err;    
     });
-    Post.update({author: req.user.username}, {avatarurl: req.body.url}, {multi: true}, function(err) {
+    Post.update({_author: req.params.usera}, {avatarurl: req.body.url}, {multi: true}, function(err) {
         if (err) throw err;
     });
     res.redirect('/settings');
