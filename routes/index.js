@@ -1,12 +1,12 @@
 var express = require('express');
+var app = express();
 var router = express.Router();
 var User = require('../models/user');
 var Post = require('../models/post');
 var marked = require('marked');
+var sanitizeHtml = require('sanitize-html');
 var twitter = require('twitter-text');
 var mongoose = require('mongoose');
-
-var sanitizeHtml = require('sanitize-html');
 
 //var sanitizeHtml = require('sanitize-html');
 
