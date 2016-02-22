@@ -8,7 +8,7 @@ var marked = require('marked');
 var twitter = require('twitter-text');
 var mongoose = require('mongoose');
 
-//var sanitizeHtml = require('sanitize-html');
+var sanitizeHtml = require('sanitize-html');
 
 /* home */
 router.get('/', function(req, res, next) {
@@ -259,7 +259,7 @@ mycontent = mycontent.replace(":&","😏");
 mycontent = mycontent.replace(";)","😉");
 mycontent = mycontent.replace("xD"||"XD","😂");
 mycontent = mycontent.replace(":P"||":p","😛");
-//mycontent = sanitizeHtml(mycontent);
+mycontent = sanitizeHtml(mycontent);
 console.log(mycontent);
 //mynewcontent = mycontent.toLowerCase();
 //mynewcontent = mynewcontent.replace(badWord,"****");
@@ -342,7 +342,7 @@ mycontent = mycontent.replace(":&","😏");
 mycontent = mycontent.replace(";)","😉");
 mycontent = mycontent.replace("xD"||"XD","😂");
 mycontent = mycontent.replace(":P"||":p","😛");
-//mycontent = sanitizeHtml(mycontent);
+mycontent = sanitizeHtml(mycontent);
 
 Post.findOne({_id:id}, function(err, doc) {
     if (err) return next(err);
