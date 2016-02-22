@@ -259,6 +259,7 @@ mycontent = mycontent.replace(":&","😏");
 mycontent = mycontent.replace(";)","😉");
 mycontent = mycontent.replace("xD"||"XD","😂");
 mycontent = mycontent.replace(":P"||":p","😛");
+mycontent = sanitizeHtml(mycontent);
 
 //mynewcontent = mycontent.toLowerCase();
 //mynewcontent = mynewcontent.replace(badWord,"****");
@@ -270,7 +271,7 @@ mycontent = mycontent.replace(":P"||":p","😛");
         names: name,
         author: authorq,
         _author: req.user.id,
-        content: sanitizeHtml(marked(mycontent)),
+        content: marked(mycontent),
         avatarurl: req.user.avatarurl,
         rawcontent:rawcontent,
         myurl: mynewurl,
@@ -341,10 +342,11 @@ mycontent = mycontent.replace(":&","😏");
 mycontent = mycontent.replace(";)","😉");
 mycontent = mycontent.replace("xD"||"XD","😂");
 mycontent = mycontent.replace(":P"||":p","😛");
+mycontent = sanitizeHtml(mycontent);
 
 Post.findOne({_id:id}, function(err, doc) {
     if (err) return next(err);
-    doc.content=sanitizeHtml(marked(mycontent));
+    doc.content=marked(mycontent);
     doc.rawcontent=rawcontent;
     doc.myurl=mynewurl;
     doc.group=group;
