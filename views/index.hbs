@@ -173,13 +173,13 @@
         {{likes}} likes
         <!-- comments -->
         <a href="/cookie/{{id}}"><font color=#6666ff>Comments ({{commentamount}})</font></a>
+        {{/ifneq}}
+       {{/if}}
         {{#or ../user.username author ../user.admin true}}
         <br><br>
         <a href="/editcookie/{{author}}/{{id}}" style="text-decoration:none;"><font color=#0066ff>[Edit]</font></a>
         <a href="/deletecookie/{{author}}/{{id}}" style="text-decoration:none;"><font color=#ff0000>[Delete]</font></a>
         {{/or}}
-        {{/ifneq}}
-       {{/if}}
         
         
        </div>
