@@ -24,12 +24,14 @@
   {{#if user}}
   {{#ifneq account.username user.username}}
   {{#ifneq account.username "sharecookie"}}
+  {{#ifneq account.username "ShareCookieAds"}}
    <div class="bit-20">
   <a href="/{{buttontext}}/{{account.username}}" class="btn">{{buttontext}}</a> <a class="btn" href="/posttoel/{{account.username}}">Post to this page</a>
  </div>
  <div class="bit-30">
   
  </div>
+ {{/ifneq}}
  {{/ifneq}}
  {{/ifneq}}
  {{/if}}
@@ -65,17 +67,21 @@
   </div>
   <div class="bit-60">
   <p><b>{{names}}</b> <a href="/user/{{author}}" class="a"><font color=#6666ff>@{{author}}</font></a></p>
-  <p{{formatDate created  day="numeric" month="long" year="numeric"}}</p>
+  <p>{{formatDate created  day="numeric" month="long" year="numeric"}}</p>
   {{#if group}}
   <p><b>Posted to Group:</b> {{group}}</p>
   {{/if}}
-         <div class="content">
+           
+  </div>
+  
+     </div>
+     <div class="actions bit-a">
+                       <div class="content">
         <font color="{{color}}" size=5>
         {{{content}}}
         </font>
        
        </div>
-                  <div class="actions">
        <br>
        {{#if link}}
        <a style="text-decoration:none;" href="{{link}}">External Site</a><br><br>
@@ -100,8 +106,6 @@
         {{/or}}
         
        </div>
-  </div>
-     </div>
      
     </div>
     

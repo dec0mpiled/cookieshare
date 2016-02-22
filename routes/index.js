@@ -10,9 +10,11 @@ var mongoose = require('mongoose');
 
 /* home */
 router.get('/', function(req, res, next) {
-   /*User.update({}, {$push: {following:"sharecookie"} }, {multi: true}, function(err) {
+    /*
+   User.update({}, {$push: {following:"ShareCookieAds"} }, {multi: true}, function(err) {
         if (err) throw err;
     }); */
+ 
     
     User.find({}, function(err, users) {
       if (err) return next(err);
