@@ -185,8 +185,10 @@
         <a href="/deletecookie/{{author}}/{{id}}" style="text-decoration:none;"><font color=#ff0000>[Delete]</font></a>
         {{/or}}
         
+        {{#if ../user}}
+        {{else}}
         <font color=#000><i>Please Login or Register to Like and Comment!</i></font>
-        
+        {{/if}}
         
        </div>
      
