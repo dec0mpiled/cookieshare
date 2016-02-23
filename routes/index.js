@@ -10,8 +10,13 @@ var mongoose = require('mongoose');
 
 /* home */
 router.get('/', function(req, res, next) {
+    
     /*
    User.update({}, {status:"none"}, {multi: true}, function(err) {
+        if (err) throw err;
+    }); */
+    /*
+    Post.update({}, {dislikes:0}, {multi: true}, function(err) {
         if (err) throw err;
     }); */
  
@@ -149,7 +154,7 @@ router.get('/dislikepost/:author/:id/:return/:group', function(req, res) {
         doc.save();
         
         Post.findOne({ _id: req.params.id }, function (err, docs){
-            docs.likes=docs.likes-1;
+            docs.dislikes=docs.dislikes+1;
             if (docs.likes<=-1){
                  docs.color="red";
             } else {
@@ -277,6 +282,7 @@ console.log(mycontent);
         group: group,
         spam: 0,
         likes: 0,
+        dislikes: 0,
         commentamount: 0,
         created: new Date(),
     });

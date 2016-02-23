@@ -14,6 +14,7 @@ var Post = new Schema({
         link: String,
         color: String,
         likes: Number,
+        dislikes: Number,
         tags: String,
         spam: Number,
         created: Date,
