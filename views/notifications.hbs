@@ -56,6 +56,12 @@
   <a class="btn" href="{{redirect}}"><h3>View Post</h3></a>
     {{/ifeq}}
     
+        {{#ifeq type "commention"}}
+  <h2><a href="/user/{{from}}" style="text-decoration:none; color:#6666ff">@{{from}}</a> Mentioned you in a comment</h2>
+  <p>{{{mini}}}</p>
+  <a class="btn" href="{{redirect}}"><h3>View Comment</h3></a>
+    {{/ifeq}}
+    
         {{#ifeq type "mentionedit"}}
   <h2><a href="/user/{{from}}" style="text-decoration:none; color:#6666ff">@{{from}}</a> Mentioned you in an edited post</h2>
   <p>{{{mini}}}</p>

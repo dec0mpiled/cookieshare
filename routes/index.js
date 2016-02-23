@@ -380,6 +380,7 @@ router.post("/sendcomment/:id", function(req, res, next) {
     var badWord = /fuck|shit|cunt|damn|nigger|nigga|twat|dick|cum|tits|titties|boob|boobs|penis|cock|bbc|porn|pornography|rape|sex|orgasm|raping|bitch|ass|clit|clitoris|breast|breasts|wigger|faggot/gi;
     var commentval = req.body.commentbox;
     var name=req.user.username;
+    var newid = mongoose.Types.ObjectId();
     commentval = commentval.replace(":)","😊");
     commentval = commentval.replace(":D","😄");
     commentval = commentval.replace(":(","😔");
@@ -394,8 +395,24 @@ router.post("/sendcomment/:id", function(req, res, next) {
     //var newcomq = mynewcomment.replace(badWord,"****");
     //commentval=newcomq;
     var id=req.params.id;
+    
+    var usernames = twitter.extractMentions(commentval);
+    var i
+    for (i = 0; i < usernames.length; i++) { 
+    console.log(usernames[i]);
+    var newc = commentval.replace("@"+usernames[i],"<a style=\"text-decoration:none; color:#6666ff\" href=\"/user/"+usernames[i]+"\">"+"@"+usernames[i]+"</a>");
+    console.log(newc);
+    commentval=newc;
+    User.findOne({username:usernames[i]}, function(err, doc) {
+        if (err) return next(err);
+       doc.notamount=doc.notamount+1;
+       doc.notifications.unshift({from: req.user.username, type: "commention", redirect:"/cookie/"+id, mini:marked(commentval)});
+       doc.save();
+    });
+    }
+    
     Post.findOne({"_id" : id}, function (err, docs){
-        docs.commentslist.push({ value: marked(commentval), likes: 0, user: name, _author: req.user.id, created: new Date() });
+        docs.commentslist.push({ _id: newid, value: marked(commentval), likes: 0, user: name, _author: req.user.id, created: new Date() });
         docs.commentamount=docs.commentamount+1;
         docs.save();
         if (err) throw err;
