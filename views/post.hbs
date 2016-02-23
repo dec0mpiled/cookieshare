@@ -49,10 +49,8 @@
   <div><br><a href="https://www.facebook.com/dialog/share?app_id=1549077778743128&amp;display=popup&amp;href=https://sharecookie.com%2Fcookie%2F{{result.id}}&amp;redirect_uri=https%3A%2F%2Fsharecookie.com" class="fbbtn">Share on Facebook</a></div>
  </div>
 </div>
-</div>
 
-<br><br><br>
-<div class="frame posts" style="border: 1px solid gray; border-radius: 2px">
+<div class="frame posts" style="border: 0px solid gray; border-radius: 2px">
  <div class="bit-2">
   {{#if user}}
   <h2>Post new comment</h2>
@@ -60,7 +58,7 @@
   <form id="test" action="/sendcomment/{{result.id}}" method="post">
    
    <textarea onkeyup="textCounter(this,'counter',200);" name="commentbox" id="commentbox" class="textarea" placeholder="Write something nice!" required></textarea>
-   <button class="btn">Comment!</button> <span id="counter">100</span>
+   <button class="btn">Comment!</button> <span id="counter">200</span>
    
    </form>
    {{else}}
@@ -90,6 +88,7 @@
       </div>
      </div>
     </div>
+   </div>
    </div>
   </div>
  </div>
