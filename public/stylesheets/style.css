@@ -30,7 +30,8 @@ body {
 .navbar {
   width: 100%;
   padding: 1em 1%;
-  background-color:#6666ff;
+  background-color:#FFF;
+  box-shadow: 0 0 5px #6666ff;
   position: fixed;
   z-index:2;
 }
@@ -60,7 +61,7 @@ body {
 .navbar-brand {
   font-size: 1.5em;
   text-decoration: none;
-  color: #fff;
+  color: #6666ff;
 
 }
 

@@ -1,5 +1,6 @@
 <nav class="navbar">
- <a style="font-family: prot" class="navbar-brand" href="/">ShareCookie</a>
+ <div class="wrapper">
+  <a style="font-family: prot" class="navbar-brand" href="/">ShareCookie</a>
   <div class="navbar-right">
    {{#if user}}
     <a class="navbar-item {{#equal filter 'date'}}selected{{/equal}}" href="/"><span class="glyphicon glyphicon-home btn" aria-hidden="true"></a>
@@ -18,6 +19,7 @@
     <a class="navbar-item" href="/auth/logout"><span class="glyphicon glyphicon-log-out btn" aria-hidden="true"></a>
     {{/if}}
   </div>
+ </div>
 </nav>
 
 <div class="wrapper">
