@@ -567,7 +567,7 @@ router.post('/update/colour/:id', function(req, res, next) {
 
 /* do some fucking awesome shit bitches #4!!!! */
 router.post('/update/bio/:id', function(req, res, next) {
-    User.findOneAndUpdate({ _id: req.params.id }, { bio: req.body.bio }, function(err, doc) {
+    User.findOneAndUpdate({ _id: req.params.id }, { bio: marked(req.body.bio) }, function(err, doc) {
         if (err) throw err;
     });
     res.redirect('/settings');
