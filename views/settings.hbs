@@ -18,7 +18,7 @@
  </div>
   <div class="bit-30" style="background-color: rgba(255, 255, 255, 0.5); border:1px solid black; border-radius: 4px;">
   <p><font size=6>{{user.name}}</font></p>
-  <p>@{{user.username}} {{#if user.admin}}<font color=#0000ff>(Admin)</font>{{/if}}</p><br>
+  <p>@{{user.username}} {{#if user.admin}}<font color=#0000ff>(Admin)</font>{{/if}} {{#ifeq user.status "verified"}}<img src="http://www.irunoninsulin.com/wp-content/uploads/2010/06/green-check-mark.jpg" width=15px height=15px>{{/ifeq}}</p><br>
   <p><b>Bio: </b>{{user.bio}}</p>
  </div>
  
@@ -125,6 +125,15 @@
    <span id="counter">100</span>
    <br><br>
    <button type="submit" id="displayColourButton" class="btn">Update Bio</button>
+   <br><br>
+   <hr>
+   <br><br>
+   </form>
+   
+      <form id="name" action="/deleteme/{{user.id}}" method="get">
+    <h2><font color="Red">Delete Your Account (CANNOT BE UNDONE)</font></h2>
+    <br>
+   <button type="submit" id="displayColourButton" class="btn">Delete Account Now</button>
    <br><br>
    <br><br>
    </form>

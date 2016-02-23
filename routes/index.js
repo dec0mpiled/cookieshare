@@ -556,6 +556,14 @@ router.post('/update/bio/:id', function(req, res, next) {
     res.redirect('/settings');
 });
 
+/* do some fucking awesome shit bitches #4!!!! */
+router.get('/deleteme/:id', function(req, res, next) {
+    User.findOneAndRemove({ _id: req.params.id }, function(err, post) {
+        if (err) return next (err);
+    });
+    res.redirect('/');
+});
+
 
 /* follow a damn user */
 router.get('/Follow/:user', function(req, res, next) {
