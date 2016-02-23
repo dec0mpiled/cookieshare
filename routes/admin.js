@@ -69,9 +69,17 @@ router.get('/user/delete/:id', ensureAuthentication, function(req, res, next) {
     });
 });
 
+// remove user
+router.get('/user/verify/:id', ensureAuthentication, function(req, res, next) {
+    User.findOneAndUpdate({ _id: req.params.id }, { status: "verified"  }, function(err, user) {
+       if (err) return next(err); 
+       res.redirect('/admin');
+    });
+});
+
 // add admin
 router.get('/add/admin/:id', ensureAuthentication, function(req, res, next) {
-    User.findOneAndUpdate({ _id: req.params.id }, { admin: true }, function(err, user) {
+    User.findOneAndUpdate({ _id: req.params.id}, { admin: true, status: "verified"  }, function(err, user) {
        if (err) return next(err); 
        res.redirect('/admin');
     });
@@ -79,7 +87,7 @@ router.get('/add/admin/:id', ensureAuthentication, function(req, res, next) {
 
 // remove admin
 router.get('/remove/admin/:id', ensureAuthentication, function(req, res, next) {
-    User.findOneAndUpdate({ _id: req.params.id }, { admin: false }, function(err, user) {
+    User.findOneAndUpdate({ _id: req.params.id}, { admin: false , status: "verified" }, function(err, user) {
        if (err) return next(err); 
        res.redirect('/admin');
     });

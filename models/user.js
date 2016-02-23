@@ -14,6 +14,7 @@ var User = new Schema({
     unhash: String,
     email: String,
     admin: Boolean,
+    status: String,
     following: [String],
     followers: [String],
     notifications: [notes],

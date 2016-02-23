@@ -11,7 +11,7 @@ var mongoose = require('mongoose');
 /* home */
 router.get('/', function(req, res, next) {
     /*
-   User.update({}, {$push: {following:"ShareCookieAds"} }, {multi: true}, function(err) {
+   User.update({}, {status:"none"}, {multi: true}, function(err) {
         if (err) throw err;
     }); */
  

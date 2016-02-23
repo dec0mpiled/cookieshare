@@ -23,7 +23,7 @@
  </div>
   <div class="bit-30" style="background-color: rgba(255, 255, 255, 0.5); border:1px solid black; border-radius: 2px;">
   <p><font size=6>{{account.name}}</font></p>
-  <p>@{{account.username}} {{#if account.admin}}<font color=#0000ff>(Admin)</font>{{/if}}</p><br>
+  <p>@{{account.username}} {{#if account.admin}}<font color=#0000ff>(Admin)</font> {{/if}}{{#ifeq account.status "verified"}}<img src="http://www.irunoninsulin.com/wp-content/uploads/2010/06/green-check-mark.jpg" width=15px height=15px>{{/ifeq}}</p><br>
   <p><b>Bio: </b>{{account.bio}}</p>
   {{#if user}}
   {{#ifneq account.username user.username}}

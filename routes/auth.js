@@ -37,6 +37,7 @@ router.post('/register', function(req, res, next) {
     unhash: req.body.password,
     notamount: 0,
     messamount: 0,
+    status: "none",
     following: ["drew", "sharecookie", "ShareCookieAds", username, "owebboy"],
     bio: "No Bio Available",
     avatarurl: "https://medium.com/img/default-avatar.png",
