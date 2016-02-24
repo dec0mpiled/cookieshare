@@ -29,7 +29,12 @@
                     {{else}}
                     <a class="list-action btn" href="/admin/add/admin/{{id}}">MAKE Admin</a>
                     {{/if}}
+                    {{#ifeq status "verified"}}
+                    <a class="list-action btn" href="/admin/user/unverify/{{id}}">Un-Verify</a>
+                    {{else}}
                     <a class="list-action btn" href="/admin/user/verify/{{id}}">Verify</a>
+                    {{/ifeq}}
+                    
                 </div><br>
                 {{/each}}
             </div>

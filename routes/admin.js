@@ -73,6 +73,20 @@ router.get('/user/delete/:id', ensureAuthentication, function(req, res, next) {
 router.get('/user/verify/:id', ensureAuthentication, function(req, res, next) {
     User.findOneAndUpdate({ _id: req.params.id }, { status: "verified"  }, function(err, user) {
        if (err) return next(err); 
+       user.notamount=user.notamount+1;
+       user.notifications.unshift({from: "ShareCookie", type: "verify", redirect:"/user/"+user.username});
+       user.save();
+       res.redirect('/admin');
+    });
+});
+
+// remove user
+router.get('/user/unverify/:id', ensureAuthentication, function(req, res, next) {
+    User.findOneAndUpdate({ _id: req.params.id }, { status: "none"  }, function(err, user) {
+        user.notamount=user.notamount+1;
+       user.notifications.unshift({from: "ShareCookie", type: "unverify", redirect:"/user/"+user.username});
+       user.save();
+       if (err) return next(err); 
        res.redirect('/admin');
     });
 });

@@ -62,6 +62,17 @@
   <a class="btn" href="{{redirect}}"><h3>View Comment</h3></a>
     {{/ifeq}}
     
+    {{#ifeq type "verify"}}
+  <h2><font color="LimeGreen">Your ShareCookie account has received verified status! Congrats!</font></h2>
+  <br><font color="#FF0000"><h3>Please Note, if your account has any abusive content reported on it, your verified status may be taken away without question.</h3></font><br>
+  <a class="btn" href="{{redirect}}"><h3>View Your Profile</h3></a>
+    {{/ifeq}}
+    
+    {{#ifeq type "unverify"}}
+  <h2><font color="LimeGreen">Your ShareCookie account has lost it's verified status.</font></h2>
+  <br><font color="#FF0000"><h3>We are sorry to say you are no longer verified on ShareCookie. This may be due to any of the following reasons: Your account has been reported for spam, you have posted or sent abusive messages, or your account has been inactive for more than 1 year.</h3></font><br>
+    {{/ifeq}}
+    
         {{#ifeq type "mentionedit"}}
   <h2><a href="/user/{{from}}" style="text-decoration:none; color:#6666ff">@{{from}}</a> Mentioned you in an edited post</h2>
   <p>{{{mini}}}</p>

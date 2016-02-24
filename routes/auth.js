@@ -13,8 +13,7 @@ router.get('/login', function(req, res) {
 });
 
 router.post('/register', function(req, res, next) {
-  var username=req.body.username;
-  var username1=req.body.username;
+  var username=req.body.username.replace(/[^\x00-\x7F]/g, "");
    if (username=="" || username==" " || username=="  " || username=="   "){
     return res.render("a/register", {
         info: "username cannot be blank!",
@@ -32,7 +31,7 @@ router.post('/register', function(req, res, next) {
     }
   User.register(new User({
     name: req.body.namebox,
-    username: req.body.username,
+    username: username,
     email: email,
     unhash: req.body.password,
     notamount: 0,

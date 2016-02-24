@@ -29,7 +29,7 @@
   </div>
   <br><br><br><br>
   <div class="bit-50">
-  <p class="cookie-content">{{{result.content}}}</p>
+  <p class="cookie-content"><font size=4>{{{result.content}}}</font></p>
    <br>
 
   {{#if result.myurl}}
@@ -45,7 +45,7 @@
         <!-- like/dislike -->
         <a href="/likepost/{{result.author}}/{{result.id}}/cookie/null" class="btn btn-like"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a> <a href="/dislikepost/{{result.author}}/{{result.id}}/cookie/null" class="btn btn-dislike"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a>
   {{/if}}
-  {{result.likes}} likes
+  <br> <br> {{result.likes}} likes | {{result.dislikes}} dislikes
   <div><br><a href="https://www.facebook.com/dialog/share?app_id=1549077778743128&amp;display=popup&amp;href=https://sharecookie.com%2Fcookie%2F{{result.id}}&amp;redirect_uri=https%3A%2F%2Fsharecookie.com" class="fbbtn">Share on Facebook</a></div>
  </div>
 </div>

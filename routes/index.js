@@ -2,11 +2,15 @@ var express = require('express');
 var app = express();
 var router = express.Router();
 var User = require('../models/user');
+var Message = require('../models/message');
 var Post = require('../models/post');
 var marked = require('marked');
 //var sanitizeHtml = require('sanitize-html');
 var twitter = require('twitter-text');
 var mongoose = require('mongoose');
+
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 /* home */
 router.get('/', function(req, res, next) {
@@ -757,6 +761,11 @@ User.findOne({ username: req.user.username }, function(err, usera) {
 res.redirect('/');
 });
 
+router.get('/messages', function(req, res, next) {
+res.render('chats');
+
+});
+
 /*/*
 router.get('/searchfollowing', function(req, res, next) {
     var val=req.body.searchbox;
@@ -770,6 +779,5 @@ router.get('/searchfollowing', function(req, res, next) {
             }
      });
 });*/
-
 
 module.exports = router;
