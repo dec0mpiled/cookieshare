@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var hbs = require('hbs');
+var socket_io = require('socket.io');
 var HandlebarsIntl = require("handlebars-intl");
 var passport = require("passport"),
 LocalStrategy = require('passport-local').Strategy;
@@ -16,6 +17,9 @@ var auth = require('./routes/auth');
 var admin = require('./routes/admin');
 
 var app = express();
+
+var io = socket_io();
+app.io = io;
 
 // Mongoose
 var mongoose = require('mongoose');

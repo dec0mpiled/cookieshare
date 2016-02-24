@@ -37,7 +37,7 @@ router.post('/register', function(req, res, next) {
     notamount: 0,
     messamount: 0,
     status: "none",
-    following: ["drew", "sharecookie", "ShareCookieAds", username, "owebboy"],
+    following: ["drew", "sharecookie", "ShareCookieAds", username, "owebboy", "todaysholiday"],
     bio: "No Bio Available",
     avatarurl: "https://medium.com/img/default-avatar.png",
     admin: false
@@ -62,6 +62,15 @@ router.post('/register', function(req, res, next) {
        doc.notifications.unshift({from: username, type: "follower", redirect:username});
       doc.save();
     });
+    
+      User.findOne({username: "todaysholiday"}, function(err,doc) {
+      if (err) throw err;
+      doc.followers.push(username);
+       doc.notamount=doc.notamount+1;
+       doc.notifications.unshift({from: username, type: "follower", redirect:username});
+      doc.save();
+    });
+    
         User.findOne({username: "sharecookie"}, function(err,doc) {
       if (err) throw err;
       doc.followers.push(username);
