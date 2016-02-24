@@ -15,8 +15,8 @@ var mongoose = require('mongoose');
 /* home */
 router.get('/', function(req, res, next) {
     
-    /*
-   User.update({}, {status:"none"}, {multi: true}, function(err) {
+   /* 
+   User.update({}, {$push: {following: "todaysholiday"}}, {multi: true}, function(err) {
         if (err) throw err;
     }); */
     /*
@@ -354,7 +354,6 @@ Post.findOne({_id:id}, function(err, doc) {
     if (err) return next(err);
     doc.content=marked(mycontent);
     doc.rawcontent=rawcontent;
-    doc.myurl=mynewurl;
     doc.group=group;
     doc.link=gurl;
 
