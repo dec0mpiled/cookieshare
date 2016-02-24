@@ -9,8 +9,8 @@ var marked = require('marked');
 var twitter = require('twitter-text');
 var mongoose = require('mongoose');
 
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+//var http = require('http').Server(app);
+//var io = require('socket.io')(http);
 
 /* home */
 router.get('/', function(req, res, next) {
