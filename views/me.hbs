@@ -123,8 +123,8 @@
   <p><img src="{{avatarurl}}" width=60px height=60px style="border: 1px solid black"></p>
   </div>
   <div class="bit-60">
-  <p><b>{{names}}</b> <a href="/user/{{author}}" class="a"><font color=#6666ff>@{{author}}</font></a></p>
-  <p>{{formatDate created  day="numeric" month="long" year="numeric"}}</p>
+  <p><b>{{names}}</b> {{#ifneq author "ShareCookieAds"}}<a href="/user/{{author}}" class="a"><font color=#6666ff>@{{author}}</font></a>{{/ifneq}}</p>
+  {{#ifneq author "ShareCookieAds"}}<p>{{formatDate created  day="numeric" month="long" year="numeric"}}</p>{{/ifneq}}
   {{#if group}}
   <p><b>Posted to Group:</b> <a href="/group/{{group}}" style="text-decoration:none">{{group}}</a></p>
   {{/if}}
@@ -150,17 +150,24 @@
      {{/if}}
        
        {{#if ../user}}
+       {{#ifneq author "ShareCookieAds"}}
         <!-- like/dislike -->
         <a href="/likepost/{{author}}/{{id}}/home/null" class="btn btn-like"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a> <a href="/dislikepost/{{author}}/{{id}}/home/null" class="btn btn-dislike"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a>
-       {{/if}}
-        {{likes}} likes
+        <br> <br> {{likes}} likes | {{dislikes}} dislikes
         <!-- comments -->
         <a href="/cookie/{{id}}"><font color=#6666ff>Comments ({{commentamount}})</font></a>
+        {{/ifneq}}
+       {{/if}}
         {{#or ../user.username author ../user.admin true}}
         <br><br>
         <a href="/editcookie/{{author}}/{{id}}" style="text-decoration:none;"><font color=#0066ff>[Edit]</font></a>
         <a href="/deletecookie/{{author}}/{{id}}" style="text-decoration:none;"><font color=#ff0000>[Delete]</font></a>
         {{/or}}
+        
+        {{#if ../user}}
+        {{else}}
+        <font color=#000><i>Please Login or Register to Like and Comment!</i></font>
+        {{/if}}
         
        </div>
      
