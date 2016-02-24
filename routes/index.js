@@ -760,8 +760,8 @@ User.findOne({ username: req.user.username }, function(err, usera) {
 res.redirect('/');
 });
 
-router.get('/messages', function(req, res, next) {
-res.render('chats');
+router.get('/search', function(req, res, next) {
+res.render('search', {user:req.user});
 
 });
 

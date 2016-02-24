@@ -11,10 +11,10 @@
     <font color="white">|</font>
      <a class="navbar-item" href="/notifications"><span class="glyphicon glyphicon-bell btn" aria-hidden="true">{{#if user}}{{#ifneq notes 0}}<font color="red">({{notes}})</font>{{/ifneq}}{{/if}}</a>
     <a class="navbar-item" href="/user/{{user.username}}"><span class="glyphicon glyphicon-user btn" aria-hidden="true"></a>
+    <a class="navbar-item" href="/search"><span class="glyphicon glyphicon-search btn" aria-hidden="true"></a>
     <font color="white">|</font>
     {{#if user.admin}}
     <a class="navbar-item" href="/admin"><span class="glyphicon glyphicon-eye-close btn" aria-hidden="true"></a>
-    <a class="navbar-item" href="/messages"><span class="glyphicon glyphicon-envelope btn" aria-hidden="true"></a>
     <font color="white">|</font>
     {{/if}}
     <a class="navbar-item" href="/auth/logout"><span class="glyphicon glyphicon-log-out btn" aria-hidden="true"></a>
