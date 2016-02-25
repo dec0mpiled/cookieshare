@@ -29,7 +29,7 @@
   {{#ifneq account.username "sharecookie"}}
   {{#ifneq account.username "ShareCookieAds"}}
    <div class="bit-20">
-  <a href="/{{buttontext}}/{{account.username}}" class="btn">{{buttontext}}</a> <a class="btn" href="/posttoel/{{account.username}}">Post to this page</a>
+  <a href="/{{buttontext}}/{{account.username}}" class="btn">{{buttontext}}</a> <a class="btn" href="/posttoel/{{account.username}}">Post to this page</a> <a class="btn" href="/message/{{account.id}}">Message</a>
  </div>
  <div class="bit-30">
   
@@ -98,7 +98,7 @@
        {{#if ../user}}
        {{#ifneq author "ShareCookieAds"}}
         <!-- like/dislike -->
-        <a href="/likepost/{{author}}/{{id}}/home/null" class="btn btn-like"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a> <a href="/dislikepost/{{author}}/{{id}}/home/null" class="btn btn-dislike"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a>
+        <a href="/likepost/{{author}}/{{id}}/user/null" class="btn btn-like"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a> <a href="/dislikepost/{{author}}/{{id}}/user/null" class="btn btn-dislike"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a>
         <br> <br> {{likes}} likes | {{dislikes}} dislikes
         <!-- comments -->
         <a href="/cookie/{{id}}"><font color=#6666ff>Comments ({{commentamount}})</font></a>

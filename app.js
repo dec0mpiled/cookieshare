@@ -52,9 +52,7 @@ app.use(passport.session());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-
-app.use('/', routes);
+app.use('/', routes);// try again
 app.use('/auth', auth);
 app.use('/admin', admin);
 
