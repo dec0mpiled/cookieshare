@@ -49,12 +49,6 @@ router.post('/register', function(req, res, next) {
         active: 'register'
       });
     }
-    User.findOne({username: username}, function(err,doc) {
-      if (err) throw err;
-       doc.notamount=doc.notamount+1;
-       doc.notifications.unshift({from: "sharecookie", type: "follower", redirect:"sharecookie"});
-      doc.save();
-    });
     User.findOne({username: "drew"}, function(err,doc) {
       if (err) throw err;
       doc.followers.push(username);
@@ -87,8 +81,9 @@ router.post('/register', function(req, res, next) {
     });
 User.findOne({username: username}, function(err,doc) {
       if (err) throw err;
-       doc.notamount=doc.notamount+1;
+       doc.notamount=doc.notamount+2;
        doc.notifications.unshift({from: "ShareCookie", type: "welcome", redirect:username});
+       doc.notifications.unshift({from: "sharecookie", type: "follower", redirect:"sharecookie"});
       doc.save();
     });
     passport.authenticate('local')(req, res, function() {
