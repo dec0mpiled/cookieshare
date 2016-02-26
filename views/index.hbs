@@ -175,7 +175,7 @@
        {{#ifneq author "ShareCookieAds"}}
         <!-- like/dislike -->
         <a href="/likepost/{{author}}/{{id}}/home/null" class="btn btn-like"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a> <a href="/dislikepost/{{author}}/{{id}}/home/null" class="btn btn-dislike"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a> 
-        <a data-toggle="tooltip" title="Rebake" href="/rebake/{{author}}/{{id}}/home/null" class="btn btn-dislike"><span class="glyphicon glyphicon-retweet" aria-hidden="true"></span></a>
+        {{#ifneq author ../../../user.username}}<a data-toggle="tooltip" title="Rebake" href="/rebake/{{author}}/{{id}}/home/null" class="btn btn-dislike"><span class="glyphicon glyphicon-retweet" aria-hidden="true"></span></a>{{/ifneq}}
         <br> <br> <p id="{{id}}">{{likes}} likes | {{dislikes}} dislikes | {{rebakes}} rebakes
         
         <!-- comments -->

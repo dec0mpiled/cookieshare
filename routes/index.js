@@ -229,7 +229,7 @@ router.get('/rebake/:author/:id/:return/:group', function(req, res, next) {
         content: marked(docs.content),
         avatarurl: req.user.avatarurl,
         rawcontent:docs.rawcontent,
-        myurl: docs.mynewurl,
+        myurl: docs.myurl,
         link: docs.gurl,
         color: docs.color,
         group: docs.group,
