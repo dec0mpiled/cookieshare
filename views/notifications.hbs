@@ -18,72 +18,72 @@
 <div class="frame body-frame" style="border: 0px solid gray; background-color:{{account.themecolor}}; border-radius: 2px">
     <h1>Notifications</h1>
     <h3><a href="/clearnotes">(Clear All)</a></h3><br>
-    <!--<input class="input-gif" placeholder="Search for a user by name (Please enter exact, no @)" required><br><br><a href="/searchfollowing" name="searchbox" class="btn">Search</a><br><br><hr><br>!-->
+    <!--<input class="input-gif" placeholder="Search for a user by name (Please enter exact, no @)" required><br><br><a href="/searchfollowing" name="searchbox" class="btn btn-notify">Search</a><br><br><hr><br>!-->
     
 {{#each notifications}}
-<div class="cookie posts" style="padding:5px; border: 1px solid black; border-radius: 2px">
+<div class="cookie posts notification" style="padding:1em; border: 1px solid #000; border-radius: 2px">
     {{#ifeq type "comment"}}
-  <h2><a href="/user/{{from}}" style="text-decoration:none; color:#6666ff">@{{from}}</a> Commented on your post</h2>
-  <p>{{{mini}}}</p>
-  <a class="btn" href="/cookie/{{redirect}}"><h3>View Post</h3></a>
+    <a class="btn btn-notify" href="/cookie/{{redirect}}">View Post</a>
+    <h2><a href="/user/{{from}}" style="text-decoration:none; color:#6666ff">@{{from}}</a> commented on your post</h2>
+    <p>{{{mini}}}</p>
     {{/ifeq}}
     
     {{#ifeq type "like"}}
-  <h2><a href="/user/{{from}}" style="text-decoration:none; color:#6666ff">@{{from}}</a> Liked your post</h2>
-  <p>{{{mini}}}</p>
-  <a class="btn" href="/cookie/{{redirect}}"><h3>View Post</h3></a>
+    <a class="btn btn-notify" href="/cookie/{{redirect}}">View Post</a>
+    <h2><a href="/user/{{from}}" style="text-decoration:none; color:#6666ff">@{{from}}</a> liked your post</h2>
+    <p>{{{mini}}}</p>
     {{/ifeq}}
     
     {{#ifeq type "rebake"}}
-  <h2><a href="/user/{{from}}" style="text-decoration:none; color:#6666ff">@{{from}}</a> Rebaked your post</h2>
-  <p>{{{mini}}}</p>
-  <a class="btn" href="/cookie/{{redirect}}"><h3>View Post</h3></a>
+    <a class="btn btn-notify" href="/cookie/{{redirect}}">View Post</a>
+    <h2><a href="/user/{{from}}" style="text-decoration:none; color:#6666ff">@{{from}}</a> rebaked your post</h2>
+    <p>{{{mini}}}</p>
     {{/ifeq}}
     
     {{#ifeq type "dislike"}}
-  <h2><a href="/user/{{from}}" style="text-decoration:none; color:#6666ff">@{{from}}</a> Disliked your post</h2>
-  <p>{{{mini}}}</p>
-  <a class="btn" href="/cookie/{{redirect}}"><h3>View Post</h3></a>
+    <a class="btn btn-notify" href="/cookie/{{redirect}}">View Post</a>
+    <h2><a href="/user/{{from}}" style="text-decoration:none; color:#6666ff">@{{from}}</a> disliked your post</h2>
+    <p>{{{mini}}}</p>
     {{/ifeq}}
     
     {{#ifeq type "follower"}}
-  <h2><a href="/user/{{from}}" style="text-decoration:none; color:#6666ff">@{{from}}</a> Followed you!</h2>
-  <a class="btn" href="/user/{{from}}"><h3>View User</h3></a>
+    <a class="btn btn-notify" href="/user/{{from}}">View User</a>
+    <h2><a href="/user/{{from}}" style="text-decoration:none; color:#6666ff">@{{from}}</a> followed you!</h2>
     {{/ifeq}}
     
     {{#ifeq type "postto"}}
-  <h2><a href="/user/{{from}}" style="text-decoration:none; color:#6666ff">@{{from}}</a> Posted on your page</h2>
-  <p>{{{mini}}}</p>
-  <a class="btn" href="/poststome/{{../../user.username}}"><h3>View</h3></a>
+    <a class="btn btn-notify" href="/poststome/{{../../user.username}}">View</a>
+    <h2><a href="/user/{{from}}" style="text-decoration:none; color:#6666ff">@{{from}}</a> posted on your page</h2>
+    <p>{{{mini}}}</p>
     {{/ifeq}}
     
     {{#ifeq type "mention"}}
-  <h2><a href="/user/{{from}}" style="text-decoration:none; color:#6666ff">@{{from}}</a> Mentioned you in a post</h2>
-  <p>{{{mini}}}</p>
-  <a class="btn" href="{{redirect}}"><h3>View Post</h3></a>
+    <a class="btn btn-notify" href="{{redirect}}">View Post</a>
+    <h2><a href="/user/{{from}}" style="text-decoration:none; color:#6666ff">@{{from}}</a> mentioned you in a post</h2>
+    <p>{{{mini}}}</p>
     {{/ifeq}}
     
-        {{#ifeq type "commention"}}
-  <h2><a href="/user/{{from}}" style="text-decoration:none; color:#6666ff">@{{from}}</a> Mentioned you in a comment</h2>
-  <p>{{{mini}}}</p>
-  <a class="btn" href="{{redirect}}"><h3>View Comment</h3></a>
+    {{#ifeq type "commention"}}
+    <a class="btn btn-notify" href="{{redirect}}">View Comment</a>
+    <h2><a href="/user/{{from}}" style="text-decoration:none; color:#6666ff">@{{from}}</a> mentioned you in a comment</h2>
+    <p>{{{mini}}}</p>
     {{/ifeq}}
     
     {{#ifeq type "verify"}}
-  <h2><font color="LimeGreen">Your ShareCookie account has received verified status! Congrats!</font></h2>
-  <br><font color="#FF0000"><h3>Please Note, if your account has any abusive content reported on it, your verified status may be taken away without question.</h3></font><br>
-  <a class="btn" href="{{redirect}}"><h3>View Your Profile</h3></a>
+    <a class="btn btn-notify" href="{{redirect}}">View Your Profile</a>
+    <h2><font color="LimeGreen">Your ShareCookie account has received verified status! Congrats!</font></h2>
+    <br><font color="#FF0000"><h3>Please Note, if your account has any abusive content reported on it, your verified status may be taken away without question.</h3></font><br>
     {{/ifeq}}
     
     {{#ifeq type "unverify"}}
-  <h2><font color="LimeGreen">Your ShareCookie account has lost it's verified status.</font></h2>
-  <br><font color="#FF0000"><h3>We are sorry to say you are no longer verified on ShareCookie. This may be due to any of the following reasons: Your account has been reported for spam, you have posted or sent abusive messages, or your account has been inactive for more than 1 year.</h3></font><br>
+    <h2><font color="LimeGreen">Your ShareCookie account has lost it's verified status.</font></h2>
+    <br><font color="#FF0000"><h3>We are sorry to say you are no longer verified on ShareCookie. This may be due to any of the following reasons: Your account has been reported for spam, you have posted or sent abusive messages, or your account has been inactive for more than 1 year.</h3></font><br>
     {{/ifeq}}
     
-        {{#ifeq type "mentionedit"}}
-  <h2><a href="/user/{{from}}" style="text-decoration:none; color:#6666ff">@{{from}}</a> Mentioned you in an edited post</h2>
-  <p>{{{mini}}}</p>
-  <a class="btn" href="{{redirect}}"><h3>View Post</h3></a>
+    {{#ifeq type "mentionedit"}}
+    <a class="btn btn-notify" href="{{redirect}}">View Post</a>
+    <h2><a href="/user/{{from}}" style="text-decoration:none; color:#6666ff">@{{from}}</a> mentioned you in an edited post</h2>
+    <p>{{{mini}}}</p>
     {{/ifeq}}
     
    {{#ifeq type "welcome"}}

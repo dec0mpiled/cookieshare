@@ -26,6 +26,15 @@ body {
   margin: 0 5%;
 }
 
+.btn-notify {
+  display: block;
+  float: right; 
+}
+
+.notification p {
+  font-size: 1.5em !important;
+}
+
 /* Navbar */
 .navbar {
   width: 100%;
@@ -59,7 +68,8 @@ body {
 }
 
 .navbar-brand {
-  font-size: 1.5em;
+  font-weight: normal;
+  font-size: 2em;
   text-decoration: none;
   color: #6666ff;
 

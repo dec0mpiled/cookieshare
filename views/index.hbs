@@ -14,7 +14,7 @@
     <a class="navbar-item" href="/search"><span class="glyphicon glyphicon-search btn" aria-hidden="true"></a>
     <font color="white">|</font>
     {{#if user.admin}}
-    <a class="navbar-item" href="/admin"><span class="glyphicon glyphicon-text-background btn" aria-hidden="true"></a>
+    <a class="navbar-item" href="/admin"><span class="glyphicon glyphicon-star btn" aria-hidden="true"></a>
     <font color="white">|</font>
     {{/if}}
     <a class="navbar-item" href="/auth/logout"><span class="glyphicon glyphicon-log-out btn" aria-hidden="true"></a>
@@ -145,7 +145,7 @@
   <p><img src="{{avatarurl}}" width=60px height=60px style="border: 1px solid black"></p>
   </div>
   <div class="bit-60">
-  <p><b>{{{names}}}</b> {{#ifneq author "ShareCookieAds"}}<a href="/user/{{author}}" class="a"><font color=#6666ff>@{{author}}</font></a>{{/ifneq}}</p>
+  <p><b>{{{names}}}</b><br> {{#ifneq author "ShareCookieAds"}}<a href="/user/{{author}}" class="a"><font color=#6666ff>@{{author}}</font></a>{{/ifneq}}</p>
   {{#ifneq author "ShareCookieAds"}}<p>{{formatDate created  day="numeric" month="long" year="numeric"}}</p>{{/ifneq}}
   {{#if group}}
   <p><b>Posted to Group:</b> <a href="/group/{{group}}" style="text-decoration:none">{{group}}</a></p>

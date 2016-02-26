@@ -57,8 +57,7 @@ router.get('/', function(req, res, next) {
 });
 
 /* sort by date */
-router.get('/filter/date', function(req, res, next) {
-
+router.get('/filter/date', ensureAuthenticated,function(req, res, next) {
     Post.find({}, null, { sort: '-created' }, function (err, posts) {
         if (err) return next(err);
         res.render('index', { title: 'ShareCookie', filter: 'date', posts: posts, user: req.user });
@@ -66,7 +65,7 @@ router.get('/filter/date', function(req, res, next) {
 });
 
 /* sort by likes */
-router.get('/public', function(req, res, next) {
+router.get('/public', ensureAuthenticated, function(req, res, next) {
     if (req.user) {
           
               var notcount=req.user.notamount;
@@ -82,7 +81,7 @@ router.get('/public', function(req, res, next) {
 
 /* Like Post */
 
-router.get('/likepost/:author/:id/:return/:group', function(req, res, next) {
+router.get('/likepost/:author/:id/:return/:group', ensureAuthenticated, function(req, res, next) {
     
     User.findById(req.user.id, function(err, doc){
         console.log(doc);
@@ -146,7 +145,7 @@ router.get('/likepost/:author/:id/:return/:group', function(req, res, next) {
 
 /* Dislike Post */
 
-router.get('/dislikepost/:author/:id/:return/:group', function(req, res) {
+router.get('/dislikepost/:author/:id/:return/:group', ensureAuthenticated, function(req, res) {
     User.findById(req.user.id, function(err, doc){
         console.log(doc);
         var nid = req.params.id.toString();
@@ -208,7 +207,7 @@ router.get('/dislikepost/:author/:id/:return/:group', function(req, res) {
 });
 
 // rebake
-router.get('/rebake/:author/:id/:return/:group', function(req, res, next) {
+router.get('/rebake/:author/:id/:return/:group', ensureAuthenticated, function(req, res, next) {
         
         Post.findOne({ _id: req.params.id }, function (err, docs){
             docs.rebakes=docs.rebakes+1;
@@ -226,9 +225,9 @@ router.get('/rebake/:author/:id/:return/:group', function(req, res, next) {
         names: req.user.name+" <i>(Rebaked from <a style=\"text-decoration:none; color=\"#6666ff\" href=\"/user/"+docs.author+"\">@"+docs.author+"</a>)</i>",
         author: req.user.username,
         _author: req.user.id,
-        content: marked(docs.content),
+        content: "@"+docs.author+" said: "+marked(docs.content),
         avatarurl: req.user.avatarurl,
-        rawcontent:docs.rawcontent,
+        rawcontent:"@"+docs.author+" said: "+marked(docs.rawcontent),
         myurl: docs.myurl,
         link: docs.gurl,
         color: docs.color,
@@ -260,7 +259,7 @@ router.get('/rebake/:author/:id/:return/:group', function(req, res, next) {
 });
 
 /* Post Cookie */
-router.post('/sharecookie', function(req, res, next) {
+router.post('/sharecookie', ensureAuthenticated, function(req, res, next) {
     var badWord = /fuck|shit|cunt|damn|nigger|nigga|twat|dick|cum|tits|titties|boob|boobs|penis|cock|bbc|porn|pornography|rape|sex|orgasm|raping|bitch|ass|clit|clitoris|breast|breasts|wigger|faggot/gi;
     var authorq=req.user.username;
     var contentq = req.body.texxtt;
@@ -349,7 +348,7 @@ console.log(mycontent);
 
 
 /* Post Cookie */
-router.post('/updatecookie/:id', function(req, res, next) {
+router.post('/updatecookie/:id', ensureAuthenticated, function(req, res, next) {
     var id=req.params.id;
     var contentq = req.body.texxtt;
     var gurl=req.body.urlbox;
@@ -416,7 +415,7 @@ Post.findOne({_id:id}, function(err, doc) {
 });
 
 
-router.get('/cookie/:id', function(req, res) {
+router.get('/cookie/:id', ensureAuthenticated, function(req, res) {
   Post.findOne({ _id: req.params.id }, function(err, result) {
     if (err) throw err;
     if (result== null) {
@@ -565,7 +564,7 @@ router.post("/sendtouser/:id", function(req, res, next) {
 ///////////////////////////////////////////////////
 
 /* GET settings page. */
-router.get('/settings', function(req, res, next) {
+router.get('/settings', ensureAuthenticated, function(req, res, next) {
     if (req.user){
     res.render('settings', { title: 'Settings', user: req.user});
     } else {
@@ -574,7 +573,7 @@ router.get('/settings', function(req, res, next) {
 });
 
 /* SET profile picture */
-router.post('/updatepp/:usera', function(req, res, next) {
+router.post('/updatepp/:usera', ensureAuthenticated, function(req, res, next) {
     var value=req.body.url;
     console.log(value);
     User.findOneAndUpdate({ _id: req.params.usera }, { avatarurl: value }, function(err, doc) {
@@ -587,7 +586,7 @@ router.post('/updatepp/:usera', function(req, res, next) {
 });
 
 /* SET profile picture */
-router.post('/update/updatecp/:id', function(req, res, next) {
+router.post('/update/updatecp/:id', ensureAuthenticated, function(req, res, next) {
     var value=req.body.ppbox1;
     console.log(value);
     User.findOneAndUpdate({ _id: req.params.id }, { coverphotourl: value }, function(err, doc) {
@@ -597,7 +596,7 @@ router.post('/update/updatecp/:id', function(req, res, next) {
 });
 
 /* do some fucking awesome shit bitches */
-router.post('/update/displayName/:id', function(req, res, next) {
+router.post('/update/displayName/:id', ensureAuthenticated, function(req, res, next) {
     User.findOneAndUpdate({ _id: req.params.id }, { name: req.body.displayName}, function(err, doc) {
         if (err) throw err;
     });
@@ -608,7 +607,7 @@ router.post('/update/displayName/:id', function(req, res, next) {
 });
 
 /* do some fucking awesome shit bitches #2 */
-router.post('/update/username/:id', function(req, res, next) {
+router.post('/update/username/:id', ensureAuthenticated, function(req, res, next) {
     User.findOneAndUpdate({ _id: req.params.id }, { username: req.body.displayName }, function(err, doc) {
         if (err) throw err;
     });
@@ -619,7 +618,7 @@ router.post('/update/username/:id', function(req, res, next) {
 });
 
 /* do some fucking awesome shit bitches #3!!!! */
-router.post('/update/colour/:id', function(req, res, next) {
+router.post('/update/colour/:id', ensureAuthenticated, function(req, res, next) {
     console.log(req.body.colour);
     User.findOneAndUpdate({ _id: req.params.id }, { themecolor: "#"+req.body.colour }, function(err, doc) {
         if (err) throw err;
@@ -628,7 +627,7 @@ router.post('/update/colour/:id', function(req, res, next) {
 });
 
 /* do some fucking awesome shit bitches #4!!!! */
-router.post('/update/bio/:id', function(req, res, next) {
+router.post('/update/bio/:id', ensureAuthenticated, function(req, res, next) {
     User.findOneAndUpdate({ _id: req.params.id }, { bio: marked(req.body.bio) }, function(err, doc) {
         if (err) throw err;
     });
@@ -636,7 +635,7 @@ router.post('/update/bio/:id', function(req, res, next) {
 });
 
 /* do some fucking awesome shit bitches #4!!!! */
-router.get('/deleteme/:id', function(req, res, next) {
+router.get('/deleteme/:id', ensureAuthenticated, function(req, res, next) {
     User.findOneAndRemove({ _id: req.params.id }, function(err, post) {
         if (err) return next (err);
     });
@@ -645,7 +644,7 @@ router.get('/deleteme/:id', function(req, res, next) {
 
 
 /* follow a damn user */
-router.get('/Follow/:user', function(req, res, next) {
+router.get('/Follow/:user', ensureAuthenticated, function(req, res, next) {
     if (req.user){
     
     User.findById(req.user.id, function(err, doc){
@@ -685,8 +684,8 @@ router.get('/Follow/:user', function(req, res, next) {
     }
     });
     
-    /* follow a damn user */
-router.get('/Unfollow/:user', function(req, res, next) {
+    /* unfollow a damn user */
+router.get('/Unfollow/:user', ensureAuthenticated, function(req, res, next) {
     if (req.user){
     User.findOneAndUpdate({username: req.user.username}, {$pull: {following: req.params.user}}, function(err, org) {
         if (err) return next(err);
@@ -701,14 +700,14 @@ router.get('/Unfollow/:user', function(req, res, next) {
     }
 });
 
-router.get('/deletecookie/:name/:id', function(req, res, next) {
+router.get('/deletecookie/:name/:id', ensureAuthenticated, function(req, res, next) {
     Post.findOneAndRemove({ _id: req.params.id }, function(err, post) {
         if (err) return next(err);
         res.redirect('/');
     });
 });
 
-router.get('/deletepostto/:name/:id', function(req, res, next) {
+router.get('/deletepostto/:name/:id', ensureAuthenticated, function(req, res, next) {
     User.findOne({username: req.params.name}, function(err, org) {
         if (err) return next(err);
         org.poststo.pull(req.params.id);
@@ -717,7 +716,7 @@ router.get('/deletepostto/:name/:id', function(req, res, next) {
     });
 });
 
-router.get('/editcookie/:name/:id', function(req, res, next) {
+router.get('/editcookie/:name/:id', ensureAuthenticated, function(req, res, next) {
     if (req.user) {
     Post.findOne({ _id: req.params.id }, function(err, post) {
         if (err) return next(err);
@@ -729,7 +728,7 @@ router.get('/editcookie/:name/:id', function(req, res, next) {
     }
 });
 
-router.get('/following/:name', function(req, res, next) {
+router.get('/following/:name', ensureAuthenticated, function(req, res, next) {
     if (req.user){
     User.findOne({username: req.params.name}, function(err, doc) {
         if (err) return next(err);
@@ -742,7 +741,7 @@ router.get('/following/:name', function(req, res, next) {
 }
 });
 
-router.get('/followers/:name', function(req, res, next) {
+router.get('/followers/:name', ensureAuthenticated, function(req, res, next) {
     if (req.user){
    User.findOne({username: req.params.name}, function(err, doc) {
         if (err) return next(err);
@@ -755,7 +754,7 @@ router.get('/followers/:name', function(req, res, next) {
 }
 }); 
 
-router.get('/notifications', function(req, res, next) {
+router.get('/notifications', ensureAuthenticated, function(req, res, next) {
     if (req.user){
    User.findOne({username: req.user.username}, function(err, doc) {
         if (err) return next(err);
@@ -769,7 +768,7 @@ router.get('/notifications', function(req, res, next) {
 }
 }); 
 
-router.get('/clearnotes', function(req, res, next) {
+router.get('/clearnotes', ensureAuthenticated, function(req, res, next) {
     if (req.user){
     User.findOne({username:req.user.username}, function(err, doc) {
        if (err) throw err; 
@@ -783,7 +782,7 @@ router.get('/clearnotes', function(req, res, next) {
     }
 });
 
-router.get('/poststome/:name', function(req, res, next) {
+router.get('/poststome/:name', ensureAuthenticated, function(req, res, next) {
     if (req.user){
 User.findOne({ username: req.params.name }, function(err, usera) {
     if (err) return next(err);
@@ -794,7 +793,7 @@ User.findOne({ username: req.params.name }, function(err, usera) {
 }
 });
 
-router.get('/posttoel/:name', function(req, res, next) {
+router.get('/posttoel/:name', ensureAuthenticated, function(req, res, next) {
     if (req.user){
 User.findOne({ username: req.params.name }, function(err, usera) {
     if (err) return next(err);
@@ -805,7 +804,7 @@ User.findOne({ username: req.params.name }, function(err, usera) {
 }
 });
 
-router.get('/followme', function(req, res, next) {
+router.get('/followme', ensureAuthenticated, function(req, res, next) {
 User.findOne({ username: req.user.username }, function(err, usera) {
     if (err) throw err;
     usera.followers.push(req.user.username);
@@ -813,7 +812,7 @@ User.findOne({ username: req.user.username }, function(err, usera) {
 res.redirect('/');
 });
 
-router.get('/search', function(req, res, next) {
+router.get('/search', ensureAuthenticated, function(req, res, next) {
 res.render('search', {user:req.user});
 
 });
@@ -836,5 +835,12 @@ router.get('/searchfollowing', function(req, res, next) {
             }
      });
 });*/
+
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated())
+    return next();
+  else
+    return res.redirect('/')
+}
 
 module.exports = router;

@@ -66,7 +66,7 @@
   <p><img src="{{avatarurl}}" width=60px height=60px style="border: 1px solid black"></p>
   </div>
   <div class="bit-60">
-  <p><b>{{{names}}}</b> {{#ifneq author "ShareCookieAds"}}<a href="/user/{{author}}" class="a"><font color=#6666ff>@{{author}}</font></a>{{/ifneq}}</p>
+  <p><b>{{{names}}}</b><br> {{#ifneq author "ShareCookieAds"}}<a href="/user/{{author}}" class="a"><font color=#6666ff>@{{author}}</font></a>{{/ifneq}}</p>
   {{#ifneq author "ShareCookieAds"}}<p>{{formatDate created  day="numeric" month="long" year="numeric"}}</p>{{/ifneq}}
   {{#if group}}
   <p><b>Posted to Group:</b> <a href="/group/{{group}}" style="text-decoration:none">{{group}}</a></p>
