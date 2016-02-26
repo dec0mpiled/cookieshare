@@ -2,13 +2,10 @@
  <div class="wrapper">
  <a style="font-family: prot" class="navbar-brand" href="/">ShareCookie</a>
   <div class="navbar-right">
+   <a class="navbar-item" onclick="window.history.back();"><span class="glyphicon glyphicon-arrow-left btn" aria-hidden="true"></a>
    <a class="navbar-item {{#equal filter 'date'}}selected{{/equal}}" href="/"><span class="glyphicon glyphicon-home btn" aria-hidden="true"></a>
     {{#if user}}
     <a class="navbar-item" href="/settings"><span class="glyphicon glyphicon glyphicon-cog" aria-hidden="true"></a>
-    <font color="white">|</font>
-    <a class="navbar-item" href="/auth/logout"><span class="glyphicon glyphicon glyphicon-log-out" aria-hidden="true"></a>
-    {{else}}
-    <a class="navbar-item" href="/auth/login"><span class="glyphicon glyphicon glyphicon-log-in" aria-hidden="true"></a>
     {{/if}}
   </div>
   </div>
@@ -69,7 +66,7 @@
   <p><img src="{{avatarurl}}" width=60px height=60px style="border: 1px solid black"></p>
   </div>
   <div class="bit-60">
-  <p><b>{{names}}</b> {{#ifneq author "ShareCookieAds"}}<a href="/user/{{author}}" class="a"><font color=#6666ff>@{{author}}</font></a>{{/ifneq}}</p>
+  <p><b>{{{names}}}</b> {{#ifneq author "ShareCookieAds"}}<a href="/user/{{author}}" class="a"><font color=#6666ff>@{{author}}</font></a>{{/ifneq}}</p>
   {{#ifneq author "ShareCookieAds"}}<p>{{formatDate created  day="numeric" month="long" year="numeric"}}</p>{{/ifneq}}
   {{#if group}}
   <p><b>Posted to Group:</b> <a href="/group/{{group}}" style="text-decoration:none">{{group}}</a></p>

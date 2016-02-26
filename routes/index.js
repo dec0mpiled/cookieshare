@@ -20,10 +20,10 @@ router.get('/', function(req, res, next) {
         if (err) throw err;
     }); */
     /*
-    Post.update({}, {dislikes:0}, {multi: true}, function(err) {
+    Post.update({}, {rebakes:0}, {multi: true}, function(err) {
         if (err) throw err;
-    }); */
- 
+    });
+ */
     
     User.find({}, function(err, users) {
       if (err) return next(err);
@@ -83,6 +83,7 @@ router.get('/public', function(req, res, next) {
 /* Like Post */
 
 router.get('/likepost/:author/:id/:return/:group', function(req, res, next) {
+    
     User.findById(req.user.id, function(err, doc){
         console.log(doc);
         var nid = req.params.id.toString()
@@ -206,6 +207,58 @@ router.get('/dislikepost/:author/:id/:return/:group', function(req, res) {
 });
 });
 
+// rebake
+router.get('/rebake/:author/:id/:return/:group', function(req, res, next) {
+        
+        Post.findOne({ _id: req.params.id }, function (err, docs){
+            docs.rebakes=docs.rebakes+1;
+            docs.save();
+            if (err) throw err;
+        User.findOne({username:docs.author}, function(err, doc) {
+        if (err) return next(err);
+       doc.notamount=doc.notamount+1;
+       doc.notifications.unshift({from: req.user.username, type: "rebake", redirect:req.params.id, mini:marked(docs.content)});
+       doc.save();
+       
+       var newpost = new Post({
+        //title: mynewtitle,
+        _id:mongoose.Types.ObjectId(),
+        names: req.user.name+" <i>(Rebaked from <a style=\"text-decoration:none\" href=\"/user/"+docs.author+"\">@"+docs.author+"</a>)</i>",
+        author: req.user.username,
+        _author: req.user.id,
+        content: marked(docs.content),
+        avatarurl: req.user.avatarurl,
+        rawcontent:docs.rawcontent,
+        myurl: docs.mynewurl,
+        link: docs.gurl,
+        color: docs.color,
+        group: docs.group,
+        spam: 0,
+        likes: 0,
+        dislikes: 0,
+        rebakes: 0,
+        commentamount: 0,
+        created: new Date(),
+    });
+    newpost.save();
+    });
+        });
+        if (req.params.return=="home"){
+        res.redirect('/');
+        };
+        if (req.params.return=="cookie"){
+        res.redirect('/cookie/'+req.params.id);
+        };
+        if (req.params.return=="group"){
+        res.redirect('/group/'+req.params.group);
+        };
+        if (req.params.return=="user"){
+            res.redirect('/user/'+req.params.author);
+        }
+        console.log("done!");
+
+});
+
 /* Post Cookie */
 router.post('/sharecookie', function(req, res, next) {
     var badWord = /fuck|shit|cunt|damn|nigger|nigga|twat|dick|cum|tits|titties|boob|boobs|penis|cock|bbc|porn|pornography|rape|sex|orgasm|raping|bitch|ass|clit|clitoris|breast|breasts|wigger|faggot/gi;
@@ -217,6 +270,7 @@ router.post('/sharecookie', function(req, res, next) {
     var ggroup=req.body.groupbox;
     var mynewurl = req.body.url;
     console.log(mynewurl);
+    var id2 = Math.floor(Math.random() * (9999999999 - 1 + 1)) + 1;
     var newid = mongoose.Types.ObjectId();
     
 function getUserName(text){
@@ -285,6 +339,7 @@ console.log(mycontent);
         spam: 0,
         likes: 0,
         dislikes: 0,
+        rebakes: 0,
         commentamount: 0,
         created: new Date(),
     });
@@ -760,6 +815,11 @@ res.redirect('/');
 
 router.get('/search', function(req, res, next) {
 res.render('search', {user:req.user});
+
+});
+
+router.get('/message/:user', function(req, res, next) {
+res.render('message', {user:req.user});
 
 });
 

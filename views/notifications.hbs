@@ -2,6 +2,7 @@
   <div class="wrapper">
  <a style="font-family: prot" class="navbar-brand" href="/">ShareCookie</a>
   <div class="navbar-right">
+    <a class="navbar-item" onclick="window.history.back();"><span class="glyphicon glyphicon-arrow-left btn" aria-hidden="true"></a>
     {{#if user}}
     <a class="navbar-item {{#equal filter 'date'}}selected{{/equal}}" href="/"><span class="glyphicon glyphicon-home btn" aria-hidden="true"></a>
     <a class="navbar-item" href="/auth/logout"><span class="glyphicon glyphicon glyphicon-log-out btn" aria-hidden="true"></a>
@@ -29,6 +30,12 @@
     
     {{#ifeq type "like"}}
   <h2><a href="/user/{{from}}" style="text-decoration:none; color:#6666ff">@{{from}}</a> Liked your post</h2>
+  <p>{{{mini}}}</p>
+  <a class="btn" href="/cookie/{{redirect}}"><h3>View Post</h3></a>
+    {{/ifeq}}
+    
+    {{#ifeq type "rebake"}}
+  <h2><a href="/user/{{from}}" style="text-decoration:none; color:#6666ff">@{{from}}</a> Rebaked your post</h2>
   <p>{{{mini}}}</p>
   <a class="btn" href="/cookie/{{redirect}}"><h3>View Post</h3></a>
     {{/ifeq}}

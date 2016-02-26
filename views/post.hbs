@@ -2,12 +2,10 @@
  <div class="wrapper">
  <a style="font-family: prot" class="navbar-brand" href="/">ShareCookie</a>
   <div class="navbar-right">
+   <a class="navbar-item" onclick="window.history.back();"><span class="glyphicon glyphicon-arrow-left btn" aria-hidden="true"></a>
     {{#if user}}
     <font color="white">|</font>
     <a class="navbar-item {{#equal filter 'date'}}selected{{/equal}}" href="/"><span class="glyphicon glyphicon-home btn" aria-hidden="true"></a>
-    <a class="navbar-item" href="/auth/logout"><span class="glyphicon glyphicon glyphicon-log-out btn" aria-hidden="true"></a>
-    {{else}}
-    <a class="navbar-item" href="/auth/login"><span class="glyphicon glyphicon glyphicon-log-in btn" aria-hidden="true"></a>
     {{/if}}
   </div>
   </div>
@@ -21,7 +19,7 @@
   <p><img src="{{person.avatarurl}}" width=60px height=60px style="border: 1px solid black"></p>
   </div>
   <div class="bit-2">
-  <p><b>Author: </b><i>{{result.names}}</i> <a href="/user/{{result.author}}" class="a"><font color=#6666ff>@{{result.author}}</font></a></p>
+  <p><b>Author: </b><i>{{{result.names}}}</i> <a href="/user/{{result.author}}" class="a"><font color=#6666ff>@{{result.author}}</font></a></p>
   <p><b>Date Created:</b> {{formatDate result.created  day="numeric" month="long" year="numeric"}}</p>
   {{#if result.group}}
   <p><b>Posted to Group:</b> <a href="/group/{{result.group}}" style="text-decoration:none">{{result.group}}</a></p>

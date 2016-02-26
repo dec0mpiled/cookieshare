@@ -4,8 +4,10 @@ var Schema = mongoose.Schema;
 var comments = new Schema({ value: String, likes: Number, user: String, _user: String, created: Date });
 
 var Post = new Schema({
+        id2: Number,
         names: String,
         author: String,
+        bakedby: String,
         _author: Schema.Types.ObjectId,
         content: String,
         avatarurl: String,
@@ -15,6 +17,7 @@ var Post = new Schema({
         color: String,
         likes: Number,
         dislikes: Number,
+        rebakes: Number,
         tags: String,
         spam: Number,
         created: Date,

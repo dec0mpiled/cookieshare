@@ -3,6 +3,7 @@
  <div class="wrapper">
   <a style="font-family: prot" class="navbar-brand" href="/">ShareCookie</a>
   <div class="navbar-right">
+   <a class="navbar-item" onclick="window.history.back();"><span class="glyphicon glyphicon-arrow-left btn" aria-hidden="true"></a>
    {{#if user}}
     <a class="navbar-item {{#equal filter 'date'}}selected{{/equal}}" href="/"><span class="glyphicon glyphicon-home btn" aria-hidden="true"></a>
     {{/if}}
@@ -15,38 +16,10 @@
 
 
 <div class="wrapper">
-    
-    {{#each message}}
-    <div class="message">
-        
-        <div class="message-content">{{content}}</div>
-        <div class="message-author">{{author}}</div>
-        
-    </div>
-    {{/each}}
-    
-    <form action=''>
-        <input type="text" id="m" placeholder="enter your message">
-    </form>
+<div class="frame body-frame">
+
+<h1>Coming Soon!</h1>
+		
 </div>
 
-<script src="/socket.io/socket.io.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.js"></script>
-<script>
-    document.addEventListener("load", scrollToBottom);
-    function scrollToBottom() {
-        $("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
-    }
-    var socket = io();
-      $('form').submit(function(){
-        document.activeElement.blur();
-        $("input").blur();
-        socket.emit('chat message', { content: $('#m').val(), author: '{{user}}', color: '{{color}}' });
-        $('#m').val('');
-        return false;
-      });
-      socket.on('chat message', function(msg){
-        $('.message').append($('<div class="animated fadeIn message">').html('<div class="message-content" style="background:'+ msg.color +'">' + msg.content + '</div><div class="message-author">'+ msg.author +'</div>'));
-        scrollToBottom();
-      });
-</script>
+</div>

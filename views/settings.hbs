@@ -2,6 +2,7 @@
  <div class="wrapper">
  <a style="font-family: prot" class="navbar-brand" href="/">ShareCookie</a>
   <div class="navbar-right">
+   <a class="navbar-item" onclick="window.history.back();"><span class="glyphicon glyphicon-arrow-left btn" aria-hidden="true"></a>
    <a class="navbar-item" href="/user/{{user.username}}"><span class="glyphicon glyphicon-user btn" aria-hidden="true"></a>
     {{#if user}}
     <a class="navbar-item" href="/auth/logout"><span class="glyphicon glyphicon-log-out btn" aria-hidden="true"></a>
