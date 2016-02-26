@@ -223,7 +223,7 @@ router.get('/rebake/:author/:id/:return/:group', function(req, res, next) {
        var newpost = new Post({
         //title: mynewtitle,
         _id:mongoose.Types.ObjectId(),
-        names: req.user.name+" <i>(Rebaked from <a style=\"text-decoration:none\" href=\"/user/"+docs.author+"\">@"+docs.author+"</a>)</i>",
+        names: req.user.name+" <i>(Rebaked from <a style=\"text-decoration:none; color=\"#6666ff\" href=\"/user/"+docs.author+"\">@"+docs.author+"</a>)</i>",
         author: req.user.username,
         _author: req.user.id,
         content: marked(docs.content),
