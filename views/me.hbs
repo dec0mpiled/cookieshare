@@ -150,7 +150,7 @@
        {{#ifneq author "ShareCookieAds"}}
         <!-- like/dislike -->
         <a href="/likepost/{{author}}/{{id}}/user/null" class="btn btn-like"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a> <a href="/dislikepost/{{author}}/{{id}}/user/null" class="btn btn-dislike"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a>
-        <br> <br> {{likes}} likes | {{dislikes}} dislikes
+        <br> <br> <p id="{{id}}">{{likes}} likes | {{dislikes}} dislikes | {{rebakes}} rebakes
         <!-- comments -->
         <a href="/cookie/{{id}}"><font color=#6666ff>Comments ({{commentamount}})</font></a>
         {{/ifneq}}
