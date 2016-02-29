@@ -19,8 +19,8 @@
   <p><img src="{{person.avatarurl}}" width=60px height=60px style="border: 1px solid black"></p>
   </div>
   <div class="bit-50">
-  <p><b>Author: </b><b>{{{result.names}}}</b><br> <a href="/user/{{result.author}}" class="a"><font color=#6666ff>@{{result.author}}</font></a></p>
-  <p><b>Date Created:</b> {{formatDate result.created  day="numeric" month="long" year="numeric"}}</p>
+  <p><b>{{{result.names}}}</b><br> <a href="/user/{{result.author}}" class="a"><font color=#6666ff>@{{result.author}}</font></a></p>
+  <p>{{formatDate result.created  day="numeric" month="long" year="numeric"}}</p>
   {{#if result.group}}
   <!---<p><b>Posted to Group:</b> <a href="/group/{{result.group}}" style="text-decoration:none">{{result.group}}</a></p>!-->
   {{/if}}
@@ -56,8 +56,8 @@
   
   <form id="test" action="/sendcomment/{{result.id}}" method="post">
    
-   <textarea onkeyup="textCounter(this,'counter',200);" name="commentbox" id="commentbox" class="textarea" placeholder="Write something nice!" required></textarea>
-   <button class="btn">Comment!</button> <span id="counter">200</span>
+   <textarea name="commentbox" id="commentbox" class="textarea" placeholder="Write something nice!" required></textarea>
+   <button class="btn">Comment!</button>
    
    </form>
    {{else}}
@@ -82,6 +82,8 @@
         <a href="/deletecomment/{{user}}/{{../../result.commentslist.id}}" style="text-decoration:none;"><p class="meta-item"><font color=#ff0000>[Delete]</font></p></a>
         {{/ifeq}}!-->
         <br>
+        <!--<a href="/likecomment/{{../result.id}}/{{id}}/post/null" class="btn btn-like"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a> <a href="/dislikecomment/{{user}}/{{id}}/post/null" class="btn btn-dislike"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a> 
+        <br> <br> <p id="{{id}}">{{likes}} likes | {{dislikes}} dislikes <br><br><hr><br>!-->
         {{/each}}
        </div>
       </div>

@@ -20,7 +20,7 @@ router.get('/', function(req, res, next) {
         if (err) throw err;
     }); */
     /*
-    Post.update({}, {locked:false}, {multi: true}, function(err) {
+    Post.update({}, {commentslist.dislikes:0}, {multi: true}, function(err) {
         if (err) throw err;
     });*/
  
@@ -78,6 +78,44 @@ router.get('/public', ensureAuthenticated, function(req, res, next) {
         res.redirect("/");
     }
 });
+
+/* like comment *//*
+router.get('/likecomment/:root/:id/:return/:group', ensureAuthenticated, function(req, res, next) {
+    
+    User.findById(req.user.id, function(err, doc){
+        console.log(doc);
+        var nid = req.params.id.toString()
+        var nlikes = doc.likes.toString();
+        var test = nlikes.indexOf(nid);
+        console.log(test);
+        if (test<0){
+        doc.likes.push({ keys: req.params.root.toString()});
+        doc.save();
+        
+        Post.findOne({ _id: req.params.id }, function (err, docs){
+            docs.likes=docs.likes+1;
+            if (docs.likes<=-1){
+                 docs.color="red";
+            } else {
+                docs.color="blacK";
+            }
+            docs.save();
+            if (err) throw err;
+        User.findOne({username:docs.author}, function(err, doc) {
+        if (err) return next(err);
+       doc.notamount=doc.notamount+1;
+       doc.notifications.unshift({from: req.user.username, type: "like", redirect:req.params.id, mini:marked(docs.content)});
+       doc.save();
+    });
+        });
+   
+        console.log("done!");
+        
+        } else if (test>0) {
+
+}
+});
+});*/
 
 /* Like Post */
 
@@ -304,7 +342,7 @@ contentq.replace(newname, "hi");
     var i
     for (i = 0; i < hashtags.length; i++) { 
     console.log(hashtags[i]);
-    var newc = contentq.replace("#"+hashtags[i],"<a style=\"text-decoration:none; color:#6666ff\" href=\"/group/"+hashtags[i]+"\">"+"#"+hashtags[i]+"</a>");
+    var newc = contentq.replace("#"+hashtags[i],"<a style=\"text-decoration:none; color:#6666ff\" href=\"/tag/"+hashtags[i]+"\">"+"#"+hashtags[i]+"</a>");
     console.log(newc);
     contentq=newc;
     group.push(hashtags[i]);
@@ -370,13 +408,9 @@ router.post('/updatecookie/:id', ensureAuthenticated, function(req, res, next) {
     var gurl=req.body.urlbox;
     var color="blacK";
     var mynewurl;
+    var group=[];
     var ggroup=req.body.groupbox;
     var rawcontent=contentq;
-    if (ggroup!="") {
-        var group=ggroup;
-    } else {
-         var group="";
-    }
 
 var gurl=gurl;
 
@@ -403,6 +437,17 @@ var usernames = twitter.extractMentions(contentq);
        doc.notifications.unshift({from: req.user.username, type: "mentionedit", redirect:"/cookie/"+id, mini:marked(contentq)});
        doc.save();
     });
+    }
+    
+    var hashtags = twitter.extractHashtags(contentq);
+    var i
+    for (i = 0; i < hashtags.length; i++) { 
+    console.log(hashtags[i]);
+    var newc = contentq.replace("#"+hashtags[i],"<a style=\"text-decoration:none; color:#6666ff\" href=\"/tag/"+hashtags[i]+"\">"+"#"+hashtags[i]+"</a>");
+    console.log(newc);
+    contentq=newc;
+    group.push(hashtags[i]);
+    
     }
 
 var mycontent = contentq;
@@ -440,16 +485,16 @@ router.get('/cookie/:id', ensureAuthenticated, function(req, res) {
 } else {
     User.findOne({username:result.author}, function(err, doc) {
         if (err) throw err;
-    res.render('post', { title: doc.username+" shared a cookie to ShareCookie!", result: result, person:doc, user: req.user });
+    res.render('post', { title: result.rawcontent, result: result, person:doc, user: req.user });
     });
 }
   });
   });
   
-  router.get('/group/:groupid', function(req, res) {
+  router.get('/tag/:groupid', function(req, res) {
   Post.find({ group: req.params.groupid },null, { sort: '-created' }, function(err, result) {
     if (err) throw err;
-    res.render('group', { title: req.params.groupid, result: result, user: req.user, groupname:req.params.groupid });
+    res.render('group', { title: "#"+req.params.groupid, result: result, user: req.user, groupname:req.params.groupid });
     });
   });
 
@@ -489,7 +534,7 @@ router.post("/sendcomment/:id", function(req, res, next) {
     }
     
     Post.findOne({"_id" : id}, function (err, docs){
-        docs.commentslist.push({ _id: newid, value: marked(commentval), likes: 0, user: name, _author: req.user.id, created: new Date() });
+        docs.commentslist.push({ _id: newid, value: marked(commentval), likes: 0, dislikes: 0, user: name, _author: req.user.id, created: new Date() });
         docs.commentamount=docs.commentamount+1;
         docs.save();
         if (err) throw err;
