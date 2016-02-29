@@ -23,6 +23,7 @@ var User = new Schema({
     coverphotourl: String,
     themecolor: String,
     bio: String,
+    locked: Boolean,
     poststo: [postkeys],
     likes: [likekeys],
     dislikes: [dislikekeys]

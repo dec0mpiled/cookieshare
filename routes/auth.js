@@ -36,6 +36,7 @@ router.post('/register', function(req, res, next) {
     unhash: req.body.password,
     notamount: 0,
     messamount: 0,
+    locked: false,
     status: "none",
     following: ["drew", "sharecookie", "ShareCookieAds", username, "owebboy", "todaysholiday"],
     followers: ["sharecookie"],

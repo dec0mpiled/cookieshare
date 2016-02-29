@@ -15,15 +15,15 @@ var mongoose = require('mongoose');
 /* home */
 router.get('/', function(req, res, next) {
     
-   /* 
-   User.update({}, {$push: {following: "todaysholiday"}}, {multi: true}, function(err) {
+   /*
+   User.update({}, {locked:false}, {multi: true}, function(err) {
         if (err) throw err;
     }); */
     /*
-    Post.update({}, {rebakes:0}, {multi: true}, function(err) {
+    Post.update({}, {locked:false}, {multi: true}, function(err) {
         if (err) throw err;
-    });
- */
+    });*/
+ 
     
     User.find({}, function(err, users) {
       if (err) return next(err);
@@ -39,7 +39,7 @@ router.get('/', function(req, res, next) {
           });
         
       } else { 
-          Post.find({}, null, { sort: '-created' }, function (err, posts) {
+          Post.find({locked:false}, null, { sort: '-created' }, function (err, posts) {
             if (err) return next(err);
             res.render('index', { title: 'ShareCookie', filter: 'date', posts: posts, user: req.user});
           });
@@ -70,7 +70,7 @@ router.get('/public', ensureAuthenticated, function(req, res, next) {
           
               var notcount=req.user.notamount;
 
-    Post.find({}, null, { sort: '-created' }, function (err, posts) {
+    Post.find({locked:false}, null, { sort: '-created' }, function (err, posts) {
         if (err) return next(err);
         res.render('index', { title: 'ShareCookie', filter: 'likes', posts: posts, user: req.user, notes:notcount,  header:"Public Timeline" });
     });
@@ -266,6 +266,7 @@ router.post('/sharecookie', ensureAuthenticated, function(req, res, next) {
     var url=req.body.picbox;
     var gurl=req.body.urlbox;
     var color="blacK";
+    var group=[];
     var ggroup=req.body.groupbox;
     var mynewurl = req.body.url;
     console.log(mynewurl);
@@ -283,11 +284,6 @@ var newname = getUserName(contentq);
 console.log(newname);
 contentq.replace(newname, "hi");
     */
-    if (ggroup!="") {
-        var group=ggroup.toLowerCase();
-    } else {
-         var group="";
-    }
     var rawcontent=contentq;
     var usernames = twitter.extractMentions(contentq);
     var i
@@ -303,7 +299,26 @@ contentq.replace(newname, "hi");
        doc.save();
     });
     }
+    
+    var hashtags = twitter.extractHashtags(contentq);
+    var i
+    for (i = 0; i < hashtags.length; i++) { 
+    console.log(hashtags[i]);
+    var newc = contentq.replace("#"+hashtags[i],"<a style=\"text-decoration:none; color:#6666ff\" href=\"/group/"+hashtags[i]+"\">"+"#"+hashtags[i]+"</a>");
+    console.log(newc);
+    contentq=newc;
+    group.push(hashtags[i]);
+    
+    }
+    console.log(group);
         
+        
+    if (req.user.locked==false) {
+        var locked=false;
+    }
+    if (req.user.locked==true){
+        var locked=true;
+    }
 
 var mycontent = contentq;
 // Emojis!!
@@ -339,6 +354,7 @@ console.log(mycontent);
         likes: 0,
         dislikes: 0,
         rebakes: 0,
+        locked:locked,
         commentamount: 0,
         created: new Date(),
     });
@@ -813,13 +829,43 @@ res.redirect('/');
 });
 
 router.get('/search', ensureAuthenticated, function(req, res, next) {
-res.render('search', {user:req.user});
+    User.find({}, function(err, users) {
+        if(err) return next(err);
+      res.render('search', {user:req.user, users:users});  
+    })
 
 });
 
 router.get('/message/:user', function(req, res, next) {
 res.render('message', {user:req.user});
 
+});
+
+router.get('/lockme/:user', function(req, res, next) {
+    
+    User.findOne({_id:req.params.user}, function(err, doc) {
+        if (err) return next(err);
+            console.log(doc.locked);
+        if (doc.locked===false){
+            User.findOneAndUpdate({_id:req.params.user}, {locked:true}, function(err, docs) {
+                if(err)return next(err);
+            
+            Post.update({_author:req.params.user}, {locked:true}, {multi: true}, function(err, users) {
+                if (err) return next (err);
+            });
+            });
+        }
+        if (doc.locked===true){
+            User.findOneAndUpdate({_id:req.params.user}, {locked:false}, function(err, docs) {
+                if(err)return next(err);
+            
+            Post.update({_author:req.params.user}, {locked:false}, {multi: true},  function(err, users) {
+                if (err) return next (err);
+            });
+            });
+        }
+    });
+res.redirect('/settings');
 });
 
 /*/*

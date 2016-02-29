@@ -86,16 +86,23 @@ body {
   background-color:#6600ff;
 }
 
+form {
+  width: 100%;
+}
+
+ol, li {
+  list-style-position: inside;
+}
+
 /* Display */
 .form-fixed {
   position: fixed;
-
 }
 .form-rel {
   position: relative;
 }
 textarea {
-  width: 100%;
+  min-width: 100%;
   font-size: 1.4em;
   color: #111;
   height: 150px;
@@ -109,6 +116,14 @@ textarea {
 textarea:hover, textarea:active, textarea:focus, .input-gif:hover, .input-gif:active, .input-gif:focus, .input-title:hover, .input-title:active, .input-title:focus, .input-username:hover, .input-username:active, .input-username:focus, .input-password:hover, .input-password:active, .input-password:focus {
   border: 1px solid #02313A;
   outline: 0;
+}
+
+.wordwrap { 
+   white-space: pre-wrap;      /* CSS3 */   
+   white-space: -moz-pre-wrap; /* Firefox */    
+   white-space: -pre-wrap;     /* Opera <7 */   
+   white-space: -o-pre-wrap;   /* Opera 7 */    
+   word-wrap: break-word;      /* IE */
 }
 
 .input-username, .input-password {
@@ -197,7 +212,7 @@ input:focus, button:focus, .btn:focus {
           z-index: 1;
         }
         .wrapper{
-          padding-top:10px;
+          padding-top:20px;
         }
     }
 
@@ -213,7 +228,7 @@ input:focus, button:focus, .btn:focus {
           z-index: 1;
         }
         .wrapper{
-          padding-top:10px;
+          padding-top:20px;
         }
     }
 
@@ -224,7 +239,7 @@ input:focus, button:focus, .btn:focus {
           z-index: 1;
         }
         .wrapper{
-          padding-top:10px;
+          padding-top:20px;
         }
     }
 
@@ -235,7 +250,7 @@ input:focus, button:focus, .btn:focus {
           z-index: 1;
         }
         .wrapper {
-          padding-top:10px;
+          padding-top:20px;
         }
     }
 
@@ -246,7 +261,7 @@ input:focus, button:focus, .btn:focus {
           z-index: 1;
         }
         .wrapper {
-          padding-top:10px;
+          padding-top:20px;
         }
     }
     

@@ -132,6 +132,31 @@
    <br><br>
    </form>
    
+   <form id="name" action="/lockme/{{user.id}}" method="get">
+    {{#if user.locked}}
+    <h2><font color="Black">Make your account Public</font></h2>
+    {{else}}
+    <h2><font color="Black">Make your account Private</font></h2>
+    {{/if}}
+    <br>
+    
+    {{#if user.locked}}
+    <h3><font color="Black"><i>If you make your account public, anyone can find and follow you, and view all of your cookies.</i></font></h3>
+    {{else}}
+    <h3><font color="Black"><i>If you make your account private, people will need your permission to follow you, and view your cookies. Take note, if someone who follows you Rebakes a cookie of yours, other people will see its content.</i></font></h3>
+    {{/if}}
+    
+    <br>
+    {{#if user.locked}}
+   <button type="submit" id="displayColourButton" class="btn">Make Account Public</button>
+   {{else}}
+    <button type="submit" id="displayColourButton" class="btn">Make Account Private</button>
+    {{/if}}
+   <br><br>
+   <hr>
+   <br><br>
+   </form>
+   
       <form id="name" action="/deleteme/{{user.id}}" method="get">
     <h2><font color="Red">Delete Your Account (CANNOT BE UNDONE)</font></h2>
     <br>

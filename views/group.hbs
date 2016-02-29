@@ -17,12 +17,11 @@
  
 <div class="frame body-frame">
  <div class="bit-75">
-  <h1>Viewing cookies in the group: {{groupname}}<font color="red"></font></h1>
+  <h1>Viewing cookies with group: #{{groupname}}<font color="red"></font></h1>
  </div>
 </div>
 
  <div class="bit-2">
-  <h2>Cookies:</h2><br><br>
   
   {{#each result}}
    
@@ -43,7 +42,7 @@
   <p><b>{{{names}}}</b><br> {{#ifneq author "ShareCookieAds"}}<a href="/user/{{author}}" class="a"><font color=#6666ff>@{{author}}</font></a>{{/ifneq}}</p>
   {{#ifneq author "ShareCookieAds"}}<p>{{formatDate created  day="numeric" month="long" year="numeric"}}</p>{{/ifneq}}
   {{#if group}}
-  <p><b>Posted to Group:</b> <a href="/group/{{group}}" style="text-decoration:none">{{group}}</a></p>
+  <!--<p><b>Posted to Group:</b> <a href="/group/{{group}}" style="text-decoration:none">{{group}}</a></p>!-->
   {{/if}}
            
   </div>
