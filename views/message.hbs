@@ -7,19 +7,21 @@
    {{#if user}}
     <a class="navbar-item {{#equal filter 'date'}}selected{{/equal}}" href="/"><span class="glyphicon glyphicon-home btn" aria-hidden="true"></a>
     {{/if}}
-    {{#if user}}
-    <a class="navbar-item" href="/auth/logout"><span class="glyphicon glyphicon-log-out btn" aria-hidden="true"></a>
-    {{/if}}
   </div>
  </div>
 </nav>
-
-
+<br><br>
 <div class="wrapper">
 <div class="frame body-frame">
-
-<h1>Coming Soon!</h1>
-		
+<!--<a onclick="location.reload();" class="btn">Refresh Messages</a><br><br>!-->
+<div class="posts" {{#ifeq by ../user.username}} style=" border-radius:4px; padding-left:10px; padding-top:10px; padding-bottom:10px; padding-right:10px; background-color: {{user.themecolor}}" {{else}} style="border-radius:4px; padding-left:10px; padding-top:10px; padding-bottom:10px; padding-right:10px;  background-color: white" {{/ifeq}}>
+{{#each messages.contents}}
+<div class="posts" style="background-color: white; padding-left:10px; padding-top:10px; padding-bottom:10px; padding-right:10px;">
+		<h2><u><a href="/user/{{by}}" style="text-decoration:none; color:black">{{#ifeq by ../user.username}}{{../../user.name}}{{/ifeq}} @{{by}}:</a></u></h2>
+		<p>{{formatDate date  day="numeric" month="long" year="numeric"}}</p><br>
+		<h3>{{{value}}}</h3><br>
+		</div>
+		{{/each}}
 </div>
-
+</div>
 </div>

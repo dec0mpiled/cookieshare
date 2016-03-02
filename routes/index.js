@@ -8,12 +8,22 @@ var marked = require('marked');
 //var sanitizeHtml = require('sanitize-html');
 var twitter = require('twitter-text');
 var mongoose = require('mongoose');
+var CryptoJS = require("crypto-js");
+var crypto = require("crypto");
+var email = require('emailjs');
+
 
 //var http = require('http').Server(app);
 //var io = require('socket.io')(http);
 
 /* home */
 router.get('/', function(req, res, next) {
+    /*
+    var msg = new Message({
+        users: ["drew", "bruh"],
+        contents: [({value:"Cool dude", date: new Date(), by:"drew"})],
+    });
+    msg.save();
     
    /*
    User.update({}, {locked:false}, {multi: true}, function(err) {
@@ -342,13 +352,22 @@ contentq.replace(newname, "hi");
     var i
     for (i = 0; i < hashtags.length; i++) { 
     console.log(hashtags[i]);
-    var newc = contentq.replace("#"+hashtags[i],"<a style=\"text-decoration:none; color:#6666ff\" href=\"/tag/"+hashtags[i]+"\">"+"#"+hashtags[i]+"</a>");
+    var newc = contentq.replace("#"+hashtags[i],"<a style=\"text-decoration:none; color:#6666ff\" href=\"/tag/"+hashtags[i].toLowerCase()+"\">"+"#"+hashtags[i].toLowerCase()+"</a>");
     console.log(newc);
     contentq=newc;
     group.push(hashtags[i]);
     
     }
     console.log(group);
+    
+    contentq=contentq.replace("bae","babe");
+    contentq=contentq.replace("Bae","Babe");
+    contentq=contentq.replace("BAE","BABE");
+    contentq=contentq.replace("bAe","bAbe");
+    contentq=contentq.replace("baE","babE");
+    contentq=contentq.replace("BaE","BabE");
+    contentq=contentq.replace("bAE","bAbE");
+    contentq=contentq.replace("BAe","BAbe");
         
         
     if (req.user.locked==false) {
@@ -394,7 +413,7 @@ console.log(mycontent);
         rebakes: 0,
         locked:locked,
         commentamount: 0,
-        created: new Date(),
+        created: new Date().toUTCString(),
     });
     newpost.save();
     res.redirect('/');
@@ -449,6 +468,16 @@ var usernames = twitter.extractMentions(contentq);
     group.push(hashtags[i]);
     
     }
+    
+    contentq=contentq.replace("bae","babe");
+    contentq=contentq.replace("Bae","Babe");
+    contentq=contentq.replace("BAE","BABE");
+    contentq=contentq.replace("bAe","bAbe");
+    contentq=contentq.replace("baE","babE");
+    contentq=contentq.replace("BaE","BabE");
+    contentq=contentq.replace("bAE","bAbE");
+    contentq=contentq.replace("BAe","BAbe");
+        
 
 var mycontent = contentq;
 // Emojis!!
@@ -483,6 +512,8 @@ router.get('/cookie/:id', ensureAuthenticated, function(req, res) {
     console.log("fail");
     res.redirect('/');
 } else {
+    console.log(result);
+    console.log(result.commentlist);
     User.findOne({username:result.author}, function(err, doc) {
         if (err) throw err;
     res.render('post', { title: result.rawcontent, result: result, person:doc, user: req.user });
@@ -576,7 +607,12 @@ if (usera == null) {
                           var test = nlikes.indexOf(nid);
                            console.log(test);
                                if (test<0){
+                                   console.log(usera.locked);
+                                   if (usera.locked==true) {
+                                     var buttontext="Request Follow";
+                                   } else {
                       var buttontext="Follow";
+                                   }
                         } else if (test>=0) {
                         var buttontext="Unfollow";
                        if (err) throw err;
@@ -689,7 +725,7 @@ router.post('/update/colour/:id', ensureAuthenticated, function(req, res, next) 
 
 /* do some fucking awesome shit bitches #4!!!! */
 router.post('/update/bio/:id', ensureAuthenticated, function(req, res, next) {
-    User.findOneAndUpdate({ _id: req.params.id }, { bio: marked(req.body.bio) }, function(err, doc) {
+    User.findOneAndUpdate({ _id: req.params.id }, { bio: req.body.bio }, function(err, doc) {
         if (err) throw err;
     });
     res.redirect('/settings');
@@ -882,8 +918,14 @@ router.get('/search', ensureAuthenticated, function(req, res, next) {
 });
 
 router.get('/message/:user', function(req, res, next) {
-res.render('message', {user:req.user});
-
+    Message.findOne({ 'users':  [ req.user.username, req.params.user ] }, function(err, messages) {
+        if (err) return next (err);
+        User.findOne({'username':req.params.user}, function(err, doc) {
+            if (err) return next (err);
+    res.render('message', {user:req.user, messages:messages, otro:doc});
+});
+            
+        });
 });
 
 router.get('/lockme/:user', function(req, res, next) {

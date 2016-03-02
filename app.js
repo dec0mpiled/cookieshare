@@ -10,6 +10,10 @@ var HandlebarsIntl = require("handlebars-intl");
 var passport = require("passport"),
 LocalStrategy = require('passport-local').Strategy;
 var User = require("./models/user");
+var Post = require("./models/post");
+var Message = require("./models/message");
+
+var email = require('emailjs');
 
 
 var routes = require('./routes/index');

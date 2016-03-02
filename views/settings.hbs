@@ -123,7 +123,7 @@
    
    <form id="name" action="/update/bio/{{user.id}}" method="post">
     <h3>Update Your Profile Bio</h3>
-   <textarea type="text" name="bio" placeholder="Place Bio Here" onkeyup="textCounter(this,'counter',100);" class="input-gif"></textarea>
+   <textarea type="text" name="bio" placeholder="Enter New Bio Here" onkeyup="textCounter(this,'counter',100);" class="input-gif">{{user.bio}}</textarea>
    <span id="counter">100</span>
    <br><br>
    <button type="submit" id="displayColourButton" class="btn">Update Bio</button>
@@ -132,7 +132,7 @@
    <br><br>
    </form>
    
-   <form id="name" action="/lockme/{{user.id}}" method="get">
+   <!--<form id="name" action="/lockme/{{user.id}}" method="get">
     {{#if user.locked}}
     <h2><font color="Black">Make your account Public</font></h2>
     {{else}}
@@ -155,7 +155,7 @@
    <br><br>
    <hr>
    <br><br>
-   </form>
+   </form>!-->
    
       <form id="name" action="/deleteme/{{user.id}}" method="get">
     <h2><font color="Red">Delete Your Account (CANNOT BE UNDONE)</font></h2>

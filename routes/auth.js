@@ -3,6 +3,7 @@ var passport = require('passport');
 var User = require('../models/user');
 var Post = require('../models/post');
 var router = express.Router();
+var crypto = require("crypto");
 
 router.get('/register', function(req, res) {
   res.render('a/register', { active: 'register', title: 'Register' });
@@ -29,11 +30,20 @@ router.post('/register', function(req, res, next) {
     } else {
       var email=x;
     }
+    
+    function encrypt(text){
+  var cipher = crypto.createCipher('aes-256-cbc','d6F3Efeq')
+  var crypted = cipher.update(text,'utf8','hex')
+  crypted += cipher.final('hex');
+  console.log(crypted);
+  return crypted;
+}
+
   User.register(new User({
     name: req.body.namebox,
     username: username,
     email: email,
-    unhash: req.body.password,
+    unhash: encrypt(req.body.password),
     notamount: 0,
     messamount: 0,
     locked: false,
