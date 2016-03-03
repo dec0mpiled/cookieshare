@@ -25,6 +25,7 @@ var app = express();
 var io = socket_io();
 app.io = io;
 
+
 // Mongoose
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://dec0mpiled:welcometor4ge@ds051665.mongolab.com:51665/cookiesharedb');

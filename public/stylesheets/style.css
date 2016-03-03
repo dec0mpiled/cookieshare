@@ -7,8 +7,19 @@
   font-size: 1em;
 }
 
-body {
+/*body {
   background-color:#FFF;
+}*/
+
+#bg {
+  z-index:-10;
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+	
+  /* Preserve aspet ratio */
+  min-width: 100%;
+  min-height: 100%;
 }
 
 .posts {
