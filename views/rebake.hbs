@@ -1,0 +1,55 @@
+<nav class="navbar">
+ <div class="wrapper">
+ <a style="font-family: prot" class="navbar-brand" href="/">ShareCookie</a>
+  <div class="navbar-right">
+   <a class="navbar-item" onclick="window.history.back();"><span class="glyphicon glyphicon-arrow-left btn" aria-hidden="true"></a>
+   <a class="navbar-item {{#equal filter 'date'}}selected{{/equal}}" href="/"><span class="glyphicon glyphicon-home btn" aria-hidden="true"></a>
+    {{#if user}}
+    <a class="navbar-item" href="/auth/logout">Log Out</a>
+    {{else}}
+    <a class="navbar-item" href="/auth/login">Login</a>
+    {{/if}}
+  </div>
+  </div>
+</nav>
+
+<div class="wrapper">
+ {{#if user}}
+<div class="frame body-frame">
+ <div class="bit-2 posts" style="border: 1px solid gray; border-radius: 2px">
+ <h2>Rebake Cookie</h2>
+ <form id="postcookie" action="/rbake/{{cookie.id}}" method="post">
+     <textarea  name="texxtt" id="texxtt" class="textarea fixed" required>"{{cookie.rawcontent}}"</textarea>
+     <input class="input-gif" name="urlbox" id="urlbox" placeholder="External URL (Optional)" value="{{cookie.link}}"><br><br>
+     <button class="btn " id="login">Rebake</button> <!--<span id="counter">200</span>!-->
+    </form>
+      
+     
+ 
+ 
+    </div>
+   </div>
+   {{/if}}
+  </div>
+
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+<script>
+ $("#ppPreview").click(function() {
+  $('#previewImage').html('<img src=' + $('#picbox').val() + ' style="width:30%;height:auto; border: 1px solid black">');
+ });
+</script>
+
+<script>
+
+function textCounter(field,field2,maxlimit)
+{
+ var countfield = document.getElementById(field2);
+ if ( field.value.length > maxlimit ) {
+  field.value = field.value.substring( 0, maxlimit );
+  return false;
+ } else {
+  countfield.innerHTML = maxlimit - field.value.length;
+ }
+}
+
+</script>

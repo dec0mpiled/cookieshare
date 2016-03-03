@@ -49,7 +49,7 @@ router.get('/', function(req, res, next) {
           });
         
       } else { 
-          Post.find({locked:false}, null, { sort: '-created' }, function (err, posts) {
+          Post.find({}, null, { sort: '-created' }, function (err, posts) {
             if (err) return next(err);
             res.render('index', { title: 'ShareCookie', filter: 'date', posts: posts, user: req.user});
           });
@@ -254,9 +254,18 @@ router.get('/dislikepost/:author/:id/:return/:group', ensureAuthenticated, funct
 });
 });
 
-// rebake
-router.get('/rebake/:author/:id/:return/:group', ensureAuthenticated, function(req, res, next) {
-        
+router.get('/rebake/:author/:id/:return/:group', function(req, res, next) {
+    Post.findOne({"_id":req.params.id}, function(err, cookie) {
+        if (err) return next (err);
+        console.log(cookie);
+    res.render('rebake', {cookie:cookie, user:req.user});
+    });
+});
+
+router.post('/rbake/:id', function(req, res, next) {
+    
+    var newid = mongoose.Types.ObjectId();
+    
         Post.findOne({ _id: req.params.id }, function (err, docs){
             docs.rebakes=docs.rebakes+1;
             docs.save();
@@ -267,15 +276,50 @@ router.get('/rebake/:author/:id/:return/:group', ensureAuthenticated, function(r
        doc.notifications.unshift({from: req.user.username, type: "rebake", redirect:req.params.id, mini:marked(docs.content)});
        doc.save();
        
+       var contentq = req.body.texxtt;
+       var group = [];
+       
+       var hashtags = twitter.extractHashtags(contentq);
+    var i
+    for (i = 0; i < hashtags.length; i++) { 
+    console.log(hashtags[i]);
+    var newc = contentq.replace("~"+hashtags[i],"<a style=\"text-decoration:none; color:#6666ff\" href=\"/chip/"+hashtags[i].toLowerCase()+"\">"+"~"+hashtags[i].toLowerCase()+"</a>");
+    console.log(newc);
+    contentq=newc;
+    group.push(hashtags[i]);
+    
+    }
+    console.log(group);
+    
+    var rawcontent=contentq;
+    var usernames = twitter.extractMentions(contentq);
+    var i
+    for (i = 0; i < usernames.length; i++) { 
+    console.log(usernames[i]);
+    var newc = contentq.replace("@"+usernames[i],"<a style=\"text-decoration:none; color:#6666ff\" href=\"/user/"+usernames[i]+"\">"+"@"+usernames[i]+"</a>");
+    console.log(newc);
+    contentq=newc;
+    User.findOne({username:usernames[i]}, function(err, doc) {
+        if (err) return next(err);
+if (doc == null) {
+    console.log("fail");
+} else {
+       doc.notamount=doc.notamount+1;
+       doc.notifications.unshift({from: req.user.username, type: "mention", redirect:"/cookie/"+newid, mini:marked(contentq)});
+       doc.save();
+}
+    });
+    }
+       
        var newpost = new Post({
         //title: mynewtitle,
-        _id:mongoose.Types.ObjectId(),
+        _id:newid,
         names: req.user.name+" &nbsp;<i><font size=\"3\" color=\"Black\"><span class=\"glyphicon glyphicon-retweet\" aria-hidden=\"true\"></span>&nbsp; <a style=\"text-decoration:none; color=\"#6666ff\" href=\"/user/"+docs.author+"\">@"+docs.author+"</a></font></i>",
         author: req.user.username,
         _author: req.user.id,
-        content:marked(docs.content),
+        content: marked(contentq),
         avatarurl: req.user.avatarurl,
-        rawcontent:marked(docs.rawcontent),
+        rawcontent: req.body.texxtt,
         myurl: docs.myurl,
         link: docs.gurl,
         color: docs.color,
@@ -288,22 +332,9 @@ router.get('/rebake/:author/:id/:return/:group', ensureAuthenticated, function(r
         created: new Date(),
     });
     newpost.save();
-    });
-        });
-        if (req.params.return=="home"){
-        res.redirect('/');
-        };
-        if (req.params.return=="cookie"){
-        res.redirect('/cookie/'+req.params.id);
-        };
-        if (req.params.return=="group"){
-        res.redirect('/group/'+req.params.group);
-        };
-        if (req.params.return=="user"){
-            res.redirect('/user/'+req.params.author);
-        }
-        console.log("done!");
-
+res.redirect("/");
+});
+});
 });
 
 /* Post Cookie */
@@ -321,17 +352,24 @@ router.post('/sharecookie', ensureAuthenticated, function(req, res, next) {
     var id2 = Math.floor(Math.random() * (9999999999 - 1 + 1)) + 1;
     var newid = mongoose.Types.ObjectId();
     
-function getUserName(text){
-    var parsed = /(@.*?)\s/.exec(contentq);
-    if(parsed){
-        return parsed[1];
-    }
-}
 /*
 var newname = getUserName(contentq);
 console.log(newname);
 contentq.replace(newname, "hi");
     */
+    
+    var hashtags = twitter.extractHashtags(contentq);
+    var i
+    for (i = 0; i < hashtags.length; i++) { 
+    console.log(hashtags[i]);
+    var newc = contentq.replace("~"+hashtags[i],"<a style=\"text-decoration:none; color:#6666ff\" href=\"/chip/"+hashtags[i].toLowerCase()+"\">"+"~"+hashtags[i].toLowerCase()+"</a>");
+    console.log(newc);
+    contentq=newc;
+    group.push(hashtags[i]);
+    
+    }
+    console.log(group);
+    
     var rawcontent=contentq;
     var usernames = twitter.extractMentions(contentq);
     var i
@@ -342,23 +380,15 @@ contentq.replace(newname, "hi");
     contentq=newc;
     User.findOne({username:usernames[i]}, function(err, doc) {
         if (err) return next(err);
+if (doc == null) {
+    console.log("fail");
+} else {
        doc.notamount=doc.notamount+1;
        doc.notifications.unshift({from: req.user.username, type: "mention", redirect:"/cookie/"+newid, mini:marked(contentq)});
        doc.save();
+}
     });
     }
-    
-    var hashtags = twitter.extractHashtags(contentq);
-    var i
-    for (i = 0; i < hashtags.length; i++) { 
-    console.log(hashtags[i]);
-    var newc = contentq.replace("#"+hashtags[i],"<a style=\"text-decoration:none; color:#6666ff\" href=\"/tag/"+hashtags[i].toLowerCase()+"\">"+"#"+hashtags[i].toLowerCase()+"</a>");
-    console.log(newc);
-    contentq=newc;
-    group.push(hashtags[i]);
-    
-    }
-    console.log(group);
     
     contentq=contentq.replace("bae","babe");
     contentq=contentq.replace("Bae","Babe");
@@ -443,6 +473,17 @@ if (gurl.startsWith("http://")||gurl.startsWith("https://")) {
 }
 }
 
+    var hashtags = twitter.extractHashtags(contentq);
+    var i
+    for (i = 0; i < hashtags.length; i++) { 
+    console.log(hashtags[i]);
+    var newc = contentq.replace("~"+hashtags[i],"<a style=\"text-decoration:none; color:#6666ff\" href=\"/chip/"+hashtags[i]+"\">"+"~"+hashtags[i]+"</a>");
+    console.log(newc);
+    contentq=newc;
+    group.push(hashtags[i]);
+    
+    }
+
 var usernames = twitter.extractMentions(contentq);
     var i
     for (i = 0; i < usernames.length; i++) { 
@@ -451,23 +492,18 @@ var usernames = twitter.extractMentions(contentq);
     console.log(newc);
     contentq=newc;
     User.findOne({username:usernames[i]}, function(err, doc) {
+                if (err) return next(err);
+if (doc == null) {
+    console.log("fail");
+} else {
         if (err) return next(err);
        doc.notamount=doc.notamount+1;
        doc.notifications.unshift({from: req.user.username, type: "mentionedit", redirect:"/cookie/"+id, mini:marked(contentq)});
        doc.save();
+}
     });
     }
-    
-    var hashtags = twitter.extractHashtags(contentq);
-    var i
-    for (i = 0; i < hashtags.length; i++) { 
-    console.log(hashtags[i]);
-    var newc = contentq.replace("#"+hashtags[i],"<a style=\"text-decoration:none; color:#6666ff\" href=\"/tag/"+hashtags[i]+"\">"+"#"+hashtags[i]+"</a>");
-    console.log(newc);
-    contentq=newc;
-    group.push(hashtags[i]);
-    
-    }
+
     
     contentq=contentq.replace("bae","babe");
     contentq=contentq.replace("Bae","Babe");
@@ -522,10 +558,10 @@ router.get('/cookie/:id', ensureAuthenticated, function(req, res) {
   });
   });
   
-  router.get('/tag/:groupid', function(req, res) {
+  router.get('/chip/:groupid', function(req, res) {
   Post.find({ group: req.params.groupid },null, { sort: '-created' }, function(err, result) {
     if (err) throw err;
-    res.render('group', { title: "#"+req.params.groupid, result: result, user: req.user, groupname:req.params.groupid });
+    res.render('group', { title: "~"+req.params.groupid, result: result, user: req.user, groupname:req.params.groupid });
     });
   });
 
