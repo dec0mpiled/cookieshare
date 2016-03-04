@@ -42,16 +42,16 @@ router.get('/', function(req, res, next) {
           console.log(req.user.following);
           
               var notcount=req.user.notamount;
-          
-          Post.find({ 'author': { $in: req.user.following } }, null, { sort: '-created' },  function(err, followings) {
+          var limit=20;
+          Post.find({ 'author': { $in: req.user.following } }, null, { sort: '-created'},  function(err, followings) {
             if (err) return next(err);
-            res.render('index', { title: 'ShareCookie', filter: 'date', posts: followings, user: req.user, notes:notcount, header:"My Timeline"});
+            res.render('index', { title: 'ShareCookie', filter: 'date', posts: followings, user: req.user, notes:notcount, header:"My Timeline", limit});
           });
         
       } else { 
-          Post.find({}, null, { sort: '-created' }, function (err, posts) {
+          Post.find({}, null, { sort: '-created'}, function (err, posts) {
             if (err) return next(err);
-            res.render('index', { title: 'ShareCookie', filter: 'date', posts: posts, user: req.user});
+            res.render('index', { title: 'ShareCookie', filter: 'date', posts: posts, user: req.user, limit});
           });
       }
       
@@ -647,19 +647,18 @@ if (usera == null) {
                                    if (usera.locked==true) {
                                      var buttontext="Request Follow";
                                    } else {
-                      var buttontext="Follow";
+                                       var buttontext="Follow";
                                    }
-                        } else if (test>=0) {
-                        var buttontext="Unfollow";
-                       if (err) throw err;
-                          }
-                    res.render('user', {user: req.user, buttontext: buttontext, title: usera.username, posts: post, posts1: usera.poststo, account: usera});
-                            
-                        });
-                }   
-           } else {
-                   res.render('user', {user: req.user, title: usera.username, posts: post, posts1: usera.poststo, account: usera});
-               }
+                              } else if (test>=0) {
+                           var buttontext="Unfollow";
+                      if (err) throw err;
+                  }
+            res.render('user', {user: req.user, buttontext: buttontext, title: usera.username, posts: post, posts1: usera.poststo, account: usera});
+        });
+        }   
+      } else {
+    res.render('user', {user: req.user, title: usera.username, posts: post, posts1: usera.poststo, account: usera});
+}
 });
 }
 });
