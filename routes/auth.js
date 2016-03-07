@@ -102,7 +102,7 @@ User.findOne({username: username}, function(err,doc) {
         if (err) {
           return next(err);
         }
-        res.redirect('/settings');
+        res.redirect('/notifications');
       });
     });
   });

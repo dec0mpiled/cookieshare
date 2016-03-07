@@ -6,6 +6,7 @@ var likekeys = new Schema({ keys: String });
 var dislikekeys = new Schema({ keys: String });
 var postkeys = new Schema({ keys: String, author: String, created: Date });
 var notes = new Schema({ from: String, type: String, redirect: String, mini:String});
+var options = new Schema({ bodycolor: String });
 
 var User = new Schema({
     name: String,
@@ -26,7 +27,8 @@ var User = new Schema({
     locked: Boolean,
     poststo: [postkeys],
     likes: [likekeys],
-    dislikes: [dislikekeys]
+    dislikes: [dislikekeys],
+    schange: [options]
 });
 
 User.plugin(passportLocalMongoose);

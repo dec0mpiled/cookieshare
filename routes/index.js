@@ -19,16 +19,20 @@ var email = require('emailjs');
 /* home */
 router.get('/', function(req, res, next) {
     /*
+    User.update({}, {schange:[]}, {multi:true}, function(err) {
+        if (err) throw (err);
+    });*/
+    /*
     var msg = new Message({
         users: ["drew", "bruh"],
         contents: [({value:"Cool dude", date: new Date(), by:"drew"})],
     });
-    msg.save();
-    
+    msg.save();*/
    /*
-   User.update({}, {locked:false}, {multi: true}, function(err) {
+   User.update({}, {$push: {schange: {bodycolor:"#FFF"}}}, {multi: true}, function(err) {
         if (err) throw err;
-    }); */
+    }); 
+    */
     /*
     Post.update({}, {commentslist.dislikes:0}, {multi: true}, function(err) {
         if (err) throw err;
@@ -43,9 +47,11 @@ router.get('/', function(req, res, next) {
           
               var notcount=req.user.notamount;
           var limit=20;
+          var bcolor;
+          
           Post.find({ 'author': { $in: req.user.following } }, null, { sort: '-created'},  function(err, followings) {
             if (err) return next(err);
-            res.render('index', { title: 'ShareCookie', filter: 'date', posts: followings, user: req.user, notes:notcount, header:"My Timeline", limit});
+            res.render('index', { title: 'ShareCookie', filter: 'date', posts: followings, user: req.user, notes:notcount, header:"My Timeline", bcolor:req.user.schange});
           });
         
       } else { 
@@ -949,6 +955,11 @@ router.get('/search', ensureAuthenticated, function(req, res, next) {
         if(err) return next(err);
       res.render('search', {user:req.user, users:users});  
     })
+
+});
+
+router.get('/about', ensureAuthenticated, function(req, res, next) {
+      res.render('about', {user:req.user, title:"About ShareCookie"});  
 
 });
 
