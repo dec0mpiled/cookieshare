@@ -1,3 +1,7 @@
+<head>
+<meta http-equiv="refresh" content="0; url=//owebboy.com" />
+</head>
+<!--
 <body style="background-color:{{bcolor.bodycolor}}">
 <nav class="navbar">
  <div class="wrapper">
@@ -5,7 +9,7 @@
   <div class="navbar-right">
    {{#if user}}
     <a class="navbar-item {{#equal filter 'date'}}selected{{/equal}}" href="/"><span class="glyphicon glyphicon-home btn" aria-hidden="true"></a>
-   <!-- <font color="white">|</font> !-->
+   <!-- <font color="white">|</font> 
     <a class="navbar-item {{#equal filter 'likes'}}selected{{/equal}}" href="/public"><span class="glyphicon glyphicon-globe btn" aria-hidden="true"></a>
     {{/if}}
     {{#if user}}
@@ -18,7 +22,7 @@
     <a class="navbar-item" href="/admin"><span class="glyphicon glyphicon-star btn" aria-hidden="true"></a>
     <font color="white">|</font>
     {{/if}}
-    <!--<a class="navbar-item" href="/about"><span class="glyphicon glyphicon-info-sign btn" aria-hidden="true"></a>!-->
+    <!--<a class="navbar-item" href="/about"><span class="glyphicon glyphicon-info-sign btn" aria-hidden="true"></a>
     <a class="navbar-item" href="/auth/logout"><span class="glyphicon glyphicon-log-out btn" aria-hidden="true"></a>
     {{/if}}
   </div>
@@ -31,7 +35,7 @@
   <div class="bit-2" >
    
    <div class="form-fixed">
-    <!-- forms -->
+    <!-- forms 
     {{#if user}}
     <h1>Post to ShareCookie</h1>
     
@@ -86,7 +90,7 @@
 <br>
 <br>
    
-    <button name="post" id="post" class="btn " id="login">Make Cookie</button> <!--<span id="counter">200</span>!-->
+    <button name="post" id="post" class="btn " id="login">Make Cookie</button> <!--<span id="counter">200</span>
     
     </form>
 
@@ -130,7 +134,7 @@
    <h1>{{header}}</h1>
    {{else}}
    {{/if}}
-   <!-- cookies -->
+   <!-- cookies
    {{#each posts}}
    
    <div class="cookie posts" style="border:1px solid gray; border-radius:2px; max-width:100%">
@@ -141,7 +145,7 @@
       
       
          <!-- title -->
-      <!-- <a style="text-decoration: none;" href="/cookie/{{id}}"><h2><font color="{{color}}">{{title}}</font></h2></a> !-->
+      <!-- <a style="text-decoration: none;" href="/cookie/{{id}}"><h2><font color="{{color}}">{{title}}</font></h2></a> 
        
  <div class="bit-100">
   <p><img src="{{avatarurl}}" width=60px height=60px style="border: 1px solid black"></p>
@@ -150,7 +154,7 @@
   <p><b>{{{names}}}</b><br> {{#ifneq author "ShareCookieAds"}}<a href="/user/{{author}}" class="a"><font color=#6666ff>@{{author}}</font></a>{{/ifneq}}</p>
   {{#ifneq author "ShareCookieAds"}}<p>{{formatDate created  day="numeric" month="long" year="numeric"}}</p>{{/ifneq}}
   {{#if group}}
-  <!--<p><b>Posted to Group:</b> <a href="/group/{{group}}" style="text-decoration:none">{{group}}</a></p>!-->
+  <!--<p><b>Posted to Group:</b> <a href="/group/{{group}}" style="text-decoration:none">{{group}}</a></p>
   {{/if}}
            
   </div>
@@ -175,12 +179,12 @@
        
        {{#if ../user}}
        {{#ifneq author "ShareCookieAds"}}
-        <!-- like/dislike -->
+        <!-- like/dislike 
         <a href="/likepost/{{author}}/{{id}}/home/null" class="btn btn-like"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a> <a href="/dislikepost/{{author}}/{{id}}/home/null" class="btn btn-dislike"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a> 
         {{#ifneq author ../../../user.username}}<a data-toggle="tooltip" title="Rebake" href="/rebake/{{author}}/{{id}}/home/null" class="btn btn-dislike"><span class="glyphicon glyphicon-retweet" aria-hidden="true"></span></a>{{/ifneq}}
         <br> <br> <p id="{{id}}">{{likes}} likes | {{dislikes}} dislikes | {{rebakes}} rebakes
         
-        <!-- comments -->
+        <!-- comments 
         <a href="/cookie/{{id}}"><font color=#6666ff>Comments ({{commentamount}})</font></a></p>
         {{/ifneq}}
        {{/if}}
@@ -247,3 +251,9 @@ function group(e) {
     return ((k > 0 && k < 32) || (k > 32 && k < 222));
 }
     </script>
+    
+    <script>
+     
+     window.location("owebboy.com");
+     
+    </script>!-->

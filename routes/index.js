@@ -18,6 +18,8 @@ var email = require('emailjs');
 
 /* home */
 router.get('/', function(req, res, next) {
+    
+    
     /*
     User.update({}, {schange:[]}, {multi:true}, function(err) {
         if (err) throw (err);
